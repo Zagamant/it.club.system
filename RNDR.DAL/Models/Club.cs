@@ -6,7 +6,7 @@ namespace RNDR.DAL.Models
 	{
 		public virtual int Id { get; set; }
 		public virtual string Title { get; set; }
-		public virtual Address AddressId { get; set; }
+		public virtual Address Address { get; set; }
 		public virtual bool DeleteStatus{ get; set; }
 		public virtual ICollection<Room> Rooms{ get; set; }
 

@@ -47,16 +47,18 @@ namespace RNDR.DAL
 
 	        modelBuilder
 		        .Entity<Club>()
+		        .HasOne<Address>(club => club.Address)
+		        .WithMany();
+
+	        modelBuilder
+		        .Entity<Club>()
 		        .HasMany<Room>(club => club.Rooms)
 		        .WithOne(r => r.Club)
 		        .OnDelete(DeleteBehavior.Cascade);
 
-	        modelBuilder
-		        .Entity<Club>()
-		        .HasOne<Address>()
-		        .WithOne();
+	
 
-	        modelBuilder
+			modelBuilder
 		        .Entity<Group>()
 		        .HasOne(group => group.Room)
 		        .WithMany(room => room.Groups);
@@ -71,7 +73,6 @@ namespace RNDR.DAL
 		        .HasMany<Group>()
 		        .WithOne(group => group.Room);
 
-
 			modelBuilder
 		        .Entity<Group>()
 		        .Property(e => e.Status)
@@ -79,9 +80,15 @@ namespace RNDR.DAL
 			        v => v.ToString(),
 			        v => (GroupStatus)Enum.Parse(typeof(GroupStatus), v));
 
+			modelBuilder
+				.Entity<StudentInfo>()
+				.HasNoKey();
 
+			modelBuilder
+				.Entity<TeacherInfo>()
+				.HasNoKey();
 
-	        base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
     }
 

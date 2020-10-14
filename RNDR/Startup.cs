@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RNDR.DAL;
+using RNDR.DAL.Models;
 using RNDR.Services.UserManagement;
 using RNDR.WebAPI.Helpers;
 
@@ -27,6 +28,9 @@ namespace RNDR.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.AddIdentity<User, Role>()
+	            .AddEntityFrameworkStores<DataContext>();
+                
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();

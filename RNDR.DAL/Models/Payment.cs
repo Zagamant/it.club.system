@@ -4,7 +4,9 @@ namespace RNDR.DAL.Models
 {
 	public class Payment
 	{
-		public virtual User UserId { get; set; }
+
+		public virtual int Id { get; set; }
+		public virtual User User { get; set; }
 		public virtual decimal September { get; set; }
 		public virtual decimal October{ get; set; }
 		public virtual decimal November{ get; set; }

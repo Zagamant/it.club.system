@@ -79,13 +79,14 @@ namespace RNDR.WebAPI.Controllers
             {
                 // create user
                 _userService.CreateAsync(user, model.Password);
-                return Ok();
+               
             }
-            catch (AppException ex)
+            catch (Exception ex)
             {
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
+            return Ok();
         }
 
         [Authorize(Roles = "admin")]

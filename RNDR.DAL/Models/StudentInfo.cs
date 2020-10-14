@@ -6,9 +6,9 @@ namespace RNDR.DAL.Models
 {
 	public class StudentInfo
 	{
-		public virtual User StudentUserId { get; set; }
+		public virtual User Student { get; set; }
 		public virtual string Phone { get; set; }
-		public virtual Address AddressId { get; set; }
+		public virtual Address Address { get; set; }
 		public virtual string Name { get; set; }
 		public virtual string Surname { get; set; }
 		public virtual string MiddleName { get; set; }

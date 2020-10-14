@@ -7,19 +7,7 @@ namespace RNDR.Services.Models.ModelManagement
     /// </summary>
     public class UserRegister
     {
-        /// <summary>
-        /// Gets or sets user's firstname
-        /// </summary>
-        [Required]
-        public string FirstName { get; set; }
-
-        /// <summary>
-        /// Gets or sets user's lastname
-        /// </summary>
-        [Required]
-        public string LastName { get; set; }
-
-        /// <summary>
+	    /// <summary>
         /// Gets or sets user's username
         /// </summary>
         [Required]
