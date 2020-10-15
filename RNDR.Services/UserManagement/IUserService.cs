@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.DAL.Models;
 using System.Threading.Tasks;
-using RNDR.DAL.Models;
 
-namespace RNDR.Services.UserManagement
+namespace System.BLL.UserManagement
 {
     /// <summary>
     /// Represent user management service.

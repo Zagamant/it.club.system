@@ -1,16 +1,14 @@
-﻿using System;
+﻿using System.BLL.Helpers;
 using System.Collections.Generic;
+using System.DAL;
+using System.DAL.Models;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RNDR.DAL;
-using RNDR.DAL.Models;
-using RNDR.Services.Helpers;
 
-namespace RNDR.Services.UserManagement
+namespace System.BLL.UserManagement
 {
 
     /// <summary>

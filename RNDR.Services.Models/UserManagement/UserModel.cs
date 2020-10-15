@@ -1,26 +1,11 @@
-﻿namespace RNDR.Services.Models.ModelManagement
+﻿namespace System.BLL.Models.UserManagement
 {
     /// <summary>
     /// Represent user model for server
     /// </summary>
     public class UserModel
     {
-        /// <summary>
-        /// Gets or sets user's id
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets user's firstname
-        /// </summary>
-        public string FirstName { get; set; }
-
-        /// <summary>
-        /// Gets or sets user's lastname
-        /// </summary>
-        public string LastName { get; set; }
-
-        /// <summary>
+	    /// <summary>
         /// Gets or sets user's username
         /// </summary>
         public string Username { get; set; }

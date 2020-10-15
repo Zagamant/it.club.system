@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RNDR.DAL.Models
+namespace System.DAL.Models
 {
 	public class TeacherInfo
 	{
@@ -12,6 +12,6 @@ namespace RNDR.DAL.Models
 		public virtual string Skype { get; set; }
 		public virtual Address Address { get; set; }
 		public virtual string Photo { get; set; }
-		public virtual ICollection<Course> Courses { get; set; }
+		public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 	}
 }

@@ -1,19 +1,21 @@
+using System.API.Helpers;
+using System.BLL.RoleManagement;
+using System.BLL.UserManagement;
+using System.DAL;
+using System.DAL.Models;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using RNDR.DAL;
-using RNDR.DAL.Models;
-using RNDR.Services.UserManagement;
-using RNDR.WebAPI.Helpers;
 
-namespace RNDR.WebAPI
+namespace System.API
 {
     public class Startup
     {
@@ -28,8 +30,18 @@ namespace RNDR.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddIdentity<User, Role>()
-	            .AddEntityFrameworkStores<DataContext>();
+            services.AddIdentity<User, Role>(options =>
+	            {
+		            options.Password.RequireDigit = true;
+		            options.Password.RequireLowercase = true;
+		            options.Password.RequireNonAlphanumeric = false;
+		            options.Password.RequireUppercase = true;
+		            options.Password.RequiredLength = 7;
+		            options.User.AllowedUserNameCharacters =
+			            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@.123457890";
+	            })
+	            .AddEntityFrameworkStores<DataContext>()
+	            .AddDefaultTokenProviders();
                 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -87,6 +99,7 @@ namespace RNDR.WebAPI
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
 
         }
 

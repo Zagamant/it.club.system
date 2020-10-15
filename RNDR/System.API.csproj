@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RNDR.DAL\RNDR.DAL.csproj" />
-    <ProjectReference Include="..\RNDR.Services.Models\RNDR.Services.Models.csproj" />
-    <ProjectReference Include="..\RNDR.Services\RNDR.Services.csproj" />
+    <ProjectReference Include="..\RNDR.DAL\System.DAL.csproj" />
+    <ProjectReference Include="..\RNDR.Services.Models\System.BLL.Models.csproj" />
+    <ProjectReference Include="..\RNDR.Services\System.BLL.csproj" />
   </ItemGroup>
 
 </Project>

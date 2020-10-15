@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using RNDR.DAL.Enums;
+using System.DAL.Enums;
 
-namespace RNDR.DAL.Models
+namespace System.DAL.Models
 {
 	public class Group
 	{
@@ -17,7 +17,7 @@ namespace RNDR.DAL.Models
 		public virtual DateTime EndDate { get; set; }
 		public virtual int Capacity { get; set; }
 		public virtual GroupStatus Status { get; set; }
-		public virtual ICollection<User> Students { get; set; }
+		public virtual ICollection<User> Students { get; set; } = new List<User>();
 
 	}
 }

@@ -1,7 +1,8 @@
+using System.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace RNDR.WebAPI
+namespace System.API
 {
     public class Program
     {

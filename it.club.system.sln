@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RNDR.WebAPI", "RNDR\RNDR.WebAPI.csproj", "{525E7F79-6FA8-4BF6-8581-781062E5A6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.API", "RNDR\System.API.csproj", "{525E7F79-6FA8-4BF6-8581-781062E5A6F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RNDR.DAL", "RNDR.DAL\RNDR.DAL.csproj", "{8AA38420-2392-494B-A7BF-DAF2CBF5BB94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.DAL", "RNDR.DAL\System.DAL.csproj", "{8AA38420-2392-494B-A7BF-DAF2CBF5BB94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RNDR.Services", "RNDR.Services\RNDR.Services.csproj", "{D082A14C-5046-4B11-96F6-730965BAED7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL", "RNDR.Services\System.BLL.csproj", "{D082A14C-5046-4B11-96F6-730965BAED7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RNDR.Services.Models", "RNDR.Services.Models\RNDR.Services.Models.csproj", "{6B4998DA-2789-4314-A726-78C4F93089E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Models", "RNDR.Services.Models\System.BLL.Models.csproj", "{6B4998DA-2789-4314-A726-78C4F93089E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

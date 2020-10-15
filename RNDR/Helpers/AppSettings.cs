@@ -1,4 +1,4 @@
-﻿namespace RNDR.WebAPI.Helpers
+﻿namespace System.API.Helpers
 {
     public class AppSettings
     {

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RNDR.DAL;
+using System.DAL;
 
-namespace RNDR.DAL.Migrations
+namespace System.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -120,7 +120,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Address", b =>
+            modelBuilder.Entity("System.DAL.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Agreement", b =>
+            modelBuilder.Entity("System.DAL.Models.Agreement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +161,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Agreements");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Club", b =>
+            modelBuilder.Entity("System.DAL.Models.Club", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Clubs");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Costs", b =>
+            modelBuilder.Entity("System.DAL.Models.Costs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +205,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Costs");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Course", b =>
+            modelBuilder.Entity("System.DAL.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -226,7 +226,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Event", b =>
+            modelBuilder.Entity("System.DAL.Models.Event", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,7 +244,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Group", b =>
+            modelBuilder.Entity("System.DAL.Models.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,7 +298,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Payment", b =>
+            modelBuilder.Entity("System.DAL.Models.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,7 +351,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Role", b =>
+            modelBuilder.Entity("System.DAL.Models.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -380,7 +380,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Room", b =>
+            modelBuilder.Entity("System.DAL.Models.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -409,7 +409,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.StudentInfo", b =>
+            modelBuilder.Entity("System.DAL.Models.StudentInfo", b =>
                 {
                     b.Property<string>("AdditionalInfo")
                         .HasColumnType("nvarchar(max)");
@@ -448,7 +448,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("StudentInfos");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.TeacherInfo", b =>
+            modelBuilder.Entity("System.DAL.Models.TeacherInfo", b =>
                 {
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -481,7 +481,7 @@ namespace RNDR.DAL.Migrations
                     b.ToTable("TeacherInfos");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.User", b =>
+            modelBuilder.Entity("System.DAL.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -555,7 +555,7 @@ namespace RNDR.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Role", null)
+                    b.HasOne("System.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -564,7 +564,7 @@ namespace RNDR.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -573,7 +573,7 @@ namespace RNDR.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -582,13 +582,13 @@ namespace RNDR.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Role", null)
+                    b.HasOne("System.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RNDR.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -597,86 +597,86 @@ namespace RNDR.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Agreement", b =>
+            modelBuilder.Entity("System.DAL.Models.Agreement", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.User", "User")
+                    b.HasOne("System.DAL.Models.User", "User")
                         .WithMany("Agreements")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Club", b =>
+            modelBuilder.Entity("System.DAL.Models.Club", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Address", "Address")
+                    b.HasOne("System.DAL.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Group", b =>
+            modelBuilder.Entity("System.DAL.Models.Group", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Course", "Course")
+                    b.HasOne("System.DAL.Models.Course", "Course")
                         .WithMany("Groups")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("RNDR.DAL.Models.Room", "Room")
+                    b.HasOne("System.DAL.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
 
-                    b.HasOne("RNDR.DAL.Models.Room", null)
+                    b.HasOne("System.DAL.Models.Room", null)
                         .WithMany("Groups")
                         .HasForeignKey("RoomId1");
 
-                    b.HasOne("RNDR.DAL.Models.User", "TeacherUserId")
+                    b.HasOne("System.DAL.Models.User", "TeacherUserId")
                         .WithMany()
                         .HasForeignKey("TeacherUserIdId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Payment", b =>
+            modelBuilder.Entity("System.DAL.Models.Payment", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.User", "User")
+                    b.HasOne("System.DAL.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.Room", b =>
+            modelBuilder.Entity("System.DAL.Models.Room", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Club", "Club")
+                    b.HasOne("System.DAL.Models.Club", "Club")
                         .WithMany("Rooms")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.StudentInfo", b =>
+            modelBuilder.Entity("System.DAL.Models.StudentInfo", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Address", "Address")
+                    b.HasOne("System.DAL.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("RNDR.DAL.Models.User", "Student")
+                    b.HasOne("System.DAL.Models.User", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.TeacherInfo", b =>
+            modelBuilder.Entity("System.DAL.Models.TeacherInfo", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Address", "Address")
+                    b.HasOne("System.DAL.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("RNDR.DAL.Models.User", "Teacher")
+                    b.HasOne("System.DAL.Models.User", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
                 });
 
-            modelBuilder.Entity("RNDR.DAL.Models.User", b =>
+            modelBuilder.Entity("System.DAL.Models.User", b =>
                 {
-                    b.HasOne("RNDR.DAL.Models.Group", null)
+                    b.HasOne("System.DAL.Models.Group", null)
                         .WithMany("Students")
                         .HasForeignKey("GroupId");
                 });

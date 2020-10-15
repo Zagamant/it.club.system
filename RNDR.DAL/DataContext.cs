@@ -1,10 +1,9 @@
-﻿using System;
+﻿using System.DAL.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using RNDR.DAL.Enums;
-using RNDR.DAL.Models;
+using System.DAL.Models;
 
-namespace RNDR.DAL
+namespace System.DAL
 {
     /// <summary>
     /// Represents an application database context.
@@ -73,20 +72,35 @@ namespace RNDR.DAL
 		        .HasMany<Group>()
 		        .WithOne(group => group.Room);
 
-			modelBuilder
-		        .Entity<Group>()
-		        .Property(e => e.Status)
-		        .HasConversion(
-			        v => v.ToString(),
-			        v => (GroupStatus)Enum.Parse(typeof(GroupStatus), v));
-
-			modelBuilder
+	        modelBuilder
 				.Entity<StudentInfo>()
 				.HasNoKey();
 
 			modelBuilder
 				.Entity<TeacherInfo>()
 				.HasNoKey();
+
+			modelBuilder
+				.Entity<Group>()
+				.Property(e => e.Status)
+				.HasConversion(
+					v => v.ToString(),
+					v => (GroupStatus)Enum.Parse(typeof(GroupStatus), v));
+
+			modelBuilder
+				.Entity<Club>()
+				.Property(c => c.Status)
+				.HasConversion(
+					v => v.ToString(),
+					v => (ClubStatus)Enum.Parse(typeof(ClubStatus), v));
+
+			modelBuilder
+				.Entity<Room>()
+				.Property(r => r.Status)
+				.HasConversion(
+					v => v.ToString(),
+					v => (RoomStatus)Enum.Parse(typeof(RoomStatus), v));
+
 
 			base.OnModelCreating(modelBuilder);
         }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RNDR.DAL.Models
+namespace System.DAL.Models
 {
 	public class StudentInfo
 	{
@@ -16,7 +14,8 @@ namespace RNDR.DAL.Models
 		public virtual string ParentContact { get; set; }
 		public virtual string Skype { get; set; }
 		public virtual string AdditionalInfo { get; set; }
-		public virtual ICollection<Group> Groups { get; set; }
+		public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+		public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
 
 	}
 }

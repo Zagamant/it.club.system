@@ -1,4 +1,4 @@
-﻿namespace RNDR.DAL.Models
+﻿namespace System.DAL.Models
 {
 	public class Address
 	{

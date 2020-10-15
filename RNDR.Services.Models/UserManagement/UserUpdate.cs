@@ -1,22 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RNDR.Services.Models.ModelManagement
+﻿namespace System.BLL.Models.UserManagement
 {
     /// <summary>
-    /// Represent authentication model for client registration
+    /// Represent authentication model for client update information
     /// </summary>
-    public class UserRegister
+    public class UserUpdate
     {
 	    /// <summary>
         /// Gets or sets user's username
         /// </summary>
-        [Required]
         public string Username { get; set; }
 
         /// <summary>
         /// Gets or sets user's password
         /// </summary>
-        [Required]
         public string Password { get; set; }
 
         /// <summary>

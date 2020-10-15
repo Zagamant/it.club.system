@@ -1,7 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace RNDR.Services.Helpers
+namespace System.BLL.Helpers
 {
     /// <summary>
     /// Custom exception class for throwing application specific exceptions (e.g. for validation) that can be caught and handled within the application

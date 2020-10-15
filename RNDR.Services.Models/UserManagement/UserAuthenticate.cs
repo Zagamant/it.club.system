@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RNDR.Services.Models.ModelManagement
+namespace System.BLL.Models.UserManagement
 {
     /// <summary>
     /// Represent authentication model for client authenticate

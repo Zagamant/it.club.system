@@ -1,5 +1,10 @@
-﻿using System;
+﻿using System.API.Helpers;
+using System.BLL.Helpers;
+using System.BLL.Models.ModelManagement;
+using System.BLL.UserManagement;
 using System.Collections.Generic;
+using System.DAL.Models;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -9,13 +14,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using RNDR.DAL.Models;
-using RNDR.Services.Helpers;
-using RNDR.Services.Models.ModelManagement;
-using RNDR.Services.UserManagement;
-using RNDR.WebAPI.Helpers;
 
-namespace RNDR.WebAPI.Controllers
+namespace System.API.Controllers
 {
     [Authorize]
     [ApiController]
@@ -70,16 +70,16 @@ namespace RNDR.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]UserRegister model)
+        public async Task<IActionResult> Register([FromBody]UserRegister model)
         {
             // map model to entity
             var user = _mapper.Map<User>(model);
 
             try
             {
-                // create user
-                _userService.CreateAsync(user, model.Password);
-               
+	            // create user
+                var result = await _userService.CreateAsync(user, model.Password);
+                Debug.WriteLine(result);
             }
             catch (Exception ex)
             {
@@ -127,10 +127,18 @@ namespace RNDR.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _userService.DeleteAsync(id);
+            await _userService.DeleteAsync(id);
             return Ok();
+        }
+
+        
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+
+	        return Ok("U r sign in");
         }
     }
 }

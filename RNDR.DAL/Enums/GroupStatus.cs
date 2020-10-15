@@ -1,4 +1,4 @@
-﻿namespace RNDR.DAL.Enums
+﻿namespace System.DAL.Enums
 {
 	public enum GroupStatus
 	{
