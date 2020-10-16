@@ -1,6 +1,6 @@
 ﻿using System.API.Helpers;
 using System.BLL.Helpers;
-using System.BLL.Models.ModelManagement;
+using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
 using System.Collections.Generic;
 using System.DAL.Models;
@@ -79,7 +79,7 @@ namespace System.API.Controllers
             {
 	            // create user
                 var result = await _userService.CreateAsync(user, model.Password);
-                Debug.WriteLine(result);
+
             }
             catch (Exception ex)
             {

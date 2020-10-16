@@ -1,4 +1,5 @@
-﻿using System.DAL.Enums;
+﻿using System.DAL.Configurations;
+using System.DAL.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.DAL.Models;
@@ -40,6 +41,9 @@ namespace System.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 	        modelBuilder
+		        .ApplyConfiguration(new InfoBaseConfiguration());
+
+	        modelBuilder
 		        .Entity<Agreement>()
 		        .HasOne<User>(agr => agr.User)
 		        .WithMany(user => user.Agreements);
@@ -55,9 +59,7 @@ namespace System.DAL
 		        .WithOne(r => r.Club)
 		        .OnDelete(DeleteBehavior.Cascade);
 
-	
-
-			modelBuilder
+	        modelBuilder
 		        .Entity<Group>()
 		        .HasOne(group => group.Room)
 		        .WithMany(room => room.Groups);
@@ -73,33 +75,25 @@ namespace System.DAL
 		        .WithOne(group => group.Room);
 
 	        modelBuilder
-				.Entity<StudentInfo>()
-				.HasNoKey();
-
-			modelBuilder
-				.Entity<TeacherInfo>()
-				.HasNoKey();
-
-			modelBuilder
 				.Entity<Group>()
 				.Property(e => e.Status)
 				.HasConversion(
-					v => v.ToString(),
-					v => (GroupStatus)Enum.Parse(typeof(GroupStatus), v));
+					s => s.ToString(),
+					str => (GroupStatus)Enum.Parse(typeof(GroupStatus), str));
 
 			modelBuilder
 				.Entity<Club>()
 				.Property(c => c.Status)
 				.HasConversion(
-					v => v.ToString(),
-					v => (ClubStatus)Enum.Parse(typeof(ClubStatus), v));
+					s => s.ToString(),
+					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str));
 
 			modelBuilder
 				.Entity<Room>()
 				.Property(r => r.Status)
 				.HasConversion(
-					v => v.ToString(),
-					v => (RoomStatus)Enum.Parse(typeof(RoomStatus), v));
+					s => s.ToString(),
+					str => (RoomStatus)Enum.Parse(typeof(RoomStatus), str));
 
 
 			base.OnModelCreating(modelBuilder);

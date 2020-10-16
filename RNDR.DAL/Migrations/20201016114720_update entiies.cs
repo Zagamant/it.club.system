@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace System.DAL.Migrations
 {
-    public partial class initial : Migration
+    public partial class updateentiies : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,21 +53,6 @@ namespace System.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    About = table.Column<string>(nullable: true),
-                    ManualLink = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
                 {
@@ -89,7 +74,7 @@ namespace System.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     AddressId = table.Column<int>(nullable: true),
-                    DeleteStatus = table.Column<bool>(nullable: false)
+                    Status = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,7 +118,7 @@ namespace System.DAL.Migrations
                     Capacity = table.Column<int>(nullable: false),
                     RoomNumber = table.Column<string>(nullable: true),
                     About = table.Column<string>(nullable: true),
-                    DeleteStatus = table.Column<bool>(nullable: false)
+                    Status = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,24 +132,30 @@ namespace System.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentInfos",
+                name: "Infos",
                 columns: table => new
                 {
-                    StudentId = table.Column<int>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    AddressId = table.Column<int>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     BirthDay = table.Column<DateTime>(nullable: false),
-                    ParentContact = table.Column<string>(nullable: true),
                     Skype = table.Column<string>(nullable: true),
-                    AdditionalInfo = table.Column<string>(nullable: true)
+                    AddressId = table.Column<int>(nullable: true),
+                    AdditionalInfo = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Photo = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: false),
+                    ParentContact = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Infos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StudentInfos_Addresses_AddressId",
+                        name: "FK_Infos_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -172,24 +163,30 @@ namespace System.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherInfos",
+                name: "Courses",
                 columns: table => new
                 {
-                    TeacherId = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    Skype = table.Column<string>(nullable: true),
-                    AddressId = table.Column<int>(nullable: true),
-                    Photo = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    About = table.Column<string>(nullable: true),
+                    ManualLink = table.Column<string>(nullable: true),
+                    StudentInfoId = table.Column<int>(nullable: true),
+                    TeacherInfoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeacherInfos_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
+                        name: "FK_Courses_Infos_StudentInfoId",
+                        column: x => x.StudentInfoId,
+                        principalTable: "Infos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Courses_Infos_TeacherInfoId",
+                        column: x => x.TeacherInfoId,
+                        principalTable: "Infos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -285,7 +282,8 @@ namespace System.DAL.Migrations
                     EndDate = table.Column<DateTime>(nullable: false),
                     Capacity = table.Column<int>(nullable: false),
                     Status = table.Column<string>(nullable: false),
-                    RoomId1 = table.Column<int>(nullable: true)
+                    RoomId1 = table.Column<int>(nullable: true),
+                    StudentInfoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -306,6 +304,12 @@ namespace System.DAL.Migrations
                         name: "FK_Groups_Rooms_RoomId1",
                         column: x => x.RoomId1,
                         principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Groups_Infos_StudentInfoId",
+                        column: x => x.StudentInfoId,
+                        principalTable: "Infos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -429,6 +433,16 @@ namespace System.DAL.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Courses_StudentInfoId",
+                table: "Courses",
+                column: "StudentInfoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_TeacherInfoId",
+                table: "Courses",
+                column: "TeacherInfoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Groups_CourseId",
                 table: "Groups",
                 column: "CourseId");
@@ -444,9 +458,25 @@ namespace System.DAL.Migrations
                 column: "RoomId1");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Groups_StudentInfoId",
+                table: "Groups",
+                column: "StudentInfoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Groups_TeacherUserIdId",
                 table: "Groups",
                 column: "TeacherUserIdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Infos_AddressId",
+                table: "Infos",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Infos_MemberId",
+                table: "Infos",
+                column: "MemberId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_UserId",
@@ -458,41 +488,13 @@ namespace System.DAL.Migrations
                 table: "Rooms",
                 column: "ClubId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentInfos_AddressId",
-                table: "StudentInfos",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentInfos_StudentId",
-                table: "StudentInfos",
-                column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeacherInfos_AddressId",
-                table: "TeacherInfos",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeacherInfos_TeacherId",
-                table: "TeacherInfos",
-                column: "TeacherId");
-
             migrationBuilder.AddForeignKey(
-                name: "FK_StudentInfos_AspNetUsers_StudentId",
-                table: "StudentInfos",
-                column: "StudentId",
+                name: "FK_Infos_AspNetUsers_MemberId",
+                table: "Infos",
+                column: "MemberId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TeacherInfos_AspNetUsers_TeacherId",
-                table: "TeacherInfos",
-                column: "TeacherId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
@@ -549,6 +551,10 @@ namespace System.DAL.Migrations
                 name: "FK_Groups_AspNetUsers_TeacherUserIdId",
                 table: "Groups");
 
+            migrationBuilder.DropForeignKey(
+                name: "FK_Infos_AspNetUsers_MemberId",
+                table: "Infos");
+
             migrationBuilder.DropTable(
                 name: "Agreements");
 
@@ -577,12 +583,6 @@ namespace System.DAL.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "StudentInfos");
-
-            migrationBuilder.DropTable(
-                name: "TeacherInfos");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -596,6 +596,9 @@ namespace System.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rooms");
+
+            migrationBuilder.DropTable(
+                name: "Infos");
 
             migrationBuilder.DropTable(
                 name: "Clubs");
