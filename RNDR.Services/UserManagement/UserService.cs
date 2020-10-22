@@ -43,9 +43,9 @@ namespace System.BLL.UserManagement
 	        var user = await _userManager.FindByNameAsync(username);
 
 	        if (user == null)
-		        return null;
+		        throw new AppException("User not found");
 
-	        var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
 	        return result.Succeeded ? user : null; 
         }
 

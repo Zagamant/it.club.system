@@ -1,5 +1,7 @@
 using System.API.Helpers;
+using System.BLL.ClubManagement;
 using System.BLL.RoleManagement;
+using System.BLL.RoomManagement;
 using System.BLL.UserManagement;
 using System.DAL;
 using System.DAL.Models;
@@ -39,18 +41,23 @@ namespace System.API
 		            options.Password.RequiredLength = 7;
 		            options.User.AllowedUserNameCharacters =
 			            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@.123457890";
+
 	            })
 	            .AddEntityFrameworkStores<DataContext>()
 	            .AddDefaultTokenProviders();
                 
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options
+	                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+	                .UseLazyLoadingProxies());
             services.AddControllers();
 
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserManagementMappingProfile());
+                mc.AddProfile(new ClubManagementMappingProfile());
+                mc.AddProfile(new RoomManagementMappingProfile());
             });
 
             var mapper = mappingConfig.CreateMapper();
@@ -100,6 +107,8 @@ namespace System.API
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IClubService, ClubService>();
 
         }
 

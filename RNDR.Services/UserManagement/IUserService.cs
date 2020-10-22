@@ -17,9 +17,6 @@ namespace System.BLL.UserManagement
         /// <returns>A <see cref="User"/></returns>
         Task<User> AuthenticateAsync(string username, string password);
 
-        /// <summary>
-        /// AuthenticateAsync user on server and create JWT-token.
-        /// </summary>
         Task LogoutAsync();
 
         /// <summary>

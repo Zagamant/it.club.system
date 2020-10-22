@@ -1,5 +1,4 @@
 ﻿using System.BLL.Models.ClubManagement;
-using System.BLL.Models.UserManagement;
 using System.DAL.Models;
 using AutoMapper;
 
