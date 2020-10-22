@@ -49,6 +49,7 @@ namespace System.BLL.RoomManagement
 		public async Task Update(RoomSafeModel room, RoomModel newRoom)
 		{
 			var result = GetRoomBySafeModel(room);
+
 			await Update(result.Id, newRoom);
 		}
 
