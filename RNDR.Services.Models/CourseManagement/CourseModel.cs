@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.DAL.Models;
 
 namespace System.BLL.Models.CourseManagement
 {
-	class CourseModel
+	public class CourseModel
 	{
+		public virtual string Title { get; set; }
+		public virtual string About { get; set; }
+		public virtual string ManualLink { get; set; }
+		public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
 	}
 }

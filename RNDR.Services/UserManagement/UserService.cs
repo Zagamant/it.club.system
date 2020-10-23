@@ -54,6 +54,12 @@ namespace System.BLL.UserManagement
 	        await _signInManager.SignOutAsync();
         }
 
+        public async Task<int> GetIdAsync(User user)
+        {
+	        var id = await _userManager.GetUserIdAsync(user);
+	        return Convert.ToInt32(id);
+        }
+
 
         /// <inheritdoc/>
         public async Task<IEnumerable<User>> GetAllAsync()

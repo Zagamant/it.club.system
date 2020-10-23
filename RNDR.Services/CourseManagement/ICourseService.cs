@@ -1,18 +1,17 @@
-﻿using System;
+﻿using System.BLL.Models.CourseManagement;
 using System.Collections.Generic;
-using System.DAL.Models;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace System.BLL.CourseManagement
 {
 	public interface ICourseService
 	{
-		Task Create(Course room);
-		Task<Course> GetCourse(CourseSafeModel room);
-		Task Update(int roomId, CourseModel newRoom);
-		Task Update(CourseSafeModel room, CourseModel newRoom);
+		Task Create(CourseRegisterModel room);
+		Task<IEnumerable<CourseModel>> GetAllCourses();
+		Task<CourseModel> GetCourse(CourseModel room);
+		Task Update(int courseId, CourseModel newCourse);
+		Task Update(CourseModel course, CourseModel newCourse);
 		Task Remove(int courseId);
-		Task Remove(CourseSafeModel room);
+		Task Remove(CourseModel room);
 	}
 }

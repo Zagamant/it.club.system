@@ -19,21 +19,23 @@ namespace System.BLL.UserManagement
 
         Task LogoutAsync();
 
+        Task<int> GetIdAsync(User user);
+
         /// <summary>
-        /// Get all users from database.
+        /// GetById all users from database.
         /// </summary>
         /// <returns>List of <see cref="User"/>s.</returns>
         Task<IEnumerable<User>> GetAllAsync();
 
         /// <summary>
-        /// Get 1 user from database by id.
+        /// GetById 1 user from database by id.
         /// </summary>
         /// <param name="id">A user identifier.</param>
         /// <returns></returns>
         Task<User> GetByIdAsync(int id);
 
         /// <summary>
-        /// Get 1 user from database by username.
+        /// GetById 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
