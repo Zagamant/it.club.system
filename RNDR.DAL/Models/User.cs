@@ -9,7 +9,6 @@ namespace System.DAL.Models
 	public class User : IdentityUser<int>
 	{
 		public virtual InfoBase AboutUserInfo { get; set; }
-		public virtual ICollection<Agreement> Agreements { get; set; } = new List<Agreement>();
 
 	}
 }

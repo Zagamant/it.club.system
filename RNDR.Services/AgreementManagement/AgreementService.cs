@@ -41,27 +41,54 @@ namespace System.BLL.AgreementManagement
 
 		public async Task<IEnumerable<AgreementModel>> GetByUser(User user)
 		{
-			throw new NotImplementedException();
+			var models = await _context.Agreements
+				.AsNoTracking()
+				.Where(agr => agr.User == user)
+				.Select(agr => new AgreementModel
+			{
+				User = agr.User,
+				Payment = agr.Payment
+			}).ToListAsync();
+			return models;
 		}
 
 		public async Task Update(int agreementId, AgreementModel agreementNew)
 		{
-			throw new NotImplementedException();
+			var newAgr = _mapper.Map<Agreement>(agreementNew);
+			newAgr.Id = agreementId;
+
+			_context.Agreements.Update(newAgr);
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task Update(AgreementModel agreement, AgreementModel agreementNew)
 		{
-			throw new NotImplementedException();
+			var oldAgr = await _context.Agreements
+				.SingleOrDefaultAsync(agr => agr.User == agreement.User && agr.Course == agreement.Course);
+
+			if (agreement == null) throw new AppException("Agreement not found.");
+
+			await Update(oldAgr.Id, agreementNew);
 		}
 
 		public async Task Delete(int agreementId)
 		{
-			throw new NotImplementedException();
+			var agreement = await _context.Agreements.FirstOrDefaultAsync(agr => agr.Id == agreementId);
+
+			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
+
+			_context.Agreements.Remove(agreement);
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task Delete(AgreementModel agreement)
 		{
-			throw new NotImplementedException();
+			var oldAgr = await _context.Agreements
+				.SingleOrDefaultAsync(agr => agr.User == agreement.User && agr.Course == agreement.Course);
+
+			if (agreement == null) throw new AppException("Agreement not found.");
+
+			await Delete(oldAgr.Id);
 		}
 	}
 }

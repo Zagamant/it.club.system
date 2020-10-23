@@ -44,11 +44,6 @@ namespace System.DAL
 		        .ApplyConfiguration(new InfoBaseConfiguration());
 
 	        modelBuilder
-		        .Entity<Agreement>()
-		        .HasOne<User>(agr => agr.User)
-		        .WithMany(user => user.Agreements);
-
-	        modelBuilder
 		        .Entity<Club>()
 		        .HasOne<Address>(club => club.Address)
 		        .WithMany();
