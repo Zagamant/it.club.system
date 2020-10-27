@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace System.DAL.Models
+namespace System.DAL.Entities
 {
 	public class Course
 	{

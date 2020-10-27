@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.DAL.Enums;
+using System.DAL.Entities.Enums;
 
-namespace System.DAL.Models
+namespace System.DAL.Entities
 {
 	public class Club
 	{

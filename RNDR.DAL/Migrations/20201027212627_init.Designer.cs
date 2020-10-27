@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace System.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201016114720_update entiies")]
-    partial class updateentiies
+    [Migration("20201027212627_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,7 +122,7 @@ namespace System.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Address", b =>
+            modelBuilder.Entity("System.DAL.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,12 +143,15 @@ namespace System.DAL.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Agreement", b =>
+            modelBuilder.Entity("System.DAL.Entities.Agreement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Payment")
                         .HasColumnType("decimal(18,2)");
@@ -158,12 +161,14 @@ namespace System.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Agreements");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Club", b =>
+            modelBuilder.Entity("System.DAL.Entities.Club", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +192,36 @@ namespace System.DAL.Migrations
                     b.ToTable("Clubs");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Costs", b =>
+            modelBuilder.Entity("System.DAL.Entities.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContactAsIs")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Costs", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,7 +242,7 @@ namespace System.DAL.Migrations
                     b.ToTable("Costs");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Course", b =>
+            modelBuilder.Entity("System.DAL.Entities.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,25 +255,20 @@ namespace System.DAL.Migrations
                     b.Property<string>("ManualLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentInfoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherInfoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentInfoId");
-
-                    b.HasIndex("TeacherInfoId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Event", b =>
+            modelBuilder.Entity("System.DAL.Entities.Event", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,7 +286,7 @@ namespace System.DAL.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Group", b =>
+            modelBuilder.Entity("System.DAL.Entities.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,12 +324,6 @@ namespace System.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StudentInfoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherUserIdId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
@@ -309,70 +332,10 @@ namespace System.DAL.Migrations
 
                     b.HasIndex("RoomId1");
 
-                    b.HasIndex("StudentInfoId");
-
-                    b.HasIndex("TeacherUserIdId");
-
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.InfoBase", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AdditionalInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("BirthDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Skype")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("MemberId")
-                        .IsUnique();
-
-                    b.ToTable("Infos");
-
-                    b.HasDiscriminator<string>("Type").HasValue("InfoBase");
-                });
-
-            modelBuilder.Entity("System.DAL.Models.Payment", b =>
+            modelBuilder.Entity("System.DAL.Entities.Payment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -425,7 +388,31 @@ namespace System.DAL.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Role", b =>
+            modelBuilder.Entity("System.DAL.Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("PhotoAsBytes")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -454,7 +441,7 @@ namespace System.DAL.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Room", b =>
+            modelBuilder.Entity("System.DAL.Entities.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -484,7 +471,7 @@ namespace System.DAL.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.User", b =>
+            modelBuilder.Entity("System.DAL.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -493,6 +480,15 @@ namespace System.DAL.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("AdditionalInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -505,14 +501,17 @@ namespace System.DAL.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
@@ -534,6 +533,9 @@ namespace System.DAL.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -543,7 +545,7 @@ namespace System.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -556,26 +558,31 @@ namespace System.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.StudentInfo", b =>
+            modelBuilder.Entity("System.DAL.Entities.UserGroup", b =>
                 {
-                    b.HasBaseType("System.DAL.Models.InfoBase");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ParentContact")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
 
-                    b.HasDiscriminator().HasValue("Student");
-                });
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-            modelBuilder.Entity("System.DAL.Models.TeacherInfo", b =>
-                {
-                    b.HasBaseType("System.DAL.Models.InfoBase");
+                    b.HasKey("Id");
 
-                    b.HasDiscriminator().HasValue("Teacher");
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("System.DAL.Models.Role", null)
+                    b.HasOne("System.DAL.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -584,7 +591,7 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("System.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -593,7 +600,7 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("System.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -602,13 +609,13 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("System.DAL.Models.Role", null)
+                    b.HasOne("System.DAL.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("System.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -617,94 +624,102 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("System.DAL.Models.User", null)
+                    b.HasOne("System.DAL.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Agreement", b =>
+            modelBuilder.Entity("System.DAL.Entities.Agreement", b =>
                 {
-                    b.HasOne("System.DAL.Models.User", "User")
-                        .WithMany("Agreements")
+                    b.HasOne("System.DAL.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("System.DAL.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Club", b =>
+            modelBuilder.Entity("System.DAL.Entities.Club", b =>
                 {
-                    b.HasOne("System.DAL.Models.Address", "Address")
+                    b.HasOne("System.DAL.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Course", b =>
+            modelBuilder.Entity("System.DAL.Entities.Contact", b =>
                 {
-                    b.HasOne("System.DAL.Models.StudentInfo", null)
-                        .WithMany("CoursesPassed")
-                        .HasForeignKey("StudentInfoId");
-
-                    b.HasOne("System.DAL.Models.TeacherInfo", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("TeacherInfoId");
+                    b.HasOne("System.DAL.Entities.User", null)
+                        .WithMany("Contacts")
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Group", b =>
+            modelBuilder.Entity("System.DAL.Entities.Course", b =>
                 {
-                    b.HasOne("System.DAL.Models.Course", "Course")
+                    b.HasOne("System.DAL.Entities.User", null)
+                        .WithMany("CoursesPassed")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Group", b =>
+                {
+                    b.HasOne("System.DAL.Entities.Course", "Course")
                         .WithMany("Groups")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("System.DAL.Models.Room", "Room")
+                    b.HasOne("System.DAL.Entities.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
 
-                    b.HasOne("System.DAL.Models.Room", null)
+                    b.HasOne("System.DAL.Entities.Room", null)
                         .WithMany("Groups")
                         .HasForeignKey("RoomId1");
-
-                    b.HasOne("System.DAL.Models.StudentInfo", null)
-                        .WithMany("Groups")
-                        .HasForeignKey("StudentInfoId");
-
-                    b.HasOne("System.DAL.Models.User", "TeacherUserId")
-                        .WithMany()
-                        .HasForeignKey("TeacherUserIdId");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.InfoBase", b =>
+            modelBuilder.Entity("System.DAL.Entities.Payment", b =>
                 {
-                    b.HasOne("System.DAL.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.HasOne("System.DAL.Models.User", "Member")
-                        .WithOne("AboutUserInfo")
-                        .HasForeignKey("System.DAL.Models.InfoBase", "MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("System.DAL.Models.Payment", b =>
-                {
-                    b.HasOne("System.DAL.Models.User", "User")
+                    b.HasOne("System.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("System.DAL.Models.Room", b =>
+            modelBuilder.Entity("System.DAL.Entities.Photo", b =>
                 {
-                    b.HasOne("System.DAL.Models.Club", "Club")
+                    b.HasOne("System.DAL.Entities.User", "User")
+                        .WithMany("Photos")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Room", b =>
+                {
+                    b.HasOne("System.DAL.Entities.Club", "Club")
                         .WithMany("Rooms")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("System.DAL.Models.User", b =>
+            modelBuilder.Entity("System.DAL.Entities.User", b =>
                 {
-                    b.HasOne("System.DAL.Models.Group", null)
-                        .WithMany("Students")
-                        .HasForeignKey("GroupId");
+                    b.HasOne("System.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.UserGroup", b =>
+                {
+                    b.HasOne("System.DAL.Entities.Group", "Group")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("System.DAL.Entities.User", "User")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

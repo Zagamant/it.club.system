@@ -1,5 +1,5 @@
 ﻿using System.BLL.Models.UserManagement;
-using System.DAL.Models;
+using System.DAL.Entities;
 using AutoMapper;
 
 namespace System.BLL.UserManagement

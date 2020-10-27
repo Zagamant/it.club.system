@@ -2,7 +2,7 @@
 using System.BLL.Models.AgreementManagement;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;

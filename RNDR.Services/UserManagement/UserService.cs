@@ -1,7 +1,7 @@
 ﻿using System.BLL.Helpers;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace System.DAL.Models
+namespace System.DAL.Entities
 {
 	public class Role : IdentityRole<int>
 	{

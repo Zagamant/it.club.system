@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 
 namespace System.BLL.UserManagement

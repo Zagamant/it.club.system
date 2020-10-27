@@ -1,8 +1,8 @@
 ﻿using System.DAL.Configurations;
-using System.DAL.Enums;
+using System.DAL.Entities;
+using System.DAL.Entities.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.DAL.Models;
 
 namespace System.DAL
 {
@@ -17,8 +17,7 @@ namespace System.DAL
         public DataContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Address> Addresses{ get; set; }
-        public DbSet<StudentInfo> StudentInfos { get; set; }
-        public DbSet<TeacherInfo> TeacherInfos { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
         public DbSet<Agreement> Agreements { get; set; }
         public DbSet<Payment> Payments { get; set; }
@@ -27,6 +26,8 @@ namespace System.DAL
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
+
 
         public DbSet<Costs> Costs{ get; set; }
         public DbSet<Event> Events{ get; set; }
@@ -41,56 +42,12 @@ namespace System.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 	        modelBuilder
-		        .ApplyConfiguration(new InfoBaseConfiguration());
+		        .ApplyConfiguration(new ClubConfiguration())
+		        .ApplyConfiguration(new GroupConfiguration())
+		        .ApplyConfiguration(new RoomConfiguration())
+		        ;
 
-	        modelBuilder
-		        .Entity<Club>()
-		        .HasOne<Address>(club => club.Address)
-		        .WithMany();
-
-	        modelBuilder
-		        .Entity<Club>()
-		        .HasMany<Room>(club => club.Rooms)
-		        .WithOne(r => r.Club)
-		        .OnDelete(DeleteBehavior.Cascade);
-
-	        modelBuilder
-		        .Entity<Group>()
-		        .HasOne(group => group.Room)
-		        .WithMany(room => room.Groups);
-
-	        modelBuilder
-		        .Entity<Group>()
-		        .HasOne(group => group.Course)
-		        .WithMany(course => course.Groups);
-
-	        modelBuilder
-		        .Entity<Room>()
-		        .HasMany<Group>()
-		        .WithOne(group => group.Room);
-
-	        modelBuilder
-				.Entity<Group>()
-				.Property(e => e.Status)
-				.HasConversion(
-					s => s.ToString(),
-					str => (GroupStatus)Enum.Parse(typeof(GroupStatus), str));
-
-			modelBuilder
-				.Entity<Club>()
-				.Property(c => c.Status)
-				.HasConversion(
-					s => s.ToString(),
-					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str));
-
-			modelBuilder
-				.Entity<Room>()
-				.Property(r => r.Status)
-				.HasConversion(
-					s => s.ToString(),
-					str => (RoomStatus)Enum.Parse(typeof(RoomStatus), str));
-
-
+	        
 			base.OnModelCreating(modelBuilder);
         }
     }
