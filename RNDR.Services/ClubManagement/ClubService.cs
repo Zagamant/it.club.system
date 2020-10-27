@@ -26,13 +26,15 @@ namespace System.BLL.ClubManagement
 
 		public async Task<IEnumerable<ClubModel>> GetAll()
 		{
-			var allClubs = await _context.Clubs.Select(c => new ClubModel
-			{
-				Address = c.Address,
-				Rooms = c.Rooms,
-				Status = c.Status,
-				Title = c.Title
-			}).ToListAsync();
+			var allClubs = await _context.Clubs
+				.AsNoTracking()
+				.Select(c => new ClubModel
+				{
+					Address = c.Address,
+					Rooms = c.Rooms,
+					Status = c.Status,
+					Title = c.Title
+				}).ToListAsync();
 			return allClubs;
 		}
 
@@ -62,7 +64,8 @@ namespace System.BLL.ClubManagement
 		{
 			if (club == null) throw new ArgumentNullException(nameof(club));
 
-			if (_context.Clubs.Any(x => x.Title == club.Title)) throw new AppException("Username \"" + club.Title + "\" is already taken");
+			if (_context.Clubs.Any(x => x.Title == club.Title))
+				throw new AppException("Username \"" + club.Title + "\" is already taken");
 
 			var clubDal = _mapper.Map<Club>(club);
 
@@ -80,7 +83,7 @@ namespace System.BLL.ClubManagement
 			var club = await GetByIdFullClubAsync(clubId);
 			var roomTemp =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && r.Club == room.Club);
-			
+
 			if (roomTemp == null) throw new AppException("Room not found");
 
 			club.Rooms.Add(roomTemp);
@@ -101,7 +104,7 @@ namespace System.BLL.ClubManagement
 
 			if (clubTemp == null) throw new AppException("Club not found");
 			if (roomTemp == null) throw new AppException("Room not found");
-			
+
 
 			clubTemp.Rooms.Add(roomTemp);
 			_context.Clubs.Update(clubTemp);
@@ -112,7 +115,8 @@ namespace System.BLL.ClubManagement
 		{
 			var club = await GetByIdFullClubAsync(clubId);
 
-			var roomTemp = await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
+			var roomTemp =
+				await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
 
 			if (roomTemp == null)
 			{
@@ -139,7 +143,8 @@ namespace System.BLL.ClubManagement
 		{
 			var resultClub = await GetByTitleFullClubAsync(club.Title);
 
-			var roomTemp = await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
+			var roomTemp =
+				await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
 
 			if (roomTemp == null)
 			{
@@ -197,7 +202,7 @@ namespace System.BLL.ClubManagement
 				club.Status = ClubStatus.Closed;
 				_context.Clubs.Update(club);
 			}
-			
+
 			await _context.SaveChangesAsync();
 		}
 
@@ -215,13 +220,16 @@ namespace System.BLL.ClubManagement
 				clubT.Status = ClubStatus.Closed;
 				_context.Clubs.Update(clubT);
 			}
+
 			await _context.SaveChangesAsync();
 		}
 
 		#region PrivateHelpers
+
 		private async Task<Club> GetByIdFullClubAsync(int clubId)
 		{
-			var club = await _context.Clubs.FirstOrDefaultAsync(cl => cl.Id == clubId);
+			var club = await _context.Clubs
+				.FirstOrDefaultAsync(cl => cl.Id == clubId);
 
 			if (club == null) throw new AppException("Club not found");
 
@@ -230,7 +238,8 @@ namespace System.BLL.ClubManagement
 
 		private async Task<Club> GetByTitleFullClubAsync(string title)
 		{
-			var club = await _context.Clubs.FirstOrDefaultAsync(cl => cl.Title == title);
+			var club = await _context.Clubs
+				.FirstOrDefaultAsync(cl => cl.Title == title);
 
 			if (club == null) throw new AppException("Club not found");
 
@@ -238,6 +247,5 @@ namespace System.BLL.ClubManagement
 		}
 
 		#endregion
-
 	}
 }

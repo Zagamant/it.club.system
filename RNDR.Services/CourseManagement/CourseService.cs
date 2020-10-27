@@ -32,13 +32,16 @@ namespace System.BLL.CourseManagement
 
 		public async Task<IEnumerable<CourseModel>> GetAllCourses()
 		{
-			var courses = _context.Courses.AsNoTracking().Select(c => new CourseModel
+			var courses = _context.Courses
+				.AsNoTracking()
+				.Select(c => new CourseModel
 			{
 				Title = c.Title,
 				ManualLink = c.ManualLink,
 				About = c.About,
 				Groups = c.Groups
-			}).AsQueryable();
+			})
+				.AsQueryable();
 			return courses;
 		}
 
@@ -47,7 +50,9 @@ namespace System.BLL.CourseManagement
 			if (course == null) throw new ArgumentNullException(nameof(course));
 
 			var courseOrig =
-				await _context.Courses.AsNoTracking().SingleAsync(c => c.Title == course.Title && c.ManualLink == course.ManualLink);
+				await _context.Courses
+					.AsNoTracking()
+					.SingleAsync(c => c.Title == course.Title && c.ManualLink == course.ManualLink);
 
 			var result = _mapper.Map<CourseModel>(courseOrig);
 			return result;
@@ -85,7 +90,8 @@ namespace System.BLL.CourseManagement
 
 		public async Task Remove(int courseId)
 		{
-			var courseOrig = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
+			var courseOrig = await _context.Courses
+				.FirstOrDefaultAsync(c => c.Id == courseId);
 
 			if (courseOrig == null) throw new AppException($"Course with id: {courseId} not found.");
 

@@ -14,6 +14,5 @@ namespace System.BLL.AgreementManagement
 		Task Update(AgreementModel agreement, AgreementModel agreementNew);
 		Task Delete(int agreementId);
 		Task Delete(AgreementModel agreement);
-
 	}
 }

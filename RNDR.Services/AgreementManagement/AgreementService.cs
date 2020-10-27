@@ -30,7 +30,9 @@ namespace System.BLL.AgreementManagement
 
 		public async Task<AgreementModel> GetById(int agreementId)
 		{
-			var agreement = await _context.Agreements.FirstOrDefaultAsync(agr => agr.Id == agreementId);
+			var agreement = await _context.Agreements
+				.AsNoTracking()
+				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
 
 			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
 
@@ -45,10 +47,10 @@ namespace System.BLL.AgreementManagement
 				.AsNoTracking()
 				.Where(agr => agr.User == user)
 				.Select(agr => new AgreementModel
-			{
-				User = agr.User,
-				Payment = agr.Payment
-			}).ToListAsync();
+				{
+					User = agr.User,
+					Payment = agr.Payment
+				}).ToListAsync();
 			return models;
 		}
 
@@ -73,7 +75,8 @@ namespace System.BLL.AgreementManagement
 
 		public async Task Delete(int agreementId)
 		{
-			var agreement = await _context.Agreements.FirstOrDefaultAsync(agr => agr.Id == agreementId);
+			var agreement = await _context.Agreements
+				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
 
 			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
 
