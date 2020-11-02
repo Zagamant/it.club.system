@@ -1,8 +1,9 @@
 ﻿using System.BLL.Helpers;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.EventManagement
 {
@@ -17,27 +18,73 @@ namespace System.BLL.EventManagement
 
 		public async Task<IEnumerable<Event>> GetAll()
 		{
-			throw new NotImplementedException();
+			var result = await _context.Events
+				.AsNoTracking()
+				.ToListAsync();
+
+			return result;
 		}
 
 		public async Task<Event> Get(int id)
 		{
-			throw new NotImplementedException();
+			var result = await _context.Events
+				.AsNoTracking()
+				.SingleOrDefaultAsync(ev => ev.Id == id);
+
+			if(result == null) throw new AppException($"Event with id: {id} not found.");
+
+			return result;
 		}
 
 		public async Task Add(Event entity)
 		{
-			throw new NotImplementedException();
+			if(entity == null) throw new ArgumentNullException(nameof(entity));
+			Event result = null;
+			if (entity.Id != 0)
+			{
+				result = await _context.Events
+					.AsNoTracking()
+					.SingleOrDefaultAsync(ev => ev.Id == entity.Id);
+
+				if (result != null) throw new AppException($"Event already exist.");
+			}
+
+			await _context.Events
+				.AddAsync(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(Event dbEntity, Event entity)
+		public async Task Update(Event dbEntity, Event newEntity)
 		{
-			throw new NotImplementedException();
+			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
+			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
+
+
+			var result = await _context.Events
+				.SingleOrDefaultAsync(ev => ev.Id == dbEntity.Id);
+
+			if (result == null) throw new AppException($"Event not found.");
+
+			newEntity.Id = dbEntity.Id;
+			_context.Events
+				.Update(newEntity);
+
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task Delete(Event entity)
 		{
-			throw new NotImplementedException();
+			if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+			var result = await _context.Events
+				.SingleOrDefaultAsync(cos => cos.Id == entity.Id);
+
+			if (result == null) throw new AppException($"Costs with id: {entity.Id} not found.");
+
+			_context.Events.Remove(entity);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

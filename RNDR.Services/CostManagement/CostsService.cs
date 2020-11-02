@@ -1,7 +1,7 @@
 ﻿using System.BLL.Helpers;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,9 +45,9 @@ namespace System.BLL.CostManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(Costs dbEntity, Costs entity)
+		public async Task Update(Costs dbEntity, Costs newEntity)
 		{
-			if (entity == null) throw new ArgumentNullException(nameof(entity));
+			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
 			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
 
 			var result = await _context.Costs
@@ -55,12 +55,10 @@ namespace System.BLL.CostManagement
 
 			if (result == null) throw new AppException($"Costs with id: {dbEntity.Id} not found.");
 
-			entity.Id = dbEntity.Id;
+			newEntity.Id = dbEntity.Id;
 
-			_context.Costs.Update(entity);
+			_context.Costs.Update(newEntity);
 
-			await _context.Costs.AddAsync(entity);
-		
 			await _context.SaveChangesAsync();
 		}
 
