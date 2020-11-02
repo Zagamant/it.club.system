@@ -1,4 +1,4 @@
-﻿namespace System.DAL.Enums
+﻿namespace System.DAL.Entities.Enums
 {
 	public enum RoomStatus
 	{

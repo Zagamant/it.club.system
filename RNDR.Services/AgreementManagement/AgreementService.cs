@@ -2,7 +2,7 @@
 using System.BLL.Models.AgreementManagement;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -30,7 +30,9 @@ namespace System.BLL.AgreementManagement
 
 		public async Task<AgreementModel> GetById(int agreementId)
 		{
-			var agreement = await _context.Agreements.FirstOrDefaultAsync(agr => agr.Id == agreementId);
+			var agreement = await _context.Agreements
+				.AsNoTracking()
+				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
 
 			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
 
@@ -73,7 +75,8 @@ namespace System.BLL.AgreementManagement
 
 		public async Task Delete(int agreementId)
 		{
-			var agreement = await _context.Agreements.FirstOrDefaultAsync(agr => agr.Id == agreementId);
+			var agreement = await _context.Agreements
+				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
 
 			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
 

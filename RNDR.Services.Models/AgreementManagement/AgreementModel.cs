@@ -1,4 +1,4 @@
-﻿using System.DAL.Models;
+﻿using System.DAL.Entities;
 
 namespace System.BLL.Models.AgreementManagement
 {

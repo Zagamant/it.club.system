@@ -1,6 +1,5 @@
-﻿using System.BLL.Models.UserManagement;
-using System.Collections.Generic;
-using System.DAL.Models;
+﻿using System.Collections.Generic;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 
 namespace System.BLL.UserManagement
@@ -62,8 +61,5 @@ namespace System.BLL.UserManagement
         /// </summary>
         /// <param name="id">A user identifier.</param>
         Task DeleteAsync(int id);
-
-        Task ForgotPassword(User userModel);
-        Task ResetPassword(User user, string code);
     }
 }

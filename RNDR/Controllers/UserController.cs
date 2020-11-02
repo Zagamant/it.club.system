@@ -3,7 +3,7 @@ using System.BLL.Helpers;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
 using System.Collections.Generic;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

@@ -1,10 +1,12 @@
 using System.API.Helpers;
+using System.BLL.AgreementManagement;
 using System.BLL.ClubManagement;
+using System.BLL.CourseManagement;
 using System.BLL.RoleManagement;
 using System.BLL.RoomManagement;
 using System.BLL.UserManagement;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -53,11 +55,13 @@ namespace System.API
             services.AddControllers();
 
             // Auto Mapper Configurations
-            var mappingConfig = new MapperConfiguration(mc =>
+            var mappingConfig = new MapperConfiguration(mapperConfig =>
             {
-                mc.AddProfile(new UserManagementMappingProfile());
-                mc.AddProfile(new ClubManagementMappingProfile());
-                mc.AddProfile(new RoomManagementMappingProfile());
+                mapperConfig.AddProfile(new UserManagementMappingProfile());
+                mapperConfig.AddProfile(new ClubManagementMappingProfile());
+                mapperConfig.AddProfile(new RoomManagementMappingProfile());
+                mapperConfig.AddProfile(new AgreementManagementMappingProfile());
+                mapperConfig.AddProfile(new CourseManagementMappingProfile() );
             });
 
             var mapper = mappingConfig.CreateMapper();

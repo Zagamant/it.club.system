@@ -1,5 +1,5 @@
 ﻿using System.BLL.Models.ClubManagement;
-using System.DAL.Models;
+using System.DAL.Entities;
 using AutoMapper;
 
 namespace System.BLL.ClubManagement

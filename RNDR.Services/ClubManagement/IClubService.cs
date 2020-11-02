@@ -1,7 +1,7 @@
 ﻿using System.BLL.Models.ClubManagement;
 using System.BLL.Models.RoomManagement;
 using System.Collections.Generic;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 
 namespace System.BLL.ClubManagement

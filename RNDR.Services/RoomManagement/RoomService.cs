@@ -1,7 +1,7 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.RoomManagement;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

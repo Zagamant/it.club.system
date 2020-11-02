@@ -1,5 +1,5 @@
-﻿using System.DAL.Enums;
-using System.DAL.Models;
+﻿using System.DAL.Entities;
+using System.DAL.Entities.Enums;
 
 namespace System.BLL.Models.ClubManagement
 {

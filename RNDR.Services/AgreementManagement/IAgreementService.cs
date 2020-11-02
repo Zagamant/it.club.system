@@ -1,6 +1,6 @@
 ﻿using System.BLL.Models.AgreementManagement;
 using System.Collections.Generic;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 
 namespace System.BLL.AgreementManagement
@@ -14,6 +14,5 @@ namespace System.BLL.AgreementManagement
 		Task Update(AgreementModel agreement, AgreementModel agreementNew);
 		Task Delete(int agreementId);
 		Task Delete(AgreementModel agreement);
-
 	}
 }

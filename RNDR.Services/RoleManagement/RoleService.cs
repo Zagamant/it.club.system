@@ -1,5 +1,5 @@
 ﻿using System.BLL.Helpers;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace System.DAL.Models
+﻿namespace System.DAL.Entities
 {
 	public class Costs
 	{

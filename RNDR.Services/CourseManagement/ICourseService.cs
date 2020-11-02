@@ -15,3 +15,4 @@ namespace System.BLL.CourseManagement
 		Task Remove(CourseModel room);
 	}
 }
+

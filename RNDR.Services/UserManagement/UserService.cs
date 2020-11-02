@@ -2,7 +2,7 @@
 using System.BLL.Models.UserManagement;
 using System.Collections.Generic;
 using System.DAL;
-using System.DAL.Models;
+using System.DAL.Entities;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
