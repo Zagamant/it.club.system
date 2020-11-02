@@ -45,10 +45,10 @@ namespace System.BLL.AgreementManagement
 				.AsNoTracking()
 				.Where(agr => agr.User == user)
 				.Select(agr => new AgreementModel
-			{
-				User = agr.User,
-				Payment = agr.Payment
-			}).ToListAsync();
+				{
+					User = agr.User,
+					Payment = agr.Payment
+				}).ToListAsync();
 			return models;
 		}
 

@@ -1,7 +1,7 @@
-﻿using System.DAL.Configurations;
-using System.DAL.Enums;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.DAL.Configurations;
+using System.DAL.Enums;
 using System.DAL.Models;
 
 namespace System.DAL
@@ -95,5 +95,4 @@ namespace System.DAL
         }
     }
 
-    
 }

@@ -1,10 +1,13 @@
 ﻿using System.BLL.Helpers;
+using System.BLL.Models.UserManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Models;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -123,6 +126,29 @@ namespace System.BLL.UserManagement
 
             await _userManager.DeleteAsync(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task ForgotPassword(User userModel)
+        {
+            //TODO
+            throw new NotImplementedException();
+
+	        var user = await _userManager.FindByEmailAsync(userModel.Email);
+	        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+	        {
+		        // пользователь с данным email может отсутствовать в бд
+		        // тем не менее мы выводим стандартное сообщение, чтобы скрыть 
+		        // наличие или отсутствие пользователя в бд
+	        }
+
+	        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+	        
+        }
+
+        public async Task ResetPassword(UserModel userModel, string code)
+        {
+	        //TODO
+            throw new NotImplementedException();
         }
 
         #region private helper methods
