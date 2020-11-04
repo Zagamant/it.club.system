@@ -12,8 +12,8 @@ namespace System.BLL.AgreementManagement
 {
 	public class AgreementService : IAgreementService
 	{
-		private DataContext _context;
-		private IMapper _mapper;
+		private readonly DataContext _context;
+		private readonly IMapper _mapper;
 
 		public AgreementService(DataContext context, IMapper mapper)
 		{

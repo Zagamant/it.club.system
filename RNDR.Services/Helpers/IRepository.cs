@@ -5,10 +5,10 @@ namespace System.BLL.Helpers
 {
 	public interface IRepository<TEntity>
 	{
-		Task<IEnumerable<TEntity>> GetAll();
-		Task<TEntity> Get(int id);
-		Task Add(TEntity entity);
-		Task Update(TEntity dbEntity, TEntity newEntity);
-		Task Delete(TEntity entity);
+		Task<IEnumerable<TEntity>> GetAllAsync();
+		Task<TEntity> GetAsync(int id);
+		Task AddAsync(TEntity entity);
+		Task UpdateAsync(TEntity dbEntity, TEntity newEntity);
+		Task DeleteAsync(TEntity entity);
 	}
 }

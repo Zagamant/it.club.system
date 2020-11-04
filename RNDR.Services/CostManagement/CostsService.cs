@@ -16,7 +16,7 @@ namespace System.BLL.CostManagement
 			_context = context ?? throw new ArgumentNullException(nameof(context));
 		}
 
-		public async Task<IEnumerable<Costs>> GetAll()
+		public async Task<IEnumerable<Costs>> GetAllAsync()
 		{
 			var result = await _context.Costs
 				.AsNoTracking()
@@ -25,7 +25,7 @@ namespace System.BLL.CostManagement
 			return result;
 		}
 
-		public async Task<Costs> Get(int id)
+		public async Task<Costs> GetAsync(int id)
 		{
 			var result = await _context.Costs
 				.AsNoTracking()
@@ -36,7 +36,7 @@ namespace System.BLL.CostManagement
 			return result;
 		}
 
-		public async Task Add(Costs entity)
+		public async Task AddAsync(Costs entity)
 		{
 			if(entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -45,7 +45,7 @@ namespace System.BLL.CostManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(Costs dbEntity, Costs newEntity)
+		public async Task UpdateAsync(Costs dbEntity, Costs newEntity)
 		{
 			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
 			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
@@ -62,7 +62,7 @@ namespace System.BLL.CostManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Delete(Costs entity)
+		public async Task DeleteAsync(Costs entity)
 		{
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 

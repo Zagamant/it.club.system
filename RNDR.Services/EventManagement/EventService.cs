@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.EventManagement
 {
-	public class EventService : IRepository<Event>
+	public class EventService : IEventService
 	{
 		private readonly DataContext _context;
 
@@ -16,7 +16,7 @@ namespace System.BLL.EventManagement
 			_context = context ?? throw new ArgumentNullException(nameof(context));
 		}
 
-		public async Task<IEnumerable<Event>> GetAll()
+		public async Task<IEnumerable<Event>> GetAllAsync()
 		{
 			var result = await _context.Events
 				.AsNoTracking()
@@ -25,7 +25,7 @@ namespace System.BLL.EventManagement
 			return result;
 		}
 
-		public async Task<Event> Get(int id)
+		public async Task<Event> GetAsync(int id)
 		{
 			var result = await _context.Events
 				.AsNoTracking()
@@ -36,7 +36,7 @@ namespace System.BLL.EventManagement
 			return result;
 		}
 
-		public async Task Add(Event entity)
+		public async Task AddAsync(Event entity)
 		{
 			if(entity == null) throw new ArgumentNullException(nameof(entity));
 			Event result = null;
@@ -55,7 +55,7 @@ namespace System.BLL.EventManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(Event dbEntity, Event newEntity)
+		public async Task UpdateAsync(Event dbEntity, Event newEntity)
 		{
 			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
 			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
@@ -73,7 +73,7 @@ namespace System.BLL.EventManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Delete(Event entity)
+		public async Task DeleteAsync(Event entity)
 		{
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 

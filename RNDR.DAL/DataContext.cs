@@ -18,7 +18,7 @@ namespace System.DAL
 
         public DbSet<Address> Addresses{ get; set; }
         public DbSet<Photo> Photos { get; set; }
-
+        
         public DbSet<Agreement> Agreements { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
@@ -45,6 +45,9 @@ namespace System.DAL
 		        .ApplyConfiguration(new ClubConfiguration())
 		        .ApplyConfiguration(new GroupConfiguration())
 		        .ApplyConfiguration(new RoomConfiguration())
+		        .ApplyConfiguration(new GroupUserConfiguration())
+		        .ApplyConfiguration(new PaymentConfiguration())
+		        .ApplyConfiguration(new UserConfiguration())
 		        ;
 
 	        

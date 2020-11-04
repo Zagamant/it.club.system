@@ -18,6 +18,5 @@ namespace System.DAL.Entities
 		public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
 		public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 		public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
-
 	}
 }
