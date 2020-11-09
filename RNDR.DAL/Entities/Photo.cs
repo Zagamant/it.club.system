@@ -9,7 +9,7 @@ namespace System.DAL.Entities
 		[Required]
 		public virtual byte[] PhotoAsBytes { get; set; }
 
-		public virtual string UserId { get; set; }
+		public virtual int UserId { get; set; }
 
 		public virtual User User { get; set; }
 	}

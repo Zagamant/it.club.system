@@ -48,6 +48,7 @@ namespace System.DAL
 		        .ApplyConfiguration(new GroupUserConfiguration())
 		        .ApplyConfiguration(new PaymentConfiguration())
 		        .ApplyConfiguration(new UserConfiguration())
+		        .ApplyConfiguration(new PhotoConfiguration())
 		        ;
 
 	        

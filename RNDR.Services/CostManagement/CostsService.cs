@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.CostManagement
 {
-	public class CostsService : ICostsService, IRepository<Costs>
+	public class CostsService : ICostsService
 	{
 		private readonly DataContext _context;
 

@@ -187,7 +187,7 @@ namespace System.DAL.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Clubs");
+                    b.ToTable("Club");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Contact", b =>

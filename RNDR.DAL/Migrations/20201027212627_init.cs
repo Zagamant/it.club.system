@@ -105,7 +105,7 @@ namespace System.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clubs",
+                name: "Club",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -345,7 +345,7 @@ namespace System.DAL.Migrations
                     table.ForeignKey(
                         name: "FK_Rooms_Clubs_ClubId",
                         column: x => x.ClubId,
-                        principalTable: "Clubs",
+                        principalTable: "Club",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -499,7 +499,7 @@ namespace System.DAL.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clubs_AddressId",
-                table: "Clubs",
+                table: "Club",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
@@ -607,7 +607,7 @@ namespace System.DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Clubs");
+                name: "Club");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
