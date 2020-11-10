@@ -13,187 +13,214 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.UserManagement
 {
+	/// <summary>
+	/// Represent a user service
+	/// </summary>
+	public class UserService : IUserService
+	{
+		private DataContext _context;
+		private UserManager<User> _userManager;
+		private SignInManager<User> _signInManager;
 
-    /// <summary>
-    /// Represent a user service
-    /// </summary>
-    public class UserService : IUserService
-    {
-        private DataContext _context;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+		/// <summary>
+		/// Initialize a new instance of the <see cref="UserService"/> class with specified <see cref="DataContext"/>.
+		/// </summary>
+		/// <param name="context">A <see cref="DataContext"/>.</param>
+		/// <param name="userManager">A <see cref="UserManager{User}"/>.</param>
+		/// <param name="signInManager">A <see cref="SignInManager{User}"/>.</param>
+		public UserService(DataContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+		{
+			_context = context ?? throw new ArgumentNullException(nameof(context));
+			_userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+			_signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+		}
 
-        /// <summary>
-        /// Initialize a new instance of the <see cref="UserService"/> class with specified <see cref="DataContext"/>.
-        /// </summary>
-        /// <param name="context">A <see cref="DataContext"/>.</param>
-        /// <param name="userManager">A <see cref="UserManager{User}"/>.</param>
-        /// <param name="signInManager">A <see cref="SignInManager{User}"/>.</param>
-        public UserService(DataContext context, UserManager<User> userManager, SignInManager<User> signInManager)
-        {
-	        _context = context ?? throw new ArgumentNullException(nameof(context));
-	        _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-	        _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+		/// <inheritdoc/>
+		public async Task<User> AuthenticateAsync(string username, string password)
+		{
+			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+				return null;
 
-        }
+			var user = await _userManager.FindByNameAsync(username);
 
-        /// <inheritdoc/>
-        public async Task<User> AuthenticateAsync(string username, string password)
-        {
-	        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-		        return null;
+			if (user == null)
+				throw new AppException("User not found");
 
-	        var user = await _userManager.FindByNameAsync(username);
+			var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+			return result.Succeeded ? user : null;
+		}
 
-	        if (user == null)
-		        throw new AppException("User not found");
+		public async Task LogoutAsync()
+		{
+			await _signInManager.SignOutAsync();
+		}
 
-            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
-	        return result.Succeeded ? user : null; 
-        }
-
-        public async Task LogoutAsync()
-        {
-	        await _signInManager.SignOutAsync();
-        }
-
-        public async Task<int> GetIdAsync(User user)
-        {
-	        var id = await _userManager.GetUserIdAsync(user);
-	        return Convert.ToInt32(id);
-        }
+		public async Task<int> GetIdAsync(User user)
+		{
+			var id = await _userManager.GetUserIdAsync(user);
+			return Convert.ToInt32(id);
+		}
 
 
-        /// <inheritdoc/>
-        public async Task<IEnumerable<User>> GetAllAsync()
-        {
-            return await _userManager.Users.ToListAsync();
-        }
+		/// <inheritdoc/>
+		public async Task<IEnumerable<User>> GetAllAsync()
+		{
+			return await _userManager.Users.ToListAsync();
+		}
 
-        /// <inheritdoc/>
-        public async Task<User> GetByIdAsync(int id)
-        {
-            return await _userManager.FindByIdAsync(id.ToString());
-        }
+		/// <inheritdoc/>
+		public async Task<User> GetByIdAsync(int id)
+		{
+			var user = await _userManager.FindByIdAsync(id.ToString());
 
-        public async Task<User> GetByUsernameAsync(string username)
-        {
-	        return await _userManager.FindByNameAsync(username);
-        }
+			if (user == null) throw new AppException("User not found");
 
-        /// <inheritdoc/>
-        public async Task<User> CreateAsync(User user, string password)
-        {
-            // validation
-            if (string.IsNullOrWhiteSpace(password)) throw new AppException("Password is required");
+			return user;
+		}
 
-            if (_context.Users.Any(x => x.UserName == user.UserName)) throw new AppException("Username \"" + user.UserName + "\" is already taken");
+		public async Task<User> GetByUsernameAsync(string username)
+		{
+			var user = await _userManager.FindByNameAsync(username);
 
-            var result = await _userManager.CreateAsync(user, password);
+			if (user == null) throw new AppException("User not found");
 
-            if (result.Succeeded)
-            {
-	            await _signInManager.SignInAsync(user, false);
-            }
-            else
-            {
-	            throw new AppException("Cant register user");
-            }
+			return user;
+		}
 
-            return user;
-        }
+		public async Task<User> GetByEmailAsync(string email)
+		{
+			var user = await _userManager.FindByEmailAsync(email);
 
-        /// <inheritdoc/>
-        public async Task UpdateAsync(User userParam, string password = null)
-        {
-            var user = await _context.Users.FindAsync(userParam.Id);
+			if (user == null) throw new AppException("User not found");
 
-            if (user == null)
-                throw new AppException("User not found");
+			return user;
+		}
 
-            // update username if it has changed
-            await _userManager.UpdateAsync(user: userParam);
+		/// <inheritdoc/>
+		public async Task<User> CreateAsync(User user, string password)
+		{
+			// validation
+			if (string.IsNullOrWhiteSpace(password)) throw new AppException("Password is required");
 
-            await _context.SaveChangesAsync();
-        }
+			if (_context.Users.Any(x => x.UserName == user.UserName))
+				throw new AppException("Username \"" + user.UserName + "\" is already taken");
 
-        /// <inheritdoc/>
-        public async Task DeleteAsync(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
+			var result = await _userManager.CreateAsync(user, password);
 
-            if (user == null) return;
+			if (result.Succeeded)
+			{
+				await _signInManager.SignInAsync(user, false);
+			}
+			else
+			{
+				throw new AppException("Cant register user");
+			}
 
-            await _userManager.DeleteAsync(user);
-            await _context.SaveChangesAsync();
-        }
+			return user;
+		}
 
-        public async Task ForgotPassword(User userModel)
-        {
-            //TODO
-            throw new NotImplementedException();
+		/// <inheritdoc/>
+		public async Task UpdateAsync(User userParam, string password = null)
+		{
+			var user = await _context.Users.FindAsync(userParam.Id);
 
-	        var user = await _userManager.FindByEmailAsync(userModel.Email);
-	        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-	        {
-		        // пользователь с данным email может отсутствовать в бд
-		        // тем не менее мы выводим стандартное сообщение, чтобы скрыть 
-		        // наличие или отсутствие пользователя в бд
-	        }
+			if (user == null)
+				throw new AppException("User not found");
 
-	        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-	        
-        }
+			// update username if it has changed
+			await _userManager.UpdateAsync(user: userParam);
 
-        public async Task ResetPassword(UserModel userModel, string code)
-        {
-	        //TODO
-            throw new NotImplementedException();
-        }
+			await _context.SaveChangesAsync();
+		}
 
-        #region private helper methods
-        
-        /// <summary>
-        /// CreateAsync password hash and uniq salt for new user.
-        /// </summary>
-        /// <param name="password">Clear password.</param>
-        /// <param name="passwordHash">Encrypted password.</param>
-        /// <param name="passwordSalt">Password's salt.</param>
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+		/// <inheritdoc/>
+		public async Task DeleteAsync(int id)
+		{
+			var user = await _context.Users.FindAsync(id);
 
-            using var hmac = new System.Security.Cryptography.HMACSHA512();
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-        }
+			if (user == null) return;
 
-        /// <summary>
-        /// Verify is entered password equals hashed ones.
-        /// </summary>
-        /// <param name="password">Entered password.</param>
-        /// <param name="storedHash">Hashed password.</param>
-        /// <param name="storedSalt">Uniq salt that were used to encrypt password.</param>
-        /// <returns>Is it corrected entered password.</returns>
-        private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
-        {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
-            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+			await _userManager.DeleteAsync(user);
+			await _context.SaveChangesAsync();
+		}
 
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-            {
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                if (computedHash.Where((t, i) => t != storedHash[i]).Any())
-                {
-                    return false;
-                }
-            }
+		public async Task<string> ForgotPassword(ForgotPasswordModel userModel)
+		{
+			var user = await _userManager.FindByEmailAsync(userModel.Email);
+			if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+			{
+				// пользователь с данным email может отсутствовать в бд
+				// тем не менее мы выводим стандартное сообщение, чтобы скрыть 
+				// наличие или отсутствие пользователя в бд
+				throw new AppException($"User with email: {userModel.Email} not found");
+			}
 
-            return true;
-        }
-        #endregion
-    }
+			return await _userManager.GeneratePasswordResetTokenAsync(user);
+		}
+		
+		public async Task ResetPasswordAsync(ResetPasswordModel userModel)
+		{
+			var user = await _userManager.FindByEmailAsync(userModel.Email);
+			if (user == null)
+			{
+				throw new AppException("Model not valid");
+			}
+
+			var result = await _userManager.ResetPasswordAsync(user, userModel.Code, userModel.Password);
+			if (!result.Succeeded)
+			{
+				throw new AppException("Reset was failed");
+			}
+		}
+
+		#region private helper methods
+
+		/// <summary>
+		/// CreateAsync password hash and uniq salt for new user.
+		/// </summary>
+		/// <param name="password">Clear password.</param>
+		/// <param name="passwordHash">Encrypted password.</param>
+		/// <param name="passwordSalt">Password's salt.</param>
+		private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+		{
+			if (password == null) throw new ArgumentNullException("password");
+			if (string.IsNullOrWhiteSpace(password))
+				throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+
+			using var hmac = new System.Security.Cryptography.HMACSHA512();
+			passwordSalt = hmac.Key;
+			passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+		}
+
+		/// <summary>
+		/// Verify is entered password equals hashed ones.
+		/// </summary>
+		/// <param name="password">Entered password.</param>
+		/// <param name="storedHash">Hashed password.</param>
+		/// <param name="storedSalt">Uniq salt that were used to encrypt password.</param>
+		/// <returns>Is it corrected entered password.</returns>
+		private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
+		{
+			if (password == null) throw new ArgumentNullException("password");
+			if (string.IsNullOrWhiteSpace(password))
+				throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+			if (storedHash.Length != 64)
+				throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
+			if (storedSalt.Length != 128)
+				throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+
+			using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
+			{
+				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+				if (computedHash.Where((t, i) => t != storedHash[i]).Any())
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		#endregion
+	}
 }

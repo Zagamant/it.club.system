@@ -3,6 +3,7 @@ using System.BLL.AgreementManagement;
 using System.BLL.ClubManagement;
 using System.BLL.CostManagement;
 using System.BLL.CourseManagement;
+using System.BLL.EmailManagement;
 using System.BLL.EventManagement;
 using System.BLL.GroupManagement;
 using System.BLL.PaymentManagement;
@@ -19,7 +20,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -126,6 +126,7 @@ namespace System.API
 			services.AddScoped<IRoleService, RoleService>();
 			services.AddScoped<IRoomService, RoomService>();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IEmailService, EmailService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

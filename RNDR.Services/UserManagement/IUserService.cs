@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.BLL.Models.UserManagement;
+using System.Collections.Generic;
 using System.DAL.Entities;
 using System.Threading.Tasks;
 
@@ -42,6 +43,13 @@ namespace System.BLL.UserManagement
         Task<User> GetByUsernameAsync(string username);
 
         /// <summary>
+        /// GetById 1 user from database by username.
+        /// </summary>
+        /// <param name="username">A user username.</param>
+        /// <returns></returns>
+        Task<User> GetByEmailAsync(string email);
+
+        /// <summary>
         /// CreateAsync new user and return it back
         /// </summary>
         /// <param name="user">A <see cref="User"/>.</param>
@@ -61,5 +69,9 @@ namespace System.BLL.UserManagement
         /// </summary>
         /// <param name="id">A user identifier.</param>
         Task DeleteAsync(int id);
+
+        Task<string> ForgotPassword(ForgotPasswordModel userModel);
+
+        Task ResetPasswordAsync(ResetPasswordModel userModel);
     }
 }
