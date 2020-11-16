@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -144,7 +142,7 @@ namespace System.BLL.UserManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> ForgotPassword(ForgotPasswordModel userModel)
+		public async Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel)
 		{
 			var user = await _userManager.FindByEmailAsync(userModel.Email);
 			if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))

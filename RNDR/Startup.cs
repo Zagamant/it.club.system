@@ -40,6 +40,7 @@ namespace System.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
+
 			services.AddIdentity<User, Role>(options =>
 				{
 					options.Password.RequireDigit = true;
@@ -85,22 +86,19 @@ namespace System.API
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 					x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 				})
-				.AddJwtBearer(x =>
+				.AddJwtBearer(x => 
 				{
 					x.Events = new JwtBearerEvents
 					{
-						OnTokenValidated = context =>
+						OnTokenValidated = async context =>
 						{
 							var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 							var userId = int.Parse(context.Principal.Identity.Name);
-							var user = userService.GetByIdAsync(userId);
+							var user =  await userService.GetByIdAsync(userId);
 							if (user == null)
 							{
-								// return unauthorized if user no longer exists
 								context.Fail("Unauthorized");
 							}
-
-							return Task.CompletedTask;
 						}
 					};
 					x.RequireHttpsMetadata = false;

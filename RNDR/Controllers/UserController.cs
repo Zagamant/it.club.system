@@ -130,17 +130,14 @@ namespace System.API.Controllers
 			}
 		}
 
+		[Authorize(Roles = "main_admin,admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			await _userService.DeleteAsync(id);
 			return Ok();
 		}
-
-
-		[HttpGet]
-		public async Task<IActionResult> Index() => Ok("U r sign in");
-
+		
 		
 		[HttpPost]
 		[AllowAnonymous]
@@ -148,7 +145,7 @@ namespace System.API.Controllers
 		public async Task ForgotPassword(ForgotPasswordModel model)
 		{
 			var user = _userService.GetByEmailAsync(model.Email);
-			var code = await _userService.ForgotPassword(model);
+			var code = await _userService.ForgotPasswordAsync(model);
 			var callbackUrl = Url.Action(action: "ResetPassword", controller: "Users",
 				values: new {userId = user.Id, code = code},
 				protocol: HttpContext.Request.Scheme);
@@ -156,10 +153,6 @@ namespace System.API.Controllers
 			await _emailService.SendEmailAsync(model.Email, "Reset Password",
 				$"To reset password follow link: <a href='{callbackUrl}'>link</a>");
 		}
-
-		[HttpGet]
-		[AllowAnonymous]
-		public async Task<ActionResult> ResetPassword([FromQuery]string code = null) => code == null ? (ActionResult) Forbid() : Ok(code);
 
 		[HttpPost]
 		[AllowAnonymous]
