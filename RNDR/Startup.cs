@@ -14,7 +14,6 @@ using System.BLL.UserManagement;
 using System.DAL;
 using System.DAL.Entities;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -86,7 +85,7 @@ namespace System.API
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 					x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 				})
-				.AddJwtBearer(x => 
+				.AddJwtBearer(x =>
 				{
 					x.Events = new JwtBearerEvents
 					{
@@ -94,11 +93,8 @@ namespace System.API
 						{
 							var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 							var userId = int.Parse(context.Principal.Identity.Name);
-							var user =  await userService.GetByIdAsync(userId);
-							if (user == null)
-							{
-								context.Fail("Unauthorized");
-							}
+							var user = await userService.GetByIdAsync(userId);
+							if (user == null) context.Fail("Unauthorized");
 						}
 					};
 					x.RequireHttpsMetadata = false;

@@ -22,11 +22,11 @@ namespace System.API.Controllers
 	[Route("[controller]")]
 	public class UsersController : ControllerBase
 	{
+		private readonly AppSettings _appSettings;
 
 		private readonly IEmailService _emailService;
-		private readonly IUserService _userService;
 		private readonly IMapper _mapper;
-		private readonly AppSettings _appSettings;
+		private readonly IUserService _userService;
 
 		public UsersController(
 			IUserService userService,
@@ -66,7 +66,7 @@ namespace System.API.Controllers
 			// return basic user info and authentication token
 			return Ok(new
 			{
-				Id = user.Id,
+				user.Id,
 				Username = user.UserName,
 				Token = tokenString
 			});
@@ -137,26 +137,57 @@ namespace System.API.Controllers
 			await _userService.DeleteAsync(id);
 			return Ok();
 		}
-		
-		
-		[HttpPost]
+
+
+		[HttpPost("forgotpassword")]
 		[AllowAnonymous]
-		[ValidateAntiForgeryToken]
 		public async Task ForgotPassword(ForgotPasswordModel model)
 		{
-			var user = _userService.GetByEmailAsync(model.Email);
+			var user = await _userService.GetByEmailAsync(model.Email);
 			var code = await _userService.ForgotPasswordAsync(model);
-			var callbackUrl = Url.Action(action: "ResetPassword", controller: "Users",
-				values: new {userId = user.Id, code = code},
-				protocol: HttpContext.Request.Scheme);
+			var callbackUrl = Url.Action("ResetPassword", "Users",
+				new {userId = user.Id, code},
+				HttpContext.Request.Scheme);
 
 			await _emailService.SendEmailAsync(model.Email, "Reset Password",
 				$"To reset password follow link: <a href='{callbackUrl}'>link</a>");
 		}
 
-		[HttpPost]
+		[HttpPost("SendConfirmation")]
+		public async Task SendConfirmation()
+		{
+			var userId = Convert.ToInt32(HttpContext.User.Identity.Name);
+
+			var user = await _userService.GetByIdAsync(userId);
+
+			var model = new ConfirmEmailModel
+			{
+				Email = user.Email,
+				Id = userId.ToString()
+			};
+
+			var code = await _userService.GenerateConfirmationEmailAsync(model);
+
+			var callbackUrl = Url.Action("ConfirmEmail", "Users",
+				new {user.Id, user.Email, Code = code},
+				HttpContext.Request.Scheme);
+
+			await _emailService.SendEmailAsync(model.Email, "Confirm Email",
+				$"To confirm email follow link: <a href='{callbackUrl}'>link</a>");
+		}
+
+		[HttpGet("ConfirmEmail")]
 		[AllowAnonymous]
-		public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+		public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailModel model)
+		{
+			await _userService.ConfirmEmailAsync(model);
+			return Ok();
+		}
+
+
+		[HttpGet("ResetPassword")]
+		[AllowAnonymous]
+		public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordModel model)
 		{
 			await _userService.ResetPasswordAsync(model);
 

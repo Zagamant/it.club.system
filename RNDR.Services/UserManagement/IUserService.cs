@@ -70,6 +70,10 @@ namespace System.BLL.UserManagement
         /// <param name="id">A user identifier.</param>
         Task DeleteAsync(int id);
 
+        Task ConfirmEmailAsync(ConfirmEmailModel model);
+
+        Task<string> GenerateConfirmationEmailAsync(ConfirmEmailModel userModel);
+
         Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel);
 
         Task ResetPasswordAsync(ResetPasswordModel userModel);
