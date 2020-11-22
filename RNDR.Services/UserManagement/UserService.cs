@@ -144,6 +144,7 @@ namespace System.BLL.UserManagement
 			await _context.SaveChangesAsync();
 		}
 
+		/// <inheritdoc/>
 		public async Task ConfirmEmailAsync(ConfirmEmailModel model)
 		{
 			var user = await _userManager.FindByIdAsync(model.Id);
@@ -158,7 +159,7 @@ namespace System.BLL.UserManagement
 			}
 		}
 
-
+		/// <inheritdoc/>
 		public async Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel)
 		{
 			var user = await _userManager.FindByEmailAsync(userModel.Email);
@@ -173,6 +174,7 @@ namespace System.BLL.UserManagement
 			return await _userManager.GeneratePasswordResetTokenAsync(user);
 		}
 
+		/// <inheritdoc/>
 		public async Task<string> GenerateConfirmationEmailAsync(ConfirmEmailModel userModel)
 		{
 			var user = await _userManager.FindByIdAsync(userModel.Id);
@@ -187,6 +189,7 @@ namespace System.BLL.UserManagement
 			return await _userManager.GenerateEmailConfirmationTokenAsync(user);
 		}
 
+		/// <inheritdoc/>
 		public async Task ResetPasswordAsync(ResetPasswordModel userModel)
 		{
 			var user = await _userManager.FindByEmailAsync(userModel.Email);
@@ -238,16 +241,9 @@ namespace System.BLL.UserManagement
 			if (storedSalt.Length != 128)
 				throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
 
-			using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-			{
-				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-				if (computedHash.Where((t, i) => t != storedHash[i]).Any())
-				{
-					return false;
-				}
-			}
-
-			return true;
+			using var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt);
+			var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+			return !computedHash.Where((t, i) => t != storedHash[i]).Any();
 		}
 
 		#endregion

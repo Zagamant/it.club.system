@@ -73,6 +73,7 @@ namespace System.API.Controllers
 		}
 
 		[AllowAnonymous]
+		[Authorize(Roles = "main_admin,admin")]
 		[HttpPost("register")]
 		public async Task<IActionResult> Register([FromBody] UserRegister model)
 		{
@@ -93,7 +94,7 @@ namespace System.API.Controllers
 			return Ok();
 		}
 
-		[Authorize(Roles = "admin")]
+		[Authorize(Roles = "main_admin,admin")]
 		[HttpGet]
 		public IActionResult GetAll()
 		{
@@ -153,8 +154,8 @@ namespace System.API.Controllers
 				$"To reset password follow link: <a href='{callbackUrl}'>link</a>");
 		}
 
-		[HttpPost("SendConfirmation")]
-		public async Task SendConfirmation()
+		[HttpPost("SendEmailConfirmation")]
+		public async Task SendEmailConfirmation()
 		{
 			var userId = Convert.ToInt32(HttpContext.User.Identity.Name);
 

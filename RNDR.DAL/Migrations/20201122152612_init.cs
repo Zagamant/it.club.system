@@ -11,11 +11,11 @@ namespace System.DAL.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Country = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    AddressLine = table.Column<string>(nullable: true)
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressLine = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,11 +26,11 @@ namespace System.DAL.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,11 +41,11 @@ namespace System.DAL.Migrations
                 name: "Costs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cost = table.Column<decimal>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    About = table.Column<string>(nullable: true)
+                    Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,10 +56,10 @@ namespace System.DAL.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateTime = table.Column<DateTime>(nullable: false),
-                    About = table.Column<string>(nullable: true)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,28 +70,28 @@ namespace System.DAL.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    BirthDay = table.Column<DateTime>(nullable: false),
-                    AddressId = table.Column<int>(nullable: true),
-                    AdditionalInfo = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    AdditionalInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,14 +105,14 @@ namespace System.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Club",
+                name: "Clubs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    AddressId = table.Column<int>(nullable: true),
-                    Status = table.Column<string>(nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -129,11 +129,11 @@ namespace System.DAL.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -150,11 +150,11 @@ namespace System.DAL.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,10 +171,10 @@ namespace System.DAL.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -191,8 +191,8 @@ namespace System.DAL.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,10 +215,10 @@ namespace System.DAL.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,12 +235,12 @@ namespace System.DAL.Migrations
                 name: "Contact",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    ContactType = table.Column<string>(nullable: false),
-                    ContactAsIs = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactAsIs = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,12 +257,12 @@ namespace System.DAL.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    About = table.Column<string>(nullable: true),
-                    ManualLink = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ManualLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -279,21 +279,21 @@ namespace System.DAL.Migrations
                 name: "Payments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: true),
-                    September = table.Column<decimal>(nullable: false),
-                    October = table.Column<decimal>(nullable: false),
-                    November = table.Column<decimal>(nullable: false),
-                    December = table.Column<decimal>(nullable: false),
-                    January = table.Column<decimal>(nullable: false),
-                    February = table.Column<decimal>(nullable: false),
-                    March = table.Column<decimal>(nullable: false),
-                    April = table.Column<decimal>(nullable: false),
-                    May = table.Column<decimal>(nullable: false),
-                    June = table.Column<decimal>(nullable: false),
-                    July = table.Column<decimal>(nullable: false),
-                    August = table.Column<decimal>(nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    September = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    October = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    November = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    December = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    January = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    February = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    March = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    April = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    May = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    June = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    July = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    August = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -310,15 +310,21 @@ namespace System.DAL.Migrations
                 name: "Photos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PhotoAsBytes = table.Column<byte[]>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    UserId1 = table.Column<int>(nullable: true)
+                    PhotoAsBytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Photos_AspNetUsers_UserId1",
                         column: x => x.UserId1,
@@ -331,13 +337,13 @@ namespace System.DAL.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClubId = table.Column<int>(nullable: true),
-                    Capacity = table.Column<int>(nullable: false),
-                    RoomNumber = table.Column<string>(nullable: true),
-                    About = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: false)
+                    ClubId = table.Column<int>(type: "int", nullable: true),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    About = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -345,7 +351,7 @@ namespace System.DAL.Migrations
                     table.ForeignKey(
                         name: "FK_Rooms_Clubs_ClubId",
                         column: x => x.ClubId,
-                        principalTable: "Club",
+                        principalTable: "Clubs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -354,25 +360,25 @@ namespace System.DAL.Migrations
                 name: "Agreements",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true),
-                    Payment = table.Column<decimal>(nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Agreements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Agreements_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Agreements_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Agreements_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -381,18 +387,18 @@ namespace System.DAL.Migrations
                 name: "Groups",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseId = table.Column<int>(nullable: true),
-                    RoomId = table.Column<int>(nullable: true),
-                    LessonsPerWeek = table.Column<int>(nullable: false),
-                    SkypeConversation = table.Column<string>(nullable: true),
-                    Messenger = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    Capacity = table.Column<int>(nullable: false),
-                    Status = table.Column<string>(nullable: false),
-                    RoomId1 = table.Column<int>(nullable: true)
+                    CourseId = table.Column<int>(type: "int", nullable: true),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    LessonsPerWeek = table.Column<int>(type: "int", nullable: false),
+                    SkypeConversation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Messenger = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoomId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -421,24 +427,23 @@ namespace System.DAL.Migrations
                 name: "UserGroups",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    GroupId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserGroups", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserGroups_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_UserGroups", x => new { x.UserId, x.GroupId });
                     table.ForeignKey(
                         name: "FK_UserGroups_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserGroups_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -481,14 +486,14 @@ namespace System.DAL.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AddressId",
-                table: "AspNetUsers",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_AddressId",
+                table: "AspNetUsers",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -499,7 +504,7 @@ namespace System.DAL.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clubs_AddressId",
-                table: "Club",
+                table: "Clubs",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
@@ -533,6 +538,11 @@ namespace System.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Photos_UserId",
+                table: "Photos",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId1",
                 table: "Photos",
                 column: "UserId1");
@@ -546,11 +556,6 @@ namespace System.DAL.Migrations
                 name: "IX_UserGroups_GroupId",
                 table: "UserGroups",
                 column: "GroupId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserGroups_UserId",
-                table: "UserGroups",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -607,7 +612,7 @@ namespace System.DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Club");
+                name: "Clubs");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
