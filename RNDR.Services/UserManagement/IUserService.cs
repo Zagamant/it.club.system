@@ -23,27 +23,27 @@ namespace System.BLL.UserManagement
         Task<int> GetIdAsync(User user);
 
         /// <summary>
-        /// GetById all users from database.
+        /// GetByIdAsync all users from database.
         /// </summary>
         /// <returns>List of <see cref="User"/>s.</returns>
         Task<IEnumerable<User>> GetAllAsync();
 
         /// <summary>
-        /// GetById 1 user from database by id.
+        /// GetByIdAsync 1 user from database by id.
         /// </summary>
         /// <param name="id">A user identifier.</param>
         /// <returns></returns>
         Task<User> GetByIdAsync(int id);
 
         /// <summary>
-        /// GetById 1 user from database by username.
+        /// GetByIdAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
         Task<User> GetByUsernameAsync(string username);
 
         /// <summary>
-        /// GetById 1 user from database by username.
+        /// GetByIdAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>

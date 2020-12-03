@@ -73,17 +73,17 @@ namespace System.API.Controllers
 		}
 
 		[AllowAnonymous]
-		[Authorize(Roles = "main_admin,admin")]
+		//[Authorize(Roles = "main_admin,admin")]
 		[HttpPost("register")]
 		public async Task<IActionResult> Register([FromBody] UserRegister model)
 		{
 			// map model to entity
 			var user = _mapper.Map<User>(model);
-
+			User result;
 			try
 			{
 				// create user
-				var result = await _userService.CreateAsync(user, model.Password);
+				result = await _userService.CreateAsync(user, model.Password);
 			}
 			catch (Exception ex)
 			{
@@ -91,7 +91,7 @@ namespace System.API.Controllers
 				return BadRequest(new {message = ex.Message});
 			}
 
-			return Ok();
+			return Ok(result);
 		}
 
 		[Authorize(Roles = "main_admin,admin")]
