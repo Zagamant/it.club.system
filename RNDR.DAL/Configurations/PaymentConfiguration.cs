@@ -9,8 +9,8 @@ namespace System.DAL.Configurations
 		public void Configure(EntityTypeBuilder<Payment> builder)
 		{
 			builder
-				.HasIndex(p => p.User)
-				.IsUnique();
+				.HasOne<User>(model => model.User)
+				.WithMany();
 		}
 	}
 }

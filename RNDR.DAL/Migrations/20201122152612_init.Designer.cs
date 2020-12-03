@@ -10,23 +10,23 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace System.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201027212627_init")]
+    [Migration("20201122152612_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -49,7 +49,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -127,7 +127,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("AddressLine")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +148,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int?>("CourseId")
                         .HasColumnType("int");
@@ -173,7 +173,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -189,7 +189,7 @@ namespace System.DAL.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Club");
+                    b.ToTable("Clubs");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Contact", b =>
@@ -197,7 +197,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ContactAsIs")
                         .IsRequired()
@@ -226,7 +226,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
@@ -247,7 +247,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
@@ -273,7 +273,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
@@ -291,7 +291,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
@@ -340,7 +340,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<decimal>("April")
                         .HasColumnType("decimal(18,2)");
@@ -393,19 +393,21 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<byte[]>("PhotoAsBytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.HasIndex("UserId1");
 
@@ -417,25 +419,25 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -446,7 +448,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("About")
                         .HasColumnType("nvarchar(max)");
@@ -476,7 +478,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -495,8 +497,8 @@ namespace System.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -514,12 +516,12 @@ namespace System.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -540,19 +542,19 @@ namespace System.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -560,22 +562,18 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("System.DAL.Entities.UserGroup", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "GroupId");
 
                     b.HasIndex("GroupId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserGroups");
                 });
@@ -640,6 +638,10 @@ namespace System.DAL.Migrations
                     b.HasOne("System.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Club", b =>
@@ -647,6 +649,8 @@ namespace System.DAL.Migrations
                     b.HasOne("System.DAL.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Contact", b =>
@@ -676,6 +680,10 @@ namespace System.DAL.Migrations
                     b.HasOne("System.DAL.Entities.Room", null)
                         .WithMany("Groups")
                         .HasForeignKey("RoomId1");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Payment", b =>
@@ -683,13 +691,23 @@ namespace System.DAL.Migrations
                     b.HasOne("System.DAL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Photo", b =>
                 {
-                    b.HasOne("System.DAL.Entities.User", "User")
+                    b.HasOne("System.DAL.Entities.User", null)
                         .WithMany("Photos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("System.DAL.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.Room", b =>
@@ -698,6 +716,8 @@ namespace System.DAL.Migrations
                         .WithMany("Rooms")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Club");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.User", b =>
@@ -705,6 +725,8 @@ namespace System.DAL.Migrations
                     b.HasOne("System.DAL.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("System.DAL.Entities.UserGroup", b =>
@@ -720,6 +742,41 @@ namespace System.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Club", b =>
+                {
+                    b.Navigation("Rooms");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Course", b =>
+                {
+                    b.Navigation("Groups");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Group", b =>
+                {
+                    b.Navigation("UserGroups");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.Room", b =>
+                {
+                    b.Navigation("Groups");
+                });
+
+            modelBuilder.Entity("System.DAL.Entities.User", b =>
+                {
+                    b.Navigation("Contacts");
+
+                    b.Navigation("CoursesPassed");
+
+                    b.Navigation("Photos");
+
+                    b.Navigation("UserGroups");
                 });
 #pragma warning restore 612, 618
         }

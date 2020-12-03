@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -116,6 +114,8 @@ namespace System.BLL.UserManagement
 				throw new AppException("Cant register user");
 			}
 
+			await _context.SaveChangesAsync();
+
 			return user;
 		}
 
@@ -144,7 +144,23 @@ namespace System.BLL.UserManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<string> ForgotPassword(ForgotPasswordModel userModel)
+		/// <inheritdoc/>
+		public async Task ConfirmEmailAsync(ConfirmEmailModel model)
+		{
+			var user = await _userManager.FindByIdAsync(model.Id);
+
+			if (user == null) throw new AppException($"User with id: {model.Id} not found");
+
+
+			var result = await _userManager.ConfirmEmailAsync(user, model.Code);
+			if (!result.Succeeded)
+			{
+				throw new AppException("Reset was failed");
+			}
+		}
+
+		/// <inheritdoc/>
+		public async Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel)
 		{
 			var user = await _userManager.FindByEmailAsync(userModel.Email);
 			if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
@@ -157,7 +173,23 @@ namespace System.BLL.UserManagement
 
 			return await _userManager.GeneratePasswordResetTokenAsync(user);
 		}
-		
+
+		/// <inheritdoc/>
+		public async Task<string> GenerateConfirmationEmailAsync(ConfirmEmailModel userModel)
+		{
+			var user = await _userManager.FindByIdAsync(userModel.Id);
+			if (user == null)
+			{
+				// пользователь с данным email может отсутствовать в бд
+				// тем не менее мы выводим стандартное сообщение, чтобы скрыть 
+				// наличие или отсутствие пользователя в бд
+				throw new AppException($"User with email: {userModel.Email} not found");
+			}
+
+			return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+		}
+
+		/// <inheritdoc/>
 		public async Task ResetPasswordAsync(ResetPasswordModel userModel)
 		{
 			var user = await _userManager.FindByEmailAsync(userModel.Email);
@@ -209,16 +241,9 @@ namespace System.BLL.UserManagement
 			if (storedSalt.Length != 128)
 				throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
 
-			using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-			{
-				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-				if (computedHash.Where((t, i) => t != storedHash[i]).Any())
-				{
-					return false;
-				}
-			}
-
-			return true;
+			using var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt);
+			var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+			return !computedHash.Where((t, i) => t != storedHash[i]).Any();
 		}
 
 		#endregion

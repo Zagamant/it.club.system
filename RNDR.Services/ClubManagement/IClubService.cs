@@ -8,17 +8,17 @@ namespace System.BLL.ClubManagement
 {
 	public interface IClubService
 	{
-		Task<IEnumerable<ClubModel>> GetAll();
-		Task<ClubModel> GetById(int clubId);
-		Task<ClubModel> GetByTitle(string clubTitle);
-		Task<ClubModel> CreateClub(ClubRegister club);
-		Task AddRoom(int clubId, RoomModel room);
-		Task AddRoom(ClubSafeModel club, RoomModel room);
-		Task RemoveRoom(int clubId, RoomModel room, bool isDeleteRoom = false);
-		Task RemoveRoom(ClubSafeModel club, RoomModel room, bool isDeleteRoom = false);
-		Task<ClubModel> UpdateClub(int clubId, ClubSafeModel newClub);
-		Task<ClubModel> UpdateClub(Club club, ClubSafeModel newClub);
-		Task RemoveClub(int clubId, bool isDelete = false);
-		Task RemoveClub(ClubSafeModel club, bool isDelete = false);
+		Task<IEnumerable<ClubModel>> GetAllAsync(string userId);
+		Task<ClubModel> GetByIdAsync(int clubId, string userId);
+		Task<ClubModel> GetByTitleAsync(string clubTitle, string userId);
+		Task<ClubModel> CreateAsync(ClubRegister club);
+		Task AddRoomAsync(int clubId, RoomModel room, string userId);
+		Task AddRoomAsync(ClubSafeModel club, RoomModel room, string userId);
+		Task RemoveRoomAsync(int clubId, RoomModel room, string userId, bool isDeleteRoom = false);
+		Task RemoveRoomAsync(ClubSafeModel club, RoomModel room, string userId, bool isDeleteRoom = false);
+		Task<ClubModel> UpdateAsync(int clubId, ClubSafeModel newClub, string userId);
+		Task<ClubModel> UpdateAsync(Club club, ClubSafeModel newClub, string userId);
+		Task RemoveAsync(int clubId, string userId, bool isDelete = false);
+		Task RemoveAsync(ClubSafeModel club, string userId, bool isDelete = false);
 	}
 }

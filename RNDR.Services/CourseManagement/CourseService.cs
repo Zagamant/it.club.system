@@ -32,7 +32,7 @@ namespace System.BLL.CourseManagement
 
 		public async Task<IEnumerable<CourseModel>> GetAllCourses()
 		{
-			var courses = _context.Courses
+			var courses = await _context.Courses
 				.AsNoTracking()
 				.Select(c => new CourseModel
 			{
@@ -41,7 +41,8 @@ namespace System.BLL.CourseManagement
 				About = c.About,
 				Groups = c.Groups
 			})
-				.AsQueryable();
+				.AsQueryable()
+				.ToListAsync();
 			return courses;
 		}
 

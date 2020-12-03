@@ -7,8 +7,8 @@ namespace System.BLL.RoleManagement
 {
 	public class RoleService : IRoleService
 	{
-		private RoleManager<Role> _roleManager;
-		private UserManager<User> _userManager;
+		private readonly RoleManager<Role> _roleManager;
+		private readonly UserManager<User> _userManager;
 
 		public RoleService(RoleManager<Role> roleManager, UserManager<User> userManager)
 		{

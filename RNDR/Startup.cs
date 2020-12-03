@@ -14,7 +14,6 @@ using System.BLL.UserManagement;
 using System.DAL;
 using System.DAL.Entities;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +39,7 @@ namespace System.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
+
 			services.AddIdentity<User, Role>(options =>
 				{
 					options.Password.RequireDigit = true;
@@ -89,18 +89,12 @@ namespace System.API
 				{
 					x.Events = new JwtBearerEvents
 					{
-						OnTokenValidated = context =>
+						OnTokenValidated = async context =>
 						{
 							var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 							var userId = int.Parse(context.Principal.Identity.Name);
-							var user = userService.GetByIdAsync(userId);
-							if (user == null)
-							{
-								// return unauthorized if user no longer exists
-								context.Fail("Unauthorized");
-							}
-
-							return Task.CompletedTask;
+							var user = await userService.GetByIdAsync(userId);
+							if (user == null) context.Fail("Unauthorized");
 						}
 					};
 					x.RequireHttpsMetadata = false;
