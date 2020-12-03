@@ -1,11 +1,5 @@
-﻿using System;
-using System.BLL.EmailManagement;
-using System.BLL.UserManagement;
-using System.Collections.Generic;
-using System.DAL;
-using System.Text;
+﻿using System.BLL.EmailManagement;
 using System.Threading.Tasks;
-using Moq;
 using NUnit.Framework;
 
 namespace System.BLL.Tests.EmailManagement
@@ -13,21 +7,24 @@ namespace System.BLL.Tests.EmailManagement
 	public class EmailServiceTest
 	{
 		private IEmailService _emailService;
+		private string _email;
+		private string _subject;
+		private string _message;
 
 		[SetUp]
 		public void Setup()
 		{
 			_emailService = new EmailService();
+			_email = "danik53@ya.ru";
+			_subject = "test subject";
+			_message = "test message";
 		}
 
 		[Test]
 		public async Task TestSendEmail()
 		{
-			var email = "danik53@ya.ru";
-			var subject = "test subject";
-			var message = "test mssage";
 
-			await _emailService.SendEmailAsync(email,subject, message);
+			await _emailService.SendEmailAsync(_email, _subject, _message);
 
 			Assert.Pass();
 		}
