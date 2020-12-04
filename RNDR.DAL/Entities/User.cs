@@ -8,15 +8,15 @@ namespace System.DAL.Entities
 	/// </summary>
 	public class User : IdentityUser<int>
 	{
-		public virtual string Name { get; set; }
-		public virtual string MiddleName { get; set; }
-		public virtual string Surname { get; set; }
-		public virtual DateTime BirthDay { get; set; }
+		public string Name { get; set; }
+		public string MiddleName { get; set; }
+		public string Surname { get; set; }
+		public DateTime BirthDay { get; set; }
 		public virtual Address Address { get; set; }
-		public virtual string AdditionalInfo { get; set; }
-		public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
-		public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
-		public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
-		public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
+		public string AdditionalInfo { get; set; }
+		public virtual IEnumerable<Photo> Photos { get; set; }
+		public virtual ICollection<Contact> Contacts { get; set; }
+		public virtual ICollection<Group> Groups { get; set; }
+		public virtual ICollection<Course> CoursesPassed { get; set; }
 	}
 }
