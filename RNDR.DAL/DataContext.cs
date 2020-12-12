@@ -26,8 +26,6 @@ namespace System.DAL
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<UserGroup> UserGroups { get; set; }
-
 
         public DbSet<Costs> Costs{ get; set; }
         public DbSet<Event> Events{ get; set; }
@@ -45,7 +43,7 @@ namespace System.DAL
 		        .ApplyConfiguration(new ClubConfiguration())
 		        .ApplyConfiguration(new GroupConfiguration())
 		        .ApplyConfiguration(new RoomConfiguration())
-		        .ApplyConfiguration(new GroupUserConfiguration())
+		        .ApplyConfiguration(new UserGroupConfiguration())
 		        .ApplyConfiguration(new PaymentConfiguration())
 		        .ApplyConfiguration(new UserConfiguration())
 		        .ApplyConfiguration(new PhotoConfiguration())

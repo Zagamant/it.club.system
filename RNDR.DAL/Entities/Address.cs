@@ -2,9 +2,9 @@
 {
 	public class Address
 	{
-		public virtual int Id { get; set; }
-		public virtual string Country { get; set; }
-		public virtual string City { get; set; }
-		public virtual string AddressLine { get; set; }
+		public int Id { get; set; }
+		public string Country { get; set; }
+		public string City { get; set; }
+		public string AddressLine { get; set; }
 	}
 }

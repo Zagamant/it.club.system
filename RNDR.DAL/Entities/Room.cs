@@ -5,11 +5,11 @@ namespace System.DAL.Entities
 {
 	public class Room
 	{
-		public virtual int Id { get; set; }
+		public int Id { get; set; }
 		public virtual Club Club { get; set; }
-		public virtual int Capacity { get; set; }
-		public virtual string RoomNumber { get; set; }
-		public virtual string About { get; set; }
+		public int Capacity { get; set; }
+		public string RoomNumber { get; set; }
+		public string About { get; set; }
 		public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
 		public virtual RoomStatus Status { get; set; }
 
