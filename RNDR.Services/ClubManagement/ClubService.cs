@@ -1,12 +1,9 @@
 ﻿using System.BLL.Helpers;
-using System.BLL.Models.ClubManagement;
-using System.BLL.Models.RoomManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.DAL.Entities.Enums;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +31,7 @@ namespace System.BLL.ClubManagement
 		}
 
 
-		public async Task<IEnumerable<ClubModel>> GetAllAsync(string userId)
+		public async Task<IEnumerable<Club>> GetAllAsync(string userId)
 		{
 			var user = await _userManager.FindByIdAsync(userId);
 			var roles = await _userManager.GetRolesAsync(user);
@@ -42,7 +39,7 @@ namespace System.BLL.ClubManagement
 			var allClubs = await _context.Clubs
 				.AsNoTracking()
 				.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
-				.Select(c => new ClubModel
+				.Select(c => new Club
 				{
 					Address = c.Address,
 					Rooms = c.Rooms,
@@ -52,30 +49,30 @@ namespace System.BLL.ClubManagement
 			return allClubs;
 		}
 
-		public async Task<ClubModel> GetByIdAsync(int clubId, string userId)
+		public async Task<Club> GetByIdAsync(int clubId, string userId)
 		{
 			
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
 			if (club == null) throw new AppException("Club not found");
 
-			var resultClub = _mapper.Map<ClubModel>(club);
+			var resultClub = _mapper.Map<Club>(club);
 
 			return resultClub;
 		}
 
-		public async Task<ClubModel> GetByTitleAsync(string clubTitle, string userId)
+		public async Task<Club> GetByTitleAsync(string clubTitle, string userId)
 		{
 			var club = await GetByTitleFullClubAsync(clubTitle, userId);
 
 			if (club == null) throw new AppException("Club not found");
 
-			var resultClub = _mapper.Map<ClubModel>(club);
+			var resultClub = _mapper.Map<Club>(club);
 
 			return resultClub;
 		}
 
-		public async Task<ClubModel> CreateAsync(ClubRegister club)
+		public async Task<Club> CreateAsync(Club club)
 		{
 			if (club == null) throw new ArgumentNullException(nameof(club));
 			
@@ -90,14 +87,14 @@ namespace System.BLL.ClubManagement
 
 			await _context.Clubs.AddAsync(clubDal);
 
-			var resultClub = _mapper.Map<ClubModel>(clubDal);
+			var resultClub = _mapper.Map<Club>(clubDal);
 
 			await _context.SaveChangesAsync();
 
 			return resultClub;
 		}
 
-		public async Task AddRoomAsync(int clubId, RoomModel room,string userId)
+		public async Task AddRoomAsync(int clubId, Room room, string userId)
 		{
 			if (room == null) throw new ArgumentNullException(nameof(room));
 
@@ -114,25 +111,59 @@ namespace System.BLL.ClubManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task AddRoomAsync(ClubSafeModel club, RoomModel room, string userId)
+		public async Task AddRoomAsync(Club club, Room room, string userId)
 		{
 			if (club == null) throw new ArgumentNullException(nameof(club));
 			if (room == null) throw new ArgumentNullException(nameof(room));
 
 			var clubTemp = await GetByTitleFullClubAsync(club.Title, userId);
+			if (clubTemp == null) throw new AppException("Club not found");
+			
 			var roomTemp =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && r.Club == room.Club);
 
-			if (clubTemp == null) throw new AppException("Club not found");
 			if (roomTemp == null) throw new AppException("Room not found");
-
 
 			clubTemp.Rooms.Add(roomTemp);
 			_context.Clubs.Update(clubTemp);
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task RemoveRoomAsync(int clubId, RoomModel room,string userId, bool isDeleteRoom = false)
+		public async Task AddRoomAsync(int clubId, int roomId, string userId)
+		{
+			var club = await GetByIdFullClubAsync(clubId, userId);
+			var roomTemp =
+				await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
+
+			if (roomTemp == null) throw new AppException("Room not found");
+
+			club.Rooms.Add(roomTemp);
+
+			_context.Clubs.Update(club);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task AddRoomAsync(Club club, int roomId, string userId)
+		{
+			if (club == null) throw new ArgumentNullException(nameof(club));
+
+			var clubTemp = await GetByTitleFullClubAsync(club.Title, userId);
+
+			if (clubTemp == null) throw new AppException("Club not found");
+
+			var roomTemp =
+				await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
+
+			if (roomTemp == null) throw new AppException("Room not found");
+
+			clubTemp.Rooms.Add(roomTemp);
+			_context.Clubs.Update(clubTemp);
+			await _context.SaveChangesAsync();
+		}
+
+
+		public async Task RemoveRoomAsync(int clubId, Room room,string userId, bool isDeleteRoom = false)
 		{
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
@@ -160,7 +191,7 @@ namespace System.BLL.ClubManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task RemoveRoomAsync(ClubSafeModel club, RoomModel room, string userId, bool isDeleteRoom = false)
+		public async Task RemoveRoomAsync(Club club, Room room, string userId, bool isDeleteRoom = false)
 		{
 			var resultClub = await GetByTitleFullClubAsync(club.Title, userId);
 
@@ -188,19 +219,19 @@ namespace System.BLL.ClubManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<ClubModel> UpdateAsync(int clubId, ClubSafeModel newClub, string userId)
+		public async Task<Club> UpdateAsync(int clubId, Club newClub, string userId)
 		{
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
 			_context.Clubs.Update(club);
 			await _context.SaveChangesAsync();
 
-			var resultClub = _mapper.Map<ClubModel>(club);
+			var resultClub = _mapper.Map<Club>(club);
 
 			return resultClub;
 		}
 
-		public async Task<ClubModel> UpdateAsync(Club club, ClubSafeModel newClub, string userId)
+		public async Task<Club> UpdateAsync(Club club, Club newClub, string userId)
 		{
 			return await UpdateAsync(club.Id, newClub, userId);
 		}
@@ -228,7 +259,7 @@ namespace System.BLL.ClubManagement
 		}
 
 
-		public async Task RemoveAsync(ClubSafeModel club, string userId, bool isDelete = false)
+		public async Task RemoveAsync(Club club, string userId, bool isDelete = false)
 		{
 			var clubT = await GetByTitleFullClubAsync(club.Title, userId);
 

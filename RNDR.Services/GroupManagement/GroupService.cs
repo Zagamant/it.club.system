@@ -3,6 +3,7 @@ using System.BLL.Models.GroupManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
+using System.DAL.Entities.Enums;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -21,17 +22,16 @@ namespace System.BLL.GroupManagement
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
-		public async Task CreateAsync(GroupRegisterModel group)
+		public async Task CreateAsync(Group group)
 		{
 			if (group == null) throw new ArgumentNullException(nameof(group));
 
-			var result = _mapper.Map<Group>(group);
 
-			await _context.Groups.AddAsync(result);
+			await _context.Groups.AddAsync(group);
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<Group>> GetAllGroupAsync()
+		public async Task<IEnumerable<Group>> GetAllAsync()
 		{
 			var result = await _context.Groups
 				.AsNoTracking()
@@ -40,7 +40,7 @@ namespace System.BLL.GroupManagement
 			return result;
 		}
 
-		public async Task<Group> GetCourseByIdAsync(int groupId)
+		public async Task<Group> GetByIdAsync(int groupId)
 		{
 			var result = await _context.Groups
 				.AsNoTracking()
@@ -111,18 +111,26 @@ namespace System.BLL.GroupManagement
 			await RemoveStudentAsync(group.Id, user);
 		}
 
-		public async Task RemoveAsync(int groupId)
+		public async Task RemoveAsync(int groupId, bool isDeleted = false)
 		{
 			var result = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
 
 			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
-
-			_context.Groups.Remove(result);
+			await RemoveAsync(result, isDeleted);
 		}
 
-		public async Task RemoveAsync(Group group)
+		public async Task RemoveAsync(Group group, bool isDeleted = false)
 		{
-			await RemoveAsync(group.Id);
+			if (isDeleted)
+			{
+				_context.Groups.Remove(group);
+			}
+			else
+			{
+				group.Status = GroupStatus.Canceled;
+				_context.Groups.Update(group);
+				await _context.SaveChangesAsync();
+			}
 		}
 	}
 }
