@@ -1,10 +1,8 @@
 ﻿using System.BLL.Helpers;
-using System.BLL.Models.GroupManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.DAL.Entities.Enums;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -77,11 +75,7 @@ namespace System.BLL.GroupManagement
 
 			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
 
-			result.UserGroups.Add(new UserGroup
-			{
-				Group = result,
-				User = user
-			});
+			result.Users.Add(user);
 
 			await _context.SaveChangesAsync();
 		}
@@ -99,9 +93,7 @@ namespace System.BLL.GroupManagement
 
 			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
 
-			var userGroup = result.UserGroups.FirstOrDefault(ug => ug.User == user && ug.Group == result);
-
-			result.UserGroups.Remove(userGroup);
+			result.Users.Remove(user);
 
 			await _context.SaveChangesAsync();
 		}
