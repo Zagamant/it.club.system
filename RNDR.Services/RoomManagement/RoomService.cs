@@ -1,7 +1,9 @@
 ﻿using System.BLL.Helpers;
-using System.BLL.Models.RoomManagement;
+using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
+using System.DAL.Entities.Enums;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -20,13 +22,13 @@ namespace System.BLL.RoomManagement
 		}
 
 
-		public async Task Create(RoomModel room)
+		public async Task Create(Room room)
 		{
 			var roomTemp = _mapper.Map<Room>(room);
 			await _context.AddAsync(roomTemp);
 		}
 
-		public async Task<Room> GetRoom(RoomSafeModel room)
+		public async Task<Room> Get(Room room)
 		{
 			var result =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && room.About == r.About);
@@ -36,7 +38,27 @@ namespace System.BLL.RoomManagement
 			return result;
 		}
 
-		public async Task Update(int roomId, RoomModel newRoom)
+		public async Task<Room> Get(int roomId)
+		{
+			var result =
+				await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
+
+			if (result == null) throw new AppException("Room not found");
+
+			return result;
+		}
+
+		public async Task<IEnumerable<Room>> GetAll()
+		{
+			var result =
+				await _context.Rooms.Where(room => room.Status != RoomStatus.Closed).ToListAsync();
+
+			if (result == null) throw new AppException("Rooms not found");
+
+			return result;
+		}
+
+		public async Task Update(int roomId, Room newRoom)
 		{
 			var roomTemp = _mapper.Map<Room>(newRoom);
 			roomTemp.Id = roomId;
@@ -46,11 +68,9 @@ namespace System.BLL.RoomManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(RoomSafeModel room, RoomModel newRoom)
+		public async Task Update(Room room, Room newRoom)
 		{
-			var result = GetRoomBySafeModel(room);
-
-			await Update(result.Id, newRoom);
+			await Update(room.Id, newRoom);
 		}
 
 		public async Task Remove(int roomId)
@@ -61,10 +81,9 @@ namespace System.BLL.RoomManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Remove(RoomSafeModel room)
+		public async Task Remove(Room room)
 		{
-			var result = GetRoomBySafeModel(room);
-			await Remove(result.Id);
+			await Remove(room.Id);
 		}
 
 		#region PrivateHelpers
