@@ -92,7 +92,6 @@ namespace System.BLL.PaymentManagement
 		public async Task AddPaymentToUserAsync(User user, DateTime month, decimal sum)
 		{
 			if (user == null) throw new ArgumentNullException(nameof(user));
-			if (month == null) throw new ArgumentNullException(nameof(month));
 
 			var userCheck = await _context.Users.FindAsync(user);
 			if (userCheck == null) throw new AppException("User not found");

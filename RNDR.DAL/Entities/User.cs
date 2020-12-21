@@ -14,9 +14,9 @@ namespace System.DAL.Entities
 		public DateTime BirthDay { get; set; }
 		public virtual Address Address { get; set; }
 		public string AdditionalInfo { get; set; }
-		public virtual IEnumerable<Photo> Photos { get; set; }
-		public virtual ICollection<Contact> Contacts { get; set; }
-		public virtual ICollection<Group> Groups { get; set; }
-		public virtual ICollection<Course> CoursesPassed { get; set; }
+		public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
+		public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
+		public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+		public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
 	}
 }

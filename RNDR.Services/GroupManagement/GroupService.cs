@@ -77,11 +77,7 @@ namespace System.BLL.GroupManagement
 
 			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
 
-			result.UserGroups.Add(new UserGroup
-			{
-				Group = result,
-				User = user
-			});
+			result.Users.Add(user);
 
 			await _context.SaveChangesAsync();
 		}
@@ -98,10 +94,8 @@ namespace System.BLL.GroupManagement
 			var result = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
 
 			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
-
-			var userGroup = result.UserGroups.FirstOrDefault(ug => ug.User == user && ug.Group == result);
-
-			result.UserGroups.Remove(userGroup);
+			
+			result.Users.Remove(user);
 
 			await _context.SaveChangesAsync();
 		}

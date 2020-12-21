@@ -43,7 +43,6 @@ namespace System.DAL
 		        .ApplyConfiguration(new ClubConfiguration())
 		        .ApplyConfiguration(new GroupConfiguration())
 		        .ApplyConfiguration(new RoomConfiguration())
-		        .ApplyConfiguration(new UserGroupConfiguration())
 		        .ApplyConfiguration(new PaymentConfiguration())
 		        .ApplyConfiguration(new UserConfiguration())
 		        .ApplyConfiguration(new PhotoConfiguration())

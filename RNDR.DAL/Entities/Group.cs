@@ -15,7 +15,7 @@ namespace System.DAL.Entities
 		public DateTime EndDate { get; set; }
 		public int Capacity { get; set; }
 		public virtual GroupStatus Status { get; set; }
-		public virtual ICollection<User> Users { get; set; } 
+		public virtual ICollection<User> Users { get; set; } = new List<User>();
 
 	}
 }
