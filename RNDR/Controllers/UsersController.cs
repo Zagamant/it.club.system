@@ -19,7 +19,7 @@ namespace System.API.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/v1/[controller]")]
 	public class UsersController : ControllerBase
 	{
 		private readonly AppSettings _appSettings;

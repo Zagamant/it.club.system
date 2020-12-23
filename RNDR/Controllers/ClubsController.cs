@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace System.API.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	public class ClubsController : ControllerBase
 	{
@@ -22,7 +22,7 @@ namespace System.API.Controllers
 		private readonly IRoomService _roomService;
 
 		private readonly IMapper _mapper;
-
+		
 		public ClubsController(
 			IClubService clubService,
 			IMapper mapper,

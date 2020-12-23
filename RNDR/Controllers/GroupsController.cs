@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace System.API.Controllers
 {
-	[Route("[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	public class GroupsController : ControllerBase
 	{
