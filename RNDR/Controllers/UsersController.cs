@@ -94,25 +94,23 @@ namespace System.API.Controllers
 			return Ok(result);
 		}
 
-		[Authorize(Roles = "main_admin,admin")]
+		//[Authorize(Roles = "main_admin,admin")]
 		[HttpGet]
-		public IActionResult GetAll()
+		public async Task<IActionResult> GetAll()
 		{
-			var users = _userService.GetAllAsync();
-			var model = _mapper.Map<IList<UserModel>>(users);
-			return Ok(model);
+			var users = await _userService.GetAllAsync();
+			return Ok(users);
 		}
 
 		[HttpGet("{id}")]
-		public IActionResult GetById(int id)
+		public async Task<IActionResult> GetById(int id)
 		{
-			var user = _userService.GetByIdAsync(id);
-			var model = _mapper.Map<UserModel>(user);
-			return Ok(model);
+			var user = await _userService.GetByIdAsync(id);
+			return Ok(user);
 		}
 
 		[HttpPut("{id}")]
-		public IActionResult Update(int id, [FromBody] UserUpdate model)
+		public async Task<IActionResult> Update(int id, [FromBody] UserUpdate model)
 		{
 			// map model to entity and set id
 			var user = _mapper.Map<User>(model);
@@ -121,7 +119,7 @@ namespace System.API.Controllers
 			try
 			{
 				// update user 
-				_userService.UpdateAsync(user, model.Password);
+				await _userService.UpdateAsync(user, model.Password);
 				return Ok();
 			}
 			catch (AppException ex)

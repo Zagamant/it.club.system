@@ -85,20 +85,6 @@ namespace System.BLL.RoomManagement
 		{
 			await Remove(room.Id);
 		}
-
-		#region PrivateHelpers
-
-		private async Task<Room> GetRoomBySafeModel(RoomSafeModel roomSm)
-		{
-			var result =
-				await _context.Rooms.FirstOrDefaultAsync(r =>
-					roomSm.ClubTitle == r.Club.Title && roomSm.RoomNumber == r.RoomNumber);
-
-			if (result == null) throw new AppException("Room wasn't find");
-
-			return result;
-		}
-
-		#endregion
+		                            
 	}
 }

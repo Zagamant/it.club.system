@@ -101,8 +101,8 @@ namespace System.API.Controllers
 		public async Task<ActionResult> RemoveRoom([FromBody] int clubId, int roomId)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.Name);
-			var room = _roomService.
-			await _clubService.RemoveRoomAsync(clubId, roomId, userId);
+			var room = await _roomService.Get(roomId);
+			await _clubService.RemoveRoomAsync(clubId, room, userId);
 			return Ok();
 		}
 	}
