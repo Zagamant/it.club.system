@@ -74,7 +74,7 @@ namespace System.API.Controllers
 
 		[AllowAnonymous]
 		//[Authorize(Roles = "main_admin,admin")]
-		[HttpPost("register")]
+		[HttpPost]
 		public async Task<IActionResult> Register([FromBody] UserRegister model)
 		{
 			// map model to entity

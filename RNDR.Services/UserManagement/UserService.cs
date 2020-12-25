@@ -122,13 +122,20 @@ namespace System.BLL.UserManagement
 		/// <inheritdoc/>
 		public async Task UpdateAsync(User userParam, string password = null)
 		{
-			var user = await _context.Users.FindAsync(userParam.Id);
+			var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(usr => usr.Id == userParam.Id);
 
 			if (user == null)
 				throw new AppException("User not found");
-
-			// update username if it has changed
-			await _userManager.UpdateAsync(user: userParam);
+			try
+			{
+				// update username if it has changed
+				// await _userManager.UpdateAsync(user: userParam);
+				_context.Users.Update(userParam);
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
 
 			await _context.SaveChangesAsync();
 		}

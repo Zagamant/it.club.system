@@ -49,45 +49,45 @@ namespace System.API.Controllers
 			return await _clubService.GetByIdAsync(id, userId);
 		}
 
-		// POST api/<ClubsController>
-		[HttpPost]
-		[Authorize(Roles = "main_admin,admin")]
-		public async Task<ActionResult> ChangeTitle([FromBody] Club club, string title)
+		// PUT api/<ClubsController>
+		[HttpPut("{id}")]
+		// [Authorize(Roles = "main_admin,admin")]
+		public async Task<ActionResult> Update(int id, [FromBody] Club club)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.Name);
 
-			var checkClub = await _clubService.GetByTitleAsync(title, userId);
-			
-			if (checkClub != null) throw new Exception("Club wit that title already exist");
+			var checkClub = await _clubService.GetByIdAsync(id, userId);
 
-			club.Title = title;
+			if (checkClub == null) throw new ArgumentException("Club not exist");
 
-			await _clubService.UpdateAsync(club.Id, new Club{Title = title}, userId);
+			club.Id = id;
+
+			await _clubService.UpdateAsync(club.Id, club, userId);
 
 			return Ok();
 		}
 
-		// PUT api/<ClubsController>/5
-		[HttpPut("{id}")]
-		public async Task<ActionResult> Put(int id, [FromBody] Club clubik)
+		// POST api/<ClubsController>/5
+		[HttpPost]
+		public async Task<ActionResult> Post([FromBody] Club club)
 		{
-			var club = await _clubService.CreateAsync(clubik);
-			return Ok(club);
+			var newClub = await _clubService.CreateAsync(club);
+			return Ok(newClub);
 		}
 
 		// DELETE api/<ClubsController>/5
 		[HttpDelete("{id}")]
-		[Authorize(Roles = "main_admin,admin")]
-		public async Task<ActionResult> Delete([FromBody] Club clubik)
+		// [Authorize(Roles = "main_admin,admin")]
+		public async Task<ActionResult> Delete([FromBody] Club club)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.Name);
 
-			await _clubService.RemoveAsync(clubik, userId);
+			await _clubService.RemoveAsync(club, userId);
 			return Ok();
 		}
 
-		[HttpPost("AddRoom")]
-		[Authorize(Roles = "main_admin,admin")]
+		[HttpPut("AddRoom")]
+		// [Authorize(Roles = "main_admin,admin")]
 		public async Task<ActionResult> AddRoom([FromBody] int clubId, int roomId)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.Name);
@@ -96,8 +96,8 @@ namespace System.API.Controllers
 			return Ok();
 		}
 
-		[HttpPost("RemoveRoom")]
-		[Authorize(Roles = "main_admin,admin")]
+		[HttpPut("RemoveRoom")]
+		// [Authorize(Roles = "main_admin,admin")]
 		public async Task<ActionResult> RemoveRoom([FromBody] int clubId, int roomId)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.Name);

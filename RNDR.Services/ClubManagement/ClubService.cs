@@ -19,9 +19,9 @@ namespace System.BLL.ClubManagement
 		private readonly RoleManager<Role> _roleManager;
 
 		public ClubService(
-			DataContext dataContext, 
-			IMapper mapper, 
-			UserManager<User> userManager, 
+			DataContext dataContext,
+			IMapper mapper,
+			UserManager<User> userManager,
 			RoleManager<Role> roleManager)
 		{
 			_context = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
@@ -35,23 +35,23 @@ namespace System.BLL.ClubManagement
 		{
 			var user = await _userManager.FindByIdAsync(userId);
 			var roles = await _userManager.GetRolesAsync(user);
+			List<Club> allClubs = await _context.Clubs
+					.AsNoTracking()
+					.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
+					.Select(c => new Club
+					{
+						Address = c.Address,
+						Rooms = c.Rooms,
+						Status = c.Status,
+						Title = c.Title
+					}).ToListAsync();
 
-			var allClubs = await _context.Clubs
-				.AsNoTracking()
-				.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
-				.Select(c => new Club
-				{
-					Address = c.Address,
-					Rooms = c.Rooms,
-					Status = c.Status,
-					Title = c.Title
-				}).ToListAsync();
+
 			return allClubs;
 		}
 
 		public async Task<Club> GetByIdAsync(int clubId, string userId)
 		{
-			
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
 			if (club == null) throw new AppException("Club not found");
@@ -75,7 +75,7 @@ namespace System.BLL.ClubManagement
 		public async Task<Club> CreateAsync(Club club)
 		{
 			if (club == null) throw new ArgumentNullException(nameof(club));
-			
+
 			if (_context.Clubs.Any(x => x.Title == club.Title))
 				throw new AppException("Club name: \"" + club.Title + "\" is already taken");
 
@@ -118,7 +118,7 @@ namespace System.BLL.ClubManagement
 
 			var clubTemp = await GetByTitleFullClubAsync(club.Title, userId);
 			if (clubTemp == null) throw new AppException("Club not found");
-			
+
 			var roomTemp =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && r.Club == room.Club);
 
@@ -163,7 +163,7 @@ namespace System.BLL.ClubManagement
 		}
 
 
-		public async Task RemoveRoomAsync(int clubId, Room room,string userId, bool isDeleteRoom = false)
+		public async Task RemoveRoomAsync(int clubId, Room room, string userId, bool isDeleteRoom = false)
 		{
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
