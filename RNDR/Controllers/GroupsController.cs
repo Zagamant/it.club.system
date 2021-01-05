@@ -30,35 +30,22 @@ namespace System.API.Controllers
 
 		// GET: api/<GroupsController>
 		[HttpGet]
-		public async Task<IEnumerable<Group>> Get()
-		{
-			return await _groupService.GetAllAsync();
-		}
+		public async Task<IEnumerable<Group>> Get() => await _groupService.GetAllAsync();
 
 		// GET api/<GroupsController>/5
 		[HttpGet("{id}")]
-		public async Task<Group> GetAsync(int id)
-		{
-			return await _groupService.GetByIdAsync(id);
-		}
+		public async Task<Group> GetAsync(int id) => await _groupService.GetByIdAsync(id);
 
 		// POST api/<GroupsController>
 		[HttpPost]
-		public async Task Post([FromBody] Group value)
-		{
-			await _groupService.CreateAsync(value);
-		}
+		public async Task Post([FromBody] Group value) => await _groupService.CreateAsync(value);
 
 		// PUT api/<GroupsController>/5
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
-		{
-		}
+		public async Task Put(int id, [FromBody] Group value) => await _groupService.CreateAsync(value);
 
 		// DELETE api/<GroupsController>/5
 		[HttpDelete("{id}")]
-		public void Delete(int id)
-		{
-		}
+		public async Task Delete(int id) => await _groupService.RemoveAsync(id);
 	}
 }
