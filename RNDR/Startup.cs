@@ -64,11 +64,11 @@ namespace System.API
 			// Auto Mapper Configurations
 			var mappingConfig = new MapperConfiguration(mapperConfig =>
 			{
-				mapperConfig.AddProfile(new UserManagementMappingProfile());
-				mapperConfig.AddProfile(new ClubManagementMappingProfile());
-				mapperConfig.AddProfile(new RoomManagementMappingProfile());
 				mapperConfig.AddProfile(new AgreementManagementMappingProfile());
+				mapperConfig.AddProfile(new ClubManagementMappingProfile());
 				mapperConfig.AddProfile(new CourseManagementMappingProfile());
+				mapperConfig.AddProfile(new RoomManagementMappingProfile());
+				mapperConfig.AddProfile(new UserManagementMappingProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();

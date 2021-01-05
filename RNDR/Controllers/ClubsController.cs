@@ -35,49 +35,16 @@ namespace System.API.Controllers
 
 		// GET: api/<ClubsController>
 		[HttpGet]
-		public async Task<IEnumerable<Club>> Get()
-		{
-			try
-			{
-
-				var userId = User.FindFirstValue(ClaimTypes.Name);
-				var asd = await _clubService.GetAllAsync(userId);
-				return asd;
-
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
-			
-		}
+		public async Task<IEnumerable<Club>> Get() => await _clubService.GetAllAsync(User.FindFirstValue(ClaimTypes.Name));
 
 		// GET api/<ClubsController>/5
 		[HttpGet("{id}")]
-		public async Task<Club> Get(int id)
-		{
-			var userId = User.FindFirstValue(ClaimTypes.Name);
-			return await _clubService.GetByIdAsync(id, userId);
-		}
+		public async Task<Club> Get(int id) => await _clubService.GetByIdAsync(id, User.FindFirstValue(ClaimTypes.Name));
 
 		// PUT api/<ClubsController>
 		[HttpPut("{id}")]
 		// [Authorize(Roles = "main_admin,admin")]
-		public async Task<ActionResult> Update(int id, [FromBody] Club club)
-		{
-			var userId = User.FindFirstValue(ClaimTypes.Name);
-
-			var checkClub = await _clubService.GetByIdAsync(id, userId);
-
-			if (checkClub == null) throw new ArgumentException("Club not exist");
-
-			club.Id = id;
-
-			await _clubService.UpdateAsync(club.Id, club, userId);
-
-			return Ok();
-		}
+		public async Task<ActionResult> Update(int id, [FromBody] Club club) => Ok(await _clubService.UpdateAsync(club.Id, club, User.FindFirstValue(ClaimTypes.Name);
 
 		// POST api/<ClubsController>/5
 		[HttpPost]
@@ -102,9 +69,7 @@ namespace System.API.Controllers
 		// [Authorize(Roles = "main_admin,admin")]
 		public async Task<ActionResult> AddRoom([FromBody] int clubId, int roomId)
 		{
-			var userId = User.FindFirstValue(ClaimTypes.Name);
-
-			await _clubService.AddRoomAsync(clubId, roomId, userId);
+			await _clubService.AddRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
 			return Ok();
 		}
 
@@ -112,9 +77,8 @@ namespace System.API.Controllers
 		// [Authorize(Roles = "main_admin,admin")]
 		public async Task<ActionResult> RemoveRoom([FromBody] int clubId, int roomId)
 		{
-			var userId = User.FindFirstValue(ClaimTypes.Name);
 			var room = await _roomService.Get(roomId);
-			await _clubService.RemoveRoomAsync(clubId, room, userId);
+			await _clubService.RemoveRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
 			return Ok();
 		}
 	}

@@ -16,6 +16,7 @@ namespace System.BLL.ClubManagement
 		Task AddRoomAsync(Club club, Room room, string userId);
 		Task RemoveRoomAsync(int clubId, Room room, string userId, bool isDeleteRoom = false);
 		Task RemoveRoomAsync(Club club, Room room, string userId, bool isDeleteRoom = false);
+		Task RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false);
 		Task<Club> UpdateAsync(int clubId, Club newClub, string userId);
 		Task<Club> UpdateAsync(Club club, Club newClub, string userId);
 		Task RemoveAsync(int clubId, string userId, bool isDelete = false);
