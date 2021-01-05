@@ -15,8 +15,8 @@ namespace System.BLL.ClubManagement
 	{
 		private readonly DataContext _context;
 		private readonly IMapper _mapper;
-		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<Role> _roleManager;
+		private readonly UserManager<User> _userManager;
 
 		public ClubService(
 			DataContext dataContext,
@@ -26,7 +26,7 @@ namespace System.BLL.ClubManagement
 		{
 			_context = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-			this._userManager = userManager;
+			_userManager = userManager;
 			_roleManager = roleManager;
 		}
 
@@ -34,19 +34,16 @@ namespace System.BLL.ClubManagement
 		public async Task<IEnumerable<Club>> GetAllAsync(string userId)
 		{
 			var user = await _userManager.FindByIdAsync(userId);
-			var roles = await _userManager.GetRolesAsync(user);
-			List<Club> allClubs = await _context.Clubs
-					.AsNoTracking()
-					.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
-					.Select(c => new Club
-					{
-						Address = c.Address,
-						Rooms = c.Rooms,
-						Status = c.Status,
-						Title = c.Title
-					}).ToListAsync();
-
-
+			// if (user == null)
+			// {
+			// 	throw new ArgumentException("No such user exist, login");
+			// }
+			// var roles = await _userManager.GetRolesAsync(user);
+			var allClubs = await _context.Clubs
+				//.AsNoTracking() //WTF cause internal server error one i ca not track for 3 DAY AF //TODO stackoverflow quest;
+				//.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
+				.ToListAsync();
+			
 			return allClubs;
 		}
 
@@ -79,19 +76,15 @@ namespace System.BLL.ClubManagement
 			if (_context.Clubs.Any(x => x.Title == club.Title))
 				throw new AppException("Club name: \"" + club.Title + "\" is already taken");
 
-			var clubDal = _mapper.Map<Club>(club);
 
-			var role = new Role(clubDal.Title);
+			var role = new Role(club.Title);
 			await _roleManager.CreateAsync(role);
-			clubDal.Permissions.Add(role);
-
-			await _context.Clubs.AddAsync(clubDal);
-
-			var resultClub = _mapper.Map<Club>(clubDal);
+			club.Permissions.Add(role);
+			await _context.Clubs.AddAsync(club);
 
 			await _context.SaveChangesAsync();
 
-			return resultClub;
+			return club;
 		}
 
 		public async Task AddRoomAsync(int clubId, Room room, string userId)
@@ -171,9 +164,7 @@ namespace System.BLL.ClubManagement
 				await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
 
 			if (roomTemp == null)
-			{
 				throw new AppException("Room: " + room.RoomNumber + " in club " + club.Title + " not found.");
-			}
 
 			if (isDeleteRoom)
 			{
@@ -199,9 +190,7 @@ namespace System.BLL.ClubManagement
 				await _context.Rooms.FirstOrDefaultAsync(r => r.Club == room.Club && r.RoomNumber == room.RoomNumber);
 
 			if (roomTemp == null)
-			{
 				throw new AppException("Room: " + room.RoomNumber + " in club " + resultClub.Title + " not found.");
-			}
 
 			if (isDeleteRoom)
 			{
@@ -240,10 +229,7 @@ namespace System.BLL.ClubManagement
 		{
 			var club = await GetByIdFullClubAsync(clubId, userId);
 
-			if (!_context.Clubs.Contains(club))
-			{
-				throw new AppException("Club: " + club.Title + " not found.");
-			}
+			if (!_context.Clubs.Contains(club)) throw new AppException("Club: " + club.Title + " not found.");
 
 			if (isDelete)
 			{
@@ -281,10 +267,13 @@ namespace System.BLL.ClubManagement
 		private async Task<Club> GetByIdFullClubAsync(int clubId, string userId)
 		{
 			var user = await _userManager.FindByIdAsync(userId);
-			var roles = await _userManager.GetRolesAsync(user);
+
+			//if (user == null) throw new AppException("User not exist");
+
+			//var roles = await _userManager.GetRolesAsync(user);
 
 			var resultClub = await _context.Clubs
-				.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
+				//.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
 				.FirstOrDefaultAsync(cl => cl.Id == clubId);
 
 			if (resultClub == null) throw new AppException("Club not found");

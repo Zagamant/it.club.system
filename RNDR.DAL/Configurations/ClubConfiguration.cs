@@ -22,7 +22,7 @@ namespace System.DAL.Configurations
 				.Property(c => c.Status)
 				.HasConversion(
 					s => s.ToString(),
-					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str));
+					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str, true));
 
 		}
 	}

@@ -37,8 +37,20 @@ namespace System.API.Controllers
 		[HttpGet]
 		public async Task<IEnumerable<Club>> Get()
 		{
-			var userId = User.FindFirstValue(ClaimTypes.Name);
-			return await _clubService.GetAllAsync(userId);
+			try
+			{
+
+				var userId = User.FindFirstValue(ClaimTypes.Name);
+				var asd = await _clubService.GetAllAsync(userId);
+				return asd;
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
+			
 		}
 
 		// GET api/<ClubsController>/5
@@ -69,7 +81,7 @@ namespace System.API.Controllers
 
 		// POST api/<ClubsController>/5
 		[HttpPost]
-		public async Task<ActionResult> Post([FromBody] Club club)
+		public async Task<ActionResult> Create([FromBody] Club club)
 		{
 			var newClub = await _clubService.CreateAsync(club);
 			return Ok(newClub);

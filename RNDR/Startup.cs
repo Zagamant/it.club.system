@@ -57,7 +57,9 @@ namespace System.API
 				options
 					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
 					.UseLazyLoadingProxies());
-			services.AddControllers();
+
+
+			services.AddControllers().AddNewtonsoftJson();
 
 			// Auto Mapper Configurations
 			var mappingConfig = new MapperConfiguration(mapperConfig =>
@@ -126,14 +128,14 @@ namespace System.API
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			app.UseRouting();
-
 			// global cors policy
 			app.UseCors(x => x
 				.AllowAnyOrigin()
 				.AllowAnyMethod()
-				.AllowAnyHeader());
+				.AllowAnyHeader()
+			);
 
+			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
 
