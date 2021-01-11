@@ -34,11 +34,9 @@ namespace System.BLL.ClubManagement
 		public async Task<IEnumerable<Club>> GetAllAsync(string userId)
 		{
 			var user = await _userManager.FindByIdAsync(userId);
-			// if (user == null)
-			// {
-			// 	throw new ArgumentException("No such user exist, login");
-			// }
+			
 			// var roles = await _userManager.GetRolesAsync(user);
+			
 			var allClubs = await _context.Clubs
 				//.AsNoTracking() //WTF cause internal server error one i ca not track for 3 DAY AF //TODO stackoverflow quest;
 				//.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
@@ -147,7 +145,6 @@ namespace System.BLL.ClubManagement
 			if (room == null) throw new ArgumentNullException(nameof(room));
 
 			if (!club.Rooms.Contains(room))
-			{
 				throw new AppException("Room: " + room.RoomNumber + " in club " + club.Title + " not found.");
 
 			if (isDeleteRoom)
@@ -170,8 +167,6 @@ namespace System.BLL.ClubManagement
 		{
 			var club = await GetByIdFullClubAsync(clubId, userId);
 			var room = await _context.Rooms.FirstOrDefaultAsync(roomItem => roomItem.Id == roomId && roomItem.Club.Id == club.Id);
-
-			resultClub.Rooms.Remove(roomTemp);
 
 			await RemoveRoomAsync(club, room, userId);
 		}
@@ -221,7 +216,7 @@ namespace System.BLL.ClubManagement
 		#region PrivateHelpers
 
 		private async Task<Club> GetByIdFullClubAsync(int clubId, string userId)
-
+		{ 
 			//if (user == null) throw new AppException("User not exist");
 
 			//var roles = await _userManager.GetRolesAsync(user);

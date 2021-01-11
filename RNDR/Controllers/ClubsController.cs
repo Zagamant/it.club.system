@@ -33,20 +33,16 @@ namespace System.API.Controllers
 			_roomService = roomService;
 		}
 
-		// GET: api/<ClubsController>
 		[HttpGet]
 		public async Task<IEnumerable<Club>> Get() => await _clubService.GetAllAsync(User.FindFirstValue(ClaimTypes.Name));
 
-		// GET api/<ClubsController>/5
 		[HttpGet("{id}")]
 		public async Task<Club> Get(int id) => await _clubService.GetByIdAsync(id, User.FindFirstValue(ClaimTypes.Name));
 
-		// PUT api/<ClubsController>
 		[HttpPut("{id}")]
 		// [Authorize(Roles = "main_admin,admin")]
-		public async Task<ActionResult> Update(int id, [FromBody] Club club) => Ok(await _clubService.UpdateAsync(club.Id, club, User.FindFirstValue(ClaimTypes.Name);
+		public async Task<ActionResult> Update(int id, [FromBody] Club club) => Ok(await _clubService.UpdateAsync(club.Id, club, User.FindFirstValue(ClaimTypes.Name)));
 
-		// POST api/<ClubsController>/5
 		[HttpPost]
 		public async Task<ActionResult> Create([FromBody] Club club)
 		{
@@ -54,7 +50,6 @@ namespace System.API.Controllers
 			return Ok(newClub);
 		}
 
-		// DELETE api/<ClubsController>/5
 		[HttpDelete("{id}")]
 		// [Authorize(Roles = "main_admin,admin")]
 		public async Task<ActionResult> Delete([FromBody] Club club)
