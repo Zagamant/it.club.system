@@ -18,13 +18,11 @@ namespace System.API.Controllers
 	{
 		private readonly IGroupService _groupService;
 		private readonly IMapper _mapper;
-		private readonly IOptions<AppSettings> _appSettings;
 
 		public GroupsController(IGroupService groupService, IMapper mapper, IOptions<AppSettings> appSettings)
 		{
 			_groupService = groupService ?? throw new ArgumentNullException(nameof(groupService));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-			_appSettings = appSettings ?? throw new ArgumentNullException(nameof(appSettings));
 		}
 
 
@@ -47,5 +45,12 @@ namespace System.API.Controllers
 		// DELETE api/<GroupsController>/5
 		[HttpDelete("{id}")]
 		public async Task Delete(int id) => await _groupService.RemoveAsync(id);
+		
+		[HttpPut("{groupId}/students/{studentId}")]
+		public async Task DeleteStudent(int groupId, int studentId) => await _groupService.RemoveStudentAsync(groupId, studentId);
+
+		[HttpDelete("{groupId}/students/{studentId}")]
+		public async Task AddStudent(int groupId, int studentId) => await _groupService.AddStudentAsync(groupId, studentId);
+
 	}
 }

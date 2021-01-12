@@ -69,38 +69,54 @@ namespace System.BLL.GroupManagement
 
 		public async Task AddStudentAsync(int groupId, User user)
 		{
-			if (user == null) throw new ArgumentNullException(nameof(user));
+			await AddStudentAsync(groupId, user.Id);
+		}
 
-			var result = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
+		public async Task AddStudentAsync(int groupId, int userId)
+		{
+			var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Id == userId);
+			
+			if (user == null) throw new AppException($"User with id: {userId} not exist");
 
-			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
+			var group = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
 
-			result.Users.Add(user);
+			if (group == null) throw new AppException($"Group with id: {groupId} not exist");
+
+			if (group.Users.Contains(user)) throw new AppException("User already exist in context");
+			
+			group.Users.Add(user);
 
 			await _context.SaveChangesAsync();
 		}
 
 		public async Task AddStudentAsync(Group group, User user)
 		{
-			await AddStudentAsync(group.Id, user);
+			await AddStudentAsync(group.Id, user.Id);
 		}
 
 		public async Task RemoveStudentAsync(int groupId, User user)
 		{
-			if (user == null) throw new ArgumentNullException(nameof(user));
+			await RemoveStudentAsync(groupId, user.Id);
+		}
 
-			var result = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
-
-			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
+		public async Task RemoveStudentAsync(int groupId, int userId)
+		{
+			var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Id == userId);
 			
-			result.Users.Remove(user);
+			if (user == null) throw new AppException($"User with id: {userId} not exist");
+
+			var group = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
+
+			if (group == null) throw new AppException($"Group with id: {groupId} not exist");
+			
+			group.Users.Remove(user);
 
 			await _context.SaveChangesAsync();
 		}
 
 		public async Task RemoveStudentAsync(Group group, User user)
 		{
-			await RemoveStudentAsync(group.Id, user);
+			await RemoveStudentAsync(group.Id, user.Id);
 		}
 
 		public async Task RemoveAsync(int groupId, bool isDeleted = false)

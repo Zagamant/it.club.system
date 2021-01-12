@@ -14,8 +14,10 @@ namespace System.BLL.GroupManagement
 		Task UpdateAsync(int groupId, Group newGroup);
 		Task UpdateAsync(Group group, Group newGroup);
 		Task AddStudentAsync(int groupId, User user);
+		Task AddStudentAsync(int groupId, int userId);
 		Task AddStudentAsync(Group group, User user);
 		Task RemoveStudentAsync(int groupId, User user);
+		Task RemoveStudentAsync(int groupId, int userId);
 		Task RemoveStudentAsync(Group group, User user);
 		Task RemoveAsync(int groupId, bool isDelete = false);
 		Task RemoveAsync(Group group, bool isDelete = false);

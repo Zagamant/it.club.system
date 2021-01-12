@@ -22,13 +22,13 @@ namespace System.BLL.RoomManagement
 		}
 
 
-		public async Task Create(Room room)
+		public async Task CreateAsync(Room room)
 		{
 			var roomTemp = _mapper.Map<Room>(room);
 			await _context.AddAsync(roomTemp);
 		}
 
-		public async Task<Room> Get(Room room)
+		public async Task<Room> GetAsync(Room room)
 		{
 			var result =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && room.About == r.About);
@@ -38,7 +38,7 @@ namespace System.BLL.RoomManagement
 			return result;
 		}
 
-		public async Task<Room> Get(int roomId)
+		public async Task<Room> GetAsync(int roomId)
 		{
 			var result =
 				await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
@@ -48,7 +48,7 @@ namespace System.BLL.RoomManagement
 			return result;
 		}
 
-		public async Task<IEnumerable<Room>> GetAll()
+		public async Task<IEnumerable<Room>> GetAllAsync()
 		{
 			var result =
 				await _context.Rooms.Where(room => room.Status != RoomStatus.Closed).ToListAsync();
@@ -58,7 +58,7 @@ namespace System.BLL.RoomManagement
 			return result;
 		}
 
-		public async Task Update(int roomId, Room newRoom)
+		public async Task UpdateAsync(int roomId, Room newRoom)
 		{
 			var roomTemp = _mapper.Map<Room>(newRoom);
 			roomTemp.Id = roomId;
@@ -68,12 +68,12 @@ namespace System.BLL.RoomManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(Room room, Room newRoom)
+		public async Task UpdateAsync(Room room, Room newRoom)
 		{
-			await Update(room.Id, newRoom);
+			await UpdateAsync(room.Id, newRoom);
 		}
 
-		public async Task Remove(int roomId)
+		public async Task RemoveAsync(int roomId)
 		{
 			var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
 			if (room == null) throw new AppException("Room wasn't find");
@@ -81,9 +81,9 @@ namespace System.BLL.RoomManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Remove(Room room)
+		public async Task RemoveAsync(Room room)
 		{
-			await Remove(room.Id);
+			await RemoveAsync(room.Id);
 		}
 		                            
 	}

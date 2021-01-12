@@ -3,7 +3,6 @@ using System.BLL.EmailManagement;
 using System.BLL.Helpers;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
-using System.Collections.Generic;
 using System.DAL.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

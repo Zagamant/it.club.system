@@ -6,13 +6,13 @@ namespace System.BLL.RoomManagement
 {
 	public interface IRoomService
 	{
-		Task Create(Room room);
-		Task<IEnumerable<Room>> GetAll();
-		Task<Room> Get(Room room);
-		Task<Room> Get(int roomId);
-		Task Update(int roomId, Room newRoom);
-		Task Update(Room room, Room newRoom);
-		Task Remove(int roomId);
-		Task Remove(Room room);
+		Task CreateAsync(Room room);
+		Task<IEnumerable<Room>> GetAllAsync();
+		Task<Room> GetAsync(Room room);
+		Task<Room> GetAsync(int roomId);
+		Task UpdateAsync(int roomId, Room newRoom);
+		Task UpdateAsync(Room room, Room newRoom);
+		Task RemoveAsync(int roomId);
+		Task RemoveAsync(Room room);
 	}
 }
