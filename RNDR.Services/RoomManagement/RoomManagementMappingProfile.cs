@@ -1,4 +1,5 @@
-﻿using System.DAL.Entities;
+﻿using System.BLL.Models.RoomManagement;
+using System.DAL.Entities;
 using AutoMapper;
 
 namespace System.BLL.RoomManagement
@@ -7,7 +8,8 @@ namespace System.BLL.RoomManagement
 	{
 		public RoomManagementMappingProfile()
 		{
-			
+			CreateMap<Room, RoomCreate>();
+			CreateMap<RoomCreate, Room>();
 		}
 	}
 }

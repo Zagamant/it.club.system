@@ -51,9 +51,7 @@ namespace System.BLL.ClubManagement
 
 			if (club == null) throw new AppException("Club not found");
 
-			var resultClub = _mapper.Map<Club>(club);
-
-			return resultClub;
+			return club;
 		}
 
 		public async Task<Club> GetByTitleAsync(string clubTitle, string userId)
@@ -180,10 +178,34 @@ namespace System.BLL.ClubManagement
 
 		public async Task<Club> UpdateAsync(Club club, Club newClub, string userId)
 		{
-			newClub.Id = club.Id;
+			try
+			{
+				newClub.Id = club.Id;
 
-			_context.Clubs.Update(newClub);
-			await _context.SaveChangesAsync();
+				// if (newClub.Title != club.Title)
+				// {
+				// 	var clubRole = await _context.Roles.FirstAsync(role => role.Name == club.Title);
+				// 	clubRole.Name = newClub.Title;
+				//
+				// 	_context.Roles.Update(clubRole);
+				// }
+				//
+				_context.Entry<Club>(club).State = EntityState.Detached;
+
+				var clubRole = newClub.Permissions.First(role => role.Name == club.Title);
+				clubRole.Name = newClub.Title;
+
+				//_context.Roles.Update(clubRole);
+
+				_context.Clubs.Update(newClub);
+				await _context.SaveChangesAsync();
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
 
 			return newClub;
 		}

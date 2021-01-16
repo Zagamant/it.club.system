@@ -1,10 +1,12 @@
 ﻿using System.API.Helpers;
+using System.BLL.Models.RoomManagement;
 using System.BLL.RoomManagement;
 using System.Collections.Generic;
 using System.DAL.Entities;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -23,25 +25,48 @@ namespace System.API.Controllers
             _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-
-
-        // GET: api/<GroupsController>
+        
         [HttpGet]
-        public async Task<IEnumerable<Room>> Get() => await _roomService.GetAllAsync();
+        public async Task<IEnumerable<Room>> Get()
+        {
+            try
+            {
 
-        // GET api/<GroupsController>/5
+                var result = await _roomService.GetAllAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+            
+        }
+
         [HttpGet("{id}")]
         public async Task<Room> GetAsync(int id) => await _roomService.GetAsync(id);
 
-        // POST api/<GroupsController>
         [HttpPost]
-        public async Task Post([FromBody] Room value) => await _roomService.CreateAsync(value);
+        public async Task<ActionResult<Room>> Post([FromBody] RoomCreate value)
+        {
+            try
+            {
 
-        // PUT api/<GroupsController>/5
+                var newRoom = await _roomService.CreateAsync(value);
+                return StatusCode(StatusCodes.Status201Created, newRoom);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Room value) => await _roomService.CreateAsync(value);
+        public async Task Put(int id, [FromBody] Room newRoom) => await _roomService.UpdateAsync(id, newRoom);
 
-        // DELETE api/<GroupsController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id) => await _roomService.RemoveAsync(id);
     }

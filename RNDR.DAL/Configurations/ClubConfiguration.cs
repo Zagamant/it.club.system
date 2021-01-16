@@ -15,13 +15,12 @@ namespace System.DAL.Configurations
 
 			builder
 				.HasMany<Room>(club => club.Rooms)
-				.WithOne(r => r.Club)
-				.OnDelete(DeleteBehavior.Cascade);
+				.WithOne(r => r.Club);
 
 			builder
 				.Property(c => c.Status)
 				.HasConversion(
-					s => s.ToString(),
+					status => status.ToString(),
 					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str, true));
 
 		}

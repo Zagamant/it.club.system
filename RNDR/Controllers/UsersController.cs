@@ -119,7 +119,7 @@ namespace System.API.Controllers
 			{
 				// update user 
 				await _userService.UpdateAsync(user, model.Password);
-				return Ok();
+				return Ok(user);
 			}
 			catch (AppException ex)
 			{

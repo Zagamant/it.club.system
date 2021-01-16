@@ -8,11 +8,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 
 namespace System.API.Controllers
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ClubsController : ControllerBase
@@ -33,32 +35,41 @@ namespace System.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Club>> Get() =>
-            await _clubService.GetAllAsync(User.FindFirstValue(ClaimTypes.Name));
+        public async Task<IEnumerable<Club>> Get()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await _clubService.GetAllAsync(userId);
+        }
 
         [HttpGet("{id}")]
-        public async Task<Club> Get(int id) =>
-            await _clubService.GetByIdAsync(id, User.FindFirstValue(ClaimTypes.Name));
+        public async Task<Club> Get(int id)
+        {
+            return await _clubService.GetByIdAsync(id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+        }
 
         [HttpPut("{id}")]
         // [Authorize(Roles = "main_admin,admin")]
-        public async Task<ActionResult> Update(int id, [FromBody] Club club) =>
+        public async Task<IActionResult> Update(int id, [FromBody] Club club) =>
             Ok(await _clubService.UpdateAsync(club.Id, club, User.FindFirstValue(ClaimTypes.Name)));
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] Club club) => Ok(await _clubService.CreateAsync(club));
+        public async Task<ActionResult<Club>> Create([FromBody] Club club)
+        {
+            var newClub = await _clubService.CreateAsync(club);
+            return StatusCode(StatusCodes.Status201Created, newClub);
+        }
 
         [HttpDelete("{id}")]
         // [Authorize(Roles = "main_admin,admin")]
-        public async Task<ActionResult> Delete([FromBody] Club club)
+        public async Task<IActionResult> Delete([FromBody] Club club)
         {
             await _clubService.RemoveAsync(club, User.FindFirstValue(ClaimTypes.Name));
-            return Ok();
+            return NoContent();
         }
 
         [HttpPut("AddRoom")]
         // [Authorize(Roles = "main_admin,admin")]
-        public async Task<ActionResult> AddRoom([FromBody] int clubId, int roomId)
+        public async Task<IActionResult> AddRoom([FromBody] int clubId, int roomId)
         {
             await _clubService.AddRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
             return Ok();

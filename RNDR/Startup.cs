@@ -23,6 +23,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace System.API
 {
@@ -59,7 +61,12 @@ namespace System.API
 					.UseLazyLoadingProxies());
 
 
-			services.AddControllers().AddNewtonsoftJson();
+			services.AddControllers()
+					.AddNewtonsoftJson(opt =>
+					{
+						opt.SerializerSettings.Converters.Add(new StringEnumConverter());
+						opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+					});
 
 			// Auto Mapper Configurations
 			var mappingConfig = new MapperConfiguration(mapperConfig =>
