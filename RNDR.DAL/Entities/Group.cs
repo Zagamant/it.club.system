@@ -9,7 +9,7 @@ namespace System.DAL.Entities
 		public virtual Course Course { get; set; }
 		public virtual Room Room { get; set; }
 		public int LessonsPerWeek { get; set; }
-		public string SkypeConversation { get; set; }
+		public string OnlineConversationLink { get; set; }
 		public string Messenger { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
