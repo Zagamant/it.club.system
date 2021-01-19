@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.API.Helpers;
 using System.BLL.ClubManagement;
+using System.BLL.Models.ClubManagement;
 using System.BLL.RoomManagement;
 using System.Collections.Generic;
 using System.DAL.Entities;
@@ -49,7 +50,7 @@ namespace System.API.Controllers
 
         [HttpPut("{id}")]
         // [Authorize(Roles = "main_admin,admin")]
-        public async Task<IActionResult> Update(int id, [FromBody] Club club) =>
+        public async Task<IActionResult> Update(int id, [FromBody] ClubModel club) =>
             Ok(await _clubService.UpdateAsync(club.Id, club, User.FindFirstValue(ClaimTypes.Name)));
 
         [HttpPost]
