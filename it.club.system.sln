@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.API", "RNDR\System.API.csproj", "{525E7F79-6FA8-4BF6-8581-781062E5A6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.API", "API\System.API.csproj", "{525E7F79-6FA8-4BF6-8581-781062E5A6F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.DAL", "RNDR.DAL\System.DAL.csproj", "{8AA38420-2392-494B-A7BF-DAF2CBF5BB94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.DAL", "DAL\System.DAL.csproj", "{8AA38420-2392-494B-A7BF-DAF2CBF5BB94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL", "RNDR.Services\System.BLL.csproj", "{D082A14C-5046-4B11-96F6-730965BAED7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL", "BLL\System.BLL.csproj", "{D082A14C-5046-4B11-96F6-730965BAED7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Models", "RNDR.Services.Models\System.BLL.Models.csproj", "{6B4998DA-2789-4314-A726-78C4F93089E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Models", "BLL.Models\System.BLL.Models.csproj", "{6B4998DA-2789-4314-A726-78C4F93089E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.BLL.Tests", "System.BLL.Tests\System.BLL.Tests.csproj", "{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.BLL.Tests", "BLL.Tests\System.BLL.Tests.csproj", "{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

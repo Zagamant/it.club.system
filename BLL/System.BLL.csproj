@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RNDR.DAL\System.DAL.csproj" />
-    <ProjectReference Include="..\RNDR.Services.Models\System.BLL.Models.csproj" />
+    <ProjectReference Include="..\DAL\System.DAL.csproj" />
+    <ProjectReference Include="..\BLL.Models\System.BLL.Models.csproj" />
   </ItemGroup>
 
 </Project>
