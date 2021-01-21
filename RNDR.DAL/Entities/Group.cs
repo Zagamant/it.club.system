@@ -6,6 +6,7 @@ namespace System.DAL.Entities
 	public class Group
 	{
 		public int Id { get; set; }
+		public string Title { get; set; }
 		public virtual Course Course { get; set; }
 		public virtual Room Room { get; set; }
 		public int LessonsPerWeek { get; set; }

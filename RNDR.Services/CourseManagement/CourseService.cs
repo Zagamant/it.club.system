@@ -21,7 +21,7 @@ namespace System.BLL.CourseManagement
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
-		public async Task Create(CourseRegisterModel course)
+		public async Task CreateAsync(CourseRegisterModel course)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 
@@ -30,7 +30,7 @@ namespace System.BLL.CourseManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<CourseModel>> GetAllCourses()
+		public async Task<IEnumerable<CourseModel>> GetAllAsync()
 		{
 			var courses = await _context.Courses
 				.AsNoTracking()
@@ -46,20 +46,29 @@ namespace System.BLL.CourseManagement
 			return courses;
 		}
 
-		public async Task<CourseModel> GetCourse(CourseModel course)
+		public async Task<CourseModel> GetAsync(CourseModel course)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 
 			var courseOrig =
 				await _context.Courses
-					.AsNoTracking()
 					.SingleAsync(c => c.Title == course.Title && c.ManualLink == course.ManualLink);
 
 			var result = _mapper.Map<CourseModel>(courseOrig);
 			return result;
 		}
 
-		public async Task Update(int courseId, CourseModel newCourse)
+		public async Task<CourseModel> GetAsync(int id)
+		{
+			var courseOrig =
+				await _context.Courses
+					.SingleAsync(c => c.Id == id);
+
+			var result = _mapper.Map<CourseModel>(courseOrig);
+			return result;
+		}
+
+		public async Task UpdateAsync(int courseId, CourseModel newCourse)
 		{
 			if (newCourse == null) throw new ArgumentNullException(nameof(newCourse));
 
@@ -71,7 +80,7 @@ namespace System.BLL.CourseManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Update(CourseModel course, CourseModel newCourse)
+		public async Task UpdateAsync(CourseModel course, CourseModel newCourse)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 			if (newCourse == null) throw new ArgumentNullException(nameof(newCourse));
@@ -89,7 +98,7 @@ namespace System.BLL.CourseManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Remove(int courseId)
+		public async Task RemoveAsync(int courseId)
 		{
 			var courseOrig = await _context.Courses
 				.FirstOrDefaultAsync(c => c.Id == courseId);
@@ -101,7 +110,7 @@ namespace System.BLL.CourseManagement
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Remove(CourseModel course)
+		public async Task RemoveAsync(CourseModel course)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 
