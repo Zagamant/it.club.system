@@ -1,11 +1,14 @@
 ﻿using System;
 using System.BLL.Helpers;
+using System.BLL.Models.EventManagement;
 using System.BLL.Models.PaymentManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.PaymentManagement
@@ -13,22 +16,23 @@ namespace System.BLL.PaymentManagement
 	public class PaymentService : IPaymentService
 	{
 		private readonly DataContext _context;
+		private readonly IMapper _mapper;
 
-		public PaymentService(DataContext context)
+		public PaymentService(DataContext context, IMapper mapper)
 		{
 			_context = context ?? throw new ArgumentNullException(nameof(context));
+			_mapper = mapper ?? throw new ArgumentNullException(nameof(context));
 		}
 
-		public async Task<IEnumerable<Payment>> GetAllAsync()
+		public async Task<IEnumerable<PaymentModel>> GetAllAsync()
 		{
 			var result = await _context.Payments
-				.AsNoTracking()
 				.ToListAsync();
 
-			return result;
+			return result.Select(item => _mapper.Map<PaymentModel>(item)).ToList();
 		}
 
-		public async Task<Payment> GetAsync(int id)
+		public async Task<PaymentModel> GetAsync(int id)
 		{
 			var result = await _context.Payments
 				.AsNoTracking()
@@ -36,10 +40,11 @@ namespace System.BLL.PaymentManagement
 
 			if (result == null) throw new AppException($"Event with id: {id} not found.");
 
-			return result;
+			var map =_mapper.Map<PaymentModel>(result);
+			return map;
 		}
 
-		public async Task AddAsync(Payment entity)
+		public async Task<PaymentModel> AddAsync(PaymentModel entity)
 		{
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 			if (entity.Id != 0)
@@ -51,31 +56,57 @@ namespace System.BLL.PaymentManagement
 				if (result != null) throw new AppException($"Event already exist.");
 			}
 
+			var map =_mapper.Map<Payment>(entity);
+			
+			map.User = entity.UserId == 0 ? null : _context.Users.FirstOrDefault(user => user.Id == entity.UserId);
+
 			await _context.Payments
-				.AddAsync(entity);
+				.AddAsync(map);
 
 			await _context.SaveChangesAsync();
+
+			return entity;
 		}
 
-		public async Task UpdateAsync(Payment dbEntity, Payment newEntity)
+		public async Task<PaymentModel> UpdateAsync(PaymentModel dbEntity, PaymentModel newEntity)
 		{
 			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
 			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
 
-
-			var result = await _context.Payments
-				.SingleOrDefaultAsync(ev => ev.Id == dbEntity.Id);
-
-			if (result == null) throw new AppException($"Event not found.");
+			if (await _context.Payments
+				.SingleOrDefaultAsync(ev => ev.Id == dbEntity.Id) == null) throw new AppException($"Event not found.");
 
 			newEntity.Id = dbEntity.Id;
-			_context.Payments
-				.Update(newEntity);
+
+			var result = _mapper.Map<Event>(newEntity);
+			_context.Events
+				.Update(result);
 
 			await _context.SaveChangesAsync();
+
+			return newEntity;
 		}
 
-		public async Task DeleteAsync(Payment entity)
+		public async Task<PaymentModel> UpdateAsync(int id, PaymentModel newEntity)
+		{
+			if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
+			{
+				throw new AppException("Not found");
+			}
+        
+			newEntity.Id = id;
+
+			var map =_mapper.Map<Event>(newEntity);
+            
+			_context.Events
+				.Update(map);
+
+			await _context.SaveChangesAsync();
+
+			return newEntity;
+		}
+
+		public async Task DeleteAsync(PaymentModel entity)
 		{
 			if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -84,7 +115,19 @@ namespace System.BLL.PaymentManagement
 
 			if (result == null) throw new AppException($"Costs with id: {entity.Id} not found.");
 
-			_context.Payments.Remove(entity);
+			_context.Payments.Remove(result);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task DeleteAsync(int id)
+		{
+			var result = await _context.Payments
+				.SingleOrDefaultAsync(Event => Event.Id == id);
+
+			if (result == null) throw new AppException($"Costs with id: {id} not found.");
+
+			_context.Payments.Remove(result);
 
 			await _context.SaveChangesAsync();
 		}

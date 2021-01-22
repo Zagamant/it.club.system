@@ -1,90 +1,130 @@
 ﻿using System.BLL.Helpers;
+using System.BLL.Models.EventManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.EventManagement
 {
-	public class EventService : IEventService
-	{
-		private readonly DataContext _context;
+    public class EventService : IEventService
+    {
+        private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-		public EventService(DataContext context)
-		{
-			_context = context ?? throw new ArgumentNullException(nameof(context));
-		}
+        public EventService(DataContext context, IMapper mapper)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
 
-		public async Task<IEnumerable<Event>> GetAllAsync()
-		{
-			var result = await _context.Events
-				.AsNoTracking()
-				.ToListAsync();
+        public async Task<IEnumerable<EventModel>> GetAllAsync()
+        {
+            var result = await _context.Events
+                .AsNoTracking()
+                .ToListAsync();
 
-			return result;
-		}
+            return result.Select(item => _mapper.Map<EventModel>(item)).ToList();
+        }
 
-		public async Task<Event> GetAsync(int id)
-		{
-			var result = await _context.Events
-				.AsNoTracking()
-				.SingleOrDefaultAsync(ev => ev.Id == id);
+        public async Task<EventModel> GetAsync(int id)
+        {
+            var result = await _context.Events
+                .AsNoTracking()
+                .SingleOrDefaultAsync(ev => ev.Id == id);
 
-			if(result == null) throw new AppException($"Event with id: {id} not found.");
+            if (result == null) throw new AppException($"Event with id: {id} not found.");
 
-			return result;
-		}
+            var map = _mapper.Map<EventModel>(result);
+            return map;
+        }
 
-		public async Task AddAsync(Event entity)
-		{
-			if(entity == null) throw new ArgumentNullException(nameof(entity));
-			Event result = null;
-			if (entity.Id != 0)
-			{
-				result = await _context.Events
-					.AsNoTracking()
-					.SingleOrDefaultAsync(ev => ev.Id == entity.Id);
+        public async Task<EventModel> AddAsync(EventModel entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-				if (result != null) throw new AppException($"Event already exist.");
-			}
+            var result = await _context.Events
+                .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
 
-			await _context.Events
-				.AddAsync(entity);
+            if (result != null) throw new AppException($"Event already exist.");
 
-			await _context.SaveChangesAsync();
-		}
+            var map = _mapper.Map<Event>(entity);
 
-		public async Task UpdateAsync(Event dbEntity, Event newEntity)
-		{
-			if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
-			if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
+            await _context.Events
+                .AddAsync(map);
+
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
+
+        public async Task<EventModel> UpdateAsync(EventModel dbEntity, EventModel newEntity)
+        {
+            if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
+            if (dbEntity == null) throw new ArgumentNullException(nameof(dbEntity));
+
+            if (await _context.Events
+                .SingleOrDefaultAsync(ev => ev.Id == dbEntity.Id) == null)
+                throw new AppException($"Event not found.");
+
+            newEntity.Id = dbEntity.Id;
+
+            var result = _mapper.Map<Event>(newEntity);
+            _context.Events
+                .Update(result);
+
+            await _context.SaveChangesAsync();
+
+            return newEntity;
+        }
+
+        public async Task<EventModel> UpdateAsync(int id, EventModel newEntity)
+        {
+            if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
+            {
+                throw new AppException("Not found");
+            }
+
+            newEntity.Id = id;
+
+            var map = _mapper.Map<Event>(newEntity);
+
+            _context.Events
+                .Update(map);
+
+            await _context.SaveChangesAsync();
+
+            return newEntity;
+        }
 
 
-			var result = await _context.Events
-				.SingleOrDefaultAsync(ev => ev.Id == dbEntity.Id);
+        public async Task DeleteAsync(EventModel entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-			if (result == null) throw new AppException($"Event not found.");
+            var result = await _context.Events
+                .SingleOrDefaultAsync(cos => cos.Id == entity.Id);
 
-			newEntity.Id = dbEntity.Id;
-			_context.Events
-				.Update(newEntity);
+            if (result == null) throw new AppException($"Costs with id: {entity.Id} not found.");
 
-			await _context.SaveChangesAsync();
-		}
+            _context.Events.Remove(result);
 
-		public async Task DeleteAsync(Event entity)
-		{
-			if (entity == null) throw new ArgumentNullException(nameof(entity));
+            await _context.SaveChangesAsync();
+        }
 
-			var result = await _context.Events
-				.SingleOrDefaultAsync(cos => cos.Id == entity.Id);
+        public async Task DeleteAsync(int id)
+        {
+            var result = await _context.Events
+                .SingleOrDefaultAsync(Event => Event.Id == id);
 
-			if (result == null) throw new AppException($"Costs with id: {entity.Id} not found.");
+            if (result == null) throw new AppException($"Costs with id: {id} not found.");
 
-			_context.Events.Remove(entity);
+            _context.Events.Remove(result);
 
-			await _context.SaveChangesAsync();
-		}
-	}
+            await _context.SaveChangesAsync();
+        }
+    }
 }
