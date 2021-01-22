@@ -14,11 +14,13 @@ namespace System.DAL
         /// <summary>
         /// Initializes a new instance of the <see cref="DataContext"/> class.
         /// </summary>
-        public DataContext(DbContextOptions options) : base(options) { }
+        public DataContext(DbContextOptions options) : base(options)
+        {
+        }
 
-        public DbSet<Address> Addresses{ get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        
+
         public DbSet<Agreement> Agreements { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
@@ -27,31 +29,29 @@ namespace System.DAL
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
 
-        public DbSet<Costs> Costs{ get; set; }
-        public DbSet<Event> Events{ get; set; }
+        public DbSet<Costs> Costs { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Event> Events { get; set; }
 
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-			base.OnConfiguring(optionsBuilder);
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-	        modelBuilder
-		        .ApplyConfiguration(new ClubConfiguration())
-		        .ApplyConfiguration(new GroupConfiguration())
-		        .ApplyConfiguration(new RoomConfiguration())
-		        .ApplyConfiguration(new PaymentConfiguration())
-		        .ApplyConfiguration(new UserConfiguration())
-		        .ApplyConfiguration(new PhotoConfiguration())
-		        ;
+            modelBuilder
+                .ApplyConfiguration(new ClubConfiguration())
+                .ApplyConfiguration(new GroupConfiguration())
+                .ApplyConfiguration(new RoomConfiguration())
+                .ApplyConfiguration(new PaymentConfiguration())
+                .ApplyConfiguration(new UserConfiguration())
+                .ApplyConfiguration(new PhotoConfiguration())
+                ;
 
-	        
-			base.OnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
-
-    
 }

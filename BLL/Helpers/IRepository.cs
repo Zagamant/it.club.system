@@ -3,14 +3,15 @@ using System.Threading.Tasks;
 
 namespace System.BLL.Helpers
 {
-	public interface IRepository<TId, TEntity> where TEntity : class
+	public interface IRepository<TId, TAddModel, TUpdateModel, TModel> 
+		where TAddModel : class
+		where TUpdateModel : class
+		where TModel : class
 	{
-		Task<IEnumerable<TEntity>> GetAllAsync();
-		Task<TEntity> GetAsync(TId id);
-		Task<TEntity> AddAsync(TEntity entity);
-		Task<TEntity>  UpdateAsync(TEntity dbEntity, TEntity newEntity);
-		Task<TEntity>  UpdateAsync(TId id, TEntity newEntity);
-		Task DeleteAsync(TEntity entity);
+		Task<IEnumerable<TModel>> GetAllAsync();
+		Task<TModel> GetAsync(TId id);
+		Task<TModel> AddAsync(TAddModel entity);
+		Task<TModel>  UpdateAsync(TId id, TUpdateModel newEntity);
 		Task DeleteAsync(TId id);
 	}
 }

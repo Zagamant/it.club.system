@@ -53,7 +53,7 @@ namespace System.BLL.UserManagement
 			await _signInManager.SignOutAsync();
 		}
 
-		public async Task<int> GetIdAsync(User user)
+		public async Task<int> GetAsync(User user)
 		{
 			var id = await _userManager.GetUserIdAsync(user);
 			return Convert.ToInt32(id);
@@ -67,7 +67,7 @@ namespace System.BLL.UserManagement
 		}
 
 		/// <inheritdoc/>
-		public async Task<User> GetByIdAsync(int id)
+		public async Task<User> GetAsync(int id)
 		{
 			var user = await _userManager.FindByIdAsync(id.ToString());
 
@@ -76,7 +76,7 @@ namespace System.BLL.UserManagement
 			return user;
 		}
 
-		public async Task<User> GetByUsernameAsync(string username)
+		public async Task<User> GetAsync(string username)
 		{
 			var user = await _userManager.FindByNameAsync(username);
 
@@ -95,7 +95,7 @@ namespace System.BLL.UserManagement
 		}
 
 		/// <inheritdoc/>
-		public async Task<User> CreateAsync(User user, string password)
+		public async Task<User> AddAsync(User user, string password)
 		{
 			// validation
 			if (string.IsNullOrWhiteSpace(password)) throw new AppException("Password is required");
@@ -219,7 +219,7 @@ namespace System.BLL.UserManagement
 		#region private helper methods
 
 		/// <summary>
-		/// CreateAsync password hash and uniq salt for new user.
+		/// AddAsync password hash and uniq salt for new user.
 		/// </summary>
 		/// <param name="password">Clear password.</param>
 		/// <param name="passwordHash">Encrypted password.</param>

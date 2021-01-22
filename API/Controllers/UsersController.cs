@@ -82,7 +82,7 @@ namespace System.API.Controllers
 			try
 			{
 				// create user
-				result = await _userService.CreateAsync(user, model.Password);
+				result = await _userService.AddAsync(user, model.Password);
 			}
 			catch (Exception ex)
 			{
@@ -104,7 +104,7 @@ namespace System.API.Controllers
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id)
 		{
-			var user = await _userService.GetByIdAsync(id);
+			var user = await _userService.GetAsync(id);
 			return Ok(user);
 		}
 
@@ -156,7 +156,7 @@ namespace System.API.Controllers
 		{
 			var userId = Convert.ToInt32(HttpContext.User.Identity.Name);
 
-			var user = await _userService.GetByIdAsync(userId);
+			var user = await _userService.GetAsync(userId);
 
 			var model = new ConfirmEmailModel
 			{

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace System.BLL.CourseManagement
 {
-	public interface ICourseService
+	public interface  ICourseService
 	{
 		Task CreateAsync(CourseRegisterModel course);
 		Task<IEnumerable<CourseModel>> GetAllAsync();

@@ -102,7 +102,7 @@ namespace System.API
 						{
 							var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 							var userId = int.Parse(context.Principal.Identity.Name);
-							var user = await userService.GetByIdAsync(userId);
+							var user = await userService.GetAsync(userId);
 							if (user == null) context.Fail("Unauthorized");
 						}
 					};

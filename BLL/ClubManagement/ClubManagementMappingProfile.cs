@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.BLL.Models.ClubManagement;
+using System.DAL.Entities;
+using AutoMapper;
 
 namespace System.BLL.ClubManagement
 {
@@ -6,10 +8,8 @@ namespace System.BLL.ClubManagement
 	{
 		public ClubManagementMappingProfile()
 		{
-			//CreateMap<Club, ClubModel>();
-			//CreateMap<ClubRegister, Club>();
-			//CreateMap<ClubUpdate, Club>();
-			//CreateMap<ClubModel, Club>();
+			CreateMap<Club, ClubModel>();
+			CreateMap<ClubModel, Club>();
 		}
 	}
 }

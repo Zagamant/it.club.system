@@ -20,42 +20,42 @@ namespace System.BLL.UserManagement
 
         Task LogoutAsync();
 
-        Task<int> GetIdAsync(User user);
+        Task<int> GetAsync(User user);
 
         /// <summary>
-        /// GetByIdAsync all users from database.
+        /// GetAsync all users from database.
         /// </summary>
         /// <returns>List of <see cref="User"/>s.</returns>
         Task<IEnumerable<User>> GetAllAsync();
 
         /// <summary>
-        /// GetByIdAsync 1 user from database by id.
+        /// GetAsync 1 user from database by id.
         /// </summary>
         /// <param name="id">A user identifier.</param>
         /// <returns></returns>
-        Task<User> GetByIdAsync(int id);
+        Task<User> GetAsync(int id);
 
         /// <summary>
-        /// GetByIdAsync 1 user from database by username.
+        /// GetAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
-        Task<User> GetByUsernameAsync(string username);
+        Task<User> GetAsync(string username);
 
         /// <summary>
-        /// GetByIdAsync 1 user from database by username.
+        /// GetAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
         Task<User> GetByEmailAsync(string email);
 
         /// <summary>
-        /// CreateAsync new user and return it back
+        /// AddAsync new user and return it back
         /// </summary>
         /// <param name="user">A <see cref="User"/>.</param>
         /// <param name="password">Password</param>
         /// <returns>A <see cref="User"/></returns>
-        Task<User> CreateAsync(User user, string password);
+        Task<User> AddAsync(User user, string password);
 
         /// <summary>
         /// UpdateAsync existed user.
