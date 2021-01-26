@@ -37,6 +37,7 @@ namespace System.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,9 +49,10 @@ namespace System.DAL
                 .ApplyConfiguration(new PaymentConfiguration())
                 .ApplyConfiguration(new UserConfiguration())
                 .ApplyConfiguration(new PhotoConfiguration())
-                ;
+                ;git
 
 
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
     }
