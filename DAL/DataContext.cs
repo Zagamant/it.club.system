@@ -1,6 +1,5 @@
 ﻿using System.DAL.Configurations;
 using System.DAL.Entities;
-using System.DAL.Entities.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,10 +48,10 @@ namespace System.DAL
                 .ApplyConfiguration(new PaymentConfiguration())
                 .ApplyConfiguration(new UserConfiguration())
                 .ApplyConfiguration(new PhotoConfiguration())
-                ;git
+                ;
 
 
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
     }

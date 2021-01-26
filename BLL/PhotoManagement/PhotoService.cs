@@ -52,8 +52,8 @@ namespace System.BLL.PhotoManagement
 
         public async Task<IEnumerable<PhotoModel>> GetAllAsync()
         {
-            return _context.Photos.Select(item => 
-                _mapper.Map<PhotoModel>(item)).ToList();
+            return await _context.Photos.Select(item => 
+                _mapper.Map<PhotoModel>(item)).ToListAsync();
         }
 
         public async Task<PhotoModel> UpdateAsync(int id, PhotoModel newEntity)

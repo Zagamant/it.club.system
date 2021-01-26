@@ -8,7 +8,9 @@ namespace System.DAL.Configurations
 	{
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
-			
+			builder
+				.HasMany<Contact>(user => user.Contacts)
+				.WithOne();
 		}
 	}
 }

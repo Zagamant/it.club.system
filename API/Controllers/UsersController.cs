@@ -97,8 +97,17 @@ namespace System.API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			var users = await _userService.GetAllAsync();
-			return Ok(users);
+			try
+			{
+				var users = await _userService.GetAllAsync();
+				return Ok(users);
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
 		}
 
 		[HttpGet("{id}")]
