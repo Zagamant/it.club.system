@@ -11,8 +11,8 @@ namespace System.BLL.RoomManagement
 		Task<IEnumerable<Room>> GetAllAsync();
 		Task<Room> GetAsync(Room room);
 		Task<Room> GetAsync(int roomId);
-		Task UpdateAsync(int roomId, Room newRoom);
-		Task UpdateAsync(Room room, Room newRoom);
+		Task<Room> UpdateAsync(int roomId, Room newRoom);
+		Task<Room> UpdateAsync(Room room, Room newRoom);
 		Task RemoveAsync(int roomId);
 		Task RemoveAsync(Room room);
 	}

@@ -266,8 +266,8 @@ namespace System.BLL.ClubManagement
             //if (user == null) throw new AppException("User not exist");
 
             //var roles = await _userManager.GetRolesAsync(user);
-            var user = await _userManager.FindByIdAsync(userId);
-            var roles = await _userManager.GetRolesAsync(user);
+            //var user = await _userManager.FindByIdAsync(userId);
+            //var roles = await _userManager.GetRolesAsync(user);
 
             var resultClub = await _context.Clubs
                 //.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())

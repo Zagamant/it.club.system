@@ -70,15 +70,17 @@ namespace System.BLL.RoomManagement
 			}
 		}
 
-		public async Task UpdateAsync(int roomId, Room newRoom)
+		public async Task<Room> UpdateAsync(int roomId, Room newRoom)
 		{
 			var room = await _context.Rooms.FirstOrDefaultAsync(room => room.Id == roomId);
 			if (room == null) throw new AppException("Room wasn't find");
 
-			await UpdateAsync(room, newRoom);
+			return await UpdateAsync(room, newRoom);
+			
+			
 		}
 
-		public async Task UpdateAsync(Room room, Room newRoom)
+		public async Task<Room> UpdateAsync(Room room, Room newRoom)
 		{
 			newRoom.Id = room.Id;
 
@@ -87,6 +89,8 @@ namespace System.BLL.RoomManagement
 			_context.Rooms.Update(newRoom);
 
 			await _context.SaveChangesAsync();
+
+			return newRoom;
 		}
 
 		public async Task RemoveAsync(int roomId)
