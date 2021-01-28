@@ -47,7 +47,6 @@ namespace System.BLL.PaymentManagement
             if (entity.Id != 0)
             {
                 var result = await _context.Payments
-                    .AsNoTracking()
                     .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
 
                 if (result != null) throw new AppException($"Event already exist.");

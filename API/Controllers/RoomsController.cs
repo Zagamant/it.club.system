@@ -25,44 +25,19 @@ namespace System.API.Controllers
             _roomService = roomService ?? throw new ArgumentNullException(nameof(roomService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-        
+
         [HttpGet]
         public async Task<IEnumerable<Room>> Get()
         {
-            try
-            {
-
-                var result = await _roomService.GetAllAsync();
-                return result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
-            
+            return await _roomService.GetAllAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<Room> GetAsync(int id) => await _roomService.GetAsync(id);
 
         [HttpPost]
-        public async Task<ActionResult<Room>> Post([FromBody] RoomCreate value)
-        {
-            try
-            {
-
-                var newRoom = await _roomService.CreateAsync(value);
-                return StatusCode(StatusCodes.Status201Created, newRoom);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
+        public async Task<ActionResult<Room>> Post([FromBody] RoomCreate value) =>
+            StatusCode(StatusCodes.Status201Created, await _roomService.CreateAsync(value));
 
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Room newRoom) => await _roomService.UpdateAsync(id, newRoom);

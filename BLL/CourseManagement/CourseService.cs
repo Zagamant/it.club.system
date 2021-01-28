@@ -21,28 +21,21 @@ namespace System.BLL.CourseManagement
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
-		public async Task CreateAsync(CourseRegisterModel course)
+		public async Task<CourseModel> CreateAsync(CourseRegisterModel course)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 
 			var courseOrig = _mapper.Map<Course>(course);
 			await _context.Courses.AddAsync(courseOrig);
 			await _context.SaveChangesAsync();
+			
+			return _mapper.Map<CourseModel>(courseOrig);
 		}
 
 		public async Task<IEnumerable<CourseModel>> GetAllAsync()
 		{
 			var courses = await _context.Courses
-				.AsNoTracking()
-				.Select(c => new CourseModel
-			{
-				Title = c.Title,
-				ManualLink = c.ManualLink,
-				About = c.About,
-				Groups = c.Groups
-			})
-				.AsQueryable()
-				.ToListAsync();
+				.Select(c => _mapper.Map<CourseModel>(c)).ToListAsync();
 			return courses;
 		}
 
@@ -68,7 +61,7 @@ namespace System.BLL.CourseManagement
 			return result;
 		}
 
-		public async Task UpdateAsync(int courseId, CourseModel newCourse)
+		public async Task<CourseModel> UpdateAsync(int courseId, CourseModel newCourse)
 		{
 			if (newCourse == null) throw new ArgumentNullException(nameof(newCourse));
 
@@ -78,9 +71,11 @@ namespace System.BLL.CourseManagement
 			_context.Courses.Update(courseOrig);
 
 			await _context.SaveChangesAsync();
+			
+			return _mapper.Map<CourseModel>(courseOrig);
 		}
 
-		public async Task UpdateAsync(CourseModel course, CourseModel newCourse)
+		public async Task<CourseModel> UpdateAsync(CourseModel course, CourseModel newCourse)
 		{
 			if (course == null) throw new ArgumentNullException(nameof(course));
 			if (newCourse == null) throw new ArgumentNullException(nameof(newCourse));
@@ -96,6 +91,8 @@ namespace System.BLL.CourseManagement
 			_context.Courses.Update(courseNewOrig);
 
 			await _context.SaveChangesAsync();
+			
+			return _mapper.Map<CourseModel>(courseNewOrig);
 		}
 
 		public async Task RemoveAsync(int courseId)

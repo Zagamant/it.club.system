@@ -7,6 +7,7 @@ namespace System.BLL.Models.GroupManagement
 	public class GroupModel
 	{
 		public int Id { get; set; }
+		public string Title { get; set; }
 		public virtual Course Course { get; set; }
 		public virtual Room Room { get; set; }
 		public int LessonsPerWeek { get; set; }
