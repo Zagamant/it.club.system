@@ -58,7 +58,7 @@ namespace System.BLL.CostManagement
         
         public async Task<CostsModel> UpdateAsync(int id, CostsModel newEntity)
         {
-            if (_context.Costs.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
+            if (!_context.Costs.Any(evnt => evnt.Id == id))
             {
                 throw new AppException("Not found");
             }

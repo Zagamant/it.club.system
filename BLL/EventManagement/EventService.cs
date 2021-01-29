@@ -83,7 +83,7 @@ namespace System.BLL.EventManagement
 
         public async Task<EventModel> UpdateAsync(int id, EventModel newEntity)
         {
-            if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
+            if (!_context.Events.Any(evnt => evnt.Id == id))
             {
                 throw new AppException("Not found");
             }

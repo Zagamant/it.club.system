@@ -32,7 +32,6 @@ namespace System.BLL.PaymentManagement
         public async Task<PaymentModel> GetAsync(int id)
         {
             var result = await _context.Payments
-                .AsNoTracking()
                 .SingleOrDefaultAsync(ev => ev.Id == id);
 
             if (result == null) throw new AppException($"Event with id: {id} not found.");
