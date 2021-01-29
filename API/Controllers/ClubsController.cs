@@ -62,9 +62,9 @@ namespace System.API.Controllers
 
         [HttpDelete("{id}")]
         // [Authorize(Roles = "main_admin,admin")]
-        public async Task<IActionResult> Delete([FromBody] Club club)
+        public async Task<IActionResult> Delete(int id)
         {
-            await _clubService.RemoveAsync(club, User.FindFirstValue(ClaimTypes.Name));
+            await _clubService.RemoveAsync(id, User.FindFirstValue(ClaimTypes.Name));
             return NoContent();
         }
 

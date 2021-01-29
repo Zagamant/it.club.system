@@ -137,7 +137,7 @@ namespace System.API.Controllers
 			}
 		}
 
-		[Authorize(Roles = "main_admin,admin")]
+		//[Authorize(Roles = "main_admin,admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{

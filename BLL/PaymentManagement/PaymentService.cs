@@ -49,7 +49,9 @@ namespace System.BLL.PaymentManagement
                 var result = await _context.Payments
                     .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
 
-                if (result != null) throw new AppException($"Event already exist.");
+                if (result != null)
+                    throw new AppException("Payment" +
+                                           " already exist.");
             }
 
             var map = _mapper.Map<Payment>(entity);
