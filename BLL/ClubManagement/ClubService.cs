@@ -32,115 +32,82 @@ namespace System.BLL.ClubManagement
         }
 
 
-        public async Task<IEnumerable<Club>> GetAllAsync(string userId)
+        public async Task<IEnumerable<ClubModel>> GetAllAsync()
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            //var user = await _userManager.FindByIdAsync(userId);
 
             // var roles = await _userManager.GetRolesAsync(user);
 
             var allClubs = await _context.Clubs
                 //.AsNoTracking() //WTF cause internal server error one i ca not track for 3 DAY AF //TODO stackoverflow quest;
                 //.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
+                .Select(club => _mapper.Map<ClubModel>(club))
                 .ToListAsync();
 
             return allClubs;
         }
 
-        public async Task<Club> GetByIdAsync(int clubId, string userId)
+        public async Task<ClubModel> GetAsync(int clubId)
         {
-            var club = await GetByIdFullClubAsync(clubId, userId);
+            var club = await GetByIdFullClubAsync(clubId);
 
-            if (club == null) throw new AppException("Club not found");
-
-            return club;
+            return _mapper.Map<ClubModel>(club);
         }
 
-        public async Task<Club> GetByTitleAsync(string clubTitle, string userId)
+        public async Task<ClubModel> GetByTitleAsync(string clubTitle, string userId)
         {
-            var club = await GetByTitleFullClubAsync(clubTitle, userId);
-
-            if (club == null) throw new AppException("Club not found");
-
-            var resultClub = _mapper.Map<Club>(club);
-
-            return resultClub;
-        }
-
-        public async Task<Club> CreateAsync(Club club)
-        {
+            var club = await _context.Clubs.FirstOrDefaultAsync(clb => clb.Title == clubTitle);
             if (club == null) throw new ArgumentNullException(nameof(club));
 
-            if (_context.Clubs.Any(x => x.Title == club.Title))
+            return _mapper.Map<ClubModel>(club);
+        }
+
+        public async Task<ClubModel> AddAsync(ClubModel club)
+        {
+            var newClub = await GetByIdFullClubAsync(club.Id);
+
+            if (_context.Clubs.Any(x => x.Title == newClub.Title))
                 throw new AppException("Club name: \"" + club.Title + "\" is already taken");
 
+            newClub.Address ??= new Address
+            {
+                City = club.City,
+                AddressLine = club.AddressLine,
+                Country = club.Country
+            };
 
-            var role = new Role(club.Title);
+            var role = new Role(newClub.Title);
             await _roleManager.CreateAsync(role);
-            club.Permissions.Add(role);
-            await _context.Clubs.AddAsync(club);
+            newClub.Permissions.Add(role);
+            await _context.Clubs.AddAsync(newClub);
 
             await _context.SaveChangesAsync();
 
-            return club;
+            return _mapper.Map<ClubModel>(newClub);
         }
 
-        public async Task AddRoomAsync(int clubId, Room room, string userId)
+        public async Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId)
         {
-            if (room == null) throw new ArgumentNullException(nameof(room));
+            var club = await GetByIdFullClubAsync(clubId);
+            
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
 
-            var club = await GetByIdFullClubAsync(clubId, userId);
-            var roomTemp =
-                await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && r.Club == room.Club);
-
-            if (roomTemp == null) throw new AppException("Room not found");
-
-            club.Rooms.Add(roomTemp);
-
-            _context.Clubs.Update(club);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task AddRoomAsync(Club club, Room room, string userId)
-        {
-            if (club == null) throw new ArgumentNullException(nameof(club));
-            if (room == null) throw new ArgumentNullException(nameof(room));
+            if (room == null) throw new AppException("Room not found");
 
             club.Rooms.Add(room);
             _context.Clubs.Update(club);
             await _context.SaveChangesAsync();
+
+            return _mapper.Map<ClubModel>(club);
         }
 
-        public async Task AddRoomAsync(int clubId, int roomId, string userId)
+        public async Task<ClubModel> RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false)
         {
-            var club = await GetByIdFullClubAsync(clubId, userId);
-            var room =
-                await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
+            var club = await GetByIdFullClubAsync(clubId);
+            
+            var room = await _context.Rooms.FirstOrDefaultAsync(roomItem =>
+                roomItem.Id == roomId && roomItem.Club.Id == club.Id);
 
-            if (room == null) throw new AppException("Room not found");
-
-            await AddRoomAsync(club, room, userId);
-        }
-
-        public async Task AddRoomAsync(Club club, int roomId, string userId)
-        {
-            var roomTemp =
-                await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId);
-
-            await AddRoomAsync(club, roomTemp, userId);
-        }
-
-
-        public async Task RemoveRoomAsync(int clubId, Room room, string userId, bool isDeleteRoom = false)
-        {
-            var club = await GetByIdFullClubAsync(clubId, userId);
-
-            await RemoveRoomAsync(club, room, userId);
-        }
-
-        public async Task RemoveRoomAsync(Club club, Room room, string userId, bool isDeleteRoom = false)
-        {
-            if (club == null) throw new ArgumentNullException(nameof(club));
             if (room == null) throw new ArgumentNullException(nameof(room));
 
             if (!club.Rooms.Contains(room))
@@ -160,83 +127,57 @@ namespace System.BLL.ClubManagement
 
             _context.Clubs.Update(club);
             await _context.SaveChangesAsync();
+
+            return _mapper.Map<ClubModel>(club);
         }
 
-        public async Task RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false)
+        public async Task<ClubModel> UpdateAsync(int clubId, ClubModel newClub)
         {
-            var club = await GetByIdFullClubAsync(clubId, userId);
-            var room = await _context.Rooms.FirstOrDefaultAsync(roomItem =>
-                roomItem.Id == roomId && roomItem.Club.Id == club.Id);
+            var club = await GetByIdFullClubAsync(clubId);
+            newClub.Id = club.Id;
 
-            await RemoveRoomAsync(club, room, userId);
-        }
-
-        public async Task<Club> UpdateAsync(int clubId, ClubModel newClub, string userId)
-        {
-            var club = await GetByIdFullClubAsync(clubId, userId);
-
-            return await UpdateAsync(club, newClub, userId);
-        }
-
-        public async Task<Club> UpdateAsync(Club club, ClubModel newClub, string userId)
-        {
-            try
+            if (newClub.Title != club.Title)
             {
-                newClub.Id = club.Id;
+                club.Title = newClub.Title;
 
-                if (newClub.Title != club.Title)
-                {
-                    club.Title = newClub.Title;
+                var clubRole = await _context.Roles.FirstAsync(role => role.Name == newClub.Title);
+                clubRole.Name = newClub.Title;
 
-                    var clubRole = await _context.Roles.FirstAsync(role => role.Name == newClub.Title);
-                    clubRole.Name = newClub.Title;
-
-                    _context.Roles.Update(clubRole);
-                }
-
-                if (club.Address == null)
-                {
-                    var address = new Address
-                    {
-                        AddressLine = newClub.AddressLine,
-                        City = newClub.City,
-                        Country = newClub.Country
-                    };
-                    await _context.Addresses.AddAsync(address);
-                    club.Address = address;
-                }
-
-                if (!string.IsNullOrEmpty(newClub.Country) && club.Address.Country != newClub.Country)
-                {
-                    club.Address.Country = newClub.Country;
-                }
-
-                if (!string.IsNullOrEmpty(newClub.City) && club.Address.City != newClub.City)
-                {
-                    club.Address.City = newClub.City;
-                }
-
-                if (!string.IsNullOrEmpty(newClub.AddressLine) && club.Address.AddressLine != newClub.AddressLine)
-                {
-                    club.Address.AddressLine = newClub.AddressLine;
-                }
-
-
-                _context.Clubs.Update(club);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                _context.Roles.Update(clubRole);
             }
 
-            return club;
-        }
+            club.Address ??= new Address
+            {
+                AddressLine = newClub.AddressLine,
+                City = newClub.City,
+                Country = newClub.Country
+            };
 
-        public async Task RemoveAsync(int clubId, string userId, bool isDelete = false)
+            if (!string.IsNullOrEmpty(newClub.Country) && club.Address.Country != newClub.Country)
+            {
+                club.Address.Country = newClub.Country;
+            }
+
+            if (!string.IsNullOrEmpty(newClub.City) && club.Address.City != newClub.City)
+            {
+                club.Address.City = newClub.City;
+            }
+
+            if (!string.IsNullOrEmpty(newClub.AddressLine) && club.Address.AddressLine != newClub.AddressLine)
+            {
+                club.Address.AddressLine = newClub.AddressLine;
+            }
+            
+            _context.Clubs.Update(club);
+            
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<ClubModel>(club);
+        }
+        
+        public async Task DeleteAsync(int clubId, bool isDelete = false)
         {
-            var club = await GetByIdFullClubAsync(clubId, userId);
+            var club = await GetByIdFullClubAsync(clubId);
 
             if (!_context.Clubs.Contains(club)) throw new AppException("Club: " + club.Title + " not found.");
 
@@ -253,15 +194,9 @@ namespace System.BLL.ClubManagement
             await _context.SaveChangesAsync();
         }
 
-
-        public async Task RemoveAsync(Club club, string userId, bool isDelete = false)
-        {
-            await RemoveAsync(club.Id, userId);
-        }
-
         #region PrivateHelpers
 
-        private async Task<Club> GetByIdFullClubAsync(int clubId, string userId)
+        private async Task<Club> GetByIdFullClubAsync(int clubId)
         {
             //if (user == null) throw new AppException("User not exist");
 
@@ -269,13 +204,13 @@ namespace System.BLL.ClubManagement
             //var user = await _userManager.FindByIdAsync(userId);
             //var roles = await _userManager.GetRolesAsync(user);
 
-            var resultClub = await _context.Clubs
+            var club = await _context.Clubs
                 //.Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
                 .FirstOrDefaultAsync(cl => cl.Id == clubId);
 
-            if (resultClub == null) throw new AppException("Club not found");
+            if (club == null) throw new AppException("Club not found");
 
-            return resultClub;
+            return club;
         }
 
         private async Task<Club> GetByTitleFullClubAsync(string title, string userId)

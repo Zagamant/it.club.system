@@ -75,7 +75,7 @@ namespace System.BLL.ContactManagement
             return newEntity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, bool isDelete = false)
         {
             var result = await _context.Contacts
                 .SingleOrDefaultAsync(contact => contact.Id == id);

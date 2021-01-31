@@ -1,19 +1,9 @@
-﻿using System.BLL.Models.RoomManagement;
-using System.Collections.Generic;
-using System.DAL.Entities;
-using System.Threading.Tasks;
+﻿using System.BLL.Helpers;
+using System.BLL.Models.RoomManagement;
 
 namespace System.BLL.RoomManagement
 {
-	public interface IRoomService
-	{
-		Task<Room> CreateAsync(RoomCreate room);
-		Task<IEnumerable<Room>> GetAllAsync();
-		Task<Room> GetAsync(Room room);
-		Task<Room> GetAsync(int roomId);
-		Task<Room> UpdateAsync(int roomId, Room newRoom);
-		Task<Room> UpdateAsync(Room room, Room newRoom);
-		Task RemoveAsync(int roomId);
-		Task RemoveAsync(Room room);
-	}
+    public interface IRoomService : IRepository<int, RoomCreateModel, RoomModel, RoomModel>
+    {
+    }
 }

@@ -23,89 +23,67 @@ namespace System.BLL.RoomManagement
 		}
 
 
-		public async Task<IEnumerable<Room>> GetAllAsync()
+		public async Task<IEnumerable<RoomModel>> GetAllAsync()
 		{
 			var result =
-				await _context.Rooms.Where(room => room.Status != RoomStatus.Closed).ToListAsync();
-
-			if (result == null) throw new AppException("Rooms not found");
-
+				await _context.Rooms
+					.Select(room => _mapper.Map<RoomModel>(room))
+					.ToListAsync();
+			
 			return result;
 		}
-
-		public async Task<Room> GetAsync(Room room)
-		{
-			var result =
-				await _context.Rooms.FirstOrDefaultAsync(r => r.RoomNumber == room.RoomNumber && room.About == r.About);
-
-			if (result == null) throw new AppException("Room not found");
-
-			return result;
-		}
-
-		public async Task<Room> GetAsync(int roomId)
+		
+		public async Task<RoomModel> GetAsync(int roomId)
 		{
 			var result =
 				await _context.Rooms.FirstOrDefaultAsync(room => room.Id == roomId);
 
 			if (result == null) throw new AppException("Room not found");
 
-			return result;
+			return _mapper.Map<RoomModel>(result);
 		}
 
-		public async Task<Room> CreateAsync(RoomCreate room)
+		public async Task<RoomModel> AddAsync(RoomCreateModel room)
 		{
-			try
-			{
-				var roomTemp = _mapper.Map<Room>(room);
-				roomTemp.Club = await _context.Clubs.FirstAsync(club => club.Id == room.ClubId);
-				await _context.AddAsync(roomTemp);
-				await _context.SaveChangesAsync();
-				return roomTemp;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
+			var result = _mapper.Map<Room>(room);
+			result.Club = await _context.Clubs.FirstAsync(club => club.Id == room.ClubId);
+			await _context.AddAsync(result);
+			await _context.SaveChangesAsync();
+			return _mapper.Map<RoomModel>(result);
 		}
 
-		public async Task<Room> UpdateAsync(int roomId, Room newRoom)
+		public async Task<RoomModel> UpdateAsync(int roomId, RoomModel newRoom)
 		{
 			var room = await _context.Rooms.FirstOrDefaultAsync(room => room.Id == roomId);
 			if (room == null) throw new AppException("Room wasn't find");
 
-			return await UpdateAsync(room, newRoom);
-			
-			
-		}
+			if (room.Club.Id != newRoom.ClubId)
+			{
+				var club = await _context.Clubs.FirstOrDefaultAsync(club => club.Id == newRoom.ClubId);
+				if (club == null) throw new ArgumentException("club wasn't find");
 
-		public async Task<Room> UpdateAsync(Room room, Room newRoom)
-		{
-			newRoom.Id = room.Id;
+				room.Club = club;
+			}
+			room.Capacity = newRoom.Capacity;
+			room.RoomNumber = newRoom.RoomNumber;
+			room.About = newRoom.About;
+			room.Status = newRoom.Status;
 
-			_context.Entry<Room>(room).State = EntityState.Detached;
-
-			_context.Rooms.Update(newRoom);
+			_context.Rooms.Update(room);
 
 			await _context.SaveChangesAsync();
 
 			return newRoom;
+			
 		}
-
-		public async Task RemoveAsync(int roomId)
+		
+		public async Task DeleteAsync(int roomId, bool isDelete = false)
 		{
 			var room = await _context.Rooms.FirstOrDefaultAsync(room => room.Id == roomId);
 			if (room == null) throw new AppException("Room wasn't find");
 			
-			await RemoveAsync(room);
-		}
-
-		public async Task RemoveAsync(Room room)
-		{
 			_context.Rooms.Remove(room);
 			await _context.SaveChangesAsync();
 		}
-		                            
 	}
 }

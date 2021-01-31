@@ -115,7 +115,7 @@ namespace System.BLL.EventManagement
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, bool isDelete = false)
         {
             var result = await _context.Events
                 .SingleOrDefaultAsync(Event => Event.Id == id);

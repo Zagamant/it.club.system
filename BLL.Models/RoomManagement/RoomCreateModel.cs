@@ -1,6 +1,6 @@
 ﻿namespace System.BLL.Models.RoomManagement
 {
-	public class RoomCreate
+	public class RoomCreateModel
 	{
 		public int Id { get; set; }
 		public int ClubId { get; set; }

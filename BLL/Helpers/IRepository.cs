@@ -12,6 +12,6 @@ namespace System.BLL.Helpers
 		Task<TModel> GetAsync(TId id);
 		Task<TModel> AddAsync(TAddModel entity);
 		Task<TModel>  UpdateAsync(TId id, TUpdateModel newEntity);
-		Task DeleteAsync(TId id);
+		Task DeleteAsync(TId id, bool isDelete = false);
 	}
 }

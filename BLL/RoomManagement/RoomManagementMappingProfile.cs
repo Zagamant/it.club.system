@@ -8,8 +8,8 @@ namespace System.BLL.RoomManagement
 	{
 		public RoomManagementMappingProfile()
 		{
-			CreateMap<Room, RoomCreate>();
-			CreateMap<RoomCreate, Room>();
+			CreateMap<Room, RoomCreateModel>();
+			CreateMap<RoomCreateModel, Room>();
 		}
 	}
 }

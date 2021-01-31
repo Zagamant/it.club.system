@@ -75,7 +75,7 @@ namespace System.BLL.CostManagement
             return newEntity;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, bool isDelete = false)
         {
             var result = await _context.Costs
                 .SingleOrDefaultAsync(costs => costs.Id == id);

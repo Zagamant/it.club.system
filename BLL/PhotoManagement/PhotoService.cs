@@ -75,7 +75,7 @@ namespace System.BLL.PhotoManagement
             return newEntity;
         }
         
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, bool isDelete = false)
         {
             var photo = await _context.Photos.SingleOrDefaultAsync(ph => ph.Id == id);
 

@@ -11,136 +11,121 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.GroupManagement
 {
-	public class GroupService : IGroupService
-	{
-		private IMapper _mapper;
-		private DataContext _context;
+    public class GroupService : IGroupService
+    {
+        private IMapper _mapper;
+        private DataContext _context;
 
-		public GroupService(DataContext context, IMapper mapper)
-		{
-			_context = context ?? throw new ArgumentNullException(nameof(context));
-			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-		}
+        public GroupService(DataContext context, IMapper mapper)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
 
-		public async Task<GroupModel> CreateAsync(GroupModel group)
-		{
-			if (group == null) throw new ArgumentNullException(nameof(group));
+        public async Task<GroupModel> GetAsync(int groupId)
+        {
+            var result = await _context.Groups
+                .FirstOrDefaultAsync(gr => gr.Id == groupId);
 
-			var realGroup = _mapper.Map<Group>(group);
+            if (result == null) throw new ArgumentNullException(nameof(result));
 
-			await _context.Groups.AddAsync(realGroup);
-			await _context.SaveChangesAsync();
-			
-			return _mapper.Map<GroupModel>(realGroup);
-		}
+            var realGroup = _mapper.Map<GroupModel>(result);
 
-		public async Task<IEnumerable<GroupModel>> GetAllAsync()
-		{
-			var result = await _context.Groups
-				.Select(group => _mapper.Map<GroupModel>(group))
-				.ToListAsync();
+            return realGroup;
+        }
 
-			return result;
-		}
+        public async Task<GroupModel> AddAsync(GroupModel group)
+        {
+            if (group == null) throw new ArgumentNullException(nameof(group));
 
-		public async Task<GroupModel> GetByIdAsync(int groupId)
-		{
-			var result = await _context.Groups
-				.FirstOrDefaultAsync(gr => gr.Id == groupId);
+            var realGroup = _mapper.Map<Group>(group);
 
-			if (result == null) throw new ArgumentNullException(nameof(result));
+            await _context.Groups.AddAsync(realGroup);
+            await _context.SaveChangesAsync();
 
-			var realGroup = _mapper.Map<GroupModel>(result);
-			
-			return realGroup;
-		}
+            return _mapper.Map<GroupModel>(realGroup);
+        }
 
-		public async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
-		{
-			if (!await _context.Groups
-				.AnyAsync(gr => gr.Id == groupId)) throw new AppException($"Group with id: {groupId} not exist in database");
+        public async Task<IEnumerable<GroupModel>> GetAllAsync()
+        {
+            var result = await _context.Groups
+                .Select(group => _mapper.Map<GroupModel>(group))
+                .ToListAsync();
 
-			newGroup.Id = groupId;
+            return result;
+        }
 
-			var realGroup = _mapper.Map<Group>(newGroup);
+        public async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
+        {
+            if (!await _context.Groups
+                .AnyAsync(gr => gr.Id == groupId))
+                throw new AppException($"Group with id: {groupId} not exist in database");
 
-			_context.Groups.Update(realGroup);
+            newGroup.Id = groupId;
 
-			await _context.SaveChangesAsync();
-			
-			return _mapper.Map<GroupModel>(realGroup);
-		}
+            var realGroup = _mapper.Map<Group>(newGroup);
 
-		public async Task<GroupModel> AddStudentAsync(int groupId, GroupModel user)
-		{
-			return await AddStudentAsync(groupId, user.Id);
-		}
-		
-		public async Task<GroupModel> AddStudentAsync(int groupId, int userId)
-		{
-			var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Id == userId);
-			
-			if (user == null) throw new AppException($"User with id: {userId} not exist");
+            _context.Groups.Update(realGroup);
 
-			var group = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
+            await _context.SaveChangesAsync();
 
-			if (group == null) throw new AppException($"Group with id: {groupId} not exist");
+            return _mapper.Map<GroupModel>(realGroup);
+        }
 
-			if (group.Users.Contains(user)) throw new AppException("User already exist in context");
-			
-			group.Users.Add(user);
+        public async Task<GroupModel> AddStudentAsync(int groupId, int userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Id == userId);
 
-			await _context.SaveChangesAsync();
-			
-			return _mapper.Map<GroupModel>(group);
-		}
-		
+            if (user == null) throw new AppException($"User with id: {userId} not exist");
 
-		public async Task<GroupModel> RemoveStudentAsync(int groupId, User user)
-		{
-			return await RemoveStudentAsync(groupId, user.Id);
-		}
+            var group = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
 
-		public async Task<GroupModel> RemoveStudentAsync(int groupId, int userId)
-		{
-			var user = await _context.Users
-				.FirstOrDefaultAsync(usr => usr.Id == userId);
-			
-			if (user == null) throw new AppException($"User with id: {userId} not exist");
+            if (group == null) throw new AppException($"Group with id: {groupId} not exist");
 
-			var group = await _context.Groups
-				.FirstOrDefaultAsync(gr => gr.Id == groupId);
+            if (group.Users.Contains(user)) throw new AppException("User already exist in context");
 
-			if (group == null) throw new AppException($"Group with id: {groupId} not exist");
-			
-			group.Users.Remove(user);
+            group.Users.Add(user);
 
-			await _context.SaveChangesAsync();
-			
-			return _mapper.Map<GroupModel>(group);
-		}
+            await _context.SaveChangesAsync();
 
-		public async Task RemoveAsync(int groupId, bool isDeleted = false)
-		{
-			var result = await _context.Groups
-				.FirstOrDefaultAsync(gr => gr.Id == groupId);
+            return _mapper.Map<GroupModel>(group);
+        }
 
-			if (result == null) throw new AppException($"Group with id: {groupId} not exist in database");
-			await RemoveAsync(result, isDeleted);
-		}
+        public async Task<GroupModel> RemoveStudentAsync(int groupId, int userId)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(usr => usr.Id == userId);
 
-		public async Task RemoveAsync(Group group, bool isDeleted = false)
-		{
-			if (isDeleted)
-			{
-				_context.Groups.Remove(group);
-			}
-			else
-			{
-				group.Status = GroupStatus.Canceled;
-				_context.Groups.Update(group);
-				await _context.SaveChangesAsync();
-			}
-		}
-	}
+            if (user == null) throw new AppException($"User with id: {userId} not exist");
+
+            var group = await _context.Groups
+                .FirstOrDefaultAsync(gr => gr.Id == groupId);
+
+            if (group == null) throw new AppException($"Group with id: {groupId} not exist");
+
+            group.Users.Remove(user);
+
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<GroupModel>(group);
+        }
+
+        public async Task DeleteAsync(int groupId, bool isDeleted = false)
+        {
+            var group = await _context.Groups
+                .FirstOrDefaultAsync(gr => gr.Id == groupId);
+
+            if (group == null) throw new AppException($"Group with id: {groupId} not exist in database");
+            if (isDeleted)
+            {
+                _context.Groups.Remove(group);
+            }
+            else
+            {
+                group.Status = GroupStatus.Canceled;
+                _context.Groups.Update(group);
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
 }

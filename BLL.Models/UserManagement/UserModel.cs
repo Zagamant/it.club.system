@@ -1,28 +1,31 @@
-﻿namespace System.BLL.Models.UserManagement
+﻿using System.Collections.Generic;
+using System.DAL.Entities;
+
+namespace System.BLL.Models.UserManagement
 {
     /// <summary>
     /// Represent user model for server
     /// </summary>
     public class UserModel
     {
-	    /// <summary>
-        /// Gets or sets user's username
-        /// </summary>
-        public string Username { get; set; }
-
-        /// <summary>
-        /// Gets or sets user's password
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
-        /// Gets or sets user's email
-        /// </summary>
+        public int Id { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Name { get; set; }
+        public string MiddleName { get; set; }
+        public string Surname { get; set; }
+        public DateTime BirthDay { get; set; }
+        public string AdditionalInfo { get; set; }
+        public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
+        public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
+        public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+        public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
 
-        /// <summary>
-        /// Gets or sets user's phone number
-        /// </summary>
-        public string Phone { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string AddressLine { get; set; }
+
+        public string NewPassword { get; set; }
     }
 }

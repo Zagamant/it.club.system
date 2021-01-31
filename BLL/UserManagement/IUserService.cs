@@ -16,7 +16,7 @@ namespace System.BLL.UserManagement
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
         /// <returns>A <see cref="User"/></returns>
-        Task<User> AuthenticateAsync(string username, string password);
+        Task<UserModel> AuthenticateAsync(string username, string password);
 
         Task LogoutAsync();
 
@@ -26,28 +26,28 @@ namespace System.BLL.UserManagement
         /// GetIdAsync all users from database.
         /// </summary>
         /// <returns>List of <see cref="User"/>s.</returns>
-        Task<IEnumerable<User>> GetAllAsync();
+        Task<IEnumerable<UserModel>> GetAllAsync();
 
         /// <summary>
         /// GetIdAsync 1 user from database by id.
         /// </summary>
         /// <param name="id">A user identifier.</param>
         /// <returns></returns>
-        Task<User> GetAsync(int id);
+        Task<UserModel> GetAsync(int id);
 
         /// <summary>
         /// GetIdAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
-        Task<User> GetAsync(string username);
+        Task<UserModel> GetAsync(string username);
 
         /// <summary>
         /// GetIdAsync 1 user from database by username.
         /// </summary>
         /// <param name="username">A user username.</param>
         /// <returns></returns>
-        Task<User> GetByEmailAsync(string email);
+        Task<UserModel> GetByEmailAsync(string email);
 
         /// <summary>
         /// AddAsync new user and return it back
@@ -55,14 +55,14 @@ namespace System.BLL.UserManagement
         /// <param name="user">A <see cref="User"/>.</param>
         /// <param name="password">Password</param>
         /// <returns>A <see cref="User"/></returns>
-        Task<User> AddAsync(User user, string password);
+        Task<UserModel> AddAsync(UserModel user, string password);
 
         /// <summary>
         /// UpdateAsync existed user.
         /// </summary>
-        /// <param name="user">A <see cref="User"/>.</param>
+        /// <param name="model">A <see cref="User"/>.</param>
         /// <param name="password">Passwords</param>
-        Task UpdateAsync(User user, string password = null);
+        Task<UserModel> UpdateAsync(int id, UserModel model, string password = null);
 
         /// <summary>
         /// DeleteAsync existed user by id.

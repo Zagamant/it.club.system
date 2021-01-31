@@ -117,7 +117,7 @@ namespace System.BLL.PaymentManagement
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, bool isDelete = false)
         {
             var result = await _context.Payments
                 .SingleOrDefaultAsync(Event => Event.Id == id);
