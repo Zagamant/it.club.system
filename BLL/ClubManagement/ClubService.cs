@@ -64,11 +64,11 @@ namespace System.BLL.ClubManagement
 
         public async Task<ClubModel> AddAsync(ClubModel club)
         {
-            var newClub = await GetByIdFullClubAsync(club.Id);
-
-            if (_context.Clubs.Any(x => x.Title == newClub.Title))
+            if (_context.Clubs.Any(x => x.Title == club.Title))
                 throw new AppException("Club name: \"" + club.Title + "\" is already taken");
 
+            var newClub = _mapper.Map<Club>(club);
+            
             newClub.Address ??= new Address
             {
                 City = club.City,

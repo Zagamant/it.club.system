@@ -42,7 +42,13 @@ namespace System.BLL.AgreementManagement
 		
 		public async Task<AgreementModel> AddAsync(AgreementModel agreement)
 		{
-			var agreementOrig = _mapper.Map<Agreement>(agreement);
+			var agreementOrig = new Agreement
+			{
+				Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == agreement.CourseId)?? throw new ArgumentException("CourseId wasn't correct"),
+				User = await _context.Users.SingleOrDefaultAsync(c => c.Id == agreement.UserId) ?? throw new ArgumentException("UserId wasn't correct"),
+				Payment = agreement.Payment
+			};
+			
 			await _context.Agreements.AddAsync(agreementOrig);
 			await _context.SaveChangesAsync();
 
@@ -51,9 +57,15 @@ namespace System.BLL.AgreementManagement
 		
 		public async Task<AgreementModel> UpdateAsync(int agreementId, AgreementModel agreementNew)
 		{
-			var newAgr = _mapper.Map<Agreement>(agreementNew);
-			newAgr.Id = agreementId;
+			var newAgr = await _context.Agreements.SingleOrDefaultAsync(a => a.Id == agreementId);
 
+			newAgr.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == agreementNew.CourseId) ??
+			                throw new ArgumentException("CourseId wasn't correct");
+			newAgr.User = await _context.Users.SingleOrDefaultAsync(c => c.Id == agreementNew.UserId) ??
+			             throw new ArgumentException("UserId wasn't correct");
+
+			newAgr.Payment = agreementNew.Payment;
+			
 			_context.Agreements.Update(newAgr);
 			await _context.SaveChangesAsync();
 

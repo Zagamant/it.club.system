@@ -10,6 +10,8 @@ namespace System.BLL.RoomManagement
 		{
 			CreateMap<Room, RoomCreateModel>();
 			CreateMap<RoomCreateModel, Room>();
+			CreateMap<Room, RoomModel>();
+			CreateMap<RoomModel, Room>();
 		}
 	}
 }

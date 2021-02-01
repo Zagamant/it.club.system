@@ -9,7 +9,6 @@ namespace System.BLL.AgreementManagement
 		public AgreementManagementMappingProfile()
 		{
 			CreateMap<Agreement, AgreementModel>();
-			CreateMap<AgreementModel, Agreement>();
 		}
 	}
 }
