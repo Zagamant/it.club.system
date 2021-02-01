@@ -21,17 +21,16 @@ namespace System.BLL.AgreementManagement
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
-		public async Task CreateAsync(AgreementModel agreement)
+		public async Task<IEnumerable<AgreementModel>> GetAllAsync()
 		{
-			var agreementOrig = _mapper.Map<Agreement>(agreement);
-			await _context.Agreements.AddAsync(agreementOrig);
-			await _context.SaveChangesAsync();
+			return await _context.Agreements
+				.Select(agr =>  _mapper.Map<AgreementModel>(agr))
+				.ToListAsync();
 		}
 
-		public async Task<AgreementModel> GetById(int agreementId)
+		public async Task<AgreementModel> GetAsync(int agreementId)
 		{
 			var agreement = await _context.Agreements
-				.AsNoTracking()
 				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
 
 			if (agreement == null) throw new AppException($"Agreement with id: {agreementId} not found.");
@@ -40,40 +39,28 @@ namespace System.BLL.AgreementManagement
 
 			return agrem;
 		}
-
-		public async Task<IEnumerable<AgreementModel>> GetByUser(User user)
+		
+		public async Task<AgreementModel> AddAsync(AgreementModel agreement)
 		{
-			var models = await _context.Agreements
-				.AsNoTracking()
-				.Where(agr => agr.User == user)
-				.Select(agr => new AgreementModel
-				{
-					User = agr.User,
-					Payment = agr.Payment
-				}).ToListAsync();
-			return models;
-		}
+			var agreementOrig = _mapper.Map<Agreement>(agreement);
+			await _context.Agreements.AddAsync(agreementOrig);
+			await _context.SaveChangesAsync();
 
-		public async Task Update(int agreementId, AgreementModel agreementNew)
+			return agreement;
+		}
+		
+		public async Task<AgreementModel> UpdateAsync(int agreementId, AgreementModel agreementNew)
 		{
 			var newAgr = _mapper.Map<Agreement>(agreementNew);
 			newAgr.Id = agreementId;
 
 			_context.Agreements.Update(newAgr);
 			await _context.SaveChangesAsync();
+
+			return agreementNew;
 		}
 
-		public async Task Update(AgreementModel agreement, AgreementModel agreementNew)
-		{
-			var oldAgr = await _context.Agreements
-				.SingleOrDefaultAsync(agr => agr.User == agreement.User && agr.Course == agreement.Course);
-
-			if (agreement == null) throw new AppException("Agreement not found.");
-
-			await Update(oldAgr.Id, agreementNew);
-		}
-
-		public async Task Delete(int agreementId)
+		public async Task DeleteAsync(int agreementId, bool isDelete = false)
 		{
 			var agreement = await _context.Agreements
 				.FirstOrDefaultAsync(agr => agr.Id == agreementId);
@@ -82,16 +69,6 @@ namespace System.BLL.AgreementManagement
 
 			_context.Agreements.Remove(agreement);
 			await _context.SaveChangesAsync();
-		}
-
-		public async Task Delete(AgreementModel agreement)
-		{
-			var oldAgr = await _context.Agreements
-				.SingleOrDefaultAsync(agr => agr.User == agreement.User && agr.Course == agreement.Course);
-
-			if (agreement == null) throw new AppException("Agreement not found.");
-
-			await Delete(oldAgr.Id);
 		}
 	}
 }
