@@ -2,15 +2,12 @@
 
 namespace System.DAL.Entities
 {
-	public class Photo
-	{
-		public int Id { get; set; }
+    public class Photo : BaseEntity
+    {
+        [Required] public byte[] PhotoAsBytes { get; set; }
 
-		[Required]
-		public byte[] PhotoAsBytes { get; set; }
+        public int UserId { get; set; }
 
-		public int UserId { get; set; }
-
-		public virtual User User { get; set; }
-	}
+        public virtual User User { get; set; }
+    }
 }

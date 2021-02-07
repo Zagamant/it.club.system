@@ -15,14 +15,15 @@ namespace System.DAL.Configurations
 
 			builder
 				.HasMany<Room>(club => club.Rooms)
-				.WithOne(r => r.Club);
+				.WithOne(r => r.Club)
+				.HasForeignKey(r => r.ClubId);
 
 			builder
 				.Property(c => c.Status)
 				.HasConversion(
 					status => status.ToString(),
 					str => (ClubStatus)Enum.Parse(typeof(ClubStatus), str, true));
-
+			
 		}
 	}
 }

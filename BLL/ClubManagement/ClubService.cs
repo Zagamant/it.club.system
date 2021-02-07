@@ -1,6 +1,5 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.ClubManagement;
-using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.DAL.Entities.Enums;
@@ -12,57 +11,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.ClubManagement
 {
-    public class ClubService : IClubService
+    public class ClubService : Repository<int, Club, ClubModel,ClubModel,ClubModel>, IClubService
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
 
         public ClubService(
-            DataContext dataContext,
+            DataContext context,
             IMapper mapper,
             UserManager<User> userManager,
-            RoleManager<Role> roleManager)
+            RoleManager<Role> roleManager) : base(context, mapper)
         {
-            _context = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _userManager = userManager;
             _roleManager = roleManager;
+            _table = _context.Clubs;
         }
 
-
-        public async Task<IEnumerable<ClubModel>> GetAllAsync()
-        {
-            //var user = await _userManager.FindByIdAsync(userId);
-
-            // var roles = await _userManager.GetRolesAsync(user);
-
-            var allClubs = await _context.Clubs
-                //.AsNoTracking() //WTF cause internal server error one i ca not track for 3 DAY AF //TODO stackoverflow quest;
-                //.Where(club => club.Permissions.Any(role => roles.Contains(role.Name)))
-                .Select(club => _mapper.Map<ClubModel>(club))
-                .ToListAsync();
-
-            return allClubs;
-        }
-
-        public async Task<ClubModel> GetAsync(int clubId)
-        {
-            var club = await GetByIdFullClubAsync(clubId);
-
-            return _mapper.Map<ClubModel>(club);
-        }
-
-        public async Task<ClubModel> GetByTitleAsync(string clubTitle, string userId)
-        {
-            var club = await _context.Clubs.FirstOrDefaultAsync(clb => clb.Title == clubTitle);
-            if (club == null) throw new ArgumentNullException(nameof(club));
-
-            return _mapper.Map<ClubModel>(club);
-        }
-
-        public async Task<ClubModel> AddAsync(ClubModel club)
+        public override async Task<ClubModel> AddAsync(ClubModel club)
         {
             if (_context.Clubs.Any(x => x.Title == club.Title))
                 throw new AppException("Club name: \"" + club.Title + "\" is already taken");
@@ -85,8 +50,8 @@ namespace System.BLL.ClubManagement
 
             return _mapper.Map<ClubModel>(newClub);
         }
-
-        public async Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId)
+        
+        public  async Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId)
         {
             var club = await GetByIdFullClubAsync(clubId);
             
@@ -131,18 +96,16 @@ namespace System.BLL.ClubManagement
             return _mapper.Map<ClubModel>(club);
         }
 
-        public async Task<ClubModel> UpdateAsync(int clubId, ClubModel newClub)
+        public override async Task<ClubModel> UpdateAsync(int clubId, ClubModel newClub)
         {
             var club = await GetByIdFullClubAsync(clubId);
             newClub.Id = club.Id;
 
             if (newClub.Title != club.Title)
             {
-                club.Title = newClub.Title;
-
-                var clubRole = await _context.Roles.FirstAsync(role => role.Name == newClub.Title);
+                var clubRole = await _context.Roles.FirstAsync(role => role.Name == club.Title);
                 clubRole.Name = newClub.Title;
-
+                club.Title = newClub.Title;
                 _context.Roles.Update(clubRole);
             }
 
@@ -174,26 +137,20 @@ namespace System.BLL.ClubManagement
 
             return _mapper.Map<ClubModel>(club);
         }
-        
-        public async Task DeleteAsync(int clubId, bool isDelete = false)
+
+        public override async Task DeleteAsync(int id, bool isDelete = false)
         {
-            var club = await GetByIdFullClubAsync(clubId);
+            var entity = await _table.FindAsync(id);
+            if (entity == null)
+                throw new ArgumentException($"Club with id: {id} not found");
 
-            if (!_context.Clubs.Contains(club)) throw new AppException("Club: " + club.Title + " not found.");
-
-            if (isDelete)
-            {
-                _context.Clubs.Remove(club);
-            }
-            else
-            {
-                club.Status = ClubStatus.Closed;
-                _context.Clubs.Update(club);
-            }
-
+            var clubRole = await _context.Roles.SingleAsync(r => r.Name == entity.Title);
+            
+            _context.Roles.Remove(clubRole);
+            _table.Remove(entity);
             await _context.SaveChangesAsync();
         }
-
+        
         #region PrivateHelpers
 
         private async Task<Club> GetByIdFullClubAsync(int clubId)
@@ -211,20 +168,6 @@ namespace System.BLL.ClubManagement
             if (club == null) throw new AppException("Club not found");
 
             return club;
-        }
-
-        private async Task<Club> GetByTitleFullClubAsync(string title, string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            var roles = await _userManager.GetRolesAsync(user);
-
-            var resultClub = await _context.Clubs
-                .Where(club => club.Permissions.Select(role => role.Name).Intersect(roles).Any())
-                .FirstOrDefaultAsync(cl => cl.Title == title);
-
-            if (resultClub == null) throw new AppException("Club not found");
-
-            return resultClub;
         }
 
         #endregion

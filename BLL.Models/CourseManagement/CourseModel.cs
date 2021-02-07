@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.BLL.Models.Helpers;
+using System.Collections.Generic;
 using System.DAL.Entities;
 
 namespace System.BLL.Models.CourseManagement
 {
-	public class CourseModel
+	public class CourseModel : BaseModel
 	{
-		public int Id { get; set; }
 		public string Title { get; set; }
 		public string About { get; set; }
 		public string ManualLink { get; set; }

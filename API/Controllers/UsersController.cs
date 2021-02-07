@@ -16,7 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace System.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class UsersController : ControllerBase
@@ -87,8 +87,7 @@ namespace System.API.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return BadRequest(e.Message);
             }
         }
 
@@ -136,7 +135,7 @@ namespace System.API.Controllers
             var model = new ConfirmEmailModel
             {
                 Email = user.Email,
-                Id = userId.ToString()
+                Id = userId
             };
 
             var code = await _userService.GenerateConfirmationEmailAsync(model);

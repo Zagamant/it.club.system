@@ -8,7 +8,7 @@ namespace System.BLL.Helpers
 		where TUpdateModel : class
 		where TModel : class
 	{
-		Task<IEnumerable<TModel>> GetAllAsync();
+		Task<IEnumerable<TModel>> GetAllAsync(string filter = "", string range = "", string sort = "");
 		Task<TModel> GetAsync(TId id);
 		Task<TModel> AddAsync(TAddModel entity);
 		Task<TModel>  UpdateAsync(TId id, TUpdateModel newEntity);

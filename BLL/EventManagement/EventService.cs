@@ -21,7 +21,8 @@ namespace System.BLL.EventManagement
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IEnumerable<EventModel>> GetAllAsync()
+        public async Task<IEnumerable<EventModel>> GetAllAsync(string filter = "", string range = "",
+            string sort = "")
         {
             var result = await _context.Events
                 .AsNoTracking()

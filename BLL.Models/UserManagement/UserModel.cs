@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.BLL.Models.Helpers;
+using System.Collections.Generic;
 using System.DAL.Entities;
 
 namespace System.BLL.Models.UserManagement
@@ -6,9 +7,8 @@ namespace System.BLL.Models.UserManagement
     /// <summary>
     /// Represent user model for server
     /// </summary>
-    public class UserModel
+    public class UserModel : BaseModel
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

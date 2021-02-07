@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.BLL.Models.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace System.BLL.Models.UserManagement
 {
-	public class ConfirmEmailModel
+	public class ConfirmEmailModel : BaseModel
 	{
-		[Required]
-		public string Id { get; set; }
-		
 		[Required]
 		[EmailAddress]
 		public string Email { get; set; }

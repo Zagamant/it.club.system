@@ -3,11 +3,13 @@ using System.DAL.Entities.Enums;
 
 namespace System.DAL.Entities
 {
-	public class Group
+	public class Group: BaseEntity
 	{
-		public int Id { get; set; }
 		public string Title { get; set; }
+		public int CourseId { get; set; }
 		public virtual Course Course { get; set; }
+		
+		public int RoomId { get; set; }
 		public virtual Room Room { get; set; }
 		public int LessonsPerWeek { get; set; }
 		public string OnlineConversationLink { get; set; }

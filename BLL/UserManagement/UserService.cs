@@ -50,7 +50,7 @@ namespace System.BLL.UserManagement
                 throw new AppException("User not found");
 
             var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
-            
+
             return result.Succeeded ? _mapper.Map<UserModel>(user) : null;
         }
 
@@ -138,7 +138,7 @@ namespace System.BLL.UserManagement
             {
                 user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, password);
             }
-            
+
             user.Address ??= new Address
             {
                 Country = model.Country,
@@ -183,7 +183,7 @@ namespace System.BLL.UserManagement
         /// <inheritdoc/>
         public async Task ConfirmEmailAsync(ConfirmEmailModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.Id);
+            var user = await _userManager.FindByIdAsync(model.Id.ToString());
 
             if (user == null) throw new AppException($"User with id: {model.Id} not found");
 
@@ -213,7 +213,7 @@ namespace System.BLL.UserManagement
         /// <inheritdoc/>
         public async Task<string> GenerateConfirmationEmailAsync(ConfirmEmailModel userModel)
         {
-            var user = await _userManager.FindByIdAsync(userModel.Id);
+            var user = await _userManager.FindByIdAsync(userModel.Id.ToString());
             if (user == null)
             {
                 // пользователь с данным email может отсутствовать в бд

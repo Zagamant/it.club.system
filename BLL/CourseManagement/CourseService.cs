@@ -32,7 +32,8 @@ namespace System.BLL.CourseManagement
 			return _mapper.Map<CourseModel>(courseOrig);
 		}
 
-		public async Task<IEnumerable<CourseModel>> GetAllAsync()
+		public async Task<IEnumerable<CourseModel>> GetAllAsync(string filter = "", string range = "",
+			string sort = "")
 		{
 			var courses = await _context.Courses
 				.Select(c => _mapper.Map<CourseModel>(c)).ToListAsync();

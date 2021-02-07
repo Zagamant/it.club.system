@@ -13,8 +13,8 @@ namespace System.BLL.GroupManagement
 {
     public class GroupService : IGroupService
     {
-        private IMapper _mapper;
-        private DataContext _context;
+        private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
         public GroupService(DataContext context, IMapper mapper)
         {
@@ -22,6 +22,16 @@ namespace System.BLL.GroupManagement
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        public async Task<IEnumerable<GroupModel>> GetAllAsync(string filter = "", string range = "",
+                                                               			string sort = "")
+        {
+            var result = await _context.Groups
+                .Select(group => _mapper.Map<GroupModel>(group))
+                .ToListAsync();
+
+            return result;
+        }
+        
         public async Task<GroupModel> GetAsync(int groupId)
         {
             var result = await _context.Groups
@@ -40,20 +50,15 @@ namespace System.BLL.GroupManagement
 
             var realGroup = _mapper.Map<Group>(group);
 
+            realGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == group.RoomId);
+            realGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == group.CourseId);
+
             await _context.Groups.AddAsync(realGroup);
             await _context.SaveChangesAsync();
 
             return _mapper.Map<GroupModel>(realGroup);
         }
 
-        public async Task<IEnumerable<GroupModel>> GetAllAsync()
-        {
-            var result = await _context.Groups
-                .Select(group => _mapper.Map<GroupModel>(group))
-                .ToListAsync();
-
-            return result;
-        }
 
         public async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
         {
@@ -64,7 +69,9 @@ namespace System.BLL.GroupManagement
             newGroup.Id = groupId;
 
             var realGroup = _mapper.Map<Group>(newGroup);
-
+            realGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == newGroup.RoomId);
+            realGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == newGroup.CourseId);
+            
             _context.Groups.Update(realGroup);
 
             await _context.SaveChangesAsync();
@@ -75,14 +82,15 @@ namespace System.BLL.GroupManagement
         public async Task<GroupModel> AddStudentAsync(int groupId, int userId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Id == userId);
-
-            if (user == null) throw new AppException($"User with id: {userId} not exist");
+            if (user == null) 
+                new AppException($"User with id: {userId} not exist");
 
             var group = await _context.Groups.FirstOrDefaultAsync(gr => gr.Id == groupId);
+            if (group == null) 
+                throw new AppException($"Group with id: {groupId} not exist");
 
-            if (group == null) throw new AppException($"Group with id: {groupId} not exist");
-
-            if (group.Users.Contains(user)) throw new AppException("User already exist in context");
+            if (group.Users.Contains(user)) 
+                throw new AppException("User already contained in Group");
 
             group.Users.Add(user);
 

@@ -1,8 +1,9 @@
-﻿namespace System.BLL.Models.PaymentManagement
+﻿using System.BLL.Models.Helpers;
+
+namespace System.BLL.Models.PaymentManagement
 {
-    public class PaymentModel
+    public class PaymentModel : BaseModel
     {
-        public int Id { get; set; }
         public virtual int UserId { get; set; }
         public decimal September { get; set; }
         public decimal October { get; set; }

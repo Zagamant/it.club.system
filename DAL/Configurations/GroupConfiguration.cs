@@ -12,10 +12,12 @@ namespace System.DAL.Configurations
 			builder
 				.HasOne(group => group.Room)
 				.WithMany(room => room.Groups);
+				
 
 			builder
 				.HasOne(group => group.Course)
-				.WithMany(course => course.Groups);
+				.WithMany(course => course.Groups)
+				.HasForeignKey(r => r.CourseId);
 
 			builder
 				.Property(e => e.Status)

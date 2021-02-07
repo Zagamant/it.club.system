@@ -1,8 +1,9 @@
-﻿namespace System.BLL.Models.ContactManagement
+﻿using System.BLL.Models.Helpers;
+
+namespace System.BLL.Models.ContactManagement
 {
-    public class ContactModel
+    public class ContactModel : BaseModel
     {
-        public int Id { get; set; }
 
         public string Name { get; set; }
 

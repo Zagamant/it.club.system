@@ -50,7 +50,8 @@ namespace System.BLL.PhotoManagement
             return entity;
         }
 
-        public async Task<IEnumerable<PhotoModel>> GetAllAsync()
+        public async Task<IEnumerable<PhotoModel>> GetAllAsync(string filter = "", string range = "",
+            string sort = "")
         {
             return await _context.Photos.Select(item => 
                 _mapper.Map<PhotoModel>(item)).ToListAsync();

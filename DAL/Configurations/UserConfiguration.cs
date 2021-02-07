@@ -11,6 +11,8 @@ namespace System.DAL.Configurations
 			builder
 				.HasMany<Contact>(user => user.Contacts)
 				.WithOne();
+			
+			
 		}
 	}
 }

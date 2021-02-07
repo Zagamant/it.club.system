@@ -1,8 +1,10 @@
 ﻿using System.BLL.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace System.API.Controllers
 {
@@ -21,7 +23,23 @@ namespace System.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TModel>>> Get() => Ok(await _service.GetAllAsync());
+        public async Task<ActionResult<IEnumerable<TModel>>> Get(string filter = "", string range = "", string sort = "")
+        {
+            var from = 0;
+            var to = 0;
+            if (!string.IsNullOrEmpty(range))
+            {
+                var rangeVal = JsonConvert.DeserializeObject<List<int>>(range);
+                from = rangeVal.First();
+                to = rangeVal.Last();
+            }
+            
+            var result = await _service.GetAllAsync(filter, range, sort);
+            Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
+            Response.Headers.Add("Content-Range", $"{typeof(TModel).Name.ToLower()} {from}-{to}/{result.Count()}");
+
+            return Ok(result);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TModel>> GetAsync(int id) => Ok(await _service.GetAsync(id));

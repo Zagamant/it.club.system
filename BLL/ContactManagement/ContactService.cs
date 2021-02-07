@@ -21,7 +21,8 @@ namespace System.BLL.ContactManagement
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IEnumerable<ContactModel>> GetAllAsync()
+        public async Task<IEnumerable<ContactModel>> GetAllAsync(string filter = "", string range = "",
+            string sort = "")
         {
             return await _context.Contacts.Select(item => _mapper.Map<ContactModel>(item)).ToListAsync();
         }

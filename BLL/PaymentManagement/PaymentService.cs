@@ -21,7 +21,8 @@ namespace System.BLL.PaymentManagement
             _mapper = mapper ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IEnumerable<PaymentModel>> GetAllAsync()
+        public async Task<IEnumerable<PaymentModel>> GetAllAsync(string filter = "", string range = "",
+            string sort = "")
         {
             var result = await _context.Payments
                 .ToListAsync();

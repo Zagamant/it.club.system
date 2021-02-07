@@ -1,8 +1,7 @@
 ﻿namespace System.DAL.Entities
 {
-	public class Event
+	public class Event: BaseEntity
 	{
-		public int Id { get; set; }
 		public DateTime DateTime { get; set; }
 		public string About { get; set; }
 	}

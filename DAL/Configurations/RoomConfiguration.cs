@@ -11,7 +11,8 @@ namespace System.DAL.Configurations
 		{
 			builder
 				.HasMany<Group>()
-				.WithOne(group => group.Room);
+				.WithOne(group => group.Room)
+				.HasForeignKey(r => r.RoomId);
 
 
 			builder

@@ -1,8 +1,9 @@
-﻿namespace System.BLL.Models.EventManagement
+﻿using System.BLL.Models.Helpers;
+
+namespace System.BLL.Models.EventManagement
 {
-    public class EventModel
+    public class EventModel : BaseModel
     {
-        public int Id { get; set; }
         public DateTime DateTime { get; set; }
         public string About { get; set; }
     }

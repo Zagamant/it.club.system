@@ -1,8 +1,9 @@
-﻿namespace System.BLL.Models.RoomManagement
+﻿using System.BLL.Models.Helpers;
+
+namespace System.BLL.Models.RoomManagement
 {
-	public class RoomCreateModel
+	public class RoomCreateModel : BaseModel
 	{
-		public int Id { get; set; }
 		public int ClubId { get; set; }
 		public int Capacity { get; set; }
 		public string RoomNumber { get; set; }

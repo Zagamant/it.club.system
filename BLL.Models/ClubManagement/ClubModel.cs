@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.BLL.Models.Helpers;
+using System.Collections.Generic;
 using System.DAL.Entities;
 using System.DAL.Entities.Enums;
 
 namespace System.BLL.Models.ClubManagement
 {
-    public class ClubModel
+    public class ClubModel : BaseModel
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

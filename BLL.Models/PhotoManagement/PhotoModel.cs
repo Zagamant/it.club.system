@@ -1,8 +1,9 @@
-﻿namespace System.BLL.Models.PhotoManagement
+﻿using System.BLL.Models.Helpers;
+
+namespace System.BLL.Models.PhotoManagement
 {
-    public class PhotoModel
+    public class PhotoModel : BaseModel
     {
-        public int Id { get; set; }
 
         public byte[] PhotoAsBytes { get; set; }
 

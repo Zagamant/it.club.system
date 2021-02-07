@@ -3,9 +3,9 @@ using System.DAL.Entities.Enums;
 
 namespace System.DAL.Entities
 {
-	public class Room
+	public class Room: BaseEntity
 	{
-		public int Id { get; set; }
+		public int ClubId { get; set; }
 		public virtual Club Club { get; set; }
 		public int Capacity { get; set; }
 		public string RoomNumber { get; set; }
