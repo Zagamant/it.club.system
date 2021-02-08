@@ -29,7 +29,7 @@ namespace System.API.Controllers
 
         public UsersController(
             IUserService userService,
-            IMapper mapper,
+            IMapper mapper, 
             IOptions<AppSettings> appSettings, IEmailService emailService)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));

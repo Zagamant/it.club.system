@@ -11,12 +11,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.GroupManagement
 {
-    public class GroupService : IGroupService
+    public class GroupService : Repository<int, Group, GroupRegisterModel, GroupModel, GroupModel>,  IGroupService
     {
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
-        public GroupService(DataContext context, IMapper mapper)
+        public GroupService(DataContext context, IMapper mapper) : base(context, mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
