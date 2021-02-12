@@ -11,40 +11,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.GroupManagement
 {
-    public class GroupService : IGroupService
+    public class GroupService : Repository<int,Group, GroupModel, GroupModel, GroupModel>, IGroupService
     {
-        private readonly IMapper _mapper;
-        private readonly DataContext _context;
-
-        public GroupService(DataContext context, IMapper mapper)
+        public GroupService(DataContext context, IMapper mapper) : base(context, mapper)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        }
-
-        public async Task<IEnumerable<GroupModel>> GetAllAsync(string filter = "", string range = "",
-                                                               			string sort = "")
-        {
-            var result = await _context.Groups
-                .Select(group => _mapper.Map<GroupModel>(group))
-                .ToListAsync();
-
-            return result;
+            _table = _context.Groups;
         }
         
-        public async Task<GroupModel> GetAsync(int groupId)
-        {
-            var result = await _context.Groups
-                .FirstOrDefaultAsync(gr => gr.Id == groupId);
-
-            if (result == null) throw new ArgumentNullException(nameof(result));
-
-            var realGroup = _mapper.Map<GroupModel>(result);
-
-            return realGroup;
-        }
-
-        public async Task<GroupModel> AddAsync(GroupModel group)
+        
+        public override async Task<GroupModel> AddAsync(GroupModel group)
         {
             if (group == null) throw new ArgumentNullException(nameof(group));
 
@@ -60,7 +35,7 @@ namespace System.BLL.GroupManagement
         }
 
 
-        public async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
+        public override async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
         {
             if (!await _context.Groups
                 .AnyAsync(gr => gr.Id == groupId))
@@ -118,7 +93,7 @@ namespace System.BLL.GroupManagement
             return _mapper.Map<GroupModel>(group);
         }
 
-        public async Task DeleteAsync(int groupId, bool isDeleted = false)
+        public override async Task DeleteAsync(int groupId, bool isDeleted = false)
         {
             var group = await _context.Groups
                 .FirstOrDefaultAsync(gr => gr.Id == groupId);

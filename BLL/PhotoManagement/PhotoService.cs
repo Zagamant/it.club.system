@@ -12,78 +12,51 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.PhotoManagement
 {
-    public class PhotoService : IPhotoService
+    public class PhotoService : Repository<int, Photo, PhotoModel, PhotoModel, PhotoModel>, IPhotoService
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
-
-        public PhotoService(DataContext context, IMapper mapper)
+        public PhotoService(DataContext context, IMapper mapper) : base(context, mapper)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _table = _context.Photos;
         }
 
-        public async Task<PhotoModel> GetAsync(int id)
-        {
-            var result = await _context.Photos
-                .SingleOrDefaultAsync(photo => photo.Id == id);
 
-            return _mapper.Map<PhotoModel>(result);
-        }
-
-        public async Task<PhotoModel> AddAsync(PhotoModel entity)
-        {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
-
-            var result = await _context.Photos
-                .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
-
-            if (result != null) throw new AppException($"Photo already exist.");
-
-            var map = _mapper.Map<Photo>(entity);
-
-            await _context.Photos
-                .AddAsync(map);
-
-            await _context.SaveChangesAsync();
-
-            return entity;
-        }
-
-        public async Task<IEnumerable<PhotoModel>> GetAllAsync(string filter = "", string range = "",
-            string sort = "")
-        {
-            return await _context.Photos.Select(item => 
-                _mapper.Map<PhotoModel>(item)).ToListAsync();
-        }
-
-        public async Task<PhotoModel> UpdateAsync(int id, PhotoModel newEntity)
-        {
-            if (_context.Photos.SingleOrDefaultAsync(item => item.Id == id) == null)
-            {
-                throw new AppException("Not found");
-            }
-
-            newEntity.Id = id;
-
-            var map = _mapper.Map<Photo>(newEntity);
-
-            _context.Photos
-                .Update(map);
-
-            await _context.SaveChangesAsync();
-
-            return newEntity;
-        }
+        // public async Task<PhotoModel> AddAsync(PhotoModel entity)
+        // {
+        //     if (entity == null) throw new ArgumentNullException(nameof(entity));
+        //
+        //     var result = await _context.Photos
+        //         .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
+        //
+        //     if (result != null) throw new AppException($"Photo already exist.");
+        //
+        //     var map = _mapper.Map<Photo>(entity);
+        //
+        //     await _context.Photos
+        //         .AddAsync(map);
+        //
+        //     await _context.SaveChangesAsync();
+        //
+        //     return entity;
+        // }
+        //
+        // public async Task<PhotoModel> UpdateAsync(int id, PhotoModel newEntity)
+        // {
+        //     if (_context.Photos.SingleOrDefaultAsync(item => item.Id == id) == null)
+        //     {
+        //         throw new AppException("Not found");
+        //     }
+        //
+        //     newEntity.Id = id;
+        //
+        //     var map = _mapper.Map<Photo>(newEntity);
+        //
+        //     _context.Photos
+        //         .Update(map);
+        //
+        //     await _context.SaveChangesAsync();
+        //
+        //     return newEntity;
+        // }
         
-        public async Task DeleteAsync(int id, bool isDelete = false)
-        {
-            var photo = await _context.Photos.SingleOrDefaultAsync(ph => ph.Id == id);
-
-            if (photo == null) throw new AppException($"Cant find photo with id: {id}");
-
-            _context.Photos.Remove(photo);
-            await _context.SaveChangesAsync();
-        }
     }
 }
