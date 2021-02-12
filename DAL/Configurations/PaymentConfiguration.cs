@@ -10,7 +10,12 @@ namespace System.DAL.Configurations
 		{
 			builder
 				.HasOne<User>(model => model.User)
-				.WithMany();
+				.WithMany()
+				.HasForeignKey(p => p.ClubId);
+
+			builder
+				.HasOne<Club>(c => c.Club)
+				.WithOne();
 		}
 	}
 }
