@@ -13,7 +13,6 @@ namespace System.DAL.Configurations
                 .WithMany()
                 .HasForeignKey(a => a.CourseId);
 
-
             builder
                 .HasOne(a => a.User)
                 .WithOne();

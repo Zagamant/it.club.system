@@ -11,8 +11,12 @@ namespace System.DAL.Configurations
 			builder
 				.HasMany<Contact>(user => user.Contacts)
 				.WithOne();
-			
-			
+
+			// builder
+			// 	.HasMany<Payment>()
+			// 	.WithOne(p => p.User)
+			// 	.HasForeignKey(i => i.ClubId);
+
 		}
 	}
 }

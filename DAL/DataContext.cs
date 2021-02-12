@@ -48,6 +48,8 @@ namespace System.DAL
                 .ApplyConfiguration(new PaymentConfiguration())
                 .ApplyConfiguration(new UserConfiguration())
                 .ApplyConfiguration(new PhotoConfiguration())
+                .ApplyConfiguration(new CostsConfiguration())
+                .ApplyConfiguration(new EventConfiguration())
                 ;
 
 

@@ -4,7 +4,8 @@ namespace System.BLL.Models.PaymentManagement
 {
     public class PaymentModel : BaseModel
     {
-        public virtual int UserId { get; set; }
+        public int ClubId { get; set; }
+        public int UserId { get; set; }
         public decimal September { get; set; }
         public decimal October { get; set; }
         public decimal November { get; set; }

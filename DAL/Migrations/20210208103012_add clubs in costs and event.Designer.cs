@@ -4,14 +4,16 @@ using System.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace System.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210208103012_add clubs in costs and event")]
+    partial class addclubsincostsandevent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,9 +249,6 @@ namespace System.DAL.Migrations
                     b.Property<int>("ClubId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClubId1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
@@ -259,8 +258,6 @@ namespace System.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClubId");
-
-                    b.HasIndex("ClubId1");
 
                     b.ToTable("Costs");
                 });
@@ -304,17 +301,12 @@ namespace System.DAL.Migrations
                     b.Property<int>("ClubId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClubId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClubId");
-
-                    b.HasIndex("ClubId1");
 
                     b.ToTable("Events");
                 });
@@ -384,12 +376,6 @@ namespace System.DAL.Migrations
                     b.Property<decimal>("August")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ClubId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClubId1")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("December")
                         .HasColumnType("decimal(18,2)");
 
@@ -425,10 +411,7 @@ namespace System.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClubId");
-
-                    b.HasIndex("ClubId1")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Payments");
                 });
@@ -713,15 +696,11 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("System.DAL.Entities.Costs", b =>
                 {
-                    b.HasOne("System.DAL.Entities.Club", null)
+                    b.HasOne("System.DAL.Entities.Club", "Club")
                         .WithMany()
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("System.DAL.Entities.Club", "Club")
-                        .WithMany()
-                        .HasForeignKey("ClubId1");
 
                     b.Navigation("Club");
                 });
@@ -735,15 +714,11 @@ namespace System.DAL.Migrations
 
             modelBuilder.Entity("System.DAL.Entities.Event", b =>
                 {
-                    b.HasOne("System.DAL.Entities.Club", null)
+                    b.HasOne("System.DAL.Entities.Club", "Club")
                         .WithMany()
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("System.DAL.Entities.Club", "Club")
-                        .WithMany()
-                        .HasForeignKey("ClubId1");
 
                     b.Navigation("Club");
                 });
@@ -775,17 +750,9 @@ namespace System.DAL.Migrations
                 {
                     b.HasOne("System.DAL.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("ClubId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("System.DAL.Entities.Club", "Club")
-                        .WithOne()
-                        .HasForeignKey("System.DAL.Entities.Payment", "ClubId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Club");
 
                     b.Navigation("User");
                 });

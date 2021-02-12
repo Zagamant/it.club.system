@@ -10,59 +10,56 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.PaymentManagement
 {
-    public class PaymentService : Repository<int, Payment, PaymentModel, PaymentModel, PaymentModel>, IPaymentService
+    public class PaymentService : Repository<int, Payment, PaymentModel,PaymentModel,PaymentModel>, IPaymentService
     {
-       
         public PaymentService(DataContext context, IMapper mapper) : base(context, mapper)
         {
-           _table = _context.Payments;
+            _table = _context.Payments;
+        }
+
+        public override async Task<PaymentModel> AddAsync(PaymentModel entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            
+            if (entity.Id != 0 && _context.Payments.Any(ev => ev.Id == entity.Id))
+                throw new AppException("Payment" +
+                                       " already exist.");
+
+            var map = _mapper.Map<Payment>(entity);
+
+            map.User = entity.UserId == 0 ? null : _context.Users.FirstOrDefault(user => user.Id == entity.UserId);
+            map.Club = await _context.Clubs.SingleOrDefaultAsync(c => c.Id == map.ClubId);
+
+            await _context.Payments
+                .AddAsync(map);
+
+            await _context.SaveChangesAsync();
+
+            return entity;
         }
         
-        // public async Task<PaymentModel> AddAsync(PaymentModel entity)
-        // {
-        //     if (entity == null) throw new ArgumentNullException(nameof(entity));
-        //     if (entity.Id != 0)
-        //     {
-        //         var result = await _context.Payments
-        //             .SingleOrDefaultAsync(ev => ev.Id == entity.Id);
-        //
-        //         if (result != null)
-        //             throw new AppException("Payment" +
-        //                                    " already exist.");
-        //     }
-        //
-        //     var map = _mapper.Map<Payment>(entity);
-        //
-        //     map.User = entity.UserId == 0 ? null : _context.Users.FirstOrDefault(user => user.Id == entity.UserId);
-        //
-        //     await _context.Payments
-        //         .AddAsync(map);
-        //
-        //     await _context.SaveChangesAsync();
-        //
-        //     return entity;
-        // }
-        //
-        // public async Task<PaymentModel> UpdateAsync(int id, PaymentModel newEntity)
-        // {
-        //     if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
-        //     {
-        //         throw new AppException("Not found");
-        //     }
-        //
-        //     newEntity.Id = id;
-        //
-        //     var map = _mapper.Map<Event>(newEntity);
-        //
-        //     _context.Events
-        //         .Update(map);
-        //
-        //     await _context.SaveChangesAsync();
-        //
-        //     return newEntity;
-        // }
+        public override async Task<PaymentModel> UpdateAsync(int id, PaymentModel newEntity)
+        {
+            if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
+            {
+                throw new AppException("Not found");
+            }
+
+            newEntity.Id = id;
+
+            var map = _mapper.Map<Event>(newEntity);
+
+            map.Club = await _context.Clubs.SingleOrDefaultAsync(c => c.Id == map.ClubId);
+
+            _context.Events
+                .Update(map);
+
+            await _context.SaveChangesAsync();
+
+            return newEntity;
+        }
         
-        public async Task AddPaymentToUserAsync(User user, DateTime month, decimal sum)
+        public async Task UpdatePaymentToUserAsync(User user, DateTime month, decimal sum)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
