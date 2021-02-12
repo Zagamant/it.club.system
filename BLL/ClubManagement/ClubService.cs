@@ -14,15 +14,12 @@ namespace System.BLL.ClubManagement
     public class ClubService : Repository<int, Club, ClubModel,ClubModel,ClubModel>, IClubService
     {
         private readonly RoleManager<Role> _roleManager;
-        private readonly UserManager<User> _userManager;
 
         public ClubService(
             DataContext context,
             IMapper mapper,
-            UserManager<User> userManager,
             RoleManager<Role> roleManager) : base(context, mapper)
         {
-            _userManager = userManager;
             _roleManager = roleManager;
             _table = _context.Clubs;
         }

@@ -18,7 +18,7 @@ namespace System.BLL.Helpers
         where TModel : BaseModel
         where T : BaseEntity, new()
     {
-        protected DbSet<T> _table;
+        protected DbSet<T> _table { get; init; }
         protected readonly DataContext _context;
         protected readonly IMapper _mapper;
             
