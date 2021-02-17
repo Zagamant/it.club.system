@@ -12,6 +12,8 @@ namespace System.BLL.CourseManagement
 			CreateMap<CourseModel, Course>();
 			CreateMap<Course, CourseRegisterModel>();
 			CreateMap<CourseRegisterModel, Course>();
+			CreateMap<CourseModel, CourseRegisterModel>();
+			CreateMap<CourseRegisterModel, CourseModel>();
 		}
 	}
 }

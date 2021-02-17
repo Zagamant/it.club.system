@@ -482,7 +482,7 @@ namespace System.DAL.Migrations
                     b.Property<int>("ClubId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RoomNumber")
+                    b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")

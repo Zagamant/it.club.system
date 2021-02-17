@@ -1,4 +1,5 @@
-﻿using System.BLL.EventManagement;
+﻿using System.API.Helpers;
+using System.BLL.EventManagement;
 using System.BLL.Models.EventManagement;
 using Microsoft.AspNetCore.Mvc;
 

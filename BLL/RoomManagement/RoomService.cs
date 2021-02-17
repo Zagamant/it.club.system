@@ -38,7 +38,7 @@ namespace System.BLL.RoomManagement
             }
 
             room.Capacity = newRoom.Capacity;
-            room.RoomNumber = newRoom.RoomNumber;
+            room.Number = newRoom.Number;
             room.About = newRoom.About;
             room.Status = newRoom.Status;
 

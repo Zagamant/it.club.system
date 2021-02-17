@@ -4,8 +4,8 @@ namespace System.BLL.Models.CourseManagement
 {
 	public class CourseRegisterModel : BaseModel
 	{
-		public virtual string Title { get; set; }
-		public virtual string About { get; set; }
-		public virtual string ManualLink { get; set; }
+		public string Title { get; set; }
+		public string About { get; set; }
+		public string ManualLink { get; set; }
 	}
 }

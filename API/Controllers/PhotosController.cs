@@ -1,4 +1,5 @@
-﻿using System.BLL.Models.PhotoManagement;
+﻿using System.API.Helpers;
+using System.BLL.Models.PhotoManagement;
 using System.BLL.PhotoManagement;
 using Microsoft.AspNetCore.Mvc;
 

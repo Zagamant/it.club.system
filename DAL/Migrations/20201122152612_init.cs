@@ -341,7 +341,7 @@ namespace System.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClubId = table.Column<int>(type: "int", nullable: true),
                     Capacity = table.Column<int>(type: "int", nullable: false),
-                    RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     About = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

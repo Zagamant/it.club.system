@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace System.API.Controllers
+namespace System.API.Helpers
 {
     [ApiController]
-    public class BaseController<TService,TAddModel, TUpdate, TModel> : ControllerBase 
+    public class BaseController<TService, TAddModel, TUpdateModel, TModel> : ControllerBase
         where TAddModel : class, new()
-        where TUpdate : class, new()
+        where TUpdateModel : class, new()
         where TModel : class, new()
-        where TService : IRepository<int, TAddModel, TUpdate,TModel>
+        where TService : IRepository<int, TAddModel, TUpdateModel, TModel>
     {
         protected readonly TService _service;
 
@@ -23,7 +23,8 @@ namespace System.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TModel>>> Get(string filter = "", string range = "", string sort = "")
+        public async Task<ActionResult<IEnumerable<TModel>>> Get(string filter = "", string range = "",
+            string sort = "")
         {
             var from = 0;
             var to = 0;
@@ -33,7 +34,7 @@ namespace System.API.Controllers
                 from = rangeVal.First();
                 to = rangeVal.Last();
             }
-            
+
             var result = await _service.GetAllAsync(filter, range, sort);
             Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
             Response.Headers.Add("Content-Range", $"{typeof(TModel).Name.ToLower()} {from}-{to}/{result.Count()}");
@@ -45,10 +46,12 @@ namespace System.API.Controllers
         public async Task<ActionResult<TModel>> GetAsync(int id) => Ok(await _service.GetAsync(id));
 
         [HttpPost]
-        public async Task<ActionResult<TModel>> Post([FromBody] TAddModel value) => StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
+        public async Task<ActionResult<TModel>> Post([FromBody] TAddModel value) =>
+            StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TModel>> Put(int id, [FromBody] TUpdate value) => Ok(await _service.UpdateAsync(id, value));
+        public async Task<ActionResult<TModel>> Put(int id, [FromBody] TUpdateModel value) =>
+            Ok(await _service.UpdateAsync(id, value));
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)

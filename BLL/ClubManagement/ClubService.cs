@@ -73,7 +73,7 @@ namespace System.BLL.ClubManagement
             if (room == null) throw new ArgumentNullException(nameof(room));
 
             if (!club.Rooms.Contains(room))
-                throw new AppException("Room: " + room.RoomNumber + " in club " + club.Title + " not found.");
+                throw new AppException("Room: " + room.Number + " in club " + club.Title + " not found.");
 
             if (isDeleteRoom)
             {
