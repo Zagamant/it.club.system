@@ -24,16 +24,13 @@ namespace System.API.Controllers
         private readonly AppSettings _appSettings;
 
         private readonly IEmailService _emailService;
-        private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
         public UsersController(
             IUserService userService,
-            IMapper mapper, 
             IOptions<AppSettings> appSettings, IEmailService emailService)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _appSettings = appSettings.Value ?? throw new ArgumentNullException(nameof(appSettings));
         }

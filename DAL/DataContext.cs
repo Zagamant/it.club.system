@@ -1,5 +1,6 @@
 ﻿using System.DAL.Configurations;
 using System.DAL.Entities;
+using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,17 +43,19 @@ namespace System.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
+                .ApplyConfiguration(new UserConfiguration())
+                .ApplyConfiguration(new RoleConfiguration())
                 .ApplyConfiguration(new ClubConfiguration())
                 .ApplyConfiguration(new GroupConfiguration())
                 .ApplyConfiguration(new RoomConfiguration())
                 .ApplyConfiguration(new PaymentConfiguration())
-                .ApplyConfiguration(new UserConfiguration())
                 .ApplyConfiguration(new PhotoConfiguration())
                 .ApplyConfiguration(new CostsConfiguration())
                 .ApplyConfiguration(new EventConfiguration())
+                .ApplyConfiguration(new UsersWithRolesConfig())
                 ;
 
-
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
