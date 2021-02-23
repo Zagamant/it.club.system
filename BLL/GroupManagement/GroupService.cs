@@ -35,23 +35,39 @@ namespace System.BLL.GroupManagement
         }
 
 
-        public override async Task<GroupModel> UpdateAsync(int groupId, GroupModel newGroup)
+        public override async Task<GroupModel> UpdateAsync(int groupId, GroupModel updatedGroup)
         {
-            if (!await _context.Groups
-                .AnyAsync(gr => gr.Id == groupId))
+            var oldGroup = await _context.Groups
+                .FirstOrDefaultAsync(gr => gr.Id == groupId);
+
+            if (oldGroup == null)
                 throw new AppException($"Group with id: {groupId} not exist in database");
 
-            newGroup.Id = groupId;
+            if (oldGroup.RoomId != updatedGroup.RoomId)
+                oldGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == updatedGroup.RoomId);
+            
+            if (oldGroup.CourseId != updatedGroup.CourseId)
+                oldGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updatedGroup.CourseId);
+            
+            var idsToAdd = updatedGroup.UsersIds.Except(oldGroup.Users.Select(u => u.Id));
+            
+            var IdsToRemove = oldGroup.Users.Select(u => u.Id).Except(updatedGroup.UsersIds);
+            
+            foreach (var oldGroupUser in oldGroup.Users.Where(user => IdsToRemove.Contains(user.Id)))
+            {
+                oldGroup.Users.Remove(oldGroupUser);
+            }
 
-            var realGroup = _mapper.Map<Group>(newGroup);
-            realGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == newGroup.RoomId);
-            realGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == newGroup.CourseId);
+            foreach (var oldGroupUser in _context.Users.Where(user => idsToAdd.Contains(user.Id)))
+            {
+                oldGroup.Users.Add(oldGroupUser);
+            }
 
-            _context.Groups.Update(realGroup);
+            _context.Groups.Update(oldGroup);
 
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<GroupModel>(realGroup);
+            return _mapper.Map<GroupModel>(oldGroup);
         }
 
         public async Task<GroupModel> AddStudentAsync(int groupId, int userId)

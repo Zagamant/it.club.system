@@ -24,29 +24,29 @@ namespace System.BLL.RoomManagement
             return _mapper.Map<RoomModel>(result);
         }
 
-        public override async Task<RoomModel> UpdateAsync(int roomId, RoomModel newRoom)
+        public override async Task<RoomModel> UpdateAsync(int roomId, RoomModel updatedGroup)
         {
             var room = await _context.Rooms.FirstOrDefaultAsync(roomIter => roomIter.Id == roomId);
             if (room == null) throw new AppException("Room wasn't find");
 
-            if (room.Club.Id != newRoom.ClubId)
+            if (room.Club.Id != updatedGroup.ClubId)
             {
-                var club = await _context.Clubs.FirstOrDefaultAsync(clubIter => clubIter.Id == newRoom.ClubId);
+                var club = await _context.Clubs.FirstOrDefaultAsync(clubIter => clubIter.Id == updatedGroup.ClubId);
                 if (club == null) throw new ArgumentException("club wasn't find");
 
                 room.Club = club;
             }
 
-            room.Capacity = newRoom.Capacity;
-            room.Number = newRoom.Number;
-            room.About = newRoom.About;
-            room.Status = newRoom.Status;
+            room.Capacity = updatedGroup.Capacity;
+            room.Number = updatedGroup.Number;
+            room.About = updatedGroup.About;
+            room.Status = updatedGroup.Status;
 
             _context.Rooms.Update(room);
 
             await _context.SaveChangesAsync();
 
-            return newRoom;
+            return updatedGroup;
         }
     }
 }

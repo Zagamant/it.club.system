@@ -17,6 +17,6 @@ namespace System.BLL.Models.GroupManagement
 		public DateTime EndDate { get; set; }
 		public int Capacity { get; set; }
 		public GroupStatus Status { get; set; }
-		public virtual ICollection<User> Users { get; set; }
+		public virtual ICollection<int> UsersIds { get; set; }
 	}
 }

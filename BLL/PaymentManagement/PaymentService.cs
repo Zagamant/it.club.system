@@ -38,16 +38,16 @@ namespace System.BLL.PaymentManagement
             return entity;
         }
         
-        public override async Task<PaymentModel> UpdateAsync(int id, PaymentModel newEntity)
+        public override async Task<PaymentModel> UpdateAsync(int id, PaymentModel updatedGroup)
         {
             if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
             {
                 throw new AppException("Not found");
             }
 
-            newEntity.Id = id;
+            updatedGroup.Id = id;
 
-            var map = _mapper.Map<Event>(newEntity);
+            var map = _mapper.Map<Event>(updatedGroup);
 
             map.Club = await _context.Clubs.SingleOrDefaultAsync(c => c.Id == map.ClubId);
 
@@ -56,7 +56,7 @@ namespace System.BLL.PaymentManagement
 
             await _context.SaveChangesAsync();
 
-            return newEntity;
+            return updatedGroup;
         }
         
         public async Task UpdatePaymentToUserAsync(User user, DateTime month, decimal sum)

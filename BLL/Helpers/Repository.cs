@@ -100,9 +100,9 @@ namespace System.BLL.Helpers
             return _mapper.Map<TModel>(entity);
         }
 
-        public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel newEntity)
+        public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel updatedGroup)
         {
-            var realItem = _mapper.Map<T>(newEntity);
+            var realItem = _mapper.Map<T>(updatedGroup);
             var entityId = (TId)typeof(T).GetProperty("Id").GetValue(realItem);
              if (!id.Equals( entityId))
              {
