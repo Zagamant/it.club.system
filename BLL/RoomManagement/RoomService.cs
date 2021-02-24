@@ -2,6 +2,7 @@
 using System.BLL.Models.RoomManagement;
 using System.DAL;
 using System.DAL.Entities;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -36,11 +37,26 @@ namespace System.BLL.RoomManagement
 
                 room.Club = club;
             }
-
+            
             room.Capacity = updatedGroup.Capacity;
             room.Number = updatedGroup.Number;
             room.About = updatedGroup.About;
             room.Status = updatedGroup.Status;
+            
+            
+            var idsToAdd = updatedGroup.GroupIds.Except(room.Groups.Select(u => u.Id));
+            
+            var IdsToRemove = room.Groups.Select(u => u.Id).Except(updatedGroup.GroupIds);
+            
+            foreach (var oldGroupUser in room.Groups.Where(user => IdsToRemove.Contains(user.Id)))
+            {
+                room.Groups.Remove(oldGroupUser);
+            }
+
+            foreach (var oldGroupUser in _context.Groups.Where(user => idsToAdd.Contains(user.Id)))
+            {
+                room.Groups.Add(oldGroupUser);
+            }
 
             _context.Rooms.Update(room);
 

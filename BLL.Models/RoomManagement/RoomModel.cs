@@ -11,8 +11,8 @@ namespace System.BLL.Models.RoomManagement
         public int Capacity { get; set; }
         public string Number { get; set; }
         public string About { get; set; }
+        public ICollection<int> GroupIds { get; set; } = new List<int>();
         public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
         public RoomStatus Status { get; set; }
-
     }
 }
