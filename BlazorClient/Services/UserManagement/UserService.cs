@@ -25,8 +25,7 @@ namespace BlazorClient.Services.UserManagement
         public async Task<UserModel> AuthenticateAsync(string username, string password)
         {
             var response = await _http.PostAsJsonAsync($"{_url}/authenticate", new {username, password});
-
-
+            
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
