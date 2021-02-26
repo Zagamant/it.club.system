@@ -1,6 +1,8 @@
 ﻿using System.API.Helpers;
 using System.BLL.ClubManagement;
 using System.BLL.Models.ClubManagement;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,17 +43,16 @@ namespace System.API.Controllers
         //     return NoContent();
         // }
         //
-        // [HttpPut("AddRoom")]
-        // // [Authorize(Roles = "main_admin,admin")]
-        // public async Task<IActionResult> AddRoom([FromBody] int clubId, int roomId) => Ok(await _clubService.AddRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name)));
-        //
-        // [HttpPut("RemoveRoom")]
-        // // [Authorize(Roles = "main_admin,admin")]
-        // public async Task<ActionResult> RemoveRoom([FromBody] int clubId, int roomId)
-        // {
-        //     await _clubService.RemoveRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
-        //     return NoContent();
-        //
-        // }
+        
+        [HttpPut("AddRoom")]
+        // [Authorize(Roles = "main_admin,admin")]
+        public async Task<ActionResult<ClubModel>> AddRoom([FromBody] int clubId, int roomId) => Ok(await _service.AddRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name)));
+        
+        [HttpPut("RemoveRoom")]
+        // [Authorize(Roles = "main_admin,admin")]
+        public async Task<ActionResult<ClubModel>> RemoveRoom([FromBody] int clubId, int roomId)
+        {
+            return await _service.RemoveRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
+        }
     }
 }

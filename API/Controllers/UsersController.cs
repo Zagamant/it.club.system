@@ -162,5 +162,17 @@ namespace System.API.Controllers
 
             return Ok();
         }
+        
+        [HttpPost("{id}/AddRole")]
+        public async Task<bool> AddRoleToUser(int id, int roleId)
+        {
+            return await _userService.AddRoleToUser(id, roleId);
+        }
+
+        [HttpPost("{id}/RemoveRole")]
+        public async Task<bool> RemoveRoleFromUser(int id, int roleId)
+        {
+            return await _userService.RemoveUsersRole(id, roleId);
+        }
     }
 }

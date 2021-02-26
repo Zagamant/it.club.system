@@ -28,8 +28,7 @@ namespace System.BLL.Helpers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));       
         }
 
-        public virtual async Task<IEnumerable<TModel>> GetAllAsync(string filter = "", string range = "",
-            string sort = "")
+        public virtual async Task<IEnumerable<TModel>> GetAllAsync(string sort = "",string page = "",string pageSize = "", string filter = "")
         {
             var entityQuery = _table.AsQueryable();
 
@@ -39,28 +38,47 @@ namespace System.BLL.Helpers
                 var t = new T();
                 foreach (var (key, value) in filterVal)
                 {
+                    if (key == "q")
+                    {
+                        //TODO: Logic for non correct filters
+                        continue;
+                    }
                     entityQuery = entityQuery
-                        .Where(t.GetType().GetProperty(key.FirstCharToUpper()).PropertyType == typeof(string) 
-                            ? $"{key}.Contains(@0)" 
+                        .Where(t.GetType().GetProperty(key.FirstCharToUpper())?.PropertyType == typeof(string)
+                            ? $"{key}.Contains(@0)"
                             : $"{key} == @0", value.ToString());
                 }
             }
 
-            var count = entityQuery.Count();
+            // if (!string.IsNullOrEmpty(search))
+            // {
+            //     var t = new T();
+            //
+            //     entityQuery = entityQuery
+            //         .Where(t.GetType().GetProperty(key.FirstCharToUpper()).PropertyType == typeof(string)
+            //             ? $"{key}.Contains(@0)"
+            //             : $"{key} == @0", value.ToString());
+            //
+            // }
+
 
             if (!string.IsNullOrEmpty(sort))
             {
-                var sortVal = JsonConvert.DeserializeObject<List<string>>(sort);
+                var sortVal = sort.Split('+');
                 var condition = sortVal.First();
                 var order = sortVal.Last() == "ASC" ? "" : "descending";
                 entityQuery = entityQuery.OrderBy($"{condition} {order}");
             }
 
-            if (!string.IsNullOrEmpty(range))
+            if (!string.IsNullOrEmpty(page) && !string.IsNullOrEmpty(pageSize))
             {
-                var rangeVal = JsonConvert.DeserializeObject<List<int>>(range);
-                var from = rangeVal.First();
-                var to = rangeVal.Last();
+                
+                var pageNumber = int.Parse(page);
+                var pageSizeNumber = int.Parse(pageSize);
+            
+                var from = (pageNumber-1)*pageSizeNumber;
+                var to = (pageNumber)*pageSizeNumber;
+                
                 entityQuery = entityQuery.Skip(from).Take(to - from + 1);
             }
 

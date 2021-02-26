@@ -7,6 +7,6 @@ namespace System.BLL.PaymentManagement
 {
     public interface IPaymentService : IRepository<int, PaymentModel, PaymentModel, PaymentModel>
     {
-        Task UpdatePaymentToUserAsync(User user, DateTime month, decimal sum);
+        Task<PaymentModel> UpdatePaymentToUserAsync(int userId, DateTime month, decimal sum);
     }
 }

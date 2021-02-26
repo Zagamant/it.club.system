@@ -77,5 +77,9 @@ namespace System.BLL.UserManagement
         Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel);
 
         Task ResetPasswordAsync(ResetPasswordModel userModel);
+        
+        
+        Task<bool> AddRoleToUser(int userId, int roleId);
+        Task<bool> RemoveUsersRole(int userId, int roleId);
     }
 }

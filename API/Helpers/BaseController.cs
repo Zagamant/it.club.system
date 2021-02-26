@@ -23,19 +23,16 @@ namespace System.API.Helpers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TModel>>> Get(string filter = "", string range = "",
-            string sort = "")
+        public async Task<ActionResult<IEnumerable<TModel>>> Get(string sort = "",string page = "",string pageSize = "", string filter = "")
         {
-            var from = 0;
-            var to = 0;
-            if (!string.IsNullOrEmpty(range))
-            {
-                var rangeVal = JsonConvert.DeserializeObject<List<int>>(range);
-                from = rangeVal.First();
-                to = rangeVal.Last();
-            }
+            int pageNumber = Int32.Parse(page);
+            int pageSizeNumber = Int32.Parse(pageSize);
+            
+            var from = (pageNumber-1)*pageSizeNumber;
+            var to = (pageNumber)*pageSizeNumber;
+            
 
-            var result = await _service.GetAllAsync(filter, range, sort);
+            var result = await _service.GetAllAsync(sort, page, pageSize, filter);
             Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
             Response.Headers.Add("Content-Range", $"{typeof(TModel).Name.ToLower()} {from}-{to}/{result.Count()}");
 

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Models", "BLL.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.BLL.Tests", "BLL.Tests\System.BLL.Tests.csproj", "{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

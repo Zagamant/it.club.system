@@ -20,6 +20,7 @@ namespace System.BLL.UserManagement
     {
         private DataContext _context;
         private UserManager<User> _userManager;
+        private RoleManager<Role> _roleManager;
         private SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
 
@@ -30,12 +31,13 @@ namespace System.BLL.UserManagement
         /// <param name="userManager">A <see cref="UserManager{User}"/>.</param>
         /// <param name="signInManager">A <see cref="SignInManager{User}"/>.</param>
         public UserService(DataContext context, UserManager<User> userManager, SignInManager<User> signInManager,
-            IMapper mapper)
+            IMapper mapper, RoleManager<Role> roleManager)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _roleManager = roleManager?? throw new ArgumentNullException(nameof(roleManager));
         }
 
         /// <inheritdoc/>
@@ -239,6 +241,32 @@ namespace System.BLL.UserManagement
             }
         }
 
+        public async Task<bool> AddRoleToUser(int userId, int roleId)
+        {
+            var realUser = await _userManager.FindByIdAsync(userId.ToString());
+            if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
+            
+            var realRole = await _roleManager.FindByIdAsync(userId.ToString());
+            if (realRole == null) throw new ArgumentNullException($"Role with Id: {roleId} not found");
+            
+            var result = await _userManager.AddToRoleAsync(realUser, realRole.Name);
+
+            return result.Succeeded;
+        }
+
+        public async Task<bool> RemoveUsersRole(int userId, int roleId)
+        {
+            var realUser = await _userManager.FindByIdAsync(userId.ToString());
+            if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
+            
+            var realRole = await _roleManager.FindByIdAsync(userId.ToString());
+            if (realRole == null) throw new ArgumentNullException($"Role with Id: {roleId} not found");
+            
+            var result = await _userManager.RemoveFromRoleAsync(realUser, realRole.Name);
+
+            return result.Succeeded;
+        }
+        
         #region private helper methods
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.PaymentManagement;
-using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;
@@ -10,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace System.BLL.PaymentManagement
 {
-    public class PaymentService : Repository<int, Payment, PaymentModel,PaymentModel,PaymentModel>, IPaymentService
+    public class PaymentService : Repository<int, Payment, PaymentModel, PaymentModel, PaymentModel>, IPaymentService
     {
         public PaymentService(DataContext context, IMapper mapper) : base(context, mapper)
         {
@@ -20,7 +19,7 @@ namespace System.BLL.PaymentManagement
         public override async Task<PaymentModel> AddAsync(PaymentModel entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-            
+
             if (entity.Id != 0 && _context.Payments.Any(ev => ev.Id == entity.Id))
                 throw new AppException("Payment" +
                                        " already exist.");
@@ -37,7 +36,7 @@ namespace System.BLL.PaymentManagement
 
             return entity;
         }
-        
+
         public override async Task<PaymentModel> UpdateAsync(int id, PaymentModel updatedGroup)
         {
             if (_context.Events.SingleOrDefaultAsync(evnt => evnt.Id == id) == null)
@@ -58,16 +57,14 @@ namespace System.BLL.PaymentManagement
 
             return updatedGroup;
         }
-        
-        public async Task UpdatePaymentToUserAsync(User user, DateTime month, decimal sum)
-        {
-            if (user == null) throw new ArgumentNullException(nameof(user));
 
-            var userCheck = await _context.Users.FindAsync(user);
+        public async Task<PaymentModel> UpdatePaymentToUserAsync(int userId, DateTime month, decimal sum)
+        {
+            var userCheck = await _context.Users.FindAsync(userId);
             if (userCheck == null) throw new AppException("User not found");
 
             var payment = await _context.Payments
-                .FirstOrDefaultAsync(p => p.User == user);
+                .FirstOrDefaultAsync(p => p.User == userCheck);
 
             switch ((Month) month.Month)
             {
@@ -110,6 +107,8 @@ namespace System.BLL.PaymentManagement
                 default:
                     throw new AppException("Month was provided in incorrect format");
             }
+
+            return _mapper.Map<PaymentModel>(payment);
         }
     }
 }
