@@ -1,49 +1,70 @@
-﻿using System.BLL.Models.RoleManagement;
+﻿using System;
+using System.BLL.Models.RoleManagement;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BlazorClient.Services.RoleManagement
 {
     public class RoleService : IRoleService
     {
-        public RoleService()
+        private readonly HttpClient _http;
+        private readonly string _url = "Roles";
+        public RoleService(HttpClient http)
         {
+            _http = http ?? throw new ArgumentNullException(nameof(http));
+            
         }
 
 
-        public async Task<List<RoleModel>> GetAllAsync()
+         public virtual async Task<IEnumerable<RoleModel>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            var items = await _http.GetFromJsonAsync<List<RoleModel>>($"{_url}");
+
+            return items;
         }
 
-        public async Task<RoleModel> GetAsync(int id)
+        public virtual async Task<RoleModel> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var item = await _http.GetFromJsonAsync<RoleModel>(_url + $"/{id}");
+
+            return item;
         }
 
-        public async Task<RoleModel> AddAsync(RoleModel role)
+        public virtual async Task<RoleModel> AddAsync(RoleModel entity)
         {
-            throw new System.NotImplementedException();
+            var response = await _http.PostAsJsonAsync(_url, entity);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var responseText = await response.Content.ReadAsStringAsync();
+                var responseObj = JsonConvert.DeserializeObject<RoleModel>(responseText);
+                return responseObj;
+            }
+
+            throw new HttpRequestException("Smth goes wrong in repo");
         }
 
-        public async Task<RoleModel> UpdateAsync(int roleId, RoleModel role)
+        public virtual async Task<RoleModel> UpdateAsync(int id, RoleModel updatedGroup)
         {
-            throw new System.NotImplementedException();
+            var response = await _http.PutAsJsonAsync($"{_url}/{id}", updatedGroup);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var responseText = await response.Content.ReadAsStringAsync();
+                var responseObj = JsonConvert.DeserializeObject<RoleModel>(responseText);
+                return responseObj;
+            }
+
+            throw new HttpRequestException("Smth goes wrong in repo");
         }
 
-        public async Task DeleteAsync(int roleId)
+        public virtual async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            await _http.DeleteAsync($"{_url}/{id}");
         }
 
-        public async Task<bool> AddRoleToUser(string username, string roleName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<bool> RemoveUsersRole(string username, string roleName)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

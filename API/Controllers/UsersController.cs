@@ -1,14 +1,11 @@
 ﻿using System.API.Helpers;
 using System.BLL.EmailManagement;
-using System.BLL.Helpers;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
-using System.DAL.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -68,10 +65,18 @@ namespace System.API.Controllers
             });
         }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            await _userService.LogoutAsync();
+            return Ok();
+        }
+
         [AllowAnonymous]
         //[Authorize(Roles = "main_admin,admin")]
         [HttpPost]
-        public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) => Ok(await _userService.AddAsync(model, model.Password));
+        public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
+            Ok(await _userService.AddAsync(model, model.Password));
 
         //[Authorize(Roles = "main_admin,admin")]
         [HttpGet]
@@ -162,7 +167,7 @@ namespace System.API.Controllers
 
             return Ok();
         }
-        
+
         [HttpPost("{id}/AddRole")]
         public async Task<bool> AddRoleToUser(int id, int roleId)
         {

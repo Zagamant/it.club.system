@@ -1,9 +1,4 @@
-﻿using System;
-using System.BLL.Models.ClubManagement;
-using System.BLL.Models.GroupManagement;
-using System.DAL.Entities;
-using System.DAL.Entities.Enums;
-using System.Linq;
+﻿using System.BLL.Models.GroupManagement;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -35,7 +30,6 @@ namespace BlazorClient.Services.GroupManagement
             }
 
             throw new HttpRequestException("Smth goes wrong in repo");
-
         }
 
         public async Task<GroupModel> RemoveStudentAsync(int groupId, int userId)
@@ -54,7 +48,6 @@ namespace BlazorClient.Services.GroupManagement
             }
 
             throw new HttpRequestException("Smth goes wrong in repo");
-
         }
     }
 }

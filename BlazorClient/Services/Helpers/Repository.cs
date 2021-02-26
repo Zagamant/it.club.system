@@ -20,7 +20,7 @@ namespace BlazorClient.Services.Helpers
         public Repository(HttpClient http/*, string url*/)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
-            _url = this.GetType().Name.Replace("Service", String.Empty);
+            _url = this.GetType().Name.Replace("Service", "s");
             //_url = url ?? throw new ArgumentNullException(nameof(http));     
         }
 

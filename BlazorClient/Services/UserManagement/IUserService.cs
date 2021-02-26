@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.DAL.Entities;
 using System.Threading.Tasks;
 
-namespace System.BLL.UserManagement
+namespace BlazorClient.Services.UserManagement
 {
     /// <summary>
     /// Represent user management service.
@@ -20,8 +20,6 @@ namespace System.BLL.UserManagement
 
         Task LogoutAsync();
 
-        Task<int> GetIdAsync(User user);
-
         /// <summary>
         /// GetIdAsync all users from database.
         /// </summary>
@@ -36,26 +34,11 @@ namespace System.BLL.UserManagement
         Task<UserModel> GetAsync(int id);
 
         /// <summary>
-        /// GetIdAsync 1 user from database by username.
-        /// </summary>
-        /// <param name="username">A user username.</param>
-        /// <returns></returns>
-        Task<UserModel> GetAsync(string username);
-
-        /// <summary>
-        /// GetIdAsync 1 user from database by username.
-        /// </summary>
-        /// <param name="username">A user username.</param>
-        /// <returns></returns>
-        Task<UserModel> GetByEmailAsync(string email);
-
-        /// <summary>
         /// AddAsync new user and return it back
         /// </summary>
-        /// <param name="user">A <see cref="User"/>.</param>
-        /// <param name="password">Password</param>
+        /// <param name="user">A <see cref="UserRegister"/>.</param>
         /// <returns>A <see cref="User"/></returns>
-        Task<UserModel> AddAsync(UserModel user, string password);
+        Task<UserModel> AddAsync(UserRegister user);
 
         /// <summary>
         /// UpdateAsync existed user.
@@ -72,10 +55,9 @@ namespace System.BLL.UserManagement
 
         Task ConfirmEmailAsync(ConfirmEmailModel model);
 
-        Task<string> GenerateConfirmationEmailAsync(ConfirmEmailModel userModel);
-
-        Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel);
-
-        Task ResetPasswordAsync(ResetPasswordModel userModel);
+        Task ForgotPasswordAsync(ForgotPasswordModel userModel);
+        
+        Task<bool> AddRole(int userId, int roleId);
+        Task<bool> RemoveRole(int userId, int roleId);
     }
 }

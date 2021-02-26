@@ -1,9 +1,10 @@
-﻿using System.BLL.Helpers;
-using System.BLL.Models.RoomManagement;
+﻿using System.BLL.Models.RoomManagement;
+using BlazorClient.Services.Helpers;
 
-namespace System.BLL.RoomManagement
+namespace BlazorClient.Services.RoomManagement
 {
-    public interface IRoomService : BlazorClient.Services.Helpers.IRepository<int, RoomCreateModel, RoomModel, RoomModel>
+    public interface
+        IRoomService : IRepository<int, RoomCreateModel, RoomModel, RoomModel>
     {
     }
 }
