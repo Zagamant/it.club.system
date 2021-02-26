@@ -67,6 +67,14 @@ namespace System.API
 						opt.SerializerSettings.Converters.Add(new StringEnumConverter());
 						opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 					});
+			
+			// services.AddControllers()
+			// 	.AddJsonOptions(opt =>
+			// 	{
+			// 		opt.JsonSerializerOptions
+			// 			.ReferenceHandler = ReferenceHandler.Preserve;
+			// 		opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			// 	});
 
 			// Auto Mapper Configurations
 			var mappingConfig = new MapperConfiguration(mapperConfig =>

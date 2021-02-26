@@ -1,8 +1,11 @@
 using System;
+using BlazorClient.Services.UserManagement;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Text;
+using BlazorClient.Services.AuthenticationManagement;
+using BlazorClient.Services.LocalStorageManagement;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +22,11 @@ namespace BlazorClient
 
             builder.Services.AddScoped(
                 sp => new HttpClient {BaseAddress = new Uri("https://localhost:44365/" + "api/v1/")});
-                // sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
+            // sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
+
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             builder.Services.AddOidcAuthentication(options =>
             {
@@ -27,6 +34,8 @@ namespace BlazorClient
                 // For more information, see https://aka.ms/blazor-standalone-auth
                 builder.Configuration.Bind("Local", options.ProviderOptions);
             });
+
+            builder.Services.AddAntDesign();
 
             await builder.Build().RunAsync();
         }

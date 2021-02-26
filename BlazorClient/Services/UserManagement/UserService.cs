@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorClient.Services.UserManagement
 {
@@ -29,7 +30,7 @@ namespace BlazorClient.Services.UserManagement
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<UserModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
                 return responseObj;
             }
 
@@ -44,7 +45,7 @@ namespace BlazorClient.Services.UserManagement
         /// <inheritdoc/>
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
-            var items = await _http.GetFromJsonAsync<List<UserModel>>($"{_url}");
+            var items = await _http.GetFromJsonAsync<IEnumerable<UserModel>>($"{_url}");
 
             return items;
         }
@@ -65,7 +66,7 @@ namespace BlazorClient.Services.UserManagement
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<UserModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
                 return responseObj;
             }
 
@@ -80,7 +81,7 @@ namespace BlazorClient.Services.UserManagement
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<UserModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
                 return responseObj;
             }
 
@@ -115,13 +116,13 @@ namespace BlazorClient.Services.UserManagement
         public async Task<bool> AddRole(int userId, int roleId)
         {
             var responce = await _http.PostAsJsonAsync($"{_url}/AddRole", new {userId, roleId});
-            return JsonConvert.DeserializeObject<bool>(await responce.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<bool>(await responce.Content.ReadAsStringAsync());
         }
 
         public async Task<bool> RemoveRole(int userId, int roleId)
         {
             var responce = await _http.PostAsJsonAsync($"{_url}/RemoveRole", new {userId, roleId});
-            return JsonConvert.DeserializeObject<bool>(await responce.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<bool>(await responce.Content.ReadAsStringAsync());
         }
         
     }

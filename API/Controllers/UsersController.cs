@@ -2,6 +2,8 @@
 using System.BLL.EmailManagement;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
+using System.Collections;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -80,7 +82,7 @@ namespace System.API.Controllers
 
         //[Authorize(Roles = "main_admin,admin")]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetAll()
         {
             try
             {

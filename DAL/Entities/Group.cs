@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.DAL.Entities.Enums;
+using System.Text.Json.Serialization;
 
 namespace System.DAL.Entities
 {
@@ -17,6 +18,7 @@ namespace System.DAL.Entities
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 		public int Capacity { get; set; }
+		[JsonConverter(typeof(JsonStringEnumConverter))] 
 		public virtual GroupStatus Status { get; set; }
 		public virtual ICollection<User> Users { get; set; } = new List<User>();
 
