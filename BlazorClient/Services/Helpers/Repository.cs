@@ -1,11 +1,11 @@
 ﻿using System;
-using System.BLL.Helpers;
 using System.BLL.Models.Helpers;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using BlazorClient.Helpers;
 
 namespace BlazorClient.Services.Helpers
 {
@@ -30,14 +30,15 @@ namespace BlazorClient.Services.Helpers
                                                                    $"{(string.IsNullOrEmpty(sort) ? "" : $"sort={sort}")}" +
                                                                    $"{(string.IsNullOrEmpty(page) ? "" : $"page={page}")}" +
                                                                    $"{(string.IsNullOrEmpty(pageSize) ? "" : $"pageSize={pageSize}")}" +
-                                                                   $"{(string.IsNullOrEmpty(filter) ? "" : $"filter={filter}")}");
+                                                                   $"{(string.IsNullOrEmpty(filter) ? "" : $"filter={filter}")}"
+                , MyOptions.JsonSerializerWebOptions);
 
             return items;
         }
 
         public virtual async Task<TModel> GetAsync(TId id)
         {
-            var item = await _http.GetFromJsonAsync<TModel>(_url + $"/{id}");
+            var item = await _http.GetFromJsonAsync<TModel>(_url + $"/{id}", MyOptions.JsonSerializerWebOptions);
 
             return item;
         }
@@ -49,7 +50,7 @@ namespace BlazorClient.Services.Helpers
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<TModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
                 return responseObj;
             }
 
@@ -63,7 +64,7 @@ namespace BlazorClient.Services.Helpers
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<TModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
                 return responseObj;
             }
 

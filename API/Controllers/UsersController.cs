@@ -33,6 +33,13 @@ namespace System.API.Controllers
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _appSettings = appSettings.Value ?? throw new ArgumentNullException(nameof(appSettings));
         }
+        
+        [AllowAnonymous]
+        //[Authorize(Roles = "main_admin,admin")]
+        [HttpPost]
+        public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
+            Ok(await _userService.AddAsync(model, model.Password));
+
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -62,7 +69,9 @@ namespace System.API.Controllers
             return Ok(new
             {
                 user.Id,
-                Username = user.UserName,
+                UserName = user.UserName,
+                Name = user.Name,
+                Surname = user.Surname,
                 Token = tokenString
             });
         }
@@ -74,12 +83,7 @@ namespace System.API.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
-        //[Authorize(Roles = "main_admin,admin")]
-        [HttpPost]
-        public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
-            Ok(await _userService.AddAsync(model, model.Password));
-
+       
         //[Authorize(Roles = "main_admin,admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAll()
@@ -103,8 +107,8 @@ namespace System.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UserModel model) =>
-            Ok(await _userService.UpdateAsync(id, model));
+        public async Task<IActionResult> Update(int id, [FromBody] UserModel model, string password = null) =>
+            Ok(await _userService.UpdateAsync(id, model, password));
 
         //[Authorize(Roles = "main_admin,admin")]
         [HttpDelete("{id}")]

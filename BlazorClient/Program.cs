@@ -1,15 +1,13 @@
 using System;
 using BlazorClient.Services.UserManagement;
 using System.Net.Http;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
+using BlazorClient.Services.AccountManagement;
+using BlazorClient.Services.AlertManagement;
 using BlazorClient.Services.AuthenticationManagement;
 using BlazorClient.Services.LocalStorageManagement;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorClient
 {
@@ -20,24 +18,29 @@ namespace BlazorClient
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(
-                sp => new HttpClient {BaseAddress = new Uri("https://localhost:44365/" + "api/v1/")});
-            // sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
+            builder.Services.AddScoped<IUserService, UserService>()
+                .AddScoped<ILocalStorageService, LocalStorageService>()
+                .AddScoped<IAuthenticationService, AuthenticationService>()
+                .AddScoped<IAccountService, AccountService>()
+                .AddScoped<IAlertService, AlertService>();
 
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
-            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-
-            builder.Services.AddOidcAuthentication(options =>
+            builder.Services.AddTransient(x =>
             {
-                // Configure your authentication provider options here.
-                // For more information, see https://aka.ms/blazor-standalone-auth
-                builder.Configuration.Bind("Local", options.ProviderOptions);
+                var apiUrl = new Uri(builder.Configuration["apiUrl"]);
+                
+                return new HttpClient {BaseAddress = apiUrl};
+                //  sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
             });
 
+            
             builder.Services.AddAntDesign();
 
-            await builder.Build().RunAsync();
+            var host = builder.Build();
+
+            var accountService = host.Services.GetRequiredService<IAccountService>();
+            await accountService.Initialize();
+
+            await host.RunAsync();
         }
     }
 }

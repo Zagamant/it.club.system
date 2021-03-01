@@ -1,0 +1,69 @@
+﻿@page "/account/login"
+@using BlazorClient.Services.AccountManagement
+@using BlazorClient.Services.AlertManagement
+@using System.BLL.Models.UserManagement
+@using System.Threading
+@inject IAccountService AccountService
+@inject IAlertService AlertService
+@inject NavigationManager NavigationManager
+
+<div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="card-body">
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="model.UserName" class="form-control" />
+                <ValidationMessage For="@(() => model.UserName)" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="model.Password" type="password" class="form-control" />
+                <ValidationMessage For="@(() => model.Password)" />
+            </div>
+            <button disabled="@loading" class="btn btn-primary">
+                @if (loading) 
+                {
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                }
+                Login
+            </button>
+            <NavLink href="account/register" class="btn btn-link">Register</NavLink>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private Models.Account.Login model = new();
+    private UserLoginData user = new();
+    private bool loading;
+
+    private string error = "asd";
+
+    private async void OnValidSubmit()
+    {
+        // reset alerts on submit
+        AlertService.Clear();
+
+        loading = true;
+        try
+        {
+            user = await AccountService.Login(model);
+            var returnUrl = NavigationManager.QueryString("returnUrl") ?? NavigationManager.BaseUri;
+            NavigationManager.NavigateTo(returnUrl, true);
+        }
+        catch (Exception ex)
+        {
+            AlertService.Error(ex.Message);
+            error = (ex.Message);
+            loading = false;
+            StateHasChanged();
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+}

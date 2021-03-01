@@ -16,23 +16,30 @@
 @*         </div> *@
 @*     </div> *@
 @* </div> *@
+@* *@
 
-@using BlazorClient.Services.AuthenticationManagement
+@using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
-@inject IAuthenticationService AuthenticationService
+@inject IAccountService AccountService
 @inject NavigationManager NavigationManager
 
-@if (AuthenticationService.User != null)
+@if (LoggedIn)
 {
     <!-- nav -->
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="navbar-nav">
             <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link">Home</NavLink>
-            <NavLink href="logout" class="nav-item nav-link">Logout</NavLink>
+            <NavLink href="users" class="nav-item nav-link">Users</NavLink>
+            <NavLink href="account/logout" class="nav-item nav-link">Logout</NavLink>
         </div>
     </nav>
 }
 
-<div class="container">
+<div class="app-container @(LoggedIn ? "bg-light" : "")">
+    <AlertCustom />
     @Body
 </div>
+
+@code {
+    private bool LoggedIn => AccountService.User != null;
+}

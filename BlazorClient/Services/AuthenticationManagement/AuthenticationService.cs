@@ -1,11 +1,11 @@
 ﻿using System.BLL.Models.UserManagement;
-using System.DAL.Entities;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
+using BlazorClient.Helpers;
 using BlazorClient.Services.LocalStorageManagement;
 using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
 
 namespace BlazorClient.Services.AuthenticationManagement
 {
@@ -42,7 +42,7 @@ namespace BlazorClient.Services.AuthenticationManagement
             if (response.IsSuccessStatusCode)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonConvert.DeserializeObject<UserModel>(responseText);
+                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText, MyOptions.JsonSerializerWebOptions);
                 User = responseObj;
             }
 

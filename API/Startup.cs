@@ -25,6 +25,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace System.API
 {
@@ -66,6 +67,7 @@ namespace System.API
 					{
 						opt.SerializerSettings.Converters.Add(new StringEnumConverter());
 						opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+						
 					});
 			
 			// services.AddControllers()

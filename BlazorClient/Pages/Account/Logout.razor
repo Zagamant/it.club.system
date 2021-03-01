@@ -1,0 +1,11 @@
+﻿@page "/account/logout"
+@using BlazorClient.Services.AccountManagement
+@layout MainLayout
+@inject IAccountService AccountService
+
+@code {
+    protected override async void OnInitialized()
+    {
+        await AccountService.Logout();
+    }
+}
