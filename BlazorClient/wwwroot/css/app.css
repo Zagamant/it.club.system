@@ -8,6 +8,10 @@ a, .btn-link {
     color: #0366d6;
 }
 
+#app {
+    height: 100vh;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -42,9 +46,29 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.login-bg-image {
+    background-image: url(../assets/images/bg.jpg);
+    background-repeat: no-repeat;
+    background-position: top left;
+    height: 100%;
+    width: 100%;
+}
+
+.paper {
+    display: flex;
+    margin: 0 20%;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+.paper>* {
+    margin-top: 5px;
+}

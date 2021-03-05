@@ -6,6 +6,9 @@ using BlazorClient.Services.AccountManagement;
 using BlazorClient.Services.AlertManagement;
 using BlazorClient.Services.AuthenticationManagement;
 using BlazorClient.Services.LocalStorageManagement;
+using Blazorise;
+using Blazorise.AntDesign;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,13 +30,15 @@ namespace BlazorClient
             builder.Services.AddTransient(x =>
             {
                 var apiUrl = new Uri(builder.Configuration["apiUrl"]);
-                
+
                 return new HttpClient {BaseAddress = apiUrl};
                 //  sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
             });
 
-            
-            builder.Services.AddAntDesign();
+
+            builder.Services.AddBlazorise(opt => { opt.ChangeTextOnKeyPress = true; })
+                .AddAntDesignProviders()
+                .AddFontAwesomeIcons();
 
             var host = builder.Build();
 

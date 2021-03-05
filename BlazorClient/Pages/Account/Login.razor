@@ -2,48 +2,72 @@
 @using BlazorClient.Services.AccountManagement
 @using BlazorClient.Services.AlertManagement
 @using System.BLL.Models.UserManagement
-@using System.Threading
 @inject IAccountService AccountService
 @inject IAlertService AlertService
 @inject NavigationManager NavigationManager
 
-<div class="card">
-    <h4 class="card-header">Login</h4>
-    <div class="card-body">
-        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-            <DataAnnotationsValidator />
-            <div class="form-group">
-                <label>Username</label>
-                <InputText @bind-Value="model.UserName" class="form-control" />
-                <ValidationMessage For="@(() => model.UserName)" />
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <InputText @bind-Value="model.Password" type="password" class="form-control" />
-                <ValidationMessage For="@(() => model.Password)" />
-            </div>
-            <button disabled="@loading" class="btn btn-primary">
-                @if (loading) 
-                {
-                    <span class="spinner-border spinner-border-sm mr-1"></span>
-                }
-                Login
-            </button>
-            <NavLink href="account/register" class="btn btn-link">Register</NavLink>
-        </EditForm>
-    </div>
-</div>
+
+<Row Class="vh-100">
+    <Column ColumnSize="ColumnSize.Is7.OnDesktop.Is7.OnTablet.Is4">
+        <div class="login-bg-image"></div>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is5.OnDesktop.Is5.OnTablet.Is8.OnMobile.Is12">
+        <div class="paper">
+            <Form>
+                @* <DataAnnotationsValidator/> *@
+                <Validation Validator="@ValidateUsername">
+                    <Field>
+                        <FieldLabel>Username</FieldLabel>
+                        <TextEdit Placeholder="Enter username" @bind-Text="model.UserName" ChangeTextOnKeyPress="true"/>
+                        @* <ValidationMessage For="@(() => model.UserName)"/> *@
+
+                    </Field>
+                </Validation>
+                @* <div class="form-group"> *@
+                @*     <label>Username</label> *@
+                @*     <InputText @bind-Value="model.UserName" class="form-control" /> *@
+                @*     <ValidationMessage For="@(() => model.UserName)" /> *@
+                @* </div> *@
+                <Validation Validator="@ValidatePassword">
+                    <Field>
+                        <FieldLabel>Password</FieldLabel>
+                        <TextEdit Placeholder="Enter username" @bind-Text="model.Password" type="password"/>
+                        @* <ValidationMessage For="@(() => model.UserName)"/> *@
+
+                    </Field>
+                </Validation>
+                @* <div class="form-group"> *@
+                @*     <label>Password</label> *@
+                @*     <InputText @bind-Value="model.Password" type="password" class="form-control"/> *@
+                @*     <ValidationMessage For="@(() => model.Password)"/> *@
+                @* </div> *@
+                <Button  Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
+                    Login
+                </Button>
+                @* <button disabled="@loading" class="btn btn-primary"> *@
+                @*     @if (loading) *@
+                @*     { *@
+                @*         <span class="spinner-border spinner-border-sm mr-1"></span> *@
+                @*     } *@
+                @*     Login *@
+                @* </button> *@
+                <Button Class="register-button" Color="Color.Light" Type="ButtonType.Link" To="account/register">
+                    Register
+                </Button>
+            </Form>
+        </div>
+    </Column>
+</Row>
+
 
 @code {
     private Models.Account.Login model = new();
     private UserLoginData user = new();
     private bool loading;
 
-    private string error = "asd";
-
     private async void OnValidSubmit()
     {
-        // reset alerts on submit
+    // reset alerts on submit
         AlertService.Clear();
 
         loading = true;
@@ -51,12 +75,11 @@
         {
             user = await AccountService.Login(model);
             var returnUrl = NavigationManager.QueryString("returnUrl") ?? NavigationManager.BaseUri;
-            NavigationManager.NavigateTo(returnUrl, true);
+    // NavigationManager.NavigateTo(returnUrl, true);
         }
         catch (Exception ex)
         {
             AlertService.Error(ex.Message);
-            error = (ex.Message);
             loading = false;
             StateHasChanged();
             Console.WriteLine(ex.Message);
@@ -66,4 +89,23 @@
             loading = false;
         }
     }
+
+    void ValidateUsername(ValidatorEventArgs e)
+    {
+        var username = Convert.ToString(e.Value);
+
+        e.Status = !string.IsNullOrEmpty(username) ? ValidationStatus.Success : ValidationStatus.Error;
+    }
+
+    private void ValidatePassword(ValidatorEventArgs e)
+    {
+        var password = Convert.ToString(e.Value);
+
+        e.Status = string.IsNullOrEmpty(password) ? ValidationStatus.Error :
+            password.Length < 8 ? ValidationStatus.Error :
+                password.Any(char.IsUpper) ? password.Any(char.IsLower) ? ValidationStatus.Success :
+                    ValidationStatus.Error :
+                    ValidationStatus.Error;
+    }
+
 }
