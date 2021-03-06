@@ -11,14 +11,18 @@
     <Column ColumnSize="ColumnSize.Is7.OnDesktop.Is7.OnTablet.Is4">
         <div class="login-bg-image"></div>
     </Column>
-    <Column ColumnSize="ColumnSize.Is5.OnDesktop.Is5.OnTablet.Is8.OnMobile.Is12">
+    <Column ColumnSize="ColumnSize.Is5.OnDesktop.Is5.OnTablet.Is8.OnMobile.Is12" Class="shadow">
         <div class="paper">
-            <Form>
+            <Form class="w-100">
+                <Heading Size="HeadingSize.Is1">Sign In</Heading>
                 @* <DataAnnotationsValidator/> *@
                 <Validation Validator="@ValidateUsername">
                     <Field>
-                        <FieldLabel>Username</FieldLabel>
-                        <TextEdit Placeholder="Enter username" @bind-Text="model.UserName" ChangeTextOnKeyPress="true"/>
+                        <FieldLabel Class="h2">Username</FieldLabel>
+                        <FieldBody >
+                            <TextEdit Placeholder="Enter username" @bind-Text="model.UserName" ChangeTextOnKeyPress="true"/>
+                        </FieldBody>
+
                         @* <ValidationMessage For="@(() => model.UserName)"/> *@
 
                     </Field>
@@ -30,8 +34,10 @@
                 @* </div> *@
                 <Validation Validator="@ValidatePassword">
                     <Field>
-                        <FieldLabel>Password</FieldLabel>
-                        <TextEdit Placeholder="Enter username" @bind-Text="model.Password" type="password"/>
+                        <FieldLabel Class="h2">Password</FieldLabel>
+                        <FieldBody >
+                            <TextEdit Placeholder="Enter password" @bind-Text="model.Password" type="password"/>
+                        </FieldBody>
                         @* <ValidationMessage For="@(() => model.UserName)"/> *@
 
                     </Field>
@@ -41,7 +47,7 @@
                 @*     <InputText @bind-Value="model.Password" type="password" class="form-control"/> *@
                 @*     <ValidationMessage For="@(() => model.Password)"/> *@
                 @* </div> *@
-                <Button  Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
+                <Button Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
                     Login
                 </Button>
                 @* <button disabled="@loading" class="btn btn-primary"> *@
@@ -51,7 +57,7 @@
                 @*     } *@
                 @*     Login *@
                 @* </button> *@
-                <Button Class="register-button" Color="Color.Light" Type="ButtonType.Link" To="account/register">
+                <Button Class="register-button mt-0" Color="Color.Light" Type="ButtonType.Link" To="account/register">
                     Register
                 </Button>
             </Form>
