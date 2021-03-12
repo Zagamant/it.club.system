@@ -8,12 +8,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.GroupManagement
 {
     public class GroupService : Repository<int, Group, GroupModel, GroupModel, GroupModel>, IGroupService
     {
-        public GroupService(DataContext context, IMapper mapper) : base(context, mapper)
+        public GroupService(DataContext context, IMapper mapper, ILogger<GroupService> logger) : base(context, mapper, logger)
         {
             _table = _context.Groups;
         }

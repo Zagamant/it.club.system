@@ -7,12 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.CostManagement
 {
     public class CostsService :  Repository<int, Costs, CostsModel,CostsModel,CostsModel>, ICostsService
     {
-        public CostsService(DataContext context, IMapper mapper) : base(context, mapper)
+        public CostsService(DataContext context, IMapper mapper, ILogger<CostsService> logger) : base(context, mapper, logger)
         {
             _table = _context.Costs;
         }

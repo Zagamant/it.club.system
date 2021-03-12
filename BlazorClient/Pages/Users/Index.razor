@@ -16,7 +16,7 @@
         <DataGridColumns>
             <DataGridCommandColumn TItem="UserModel">
                 <DeleteCommandTemplate>
-                    <Button Color="Color.Danger"Clicked="@context.Clicked">Delete</Button>
+                    <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
                 </DeleteCommandTemplate>
             </DataGridCommandColumn>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Username"/>
@@ -33,48 +33,6 @@
             </DataGridColumn>
         </DataGridColumns>
     </DataGrid>
-    @* <thead> *@
-    @* <tr> *@
-    @*     <th style="width: 30%">First Name</th> *@
-    @*     <th style="width: 30%">Last Name</th> *@
-    @*     <th style="width: 30%">Username</th> *@
-    @*     <th style="width: 10%"></th> *@
-    @* </tr> *@
-    @* </thead> *@
-    @* <tbody> *@
-    @* @if (users != null) *@
-    @* { *@
-    @*     foreach (var user in users) *@
-    @*     { *@
-    @*         <tr> *@
-    @*             <td>@user.Name</td> *@
-    @*             <td>@user.Surname</td> *@
-    @*             <td>@user.UserName</td> *@
-    @*             <td style="white-space: nowrap"> *@
-    @*                 <NavLink href="@($"users/edit/{user.Id}")" class="btn btn-sm btn-primary mr-1">Edit</NavLink> *@
-    @*                 <button @onclick="@(() => DeleteUser(user.Id))" disabled="@IsDeleting" class="btn btn-sm btn-danger btn-delete-user"> *@
-    @*                     @if (IsDeleting) *@
-    @*                     { *@
-    @*                         <span class="spinner-border spinner-border-sm"></span> *@
-    @*                     } *@
-    @*                     else *@
-    @*                     { *@
-    @*                         <span>Delete</span> *@
-    @*                     } *@
-    @*                 </button> *@
-    @*             </td> *@
-    @*         </tr> *@
-    @*     } *@
-    @* } *@
-    @* @if (loading) *@
-    @* { *@
-    @*     <tr> *@
-    @*         <td colspan="4" class="text-center"> *@
-    @*             <span class="spinner-border spinner-border-lg align-center"></span> *@
-    @*         </td> *@
-    @*     </tr> *@
-    @* } *@
-    @* </tbody> *@
 </table>
 
 @code {

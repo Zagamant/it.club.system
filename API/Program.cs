@@ -1,6 +1,8 @@
 using System.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace System.API
 {
@@ -8,7 +10,26 @@ namespace System.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateBootstrapLogger();
+            
+            Log.Information("Starting up!");
+            
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+
+                Log.Information("Stopped cleanly");
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "An unhandled exception occured during bootstrapping");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -17,6 +38,14 @@ namespace System.API
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseUrls("http://localhost:4000");
+                    webBuilder.ConfigureLogging(logging =>
+                    {
+                        logging.AddSerilog();
+                        logging.AddConsole();
+                        logging.AddDebug();
+                        logging.SetMinimumLevel(LogLevel.Trace);
+                        
+                    });
                 });
     }
 }

@@ -5,13 +5,14 @@ using System.DAL.Entities;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.AgreementManagement
 {
     public class AgreementService : Repository<int, Agreement, AgreementModel, AgreementModel, AgreementModel>,
         IAgreementService
     {
-        public AgreementService(DataContext context, IMapper mapper) : base(context, mapper)
+        public AgreementService(DataContext context, IMapper mapper, ILogger<AgreementService> logger) : base(context, mapper, logger)
         {
             _table = _context.Agreements;
         }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.ClubManagement
 {
@@ -18,7 +19,7 @@ namespace System.BLL.ClubManagement
         public ClubService(
             DataContext context,
             IMapper mapper,
-            RoleManager<Role> roleManager) : base(context, mapper)
+            RoleManager<Role> roleManager, ILogger<ClubService> logger) : base(context, mapper, logger)
         {
             _roleManager = roleManager;
             _table = _context.Clubs;

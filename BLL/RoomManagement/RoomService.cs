@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.RoomManagement
 {
     public class RoomService : Repository<int, Room, RoomCreateModel, RoomModel, RoomModel>, IRoomService
     {
-        public RoomService(DataContext context, IMapper mapper) : base(context, mapper)
+        public RoomService(DataContext context, IMapper mapper, ILogger<RoomService> logger) : base(context, mapper, logger)
         {
             _table = _context.Rooms;
         }

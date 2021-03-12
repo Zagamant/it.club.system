@@ -27,7 +27,7 @@ namespace System.BLL.RoleManagement
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<RoleModel>> GetAllAsync()
+        public async Task<IEnumerable<RoleModel>> GetAllAsync()
         {
             return await _context.Roles.Select(role => _mapper.Map<RoleModel>(role)).ToListAsync();
         }
@@ -53,14 +53,15 @@ namespace System.BLL.RoleManagement
 
         public async Task<RoleModel> UpdateAsync(int roleId, RoleModel role)
         {
-            var realRole = await _roleManager.FindByNameAsync(role.Name);
+            var realRole = await _roleManager.FindByIdAsync(roleId.ToString());
             
             if (realRole == null) throw new ArgumentNullException($"Role with name {role.Name} not found");
+            
             realRole.Name = role.Name;
             return _mapper.Map<RoleModel>(await _roleManager.UpdateAsync(realRole));
         }
 
-        public async Task DeleteAsync(int roleId)
+        public async Task RemoveAsync(int roleId)
         {
             var realRole = await _roleManager.FindByIdAsync(roleId.ToString());
             

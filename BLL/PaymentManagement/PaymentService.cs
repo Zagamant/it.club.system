@@ -1,28 +1,38 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.PaymentManagement;
+using System.BLL.PhotoManagement;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.PaymentManagement
 {
     public class PaymentService : Repository<int, Payment, PaymentModel, PaymentModel, PaymentModel>, IPaymentService
     {
-        public PaymentService(DataContext context, IMapper mapper) : base(context, mapper)
+        public PaymentService(DataContext context, IMapper mapper, ILogger<PaymentService> logger) : base(context, mapper, logger)
         {
             _table = _context.Payments;
         }
 
         public override async Task<PaymentModel> AddAsync(PaymentModel entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            _logger.LogInformation($"{DateTime.Now}: Adding new payment");
+            
+            if (entity == null)
+            {
+                _logger.LogError($"{DateTime.Now}: payment model was null");
+                throw new ArgumentNullException(nameof(entity));
+            }
 
             if (entity.Id != 0 && _context.Payments.Any(ev => ev.Id == entity.Id))
-                throw new AppException("Payment" +
-                                       " already exist.");
+            {
+                _logger.LogError($"{DateTime.Now}: Payment already exist");
+                throw new AppException("Payment already exist.");
+            }
 
             var map = _mapper.Map<Payment>(entity);
 

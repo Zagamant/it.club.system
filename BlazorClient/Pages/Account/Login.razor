@@ -68,20 +68,20 @@
 
 @code {
     private Models.Account.Login model = new();
-    private UserLoginData user = new();
+    private UserLoginData _user = new();
     private bool loading;
 
     private async void OnValidSubmit()
     {
-    // reset alerts on submit
+        // reset alerts on submit
         AlertService.Clear();
 
         loading = true;
         try
         {
-            user = await AccountService.Login(model);
-            var returnUrl = NavigationManager.QueryString("returnUrl") ?? NavigationManager.BaseUri;
-    // NavigationManager.NavigateTo(returnUrl, true);
+            _user = await AccountService.Login(model);
+            var returnUrl = NavigationManager.QueryString("returnUrl") ?? "/";
+            NavigationManager.NavigateTo(returnUrl, true);
         }
         catch (Exception ex)
         {

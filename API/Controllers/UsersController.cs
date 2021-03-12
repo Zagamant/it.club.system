@@ -2,7 +2,6 @@
 using System.BLL.EmailManagement;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
-using System.Collections;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -33,7 +32,7 @@ namespace System.API.Controllers
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _appSettings = appSettings.Value ?? throw new ArgumentNullException(nameof(appSettings));
         }
-        
+
         [AllowAnonymous]
         //[Authorize(Roles = "main_admin,admin")]
         [HttpPost]
@@ -83,7 +82,7 @@ namespace System.API.Controllers
             return Ok();
         }
 
-       
+
         //[Authorize(Roles = "main_admin,admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAll()
@@ -99,6 +98,7 @@ namespace System.API.Controllers
             }
         }
 
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -106,10 +106,13 @@ namespace System.API.Controllers
             return Ok(user);
         }
 
+        
+        [Authorize(Roles = "main_admin,admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));
 
+        
         //[Authorize(Roles = "main_admin,admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -133,6 +136,7 @@ namespace System.API.Controllers
                 $"To reset password follow link: <a href='{callbackUrl}'>link</a>");
         }
 
+        
         [HttpPost("SendEmailConfirmation")]
         public async Task SendEmailConfirmation()
         {
@@ -156,6 +160,7 @@ namespace System.API.Controllers
                 $"To confirm email follow link: <a href='{callbackUrl}'>link</a>");
         }
 
+        
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailModel model)
@@ -174,12 +179,14 @@ namespace System.API.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "main_admin")]
         [HttpPost("{id}/AddRole")]
         public async Task<bool> AddRoleToUser(int id, int roleId)
         {
             return await _userService.AddRoleToUser(id, roleId);
         }
 
+        [Authorize(Roles = "main_admin")]
         [HttpPost("{id}/RemoveRole")]
         public async Task<bool> RemoveRoleFromUser(int id, int roleId)
         {

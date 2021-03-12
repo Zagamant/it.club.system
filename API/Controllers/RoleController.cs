@@ -1,6 +1,7 @@
 ﻿using System.BLL.Models.RoleManagement;
 using System.BLL.RoleManagement;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,27 +27,63 @@ namespace System.API.Controllers
         {
            var result = await _service.GetAllAsync();
             Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
-            Response.Headers.Add("Content-Range", $"{result.Count}");
+            Response.Headers.Add("Content-Range", $"{result.Count()}");
 
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RoleModel>> GetAsync(int id) => Ok(await _service.GetAsync(id));
+        public async Task<ActionResult<RoleModel>> GetAsync(int id)
+        {
+            try
+            {
+                return Ok(await _service.GetAsync(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpPost]
-        public async Task<ActionResult<RoleModel>> Post([FromBody] RoleModel value) =>
-            StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
+        public async Task<ActionResult<RoleModel>> Post([FromBody] RoleModel value)
+        {
+            try
+            {
+                return StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<RoleModel>> Put(int id, [FromBody] RoleModel value) =>
-            Ok(await _service.UpdateAsync(id, value));
+        public async Task<ActionResult<RoleModel>> Put(int id, [FromBody] RoleModel value)
+        {
+            try
+            {
+                return Ok(await _service.UpdateAsync(id, value));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            await _service.DeleteAsync(id);
-            return NoContent();
+            try
+            {
+                await _service.RemoveAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -18,10 +18,10 @@ namespace System.BLL.UserManagement
     /// </summary>
     public class UserService : IUserService
     {
-        private DataContext _context;
-        private UserManager<User> _userManager;
-        private RoleManager<Role> _roleManager;
-        private SignInManager<User> _signInManager;
+        private readonly DataContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
 
         /// <summary>

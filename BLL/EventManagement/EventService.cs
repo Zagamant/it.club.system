@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.EventManagement
 {
     public class EventService : Repository<int, Event, EventModel,EventModel,EventModel>, IEventService
     {
-        public EventService(DataContext context, IMapper mapper) : base(context, mapper)
+        public EventService(DataContext context, IMapper mapper, ILogger<EventService> logger) : base(context, mapper, logger)
         {
             _table = _context.Events;
         }
