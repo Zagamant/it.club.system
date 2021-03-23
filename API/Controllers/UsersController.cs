@@ -1,5 +1,6 @@
 ﻿using System.API.Helpers;
 using System.BLL.EmailManagement;
+using System.BLL.Models.RoleManagement;
 using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
 using System.Collections.Generic;
@@ -38,8 +39,8 @@ namespace System.API.Controllers
         [HttpPost]
         public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
             Ok(await _userService.AddAsync(model, model.Password));
-
-
+        
+        
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticate model)
@@ -181,16 +182,16 @@ namespace System.API.Controllers
 
         [Authorize(Roles = "main_admin")]
         [HttpPost("{id}/AddRole")]
-        public async Task<bool> AddRoleToUser(int id, int roleId)
+        public async Task<bool> AddRoleToUser(int id, RoleModel role)
         {
-            return await _userService.AddRoleToUser(id, roleId);
+            return await _userService.AddRoleToUser(id, role.Name);
         }
 
         [Authorize(Roles = "main_admin")]
         [HttpPost("{id}/RemoveRole")]
-        public async Task<bool> RemoveRoleFromUser(int id, int roleId)
+        public async Task<bool> RemoveRoleFromUser(int id, RoleModel role)
         {
-            return await _userService.RemoveUsersRole(id, roleId);
+            return await _userService.RemoveUsersRole(id, role.Name);
         }
     }
 }

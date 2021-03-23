@@ -1,4 +1,5 @@
 ﻿using System.BLL.Helpers;
+using System.BLL.Models.RoleManagement;
 using System.BLL.Models.UserManagement;
 using System.Collections.Generic;
 using System.DAL;
@@ -241,28 +242,30 @@ namespace System.BLL.UserManagement
             }
         }
 
-        public async Task<bool> AddRoleToUser(int userId, int roleId)
+        public async Task<IEnumerable<string>> GetRoles(int userId)
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
             
-            var realRole = await _roleManager.FindByIdAsync(userId.ToString());
-            if (realRole == null) throw new ArgumentNullException($"Role with Id: {roleId} not found");
-            
-            var result = await _userManager.AddToRoleAsync(realUser, realRole.Name);
+            return await _userManager.GetRolesAsync(realUser);
+        }
+
+        public async Task<bool> AddRoleToUser(int userId, string role)
+        {
+            var realUser = await _userManager.FindByIdAsync(userId.ToString());
+            if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
+ 
+            var result = await _userManager.AddToRoleAsync(realUser, role);
 
             return result.Succeeded;
         }
 
-        public async Task<bool> RemoveUsersRole(int userId, int roleId)
+        public async Task<bool> RemoveUsersRole(int userId, string role)
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
             
-            var realRole = await _roleManager.FindByIdAsync(userId.ToString());
-            if (realRole == null) throw new ArgumentNullException($"Role with Id: {roleId} not found");
-            
-            var result = await _userManager.RemoveFromRoleAsync(realUser, realRole.Name);
+            var result = await _userManager.RemoveFromRoleAsync(realUser, role);
 
             return result.Succeeded;
         }

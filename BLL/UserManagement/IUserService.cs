@@ -1,4 +1,5 @@
-﻿using System.BLL.Models.UserManagement;
+﻿using System.BLL.Models.RoleManagement;
+using System.BLL.Models.UserManagement;
 using System.Collections.Generic;
 using System.DAL.Entities;
 using System.Threading.Tasks;
@@ -77,9 +78,9 @@ namespace System.BLL.UserManagement
         Task<string> ForgotPasswordAsync(ForgotPasswordModel userModel);
 
         Task ResetPasswordAsync(ResetPasswordModel userModel);
-        
-        
-        Task<bool> AddRoleToUser(int userId, int roleId);
-        Task<bool> RemoveUsersRole(int userId, int roleId);
+
+        Task<IEnumerable<string>> GetRoles(int userId);
+        Task<bool> AddRoleToUser(int userId, string role);
+        Task<bool> RemoveUsersRole(int userId, string role);
     }
 }
