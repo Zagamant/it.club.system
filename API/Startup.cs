@@ -85,6 +85,7 @@ namespace System.API
 				mapperConfig.AddProfile(new ClubManagementMappingProfile());
 				mapperConfig.AddProfile(new CourseManagementMappingProfile());
 				mapperConfig.AddProfile(new RoomManagementMappingProfile());
+				mapperConfig.AddProfile(new RoleManagementMappingProfile());
 				mapperConfig.AddProfile(new UserManagementMappingProfile());
 				mapperConfig.AddProfile(new CostsManagementMappingProfile());
 				mapperConfig.AddProfile(new CourseManagementMappingProfile());

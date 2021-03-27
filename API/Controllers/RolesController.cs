@@ -13,11 +13,11 @@ namespace System.API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class RoleController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly IRoleService _service;
 
-        public RoleController(IRoleService service)
+        public RolesController(IRoleService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }

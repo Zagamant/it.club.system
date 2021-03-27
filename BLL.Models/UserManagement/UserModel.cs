@@ -1,6 +1,8 @@
 ﻿using System.BLL.Models.Helpers;
+using System.BLL.Models.RoleManagement;
 using System.Collections.Generic;
 using System.DAL.Entities;
+using System.Threading.Tasks;
 
 namespace System.BLL.Models.UserManagement
 {
@@ -18,6 +20,7 @@ namespace System.BLL.Models.UserManagement
         public DateTime BirthDay { get; set; }
         public string AdditionalInfo { get; set; }
         public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
+        public virtual IList<string> Roles { get; set; } = new List<string>();
         public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
         public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
         public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();

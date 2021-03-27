@@ -61,9 +61,9 @@ namespace System.BLL.UserManagement
         /// <summary>
         /// UpdateAsync existed user.
         /// </summary>
-        /// <param name="model">A <see cref="User"/>.</param>
+        /// <param name="newUser">A <see cref="User"/>.</param>
         /// <param name="password">Passwords</param>
-        Task<UserModel> UpdateAsync(int id, UserModel model, string password = null);
+        Task<UserModel> UpdateAsync(int id, UserModel newUser, string password = null);
 
         /// <summary>
         /// DeleteAsync existed user by id.

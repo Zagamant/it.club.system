@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace System.API.Helpers
 {
@@ -23,16 +22,17 @@ namespace System.API.Helpers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TModel>>> Get(string sort = "",string page = "",string pageSize = "", string filter = "")
+        public async Task<ActionResult<IEnumerable<TModel>>> Get(string sort = "", string page = "1",
+            string pageSize = "10", string filter = "")
         {
             try
             {
                 int pageNumber = Int32.Parse(page);
                 int pageSizeNumber = Int32.Parse(pageSize);
-            
-                var from = (pageNumber-1)*pageSizeNumber;
-                var to = (pageNumber)*pageSizeNumber;
-            
+
+                var from = (pageNumber - 1) * pageSizeNumber;
+                var to = (pageNumber) * pageSizeNumber;
+
 
                 var result = await _service.GetAllAsync(sort, page, pageSize, filter);
                 Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
@@ -52,7 +52,6 @@ namespace System.API.Helpers
             try
             {
                 return Ok(await _service.GetAsync(id));
-
             }
             catch (Exception ex)
             {
@@ -65,9 +64,7 @@ namespace System.API.Helpers
         {
             try
             {
-
                 return StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
-
             }
             catch (Exception ex)
             {
@@ -81,7 +78,6 @@ namespace System.API.Helpers
             try
             {
                 return Ok(await _service.UpdateAsync(id, value));
-
             }
             catch (Exception ex)
             {
@@ -96,7 +92,6 @@ namespace System.API.Helpers
             {
                 await _service.DeleteAsync(id);
                 return NoContent();
-
             }
             catch (Exception ex)
             {

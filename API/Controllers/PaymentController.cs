@@ -16,7 +16,7 @@ namespace System.API.Controllers
         {
         }
 
-        [HttpPost]
+        [HttpPost("user/{userId}")]
         public async Task<PaymentModel> UpdatePaymentToUserAsync(int userId, DateTime month, decimal sum)
         {
             return await _service.UpdatePaymentToUserAsync(userId, month, sum);

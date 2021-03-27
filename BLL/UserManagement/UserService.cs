@@ -38,7 +38,7 @@ namespace System.BLL.UserManagement
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _roleManager = roleManager?? throw new ArgumentNullException(nameof(roleManager));
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
         }
 
         /// <inheritdoc/>
@@ -72,7 +72,26 @@ namespace System.BLL.UserManagement
         /// <inheritdoc/>
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
-            return await _userManager.Users.Select(user => _mapper.Map<UserModel>(user)).ToListAsync();
+            //TODO: FIX ISSUE
+            // var users = _userManager.Users.AsEnumerable().Select(async user =>
+            // {
+            //     var roles = await _userManager.GetRolesAsync(user);
+            //     var userModel = _mapper.Map<UserModel>(user);
+            //     userModel.Roles = roles;
+            //     return userModel;
+            // }).ToList();
+
+            var users = await _userManager.Users.ToListAsync();
+            var userModels = new List<UserModel>(users.Count);
+            
+            foreach (var user in users)
+            {
+                var newUser = _mapper.Map<UserModel>(user);
+                newUser.Roles = await _userManager.GetRolesAsync(user);
+                userModels.Add(newUser);
+            }
+
+            return userModels;
         }
 
         /// <inheritdoc/>
@@ -119,21 +138,21 @@ namespace System.BLL.UserManagement
         }
 
         /// <inheritdoc/>
-        public async Task<UserModel> UpdateAsync(int id, UserModel model, string password = null)
+        public async Task<UserModel> UpdateAsync(int id, UserModel newUser, string password = null)
         {
-            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+            var user = await _userManager.FindByIdAsync(newUser.Id.ToString());
 
             if (user == null)
                 throw new AppException("User not found");
 
-            user.Name = model.Name;
-            user.MiddleName = model.MiddleName;
-            user.Surname = model.Surname;
-            user.BirthDay = model.BirthDay;
-            user.AdditionalInfo = model.AdditionalInfo;
-            user.UserName = model.UserName;
-            user.Email = model.Email;
-            user.PhoneNumber = model.PhoneNumber;
+            user.Name = newUser.Name;
+            user.MiddleName = newUser.MiddleName;
+            user.Surname = newUser.Surname;
+            user.BirthDay = newUser.BirthDay;
+            user.AdditionalInfo = newUser.AdditionalInfo;
+            user.UserName = newUser.UserName;
+            user.Email = newUser.Email;
+            user.PhoneNumber = newUser.PhoneNumber;
 
             if (!password.IsNullOrEmpty())
             {
@@ -142,26 +161,41 @@ namespace System.BLL.UserManagement
 
             user.Address ??= new Address
             {
-                Country = model.Country,
-                AddressLine = model.AddressLine,
-                City = model.City
+                Country = newUser.Country,
+                AddressLine = newUser.AddressLine,
+                City = newUser.City
             };
 
-            if (!user.Address.Country.IsNullOrEmpty() && user.Address.Country != model.Country)
+            if (!user.Address.Country.IsNullOrEmpty() && user.Address.Country != newUser.Country)
             {
-                user.Address.Country = model.Country;
+                user.Address.Country = newUser.Country;
             }
 
-            if (!user.Address.City.IsNullOrEmpty() && user.Address.City != model.City)
+            if (!user.Address.City.IsNullOrEmpty() && user.Address.City != newUser.City)
             {
-                user.Address.City = model.City;
+                user.Address.City = newUser.City;
             }
 
-            if (!user.Address.AddressLine.IsNullOrEmpty() && user.Address.AddressLine != model.AddressLine)
+            if (!user.Address.AddressLine.IsNullOrEmpty() && user.Address.AddressLine != newUser.AddressLine)
             {
-                user.Address.AddressLine = model.AddressLine;
+                user.Address.AddressLine = newUser.AddressLine;
             }
 
+            //Roles management
+            var oldRoles = await _userManager.GetRolesAsync(user);
+            var rolesToAdd = newUser.Roles.Except(oldRoles);
+
+            var rolesToRemove = oldRoles.Except(newUser.Roles);
+
+            foreach (var roleToRemove in rolesToRemove)
+            {
+                await RemoveUsersRole(user.Id, roleToRemove);
+            }
+
+            foreach (var newRole in rolesToAdd)
+            {
+                await AddRoleToUser(user.Id, newRole);
+            }
 
             await _userManager.UpdateAsync(user: user);
 
@@ -246,7 +280,7 @@ namespace System.BLL.UserManagement
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
-            
+
             return await _userManager.GetRolesAsync(realUser);
         }
 
@@ -254,7 +288,7 @@ namespace System.BLL.UserManagement
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
- 
+
             var result = await _userManager.AddToRoleAsync(realUser, role);
 
             return result.Succeeded;
@@ -264,12 +298,12 @@ namespace System.BLL.UserManagement
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
-            
+
             var result = await _userManager.RemoveFromRoleAsync(realUser, role);
 
             return result.Succeeded;
         }
-        
+
         #region private helper methods
 
         /// <summary>
