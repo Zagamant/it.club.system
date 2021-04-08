@@ -72,3 +72,6 @@ a, .btn-link {
 .paper>* {
     margin-top: 5px;
 }
+body {
+    background-color: red;
+}

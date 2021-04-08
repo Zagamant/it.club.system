@@ -30,6 +30,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    body .navbar-expand {
+        background-color: #F5F6F7;
+        padding: 0;
+    }
+
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
@@ -44,6 +49,7 @@
         margin-left: 0;
     }
 }
+
 
 @media (min-width: 641px) {
     .page {
