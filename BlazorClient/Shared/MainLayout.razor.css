@@ -30,11 +30,33 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     body .navbar-expand {
         background-color: #F5F6F7;
         padding: 0;
     }
 
+    .navbar-nav {
+        padding: 0px;
+        padding-left: 45px;
+    }
+    .navLink {
+        padding: 10px;
+    }
+    .home {
+        font-size: 30px;
+        font-family: 'Exo 2';
+        color: black;
+    }
+    .navMenu{
+        padding-left:30px;
+        display:flex;
+    }
+    .user-profile {
+        display: flex;
+        position: relative;
+        left: 300px;
+    }
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {

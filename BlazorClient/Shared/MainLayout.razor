@@ -26,29 +26,48 @@
 @if (LoggedIn)
 {
     <!-- nav -->
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-light ">
         <div class="navbar-nav">
-            <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link" style="font-size: 30px; font-family: 'Exo 2'; color: black; padding-left:52px"><b>IT_Club</b></NavLink>
-            <div class="navbar-nav" style="padding: 10px; padding-left: 45px;">
-                <NavLink href="users" class="nav-item nav-link" style="padding-right:24px">Список пользователей</NavLink>
-                <NavLink href="#" class="nav-item nav-link" style="padding-right:24px">Список учащихся</NavLink>
-                <NavLink href="#" class="nav-item nav-link" style="padding-right:24px">Cписок групп</NavLink>
-                <NavLink href="#" class="nav-item nav-link" style="padding-right:24px">Оплата</NavLink>
-                <NavLink href="#" class="nav-item nav-link" style="padding-right:24px">Личный кабинет</NavLink>
-                <NavLink href="account/logout" class="nav-item nav-link" style="padding-right:24px">Выход</NavLink>
-                <div class="navbar-nav" style="position: relative; left:300px">
-                    <NavLink href="#" class="nav-item nav-link">
-                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                        </svg>
-                    </NavLink>
-                    <NavLink href="#" class="nav-item nav-link" style="padding-right:24px">Имя Фамилия</NavLink>
+
+            <div class="home">
+                <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link"><b>IT_Club</b></NavLink>
+            </div>
+            <div class="navMenu" >
+                <div class="navLink">
+                    <NavLink href="users" class="nav-item nav-link">Список пользователей</NavLink>
+                </div>
+                <div class="navLink">
+                    <NavLink href="#" class="nav-item nav-link">Список учащихся</NavLink>
+                </div>
+                <div class="navLink">
+                    <NavLink href="#" class="nav-item nav-link">Cписок групп</NavLink>
+                </div>
+                <div class="navLink">
+                    <NavLink href="#" class="nav-item nav-link">Оплата</NavLink>
+                </div>
+                <div class="navLink">
+                    <NavLink href="#" class="nav-item nav-link">Личный кабинет</NavLink>
+                </div>
+                <div class="navLink">
+                    <NavLink href="account/logout" class="nav-item nav-link">Выход</NavLink>
+                </div>
+                <div class="user-profile">
+                    <div class="navLink">
+                        <NavLink href="#" class="nav-item nav-link">
+                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                            </svg>
+                        </NavLink>
+                    </div>
+                    <div class="navLink">
+                        <NavLink href="#" class="nav-item nav-link">Имя Фамилия</NavLink>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+</nav>
 }
 
 <div class="app-container @(LoggedIn ? "bg-white" : "")">
