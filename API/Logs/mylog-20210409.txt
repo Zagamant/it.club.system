@@ -313,3 +313,8 @@
 2021-04-09T11:49:16.8449933+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
 2021-04-09T11:49:16.8783056+03:00 80000016-0005-d100-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
 2021-04-09T11:49:17.0131746+03:00 80000016-0005-d100-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 140.8213ms (791a596a)
+2021-04-09T19:08:21.9804320+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-09T19:08:21.9889420+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-09T19:08:21.9909120+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-09T19:08:22.0324871+03:00 8000002a-0005-cd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-09T19:08:22.2022782+03:00 8000002a-0005-cd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 174.4765ms (791a596a)
