@@ -37,25 +37,29 @@
     }
 
     .navbar-nav {
-        padding: 0px;
         padding-left: 45px;
     }
-    .navLink {
-        padding: 10px;
-    }
+
     .home {
         font-size: 30px;
         font-family: 'Exo 2';
         color: black;
     }
-    .navMenu{
-        padding-left:30px;
-        display:flex;
-    }
-    .user-profile {
+
+    .nav-menu[b-lor2elsqal] {
         display: flex;
-        position: relative;
-        left: 300px;
+        padding-left: 40px;
+        align-items:center;
+    }
+
+    .user-image {
+        max-width:45px;
+    }
+
+    .user-profile{
+        display:flex;
+        padding-left:300px;
+        align-items:center;
     }
 
 @media (max-width: 640.98px) {
