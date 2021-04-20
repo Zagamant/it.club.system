@@ -6,9 +6,7 @@ using BlazorClient.Services.AccountManagement;
 using BlazorClient.Services.AlertManagement;
 using BlazorClient.Services.AuthenticationManagement;
 using BlazorClient.Services.LocalStorageManagement;
-using Blazorise;
-using Blazorise.AntDesign;
-using Blazorise.Icons.FontAwesome;
+using BlazorFluentUI;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,9 +34,7 @@ namespace BlazorClient
             });
 
 
-            builder.Services.AddBlazorise(opt => { opt.ChangeTextOnKeyPress = true; })
-                .AddAntDesignProviders()
-                .AddFontAwesomeIcons();
+            builder.Services.AddBlazorFluentUI();
 
             var host = builder.Build();
 

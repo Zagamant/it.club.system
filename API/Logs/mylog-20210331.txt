@@ -1,0 +1,4 @@
+2021-03-31T21:31:23.8301923+03:00  [INF] Now listening on: "http://localhost:4000" (d826f4b8)
+2021-03-31T21:31:23.8356902+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-03-31T21:31:23.8422924+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-03-31T21:31:23.8640877+03:00  [INF] Content root path: "C:\Users\danik\Desktop\it_club\system\it.club.system\API" (b5d60022)
