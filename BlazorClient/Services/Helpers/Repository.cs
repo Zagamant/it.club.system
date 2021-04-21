@@ -9,22 +9,24 @@ using BlazorClient.Helpers;
 
 namespace BlazorClient.Services.Helpers
 {
-    public abstract class Repository<TId,  TAddModel, TUpdateModel, TModel> : IRepository<TId, TAddModel, TUpdateModel, TModel>
+    public abstract class
+        Repository<TId, TAddModel, TUpdateModel, TModel> : IRepository<TId, TAddModel, TUpdateModel, TModel>
         where TAddModel : BaseModel
         where TUpdateModel : BaseModel
         where TModel : BaseModel
     {
         protected readonly HttpClient _http;
         protected readonly string _url;
-            
-        public Repository(HttpClient http/*, string url*/)
+
+        public Repository(HttpClient http /*, string url*/)
         {
             _http = http ?? throw new ArgumentNullException(nameof(http));
             _url = this.GetType().Name.Replace("Service", "s");
             //_url = url ?? throw new ArgumentNullException(nameof(http));     
         }
 
-        public virtual async Task<IEnumerable<TModel>> GetAllAsync(string sort = "",string page = "",string pageSize = "", string filter = "")
+        public virtual async Task<IEnumerable<TModel>> GetAllAsync(string sort = "", string page = "",
+            string pageSize = "", string filter = "")
         {
             var items = await _http.GetFromJsonAsync<List<TModel>>($"{_url}?" +
                                                                    $"{(string.IsNullOrEmpty(sort) ? "" : $"sort={sort}")}" +
@@ -46,29 +48,25 @@ namespace BlazorClient.Services.Helpers
         public virtual async Task<TModel> AddAsync(TAddModel entity)
         {
             var response = await _http.PostAsJsonAsync(_url, entity);
-            
-            if (response.IsSuccessStatusCode)
-            {
-                var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
-                return responseObj;
-            }
 
-            throw new HttpRequestException("Smth goes wrong in repo");
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException("Smth goes wrong in repo");
+
+            var responseText = await response.Content.ReadAsStringAsync();
+            var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
+            return responseObj;
         }
 
         public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel updatedGroup)
         {
             var response = await _http.PutAsJsonAsync($"{_url}/{id}", updatedGroup);
-            
-            if (response.IsSuccessStatusCode)
-            {
-                var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
-                return responseObj;
-            }
 
-            throw new HttpRequestException("Smth goes wrong in repo");
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException("Smth goes wrong in repo");
+
+            var responseText = await response.Content.ReadAsStringAsync();
+            var responseObj = JsonSerializer.Deserialize<TModel>(responseText, MyOptions.JsonSerializerWebOptions);
+            return responseObj;
         }
 
         public virtual async Task DeleteAsync(TId id, bool isDelete = false)
