@@ -1,24 +1,4 @@
-﻿@* @inherits LayoutComponentBase *@
-@* *@
-@* <div class="page"> *@
-@*     <div class="sidebar"> *@
-@*         <NavMenu/> *@
-@*     </div> *@
-@* *@
-@*     <div class="main"> *@
-@*         <div class="top-row px-4 auth"> *@
-@*             <LoginDisplay/> *@
-@*             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a> *@
-@*         </div> *@
-@* *@
-@*         <div class="content px-4"> *@
-@*             @Body *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-@* *@
-
-@using BlazorClient.Services.AccountManagement
+﻿@using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
 @inject IAccountService AccountService
 @inject NavigationManager NavigationManager
@@ -43,7 +23,7 @@
                     <NavLink href="#" class="nav-item nav-link">
                         <img class="user-image" src="/assets/images/User (1).svg" />
                     </NavLink>
-                    <NavLink href="#" class="nav-item nav-link">Имя Фамилия</NavLink>
+                    <NavLink href="#" class="nav-item nav-link">@($"{AccountService.User.Name} {AccountService.User.Surname}")</NavLink>
                 </div>
             </div>
         </div>
@@ -57,4 +37,6 @@
 
 @code {
     private bool LoggedIn => AccountService.User != null;
+    
+    
 }
