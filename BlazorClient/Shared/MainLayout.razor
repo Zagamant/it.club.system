@@ -1,45 +1,32 @@
-﻿@* @inherits LayoutComponentBase *@
-@* *@
-@* <div class="page"> *@
-@*     <div class="sidebar"> *@
-@*         <NavMenu/> *@
-@*     </div> *@
-@* *@
-@*     <div class="main"> *@
-@*         <div class="top-row px-4 auth"> *@
-@*             <LoginDisplay/> *@
-@*             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a> *@
-@*         </div> *@
-@* *@
-@*         <div class="content px-4"> *@
-@*             @Body *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-@* *@
-
-@using BlazorClient.Services.AccountManagement
+﻿@using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
 @inject IAccountService AccountService
 @inject NavigationManager NavigationManager
 
 @if (LoggedIn)
 {
-    <!--nav-->
-<Bar Breakpoint="Breakpoint.Desktop"
-     Background="Background.White"
-     ThemeContrast="ThemeContrast.Light"
->
 
-    <BarBrand>
-        <div class="home">
-            <BarDropdown>
-                <BarDropdownToggle><b>It_Club</b></BarDropdownToggle>
-                <BarDropdownMenu>
-                    <BarDropdownItem>Action</BarDropdownItem>
-                    <BarDropdownItem>Another action</BarDropdownItem>
-                </BarDropdownMenu>
-            </BarDropdown>
+    <!-- nav -->
+    <nav class="navbar navbar-expand navbar-light ">
+        <div class="navbar-nav">
+
+            <div class="home">
+                <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link" ><b>IT_Club</b></NavLink>
+            </div>
+            <div class="nav-menu">
+                <NavLink href="users" class="nav-item nav-link">Список пользователей</NavLink>
+                <NavLink href="#" class="nav-item nav-link">Список учащихся</NavLink>
+                <NavLink href="#" class="nav-item nav-link">Cписок групп</NavLink>
+                <NavLink href="#" class="nav-item nav-link">Оплата</NavLink>
+                <NavLink href="#" class="nav-item nav-link">Личный кабинет</NavLink>
+                <NavLink href="account/logout" class="nav-item nav-link">Выход</NavLink>
+                <div class="user-profile">
+                    <NavLink href="#" class="nav-item nav-link">
+                        <img class="user-image" src="/assets/images/User (1).svg" />
+                    </NavLink>
+                    <NavLink href="#" class="nav-item nav-link">@($"{AccountService.User.Name} {AccountService.User.Surname}")</NavLink>
+                </div>
+            </div>
         </div>
     </BarBrand>
 
@@ -94,4 +81,6 @@
 
 @code {
     private bool LoggedIn => AccountService.User != null;
+    
+    
 }
