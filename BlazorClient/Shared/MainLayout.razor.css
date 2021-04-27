@@ -12,6 +12,25 @@
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
+/*.left.nav-menu.nav-item.nav-link::before {
+    content: '';
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #000;
+    transition: 0.2s;
+}
+
+.left.nav-menu.nav-item.nav-link:hover:before {
+    width: 100%;
+    left: 0;
+}*/
+
+
+
+
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -74,6 +93,18 @@ body .navbar-expand {
     .top-row a, .top-row .btn-link {
         margin-left: 0;
     }
+    .home {
+        position: relative;
+        left: 60px;
+    }
+    .nav-menu {
+        position: relative;
+        left: 60px
+    }
+    .user-profile {
+        position: relative;
+        right: 270px;
+    }
 }
 
 
@@ -99,4 +130,5 @@ body .navbar-expand {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+
 }

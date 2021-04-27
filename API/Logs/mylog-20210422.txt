@@ -1,0 +1,335 @@
+2021-04-22T18:28:53.6923878+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:28:53.7134519+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:28:53.7198405+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:28:54.1894779+03:00 80000008-0001-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:28:54.6807870+03:00 80000008-0001-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 609.4844ms (791a596a)
+2021-04-22T18:32:50.3329895+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:32:50.3390250+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:32:50.3406078+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:32:50.3750966+03:00 80000004-0002-c100-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:32:50.4968053+03:00 80000004-0002-c100-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 124.3403ms (791a596a)
+2021-04-22T18:37:13.1752925+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:37:13.1781638+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:37:13.1795729+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:37:13.2113674+03:00 80000006-0006-ef00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:37:13.3642566+03:00 80000006-0006-ef00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 156.1660ms (791a596a)
+2021-04-22T18:41:16.6786452+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:41:16.6851596+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:41:16.6868829+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:41:16.7216827+03:00 80000005-0000-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:41:16.8489506+03:00 80000005-0000-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 129.4021ms (791a596a)
+2021-04-22T18:45:06.5083559+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:45:06.5115489+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:45:06.5132025+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:45:06.5461154+03:00 80000007-0002-db00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:45:06.6797178+03:00 80000007-0002-db00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 136.7711ms (791a596a)
+2021-04-22T18:46:55.7920326+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:46:55.7953103+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:46:55.7971621+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:46:55.8319934+03:00 8000000c-0006-d700-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:46:55.9715456+03:00 8000000c-0006-d700-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 148.4397ms (791a596a)
+2021-04-22T18:50:49.0183741+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:50:49.0472834+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:50:49.0502528+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:50:49.0885517+03:00 80000006-0001-ac00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:50:49.2387371+03:00 80000006-0001-ac00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 154.4467ms (791a596a)
+2021-04-22T18:52:02.4355898+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:52:02.4385305+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:52:02.4408420+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:52:02.4723806+03:00 80000008-0002-7b00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:52:02.6009398+03:00 80000008-0002-7b00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 131.4797ms (791a596a)
+2021-04-22T18:56:24.6952211+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:56:24.7013019+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:56:24.7030599+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:56:24.7372991+03:00 80000008-0001-c900-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:56:24.8648102+03:00 80000008-0001-c900-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 130.7303ms (791a596a)
+2021-04-22T18:57:42.4308199+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:57:42.4326905+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:57:42.4327784+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:57:42.4510434+03:00 8000000e-0002-d900-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:57:42.5134742+03:00 8000000e-0002-d900-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 65.4957ms (791a596a)
+2021-04-22T18:57:57.9669649+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T18:57:57.9701328+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T18:57:57.9715914+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T18:57:58.0006154+03:00 80000010-0001-bf00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T18:57:58.1366975+03:00 80000010-0001-bf00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 138.2555ms (791a596a)
+2021-04-22T19:00:16.3523406+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:00:16.3551782+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:00:16.3567370+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:00:16.3898159+03:00 80000012-0002-ec00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:00:16.5214430+03:00 80000012-0002-ec00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 135.0334ms (791a596a)
+2021-04-22T19:01:20.6661473+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:01:20.6691102+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:01:20.6706268+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:01:20.7018718+03:00 80000010-0001-9d00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:01:20.8270876+03:00 80000010-0001-9d00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 127.0098ms (791a596a)
+2021-04-22T19:03:03.5903123+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:03:03.5987629+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:03:03.6013246+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:03:03.6367695+03:00 80000018-0007-c200-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:03:03.7687338+03:00 80000018-0007-c200-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 134.7443ms (791a596a)
+2021-04-22T19:04:28.7001887+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:04:28.7039922+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:04:28.7065410+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:04:28.7421997+03:00 8000000c-0005-b200-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:04:28.8827072+03:00 8000000c-0005-b200-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 144.9380ms (791a596a)
+2021-04-22T19:06:30.1579927+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:06:30.1615376+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:06:30.1631852+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:06:30.2029746+03:00 8000000e-0001-d100-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:06:30.3331916+03:00 8000000e-0001-d100-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 134.9923ms (791a596a)
+2021-04-22T19:08:47.9297835+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:08:47.9357850+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:08:47.9372277+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:08:47.9677389+03:00 8000001c-0000-f600-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:08:48.1025903+03:00 8000001c-0000-f600-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 137.6674ms (791a596a)
+2021-04-22T19:10:22.2979986+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:10:22.3009976+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:10:22.3027847+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:10:22.3341877+03:00 8000001a-0006-6c00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:10:22.4609799+03:00 8000001a-0006-6c00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 129.8173ms (791a596a)
+2021-04-22T19:14:36.5884893+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:14:36.5942743+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:14:36.5973415+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:14:36.6322804+03:00 8000001a-0003-f400-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:14:36.8012190+03:00 8000001a-0003-f400-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 169.3769ms (791a596a)
+2021-04-22T19:20:16.4158563+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:20:16.4192060+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:20:16.4207805+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:20:16.4526046+03:00 80000024-0001-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:20:16.6226305+03:00 80000024-0001-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 170.3482ms (791a596a)
+2021-04-22T19:21:31.1584768+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:21:31.1651799+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:21:31.1669069+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:21:31.2018474+03:00 8000001c-0003-e400-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:21:31.3342709+03:00 8000001c-0003-e400-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 136.3115ms (791a596a)
+2021-04-22T19:21:58.1854659+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:21:58.1918276+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:21:58.1933487+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:21:58.2289006+03:00 80000021-0002-e900-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:21:58.3737707+03:00 80000021-0002-e900-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 146.2521ms (791a596a)
+2021-04-22T19:22:52.2773429+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:22:52.2807531+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:22:52.2823507+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:22:52.3158759+03:00 80000022-0000-f300-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:22:52.4465177+03:00 80000022-0000-f300-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 132.9565ms (791a596a)
+2021-04-22T19:23:41.5250772+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:23:41.5324309+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:23:41.5343471+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:23:41.5749996+03:00 80000024-0001-d700-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:23:41.7242895+03:00 80000024-0001-d700-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 153.5444ms (791a596a)
+2021-04-22T19:24:22.1765513+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:24:22.1811569+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:24:22.1831920+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:24:22.2155481+03:00 8000001a-0001-af00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:24:22.3533996+03:00 8000001a-0001-af00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 140.5046ms (791a596a)
+2021-04-22T19:27:34.6948194+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:27:34.7029919+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:27:34.7046761+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:27:34.7358630+03:00 80000022-0003-b200-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:27:34.8579035+03:00 80000022-0003-b200-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 124.6503ms (791a596a)
+2021-04-22T19:29:51.9197582+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:29:51.9233181+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:29:51.9251427+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:29:51.9580386+03:00 8000001c-0004-9200-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:29:52.0877222+03:00 8000001c-0004-9200-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 132.1305ms (791a596a)
+2021-04-22T19:30:35.6910387+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:30:35.6949259+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:30:35.6972948+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:30:35.7305533+03:00 8000001d-0000-f400-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:30:35.8646921+03:00 8000001d-0000-f400-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 138.1708ms (791a596a)
+2021-04-22T19:33:04.4302613+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T19:33:04.4427010+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T19:33:04.4454588+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T19:33:04.4792556+03:00 8000001c-0001-b500-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T19:33:04.6373051+03:00 8000001c-0001-b500-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 160.8090ms (791a596a)
+2021-04-22T21:53:37.9005280+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T21:53:37.9130597+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T21:53:37.9147960+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T21:53:37.9522106+03:00 80000020-0006-6f00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T21:53:38.1201261+03:00 80000020-0006-6f00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 172.6769ms (791a596a)
+2021-04-22T21:54:18.0156520+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T21:54:18.0199120+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T21:54:18.0224246+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T21:54:18.0582973+03:00 8000003a-0000-f600-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T21:54:18.1889235+03:00 8000003a-0000-f600-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 134.4429ms (791a596a)
+2021-04-22T21:59:15.9921822+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-04-22T21:59:16.0015832+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-04-22T21:59:16.0196907+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-04-22T21:59:16.0527179+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-04-22T21:59:17.5990607+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-04-22T21:59:19.1860625+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("58"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-04-22T21:59:19.4238393+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("32"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T21:59:19.4392478+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T21:59:19.5706675+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("16"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-04-22T21:59:19.5809120+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T21:59:19.6013479+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed DbCommand ("4"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-04-22T21:59:19.6157936+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-04-22T21:59:19.7552595+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 3693.6512ms (afa2e885)
+2021-04-22T21:59:19.7576707+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-04-22T21:59:19.7655065+03:00 80000016-0004-a300-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 3772.9704ms (791a596a)
+2021-04-22T22:04:48.6842216+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T22:04:48.6896846+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T22:04:48.6917754+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T22:04:48.7299759+03:00 8000003d-0000-f600-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T22:04:48.9101815+03:00 8000003d-0000-f600-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 183.5448ms (791a596a)
+2021-04-22T22:09:15.5541540+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T22:09:15.5609383+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T22:09:15.5632921+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T22:09:15.6180431+03:00 80000032-0001-e100-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T22:09:15.7717981+03:00 80000032-0001-e100-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 157.9107ms (791a596a)
+2021-04-22T22:12:28.5946413+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T22:12:28.6053691+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T22:12:28.6069586+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T22:12:28.6419657+03:00 80000004-0002-2f00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T22:12:28.7827279+03:00 80000004-0002-2f00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 145.2507ms (791a596a)
+2021-04-22T22:12:39.3571223+03:00 8000000c-0007-eb00-b63f-84710c7967bb [INF] Request starting HTTP/2 OPTIONS https://localhost:44365/api/v1/users/authenticate - - (ca22a1cb)
+2021-04-22T22:12:39.3636457+03:00 8000000c-0007-eb00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-04-22T22:12:39.3672040+03:00 8000000c-0007-eb00-b63f-84710c7967bb [INF] Request finished HTTP/2 OPTIONS https://localhost:44365/api/v1/users/authenticate - - - 204 - - 10.7191ms (791a596a)
+2021-04-22T22:12:39.3702874+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Request starting HTTP/2 POST https://localhost:44365/api/v1/users/authenticate application/json;+charset=utf-8 45 (ca22a1cb)
+2021-04-22T22:12:39.3729620+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-04-22T22:12:39.3934309+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.Authenticate (System.API)"' (500cc934)
+2021-04-22T22:12:39.4296306+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Route matched with "{action = \"Authenticate\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Authenticate(System.BLL.Models.UserManagement.UserAuthenticate)" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-04-22T22:12:41.1054656+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-04-22T22:12:42.5764098+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("61"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2021-04-22T22:12:42.7516577+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__user_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0" (0723d8ff)
+2021-04-22T22:12:42.7816394+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-04-22T22:12:42.7952049+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [a].[Id], [a].[ClubId], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2021-04-22T22:12:42.8117084+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__role_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0" (0723d8ff)
+2021-04-22T22:12:42.8175767+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [a].[Id], [a].[ClubId], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2021-04-22T22:12:42.8216919+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__role_Id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0" (0723d8ff)
+2021-04-22T22:12:42.8428434+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2021-04-22T22:12:42.9118355+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T22:12:42.9254886+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T22:12:43.0638024+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("11"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-04-22T22:12:43.0755556+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T22:12:43.1923571+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"<>f__AnonymousType1`5[[System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (605b4265)
+2021-04-22T22:12:43.2469926+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.Authenticate (System.API)" in 3806.8358ms (afa2e885)
+2021-04-22T22:12:43.2495664+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.Authenticate (System.API)"' (99874f2b)
+2021-04-22T22:12:43.2601384+03:00 80000014-0006-d900-b63f-84710c7967bb [INF] Request finished HTTP/2 POST https://localhost:44365/api/v1/users/authenticate application/json;+charset=utf-8 45 - 200 247 application/json;+charset=utf-8 3889.3390ms (791a596a)
+2021-04-22T23:02:34.6840999+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-04-22T23:02:34.6948002+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-04-22T23:02:34.6982877+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-04-22T23:02:34.7381263+03:00 80000006-0002-2f00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-04-22T23:02:34.9171893+03:00 80000006-0002-2f00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 180.8752ms (791a596a)
+2021-04-22T23:02:59.1829595+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-04-22T23:02:59.1924126+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-04-22T23:02:59.2063922+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-04-22T23:02:59.2424795+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-04-22T23:03:00.8516230+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-04-22T23:03:02.1999642+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("37"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-04-22T23:03:02.4357518+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("21"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T23:03:02.4592586+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T23:03:02.6359644+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("7"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-04-22T23:03:02.6458961+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-04-22T23:03:02.6631721+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed DbCommand ("4"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-04-22T23:03:02.6783231+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-04-22T23:03:02.8064336+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 3554.7809ms (afa2e885)
+2021-04-22T23:03:02.8094254+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-04-22T23:03:02.8172967+03:00 80000008-0002-2f00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 3633.6691ms (791a596a)

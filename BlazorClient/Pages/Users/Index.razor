@@ -4,10 +4,9 @@
 @using System.BLL.Models.UserManagement
 @attribute [Authorize]
 @inject IAccountService AccountService
-
-<h1>Users</h1>
-<NavLink href="users/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
-<table class="table table-striped">
+    <h1>Users</h1>
+    <NavLink href="user/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
+<table class="table">
     <DataGrid TItem="UserModel"
               Data="@users"
               TotalItems="@totalCount"
@@ -19,11 +18,11 @@
                     <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
                 </DeleteCommandTemplate>
             </DataGridCommandColumn>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Username"/>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="First Name"/>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Last Name"/>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Email"/>
-            
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Username" />
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="First Name" />
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Last Name" />
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Email" />
+
             <DataGridColumn TItem="UserModel" Field="@nameof( UserModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
                     <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
@@ -34,7 +33,6 @@
         </DataGridColumns>
     </DataGrid>
 </table>
-
 @code {
     private bool loading;
     private IList<UserModel> users;

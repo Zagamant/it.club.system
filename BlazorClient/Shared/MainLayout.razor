@@ -5,6 +5,7 @@
 
 @if (LoggedIn)
 {
+
     <!-- nav -->
     <nav class="navbar navbar-expand navbar-light ">
         <div class="navbar-nav">
@@ -27,8 +28,51 @@
                 </div>
             </div>
         </div>
-</nav>
+    </BarBrand>
+
+    <BarMenu>
+
+        <BarStart>
+
+            <BarItem>
+                <BarLink To="users">Список челбосо</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="groups">Cписок групп</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="#">Оплата</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="#">Выход</BarLink>
+            </BarItem>
+
+            <BarItem Style="float:right">
+                <BarLink To="#">
+                    <img class="user-image" src="/assets/images/User (1).svg" />
+                    @($"{AccountService.User.Name} {AccountService.User.Surname} ")
+                </BarLink>
+            </BarItem>
+
+        </BarStart>
+
+         
+
+    </BarMenu>
+
+</Bar>
+    <!--</nav>-->
+
+
+
+
+
+
 }
+
 
 <div class="app-container @(LoggedIn ? "bg-white" : "")">
     <AlertCustom />
