@@ -25,28 +25,67 @@
 
 @if (LoggedIn)
 {
-    <!-- nav -->
-    <nav class="navbar navbar-expand navbar-light ">
-        <div class="navbar-nav">
+    <!--nav-->
+<Bar Breakpoint="Breakpoint.Desktop"
+     Background="Background.White"
+     ThemeContrast="ThemeContrast.Light"
+>
 
-            <div class="home">
-                <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link" ><b>IT_Club</b></NavLink>
-            </div>
-            <div class="nav-menu">
-                <NavLink href="users" class="nav-item nav-link">Список чедбиков</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Cписок групп</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Оплата</NavLink>
-                <NavLink href="account/logout" class="nav-item nav-link">Выход</NavLink>
-                <div class="user-profile">
-                    <NavLink href="#" class="nav-item nav-link">
-                        <img class="user-image" src="/assets/images/User (1).svg" />
-                    </NavLink>
-                    <NavLink href="#" class="nav-item nav-link">Имя Фамилия</NavLink>
-                </div>
-            </div>
+    <BarBrand>
+        <div class="home">
+            <BarDropdown>
+                <BarDropdownToggle><b>It_Club</b></BarDropdownToggle>
+                <BarDropdownMenu>
+                    <BarDropdownItem>Action</BarDropdownItem>
+                    <BarDropdownItem>Another action</BarDropdownItem>
+                </BarDropdownMenu>
+            </BarDropdown>
         </div>
-</nav>
+    </BarBrand>
+
+    <BarMenu>
+
+        <BarStart>
+
+            <BarItem>
+                <BarLink To="users">Список челбосо</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="groups">Cписок групп</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="#">Оплата</BarLink>
+            </BarItem>
+
+            <BarItem>
+                <BarLink To="#">Выход</BarLink>
+            </BarItem>
+
+            <BarItem Style="float:right">
+                <BarLink To="#">
+                    <img class="user-image" src="/assets/images/User (1).svg" />
+                    @($"{AccountService.User.Name} {AccountService.User.Surname} ")
+                </BarLink>
+            </BarItem>
+
+        </BarStart>
+
+         
+
+    </BarMenu>
+
+</Bar>
+    <!--</nav>-->
+
+
+
+
+
+
 }
+
 
 <div class="app-container @(LoggedIn ? "bg-white" : "")">
     <AlertCustom />
