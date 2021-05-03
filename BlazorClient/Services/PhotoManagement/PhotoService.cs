@@ -4,7 +4,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.PhotoManagement
 {
-    public class PhotoService : Repository<int, PhotoModel, PhotoModel, PhotoModel>,
+    public class PhotoService : Repository<int, ImageModel, ImageModel, ImageModel>,
         IPhotoService
     {
         public PhotoService(HttpClient http) : base(http)

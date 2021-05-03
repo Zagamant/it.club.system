@@ -70,14 +70,6 @@ namespace System.API
 						
 					});
 			
-			// services.AddControllers()
-			// 	.AddJsonOptions(opt =>
-			// 	{
-			// 		opt.JsonSerializerOptions
-			// 			.ReferenceHandler = ReferenceHandler.Preserve;
-			// 		opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-			// 	});
-
 			// Auto Mapper Configurations
 			var mappingConfig = new MapperConfiguration(mapperConfig =>
 			{
@@ -92,7 +84,7 @@ namespace System.API
 				mapperConfig.AddProfile(new EventManagementMappingProfile());
 				mapperConfig.AddProfile(new GroupManagementMappingProfile());
 				mapperConfig.AddProfile(new PaymentManagementMappingProfile());
-				mapperConfig.AddProfile(new PhotoManagementMappingProfile());
+				mapperConfig.AddProfile(new ImageManagementMappingProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();
@@ -142,7 +134,7 @@ namespace System.API
 			services.AddScoped<IEventService, EventService>();
 			services.AddScoped<IGroupService, GroupService>();
 			services.AddScoped<IPaymentService, PaymentService>();
-			services.AddScoped<IPhotoService, PhotoService>();
+			services.AddScoped<IImageService, ImageService>();
 			services.AddScoped<IRoleService, RoleService>();
 			services.AddScoped<IRoomService, RoomService>();
 			services.AddScoped<IUserService, UserService>();

@@ -19,7 +19,7 @@ namespace System.DAL
         }
 
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DbSet<Agreement> Agreements { get; set; }
         public DbSet<Payment> Payments { get; set; }

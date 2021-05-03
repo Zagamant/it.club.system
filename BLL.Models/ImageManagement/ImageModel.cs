@@ -2,10 +2,10 @@
 
 namespace System.BLL.Models.PhotoManagement
 {
-    public class PhotoModel : BaseModel
+    public class ImageModel : BaseModel
     {
 
-        public byte[] PhotoAsBytes { get; set; }
+        public string Path { get; set; }
 
         public int UserId { get; set; }
     }
