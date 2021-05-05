@@ -5,15 +5,16 @@
 
 
 
-
 <div class="main-info">
     <div class="photo-card">
         <Figure Size="FigureSize.Is256x256">
             <FigureImage Source="/assets/images/User-photo.jpg" AlternateText="256x256" />
             <FigureCaption>
-                <div class="card-title">
-                    <Heading Size="HeadingSize.Is4">@($"{AccountService.User.Name} {AccountService.User.Surname}")</Heading>
-                </div>
+                
+                    <Heading Size="HeadingSize.Is4">
+                        <Button Style="height:40px; width: 250px; margin-top:20px; margin-left:20px" Color="Color.Primary">Редактировать</Button>
+                    </Heading>
+                
             </FigureCaption>
         </Figure>
     </div>
@@ -23,56 +24,35 @@
                 @($"{AccountService.User.Name} {AccountService.User.Surname}")
             </DisplayHeading>
         </div>
-        <div class="tables">
-            <div class="firstTable">
-                <Table Borderless="true">
+                <Table Borderless="true" Style="font-size:175%">
                     <TableBody>
                         <TableRow>
                             <TableRowHeader> <b>Клуб:</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
                             <TableRowCell>Серебронск</TableRowCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowHeader><b>Имя Фамилия:</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell>Пупкин лупкин</TableRowCell>
+                            <TableRowHeader><b>ФИО:</b></TableRowHeader>
+                            <TableRowCell>Пупкин лупкин залпукин</TableRowCell>
                         </TableRow>
                         <TableRow>
                             <TableRowHeader><b>Номер телефона:</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
                             <TableRowCell>+375 33 658 62 62</TableRowCell>
                         </TableRow>
                         <TableRow>
                             <TableRowHeader><b>Список курсов:</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
                             <TableRowCell> Много курсов</TableRowCell>
                         </TableRow>
-                    </TableBody>
-                </Table>
-            </div>
-            <div class="secondTable">
-                <Table Borderless="true">
-                    <TableBody>
+
                         <TableRow>
                             <TableRowHeader><b>Контакты:</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
                             <TableRowCell> Контакты</TableRowCell>
                         </TableRow>
                         <TableRow>
                             <TableRowHeader><b>Другая информация :</b></TableRowHeader>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell></TableRowCell>
-                            <TableRowCell> Информация</TableRowCell>
+                            <TableRowCell> Информация kldsmvjlkdfsnvlkjsdnlknldksmv lkdsmkm</TableRowCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -82,6 +62,7 @@
 
 
 @code {
+
     [Parameter]
     public int Id { get; set; }
 

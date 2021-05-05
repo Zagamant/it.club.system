@@ -10,6 +10,7 @@ a, .btn-link {
 
 #app {
     height: 100vh;
+    background-color: #F0F0F0;
 }
 
 .btn-primary {
