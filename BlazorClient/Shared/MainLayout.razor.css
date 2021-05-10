@@ -42,10 +42,13 @@
     }
 
     .home {
-        font-size: 30px;
+        font-size: 250%;
         font-family: 'Exo 2';
         color: black;
+        margin-left:20px;
+        margin-bottom: 5px;
     }
+
 
     .nav-menu[b-lor2elsqal] {
         display: flex;
