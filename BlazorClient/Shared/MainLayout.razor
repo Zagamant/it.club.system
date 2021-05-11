@@ -1,4 +1,4 @@
-﻿@using BlazorClient.Services.AccountManagement
+@using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
 @inject IAccountService AccountService
 @inject NavigationManager NavigationManager
@@ -6,67 +6,101 @@
 @if (LoggedIn)
 {
 
-    <!-- nav -->
-    <nav class="navbar navbar-expand navbar-light ">
-        <div class="navbar-nav">
+    <!--nav-->
+    <Bar Breakpoint="Breakpoint.Desktop"
+         Background="Background.White"
+         ThemeContrast="ThemeContrast.Light">
 
+        <BarBrand Style="border:none;">
             <div class="home">
-                <NavLink href="" Match="NavLinkMatch.All" class="nav-item nav-link" ><b>IT_Club</b></NavLink>
+                <BarDropdown>
+                    <BarDropdownToggle><b>It_Club</b></BarDropdownToggle>
+                    <BarDropdownMenu>
+                        <BarDropdownItem>Action</BarDropdownItem>
+                        <BarDropdownItem>Another action</BarDropdownItem>
+                    </BarDropdownMenu>
+                </BarDropdown>
             </div>
-            <div class="nav-menu">
-                <NavLink href="users" class="nav-item nav-link">Список пользователей</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Список учащихся</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Cписок групп</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Оплата</NavLink>
-                <NavLink href="#" class="nav-item nav-link">Личный кабинет</NavLink>
-                <NavLink href="account/logout" class="nav-item nav-link">Выход</NavLink>
-                <div class="user-profile">
-                    <NavLink href="#" class="nav-item nav-link">
+        </BarBrand>
+        <BarMenu>
+            <BarStart>
+
+                <BarItem>
+                    <BarLink To="users">Список челбосо</BarLink>
+                </BarItem>
+
+                <BarItem>
+                    <BarLink To="groups">Cписок групп</BarLink>
+                </BarItem>
+
+                <BarItem>
+                    <BarLink To="#">Оплата</BarLink>
+                </BarItem>
+
+                <BarItem>
+                    <BarLink To="#">Выход</BarLink>
+                </BarItem>
+
+                <BarItem Style="float:right">
+
+                    <BarLink To="#">
                         <img class="user-image" src="/assets/images/User (1).svg" />
-                    </NavLink>
-                    <NavLink href="#" class="nav-item nav-link">@($"{AccountService.User.Name} {AccountService.User.Surname}")</NavLink>
-                </div>
-            </div>
-        </div>
-    </BarBrand>
+                        @($"{AccountService.User.Name} {AccountService.User.Surname} ")
+                    </BarLink>
 
-    <BarMenu>
+                </BarItem>
+            </BarStart>
+        </BarMenu>
+    </Bar>
 
-        <BarStart>
-
-            <BarItem>
-                <BarLink To="users">Список челбосо</BarLink>
-            </BarItem>
-
-            <BarItem>
-                <BarLink To="groups">Cписок групп</BarLink>
-            </BarItem>
-
-            <BarItem>
-                <BarLink To="#">Оплата</BarLink>
-            </BarItem>
-
-            <BarItem>
-                <BarLink To="#">Выход</BarLink>
-            </BarItem>
-
-            <BarItem Style="float:right">
-                <BarLink To="#">
-                    <img class="user-image" src="/assets/images/User (1).svg" />
-                    @($"{AccountService.User.Name} {AccountService.User.Surname} ")
-                </BarLink>
-            </BarItem>
-
-        </BarStart>
-
-         
-
-    </BarMenu>
-
-</Bar>
     <!--</nav>-->
 
+<div class="sider">
+    <!--Sidebar-->
+    <Sidebar @ref="sidebar">
+        <SidebarContent>
+            <SidebarBrand>
+                <a href="">Blazorise Sidebar</a>
+            </SidebarBrand>
+            <SidebarNavigation>
+                <SidebarLabel>Main</SidebarLabel>
+                <SidebarItem>
+                    <SidebarLink To="" Title="Home">
+                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Home
+                    </SidebarLink>
+                </SidebarItem>
+                <SidebarItem>
+                    <SidebarLink Toggled="(isOpen)=> mailSidebarSubItems.Toggle(isOpen)" IsShow="true">
+                        <Icon Name="IconName.Mail" Margin="Margin.Is3.FromRight" />Email
+                    </SidebarLink>
+                    <SidebarSubItem @ref="mailSidebarSubItems" IsShow="true">
+                        <SidebarItem>
+                            <SidebarLink To="email/inbox">Inbox</SidebarLink>
+                        </SidebarItem>
+                        <SidebarItem>
+                            <SidebarLink To="email/compose">Compose Email</SidebarLink>
+                        </SidebarItem>
+                        @* other subitems *@
+                    </SidebarSubItem>
+                </SidebarItem>
+                <SidebarItem>
+                    <SidebarLink Toggled="(isOpen)=> appsSidebarSubItems.Toggle(isOpen)" IsShow="true">
+                        <Icon Name="IconName.Smartphone" Margin="Margin.Is3.FromRight" />Apps
+                    </SidebarLink>
+                    <SidebarSubItem @ref="appsSidebarSubItems" IsShow="true">
+                        <SidebarItem>
+                            <SidebarLink To="apps/todo">Todo List</SidebarLink>
+                        </SidebarItem>
+                    </SidebarSubItem>
+                </SidebarItem>
+            </SidebarNavigation>
+        </SidebarContent>
+    </Sidebar>
 
+    <AlertCustom />
+    @Body
+</div>
+    <!--Sidebar-->
 
 
 
@@ -74,13 +108,20 @@
 }
 
 
-<div class="app-container @(LoggedIn ? "bg-white" : "")">
-    <AlertCustom />
-    @Body
-</div>
+
+
 
 @code {
     private bool LoggedIn => AccountService.User != null;
-    
-    
+
+
+    Sidebar sidebar;
+    SidebarSubItem mailSidebarSubItems;
+    SidebarSubItem appsSidebarSubItems;
+
+    void ToggleSidebar()
+    {
+        sidebar.Toggle();
+    }
+
 }
