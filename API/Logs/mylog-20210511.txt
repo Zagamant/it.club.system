@@ -2049,3 +2049,225 @@ WHERE [a].[UserId] = @__userId_0" (0723d8ff)
 2021-05-11T23:06:34.9065179+03:00 80000020-0000-fc00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 30.985ms (afa2e885)
 2021-05-11T23:06:34.9088093+03:00 80000020-0000-fc00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
 2021-05-11T23:06:34.9114134+03:00 80000020-0000-fc00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 45.8583ms (791a596a)
+2021-05-11T23:19:37.2550458+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-05-11T23:19:37.2608352+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-05-11T23:19:37.2627434+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-05-11T23:19:37.2949276+03:00 80000006-0000-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-05-11T23:19:37.4401138+03:00 80000006-0000-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 149.1121ms (791a596a)
+2021-05-11T23:22:21.0325239+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-05-11T23:22:21.0665720+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-05-11T23:22:21.0736370+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-05-11T23:22:21.1228663+03:00 80000017-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-05-11T23:22:21.3078379+03:00 80000017-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 190.2127ms (791a596a)
+2021-05-11T23:24:37.7428192+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:24:37.7499827+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:24:37.7668888+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:24:37.8028702+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:24:37.9663163+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] 11.05.2021 23:24:37: Getting all models (0a525d55)
+2021-05-11T23:24:39.3440237+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:24:39.4947855+03:00 80000014-0000-fd00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
+2021-05-11T23:24:39.4977680+03:00 80000014-0000-fd00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
+2021-05-11T23:24:40.7258713+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("46"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:24:40.7626781+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:24:40.8618646+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 3049.2016ms (afa2e885)
+2021-05-11T23:24:40.8646279+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:24:40.8728317+03:00 80000014-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 3129.2674ms (791a596a)
+2021-05-11T23:25:05.4803286+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:25:05.4823810+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:25:05.4868413+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:25:05.4892153+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:25:05.4923116+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] 11.05.2021 23:25:05: Getting all models (80081e24)
+2021-05-11T23:25:05.5175678+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:25:05.5271655+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("4"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:25:05.5299140+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:25:05.5323761+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 41.4539ms (afa2e885)
+2021-05-11T23:25:05.5346632+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:25:05.5371095+03:00 8000000d-0005-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 57.0752ms (791a596a)
+2021-05-11T23:25:41.1265964+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:25:41.1291120+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:25:41.1310318+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:25:41.1330162+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:25:41.1370222+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] 11.05.2021 23:25:41: Getting all models (6eee93cf)
+2021-05-11T23:25:41.1512582+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:25:41.1589067+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:25:41.1610314+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:25:41.1631588+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 28.3048ms (afa2e885)
+2021-05-11T23:25:41.1653451+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:25:41.1678507+03:00 80000009-0007-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 41.1614ms (791a596a)
+2021-05-11T23:26:58.6280182+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:26:58.6298155+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:26:58.6316632+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:26:58.6335735+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:26:58.6362975+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] 11.05.2021 23:26:58: Getting all models (8a71e4df)
+2021-05-11T23:26:58.6417750+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:26:58.6518418+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("7"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:26:58.6543669+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:26:58.6573551+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 21.1262ms (afa2e885)
+2021-05-11T23:26:58.6612028+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:26:58.6633577+03:00 80000016-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 34.7646ms (791a596a)
+2021-05-11T23:27:27.5577416+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:27:27.5596201+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:27:27.5620336+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:27:27.5641398+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:27:27.5660735+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] 11.05.2021 23:27:27: Getting all models (93a002fb)
+2021-05-11T23:27:27.5688985+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:27:27.5801175+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:27:27.5822038+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:27:27.5887354+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 18.5787ms (afa2e885)
+2021-05-11T23:27:27.5907823+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:27:27.5934563+03:00 80000019-0006-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 34.9121ms (791a596a)
+2021-05-11T23:28:26.0348454+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:28:26.0363920+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:28:26.0379347+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:28:26.0397073+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:28:26.0417171+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] 11.05.2021 23:28:26: Getting all models (30655d82)
+2021-05-11T23:28:26.0437947+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:28:26.0479591+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:28:26.0500894+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:28:26.0546163+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 10.682ms (afa2e885)
+2021-05-11T23:28:26.0563363+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:28:26.0591834+03:00 80000018-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 23.0707ms (791a596a)
+2021-05-11T23:35:56.0802420+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:35:56.0819440+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:35:56.0841345+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:35:56.0879451+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:35:56.0900249+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] 11.05.2021 23:35:56: Getting all models (ca0291fe)
+2021-05-11T23:35:56.1286044+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:35:56.1993931+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("6"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:35:56.2018240+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:35:56.2048165+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 114.8254ms (afa2e885)
+2021-05-11T23:35:56.2067584+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:35:56.2092778+03:00 8000001b-0006-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 128.6220ms (791a596a)
+2021-05-11T23:36:01.5829243+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-11T23:36:01.5861803+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:36:01.5883793+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-11T23:36:01.5975426+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-11T23:36:01.6120429+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:36:01.6238795+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-11T23:36:01.7810318+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:01.7958356+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:01.9287851+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("7"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-11T23:36:01.9398296+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:01.9555444+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-11T23:36:01.9594439+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:36:01.9921273+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 392.6686ms (afa2e885)
+2021-05-11T23:36:01.9941382+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-11T23:36:01.9969174+03:00 8000000f-0005-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 414.5146ms (791a596a)
+2021-05-11T23:36:13.1820620+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-11T23:36:13.1839854+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:36:13.1863992+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-11T23:36:13.1882678+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-11T23:36:13.1904881+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] 11.05.2021 23:36:13: Getting all models (736be24d)
+2021-05-11T23:36:13.1926607+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:36:13.1963482+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-11T23:36:13.1991771+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:36:13.2014127+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 11.2243ms (afa2e885)
+2021-05-11T23:36:13.2035430+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-11T23:36:13.2062552+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 24.4994ms (791a596a)
+2021-05-11T23:36:59.5133900+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-11T23:36:59.5159401+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-11T23:36:59.5179114+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-11T23:36:59.5201279+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-11T23:36:59.5234831+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-11T23:36:59.5338359+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-11T23:36:59.5462173+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:59.5499638+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:59.5543068+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-11T23:36:59.5576395+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-11T23:36:59.5622381+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-11T23:36:59.5654751+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-11T23:36:59.5738128+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 46.2801ms (afa2e885)
+2021-05-11T23:36:59.5766757+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-11T23:36:59.5799094+03:00 8000000b-0007-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 65.6500ms (791a596a)
