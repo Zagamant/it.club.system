@@ -395,3 +395,675 @@ WHERE [a].[UserId] = @__userId_0" (0723d8ff)
 2021-05-06T00:37:41.0719945+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 851.6408ms (afa2e885)
 2021-05-06T00:37:41.0739215+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
 2021-05-06T00:37:41.0765915+03:00 8000001a-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 869.0152ms (791a596a)
+2021-05-06T00:56:56.5911586+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-05-06T00:56:56.6035514+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-05-06T00:56:56.6071104+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-05-06T00:56:56.6617286+03:00 80000017-0005-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-05-06T00:56:56.9086177+03:00 80000017-0005-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 251.8004ms (791a596a)
+2021-05-06T16:34:39.0975237+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-05-06T16:34:39.1099369+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-05-06T16:34:39.1128449+03:00  [INF] Content root path: "C:\Users\khava\Desktop\IT_Club\it.club.system\API" (b5d60022)
+2021-05-06T16:34:39.1798092+03:00 8000001e-0001-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/ - - (ca22a1cb)
+2021-05-06T16:34:39.4297629+03:00 8000001e-0001-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/ - - - 404 - - 258.2405ms (791a596a)
+2021-05-06T16:56:02.7935587+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T16:56:02.8103333+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T16:56:02.8332298+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T16:56:02.8942237+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T16:56:07.2434282+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-06T16:56:07.2474645+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T16:56:07.2552074+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-06T16:56:07.2837341+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-06T16:56:07.3411377+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] 06.05.2021 16:56:07: Getting all models (34fd29c9)
+2021-05-06T16:56:07.5013873+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T16:56:07.5015269+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T16:56:07.7080708+03:00 80000019-0005-fd00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
+2021-05-06T16:56:07.7134853+03:00 80000019-0005-fd00-b63f-84710c7967bb [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. (96eb03fe)
+2021-05-06T16:56:10.1161000+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("109"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T16:56:10.1162361+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("116"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-06T16:56:10.2491976+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T16:56:10.8368574+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 3498.5285ms (afa2e885)
+2021-05-06T16:56:10.8444431+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-06T16:56:10.8609653+03:00 80000019-0005-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 3615.2679ms (791a596a)
+2021-05-06T16:56:10.9322795+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("9"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:10.9623242+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:11.2535131+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("25"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T16:56:11.2836408+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:11.3499401+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("12"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T16:56:11.3673749+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T16:56:11.4700640+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 8568.7213ms (afa2e885)
+2021-05-06T16:56:11.4773857+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T16:56:11.4850896+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T16:56:11.4957686+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T16:56:11.4984953+03:00 80000020-0001-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 8695.3308ms (791a596a)
+2021-05-06T16:56:11.5040654+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T16:56:11.5113623+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T16:56:11.6137465+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T16:56:11.6258342+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T16:56:11.6419978+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:11.6510009+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:11.6620360+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T16:56:11.6696350+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T16:56:11.6795501+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T16:56:11.6850996+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T16:56:11.6901437+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 174.3636ms (afa2e885)
+2021-05-06T16:56:11.6939622+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T16:56:11.6985432+03:00 80000004-0001-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 216.3769ms (791a596a)
+2021-05-06T17:00:22.9014800+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:00:22.9050842+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:00:22.9091342+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:00:22.9123161+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:00:22.9348812+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:00:22.9431522+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:00:22.9823307+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:22.9891721+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:22.9961799+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:00:23.0025189+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:23.0156846+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:00:23.0199389+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:00:23.0241975+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 108.3385ms (afa2e885)
+2021-05-06T17:00:23.0280011+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:00:23.0321166+03:00 80000027-0006-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 130.1292ms (791a596a)
+2021-05-06T17:00:29.7317195+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/Groups? - - (ca22a1cb)
+2021-05-06T17:00:29.7448087+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:00:29.7521082+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (500cc934)
+2021-05-06T17:00:29.7600286+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"Get\", controller = \"Groups\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.GroupManagement.GroupModel]]] Get(System.String, System.String, System.String, System.String)" on controller "System.API.Controllers.GroupsController" ("System.API"). (122b2fdf)
+2021-05-06T17:00:29.7691805+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] 06.05.2021 17:00:29: Getting all models (f9af0a5a)
+2021-05-06T17:00:29.7766395+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:00:29.7905093+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [g].[Id], [g].[Capacity], [g].[CourseId], [g].[EndDate], [g].[LessonsPerWeek], [g].[Messenger], [g].[OnlineConversationLink], [g].[RoomId], [g].[RoomId1], [g].[StartDate], [g].[Status], [g].[Title]
+FROM [Groups] AS [g]
+ORDER BY (SELECT 1)
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2021-05-06T17:00:29.8009961+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.GroupManagement.GroupModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:00:29.8087286+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.GroupsController.Get (System.API)" in 41.9833ms (afa2e885)
+2021-05-06T17:00:29.8157411+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.GroupsController.Get (System.API)"' (99874f2b)
+2021-05-06T17:00:29.8245009+03:00 8000002e-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/Groups? - - - 200 2 application/json;+charset=utf-8 92.8031ms (791a596a)
+2021-05-06T17:00:43.5376331+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:00:43.5418029+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:00:43.5452308+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:00:43.5495356+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:00:43.5539105+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:00:43.5614407+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:00:43.5665223+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:43.5715940+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:43.5779319+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:00:43.5835423+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:00:43.5888535+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:00:43.5923288+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:00:43.5966502+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 43.4296ms (afa2e885)
+2021-05-06T17:00:43.5999907+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:00:43.6033930+03:00 8000000d-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 66.4035ms (791a596a)
+2021-05-06T17:01:27.6659417+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:01:27.6718121+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:01:27.6778646+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:01:27.6835869+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:01:27.6923065+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:01:27.7157787+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:01:27.7287866+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:27.7386445+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:27.7492738+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:01:27.7593972+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:27.7935769+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:01:27.8006235+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:01:27.8097778+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 118.3827ms (afa2e885)
+2021-05-06T17:01:27.8151092+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:01:27.8234261+03:00 80000030-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 155.7148ms (791a596a)
+2021-05-06T17:01:40.9468643+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:01:40.9532911+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:01:40.9600555+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:01:40.9661755+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:01:40.9757010+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:01:40.9877836+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:01:40.9991107+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:41.0098569+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:41.0206762+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:01:41.0306446+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:01:41.0433982+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:01:41.0524567+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:01:41.0602624+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 87.6491ms (afa2e885)
+2021-05-06T17:01:41.0656832+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:01:41.0739705+03:00 8000000f-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 126.6340ms (791a596a)
+2021-05-06T17:02:48.5467039+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:02:48.5518709+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:02:48.5562713+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:02:48.5616633+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:02:48.5682733+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:02:48.5784433+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:02:48.5942358+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:02:48.6038148+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:02:48.6119116+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:02:48.6198797+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:02:48.6374030+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("5"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:02:48.6428046+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:02:48.6488839+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 81.9865ms (afa2e885)
+2021-05-06T17:02:48.6539817+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:02:48.6601904+03:00 80000032-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 112.5151ms (791a596a)
+2021-05-06T17:03:08.8683821+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:03:08.8732118+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:03:08.8789821+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:03:08.8851109+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:03:08.8920491+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:03:08.9019468+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:03:08.9130686+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:08.9217054+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:08.9299582+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:03:08.9388925+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:08.9486592+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:03:08.9550214+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:03:08.9623933+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 72.4599ms (afa2e885)
+2021-05-06T17:03:08.9692460+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:03:08.9755150+03:00 8000001c-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 106.6376ms (791a596a)
+2021-05-06T17:03:54.2883137+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:03:54.2956879+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:03:54.3033933+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:03:54.3116847+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:03:54.3203940+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:03:54.3355427+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:03:54.3503512+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:54.3626706+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:54.3809883+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:03:54.4113902+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("12"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:03:54.4409191+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("6"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:03:54.4686913+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:03:54.4736992+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 157.3822ms (afa2e885)
+2021-05-06T17:03:54.4813974+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:03:54.4870239+03:00 80000034-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 199.5947ms (791a596a)
+2021-05-06T17:04:07.6301167+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:04:07.6394518+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:04:07.6485403+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:04:07.6546081+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:04:07.6626969+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:04:07.6746748+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:04:07.6916587+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:04:07.7017564+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:04:07.7135627+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:04:07.7236360+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:04:07.7364067+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed DbCommand ("4"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:04:07.7438615+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:04:07.7633881+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 92.3881ms (afa2e885)
+2021-05-06T17:04:07.7695120+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:04:07.7776390+03:00 80000011-0004-fe00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 145.8586ms (791a596a)
+2021-05-06T17:05:15.4255723+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:05:15.4312052+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:05:15.4354249+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:05:15.4422096+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:05:15.4474870+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:05:15.4582755+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:05:15.4661518+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:15.4733558+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:15.4818616+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:05:15.4898457+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:15.5143728+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("5"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:05:15.5197700+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:05:15.5261211+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 78.459ms (afa2e885)
+2021-05-06T17:05:15.5311410+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:05:15.5373900+03:00 80000036-0002-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 111.0321ms (791a596a)
+2021-05-06T17:05:45.8610365+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:05:45.8658911+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:05:45.8712482+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:05:45.8769521+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:05:45.8828123+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:05:45.8926566+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:05:45.9027764+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:45.9127985+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:45.9226725+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:05:45.9318633+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:05:45.9441532+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("2"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:05:45.9514492+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:05:45.9602283+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 75.6507ms (afa2e885)
+2021-05-06T17:05:45.9657762+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:05:45.9736772+03:00 8000001e-0000-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 110.6550ms (791a596a)
+2021-05-06T17:07:50.1054627+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:07:50.1131020+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:07:50.1168038+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:07:50.1203038+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:07:50.1243483+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:07:50.1367555+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:07:50.1430884+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:07:50.1491022+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:07:50.1549761+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:07:50.1605504+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("0"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:07:50.1750421+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed DbCommand ("3"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:07:50.1792762+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:07:50.1849460+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 60.2587ms (afa2e885)
+2021-05-06T17:07:50.1911595+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:07:50.1949520+03:00 8000001b-0005-fd00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 90.5515ms (791a596a)
+2021-05-06T17:08:32.0825727+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Request starting HTTP/2 GET https://localhost:44365/api/v1/users - - (ca22a1cb)
+2021-05-06T17:08:32.0883496+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] CORS policy execution successful. (5409d6ef)
+2021-05-06T17:08:32.0964105+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executing endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (500cc934)
+2021-05-06T17:08:32.1023046+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Route matched with "{action = \"GetAll\", controller = \"Users\"}". Executing controller action with signature "System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.BLL.Models.UserManagement.UserModel]]] GetAll()" on controller "System.API.Controllers.UsersController" ("System.API"). (122b2fdf)
+2021-05-06T17:08:32.1113388+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Entity Framework Core "5.0.4" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "using lazy-loading proxies " (9958f5bb)
+2021-05-06T17:08:32.1395472+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("18"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [a].[Id], [a].[AccessFailedCount], [a].[AdditionalInfo], [a].[AddressId], [a].[BirthDay], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[MiddleName], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[Surname], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]" (0723d8ff)
+2021-05-06T17:08:32.1612374+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[Id], [p].[PhotoAsBytes], [p].[UserId], [p].[UserId1]
+FROM [Photos] AS [p]
+WHERE [p].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:08:32.1717448+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[ContactAsIs], [c].[ContactType], [c].[Name], [c].[UserId]
+FROM [Contacts] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:08:32.1860791+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [t].[Id], [t].[Capacity], [t].[CourseId], [t].[EndDate], [t].[LessonsPerWeek], [t].[Messenger], [t].[OnlineConversationLink], [t].[RoomId], [t].[RoomId1], [t].[StartDate], [t].[Status], [t].[Title], [a].[Id], [t].[GroupsId], [t].[UsersId], [t0].[GroupsId], [t0].[UsersId], [t0].[Id], [t0].[AccessFailedCount], [t0].[AdditionalInfo], [t0].[AddressId], [t0].[BirthDay], [t0].[ConcurrencyStamp], [t0].[Email], [t0].[EmailConfirmed], [t0].[LockoutEnabled], [t0].[LockoutEnd], [t0].[MiddleName], [t0].[Name], [t0].[NormalizedEmail], [t0].[NormalizedUserName], [t0].[PasswordHash], [t0].[PhoneNumber], [t0].[PhoneNumberConfirmed], [t0].[SecurityStamp], [t0].[Surname], [t0].[TwoFactorEnabled], [t0].[UserName]
+FROM [AspNetUsers] AS [a]
+INNER JOIN (
+    SELECT [g0].[Id], [g0].[Capacity], [g0].[CourseId], [g0].[EndDate], [g0].[LessonsPerWeek], [g0].[Messenger], [g0].[OnlineConversationLink], [g0].[RoomId], [g0].[RoomId1], [g0].[StartDate], [g0].[Status], [g0].[Title], [g].[GroupsId], [g].[UsersId]
+    FROM [GroupUser] AS [g]
+    INNER JOIN [Groups] AS [g0] ON [g].[GroupsId] = [g0].[Id]
+) AS [t] ON [a].[Id] = [t].[UsersId]
+LEFT JOIN (
+    SELECT [g1].[GroupsId], [g1].[UsersId], [a0].[Id], [a0].[AccessFailedCount], [a0].[AdditionalInfo], [a0].[AddressId], [a0].[BirthDay], [a0].[ConcurrencyStamp], [a0].[Email], [a0].[EmailConfirmed], [a0].[LockoutEnabled], [a0].[LockoutEnd], [a0].[MiddleName], [a0].[Name], [a0].[NormalizedEmail], [a0].[NormalizedUserName], [a0].[PasswordHash], [a0].[PhoneNumber], [a0].[PhoneNumberConfirmed], [a0].[SecurityStamp], [a0].[Surname], [a0].[TwoFactorEnabled], [a0].[UserName]
+    FROM [GroupUser] AS [g1]
+    INNER JOIN [AspNetUsers] AS [a0] ON [g1].[UsersId] = [a0].[Id]
+    WHERE [a0].[Id] = @__p_0
+) AS [t0] ON [t].[Id] = [t0].[GroupsId]
+WHERE [a].[Id] = @__p_0
+ORDER BY [a].[Id], [t].[GroupsId], [t].[UsersId], [t].[Id], [t0].[GroupsId], [t0].[UsersId], [t0].[Id]" (0723d8ff)
+2021-05-06T17:08:32.1994347+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("1"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[About], [c].[ManualLink], [c].[Title], [c].[UserId]
+FROM [Courses] AS [c]
+WHERE [c].[UserId] = @__p_0" (0723d8ff)
+2021-05-06T17:08:32.2259970+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed DbCommand ("20"ms) [Parameters=["@__userId_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0" (0723d8ff)
+2021-05-06T17:08:32.2307442+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executing "OkObjectResult", writing value of type '"System.Collections.Generic.List`1[[System.BLL.Models.UserManagement.UserModel, System.BLL.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (605b4265)
+2021-05-06T17:08:32.2346178+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed action "System.API.Controllers.UsersController.GetAll (System.API)" in 128.954ms (afa2e885)
+2021-05-06T17:08:32.2382457+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Executed endpoint '"System.API.Controllers.UsersController.GetAll (System.API)"' (99874f2b)
+2021-05-06T17:08:32.2420835+03:00 80000029-0006-ff00-b63f-84710c7967bb [INF] Request finished HTTP/2 GET https://localhost:44365/api/v1/users - - - 200 355 application/json;+charset=utf-8 163.7901ms (791a596a)

@@ -13,19 +13,13 @@
 
         <BarBrand Style="border:none;">
             <div class="home">
-                <BarDropdown>
-                    <BarDropdownToggle><b>It_Club</b></BarDropdownToggle>
-                    <BarDropdownMenu>
-                        <BarDropdownItem>Action</BarDropdownItem>
-                        <BarDropdownItem>Another action</BarDropdownItem>
-                    </BarDropdownMenu>
-                </BarDropdown>
+                <b>It_Club</b>
             </div>
         </BarBrand>
-        <BarMenu>
-            <BarStart>
+        <BarMenu >
+            <BarStart Style="font-size:170%">
 
-                <BarItem>
+                <BarItem Style="margin-left:82px">
                     <BarLink To="users">Список челбосо</BarLink>
                 </BarItem>
 
@@ -43,7 +37,7 @@
 
                 <BarItem Style="float:right">
 
-                    <BarLink To="#">
+                    <BarLink To="/users/{id:int}">
                         <img class="user-image" src="/assets/images/User (1).svg" />
                         @($"{AccountService.User.Name} {AccountService.User.Surname} ")
                     </BarLink>
@@ -52,8 +46,48 @@
             </BarStart>
         </BarMenu>
     </Bar>
-
     <!--</nav>-->
+
+<div class="sider">
+    <!--Sidebar-->
+    <Sidebar @ref="sidebar">
+        <SidebarContent>
+            <SidebarBrand>
+                <a href="">Список групп</a>
+            </SidebarBrand>
+            <SidebarNavigation>
+                <SidebarItem>
+                    <SidebarLink To="" Title="Дворец">
+                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Дворец
+                    </SidebarLink>
+                </SidebarItem>
+                <SidebarItem>
+                    <SidebarLink To="" Title="Серебронск">
+                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Серебронск
+                    </SidebarLink>
+                </SidebarItem>
+                <SidebarItem>
+                    <SidebarLink To="" Title="Двойное чикаго">
+                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Двойное чикаго
+                    </SidebarLink>
+                </SidebarItem>
+                <SidebarItem>
+                    <SidebarLink To="" Title="Серебронск">
+                        <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight" />Серебронск
+                    </SidebarLink>
+                </SidebarItem>
+
+            </SidebarNavigation>
+        </SidebarContent>
+    </Sidebar>
+
+    <AlertCustom/>
+
+    @Body
+
+</div>
+    <!--Sidebar-->
+
 
 <div class="sider">
     <!--Sidebar-->
@@ -103,13 +137,7 @@
     <!--Sidebar-->
 
 
-
-
 }
-
-
-
-
 
 @code {
     private bool LoggedIn => AccountService.User != null;

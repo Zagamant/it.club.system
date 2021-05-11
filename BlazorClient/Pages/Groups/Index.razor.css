@@ -1,10 +1,10 @@
 ﻿body {
 }
-.table{
-    padding-left:200px;
-    padding-right:200px;
-    display:block;
-}
-.head{
-    margin-left:200px;
+.table {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: white;
+    width: 1855px;
 }

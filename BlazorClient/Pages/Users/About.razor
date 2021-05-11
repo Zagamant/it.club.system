@@ -12,7 +12,7 @@
             <FigureCaption>
                 
                     <Heading Size="HeadingSize.Is4">
-                        <Button Style="height:40px; width: 250px; margin-top:20px; margin-left:20px" Color="Color.Primary">Редактировать</Button>
+                        <Button Style="height:40px; width: 250px; margin-top:20px; margin-left:20px" Color="Color.Info">Редактировать</Button>
                     </Heading>
                 
             </FigureCaption>
@@ -24,35 +24,42 @@
                 @($"{AccountService.User.Name} {AccountService.User.Surname}")
             </DisplayHeading>
         </div>
-                <Table Borderless="true" Style="font-size:175%">
-                    <TableBody>
-                        <TableRow>
-                            <TableRowHeader> <b>Клуб:</b></TableRowHeader>
-                            <TableRowCell>Серебронск</TableRowCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowHeader><b>ФИО:</b></TableRowHeader>
-                            <TableRowCell>Пупкин лупкин залпукин</TableRowCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowHeader><b>Номер телефона:</b></TableRowHeader>
-                            <TableRowCell>+375 33 658 62 62</TableRowCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowHeader><b>Список курсов:</b></TableRowHeader>
-                            <TableRowCell> Много курсов</TableRowCell>
-                        </TableRow>
+        <div class="tables">
+            <Table Borderless="true" Style="font-size:150%;">
+                <TableBody>
+                    <TableRow>
+                        <TableRowHeader> <b>Клуб:</b></TableRowHeader>
+                        <TableRowCell>Серебронск</TableRowCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowHeader><b>ФИО:</b></TableRowHeader>
+                        <TableRowCell>Пупкин лупкин залпукин</TableRowCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowHeader><b>Номер телефона:</b></TableRowHeader>
+                        <TableRowCell>+375 33 658 62 62</TableRowCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
 
-                        <TableRow>
-                            <TableRowHeader><b>Контакты:</b></TableRowHeader>
-                            <TableRowCell> Контакты</TableRowCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowHeader><b>Другая информация :</b></TableRowHeader>
-                            <TableRowCell> Информация kldsmvjlkdfsnvlkjsdnlknldksmv lkdsmkm</TableRowCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
+            <Table Borderless="true" Style="font-size:150%">
+                <TableBody>
+                    <TableRow>
+                        <TableRowHeader><b>Список курсов:</b></TableRowHeader>
+                        <TableRowCell> Много курсов</TableRowCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowHeader><b>Контакты:</b></TableRowHeader>
+                        <TableRowCell> Контакты</TableRowCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowHeader><b>Другая информация :</b></TableRowHeader>
+                        <TableRowCell>Другая информация :</TableRowCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </div>
+
     </div>
 </div>
 

@@ -4,11 +4,9 @@
 @using System.BLL.Models.GroupManagement
 @attribute [Authorize]
 @inject IGroupService GroupService
-    <div class="head">
-        <h1>Groups</h1>
-        <NavLink href="groups/add" class="btn btn-sm btn-success mb-2">Add Group</NavLink>
-    </div>
-        <table class="table">
+
+    <div class="table">
+            <NavLink href="groups/add" class="btn btn-sm btn-success mb-2">Add Group</NavLink>
             <DataGrid TItem="GroupModel"
                       Data="@groups"
                       TotalItems="@totalCount"
@@ -20,14 +18,14 @@
                             <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
                         </DeleteCommandTemplate>
                     </DataGridCommandColumn>
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Title" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Название" />
 
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.LessonsPerWeek)" Caption="LessonsPerWeek" />
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.OnlineConversationLink)" Caption="OnlineConversationLink" />
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.StartDate)" Caption="StartDate" />
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.EndDate)" Caption="EndDate" />
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Capacity)" Caption="Capacity" />
-                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Status)" Caption="Status" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.LessonsPerWeek)" Caption="Уроков в неделю" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.OnlineConversationLink)" Caption="Ссылка на конференцию" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.StartDate)" Caption="Начало занятий" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.EndDate)" Caption="Окончание занятий" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Capacity)" Caption="Количество учащихся" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Status)" Caption="Статус" />
 
                     <DataGridColumn TItem="GroupModel" Field="@nameof( GroupModel.Id)" Sortable="false" Filterable="false">
                         <DisplayTemplate>
@@ -38,7 +36,8 @@
                     </DataGridColumn>
                 </DataGridColumns>
             </DataGrid>
-        </table>
+    </div>
+
     @code {
         private bool loading;
         private IList<GroupModel> groups;
