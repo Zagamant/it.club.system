@@ -6,11 +6,6 @@
 @attribute [Authorize]
 @inject IAccountService AccountService
 
-
-
-
-
-
 <div class="table">
     <NavLink href="users/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
 
@@ -29,6 +24,7 @@
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.MiddleName)" Caption="Отчество" />
+
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил" />
 
