@@ -32,4 +32,8 @@
     <ProjectReference Include="..\BLL\System.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs" />
+  </ItemGroup>
+
 </Project>
