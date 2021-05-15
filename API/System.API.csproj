@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images" />
+    <Folder Include="Logs" />
   </ItemGroup>
 
 </Project>

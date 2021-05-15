@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL", "BLL\System.BL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Models", "BLL.Models\System.BLL.Models.csproj", "{6B4998DA-2789-4314-A726-78C4F93089E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.BLL.Tests", "BLL.Tests\System.BLL.Tests.csproj", "{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.BLL.Tests", "BLL.Tests\System.BLL.Tests.csproj", "{1A3693BC-A1DE-4091-92C9-A9F4FED53F25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClient", "BlazorClient\BlazorClient.csproj", "{AE25E0BC-10C3-4824-9A8E-DBF7506D4F0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

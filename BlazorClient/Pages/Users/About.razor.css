@@ -1,0 +1,34 @@
+﻿body {
+}
+.main-info {
+    display: flex;
+    margin: 20px;
+    position: relative;
+    width: 1645px;
+}
+.info {
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 3px;
+    background-color: white;
+    width: 1855px;
+}
+.photo-card {
+    padding: 30px;
+    margin-right: 20px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 3px;
+    background-color: white;
+    display:table;
+}
+.Name {
+    margin-left: 140px;
+}
+.tables {
+    margin-top:60px;
+    display: flex;
+    justify-content:space-around;
+}

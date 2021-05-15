@@ -24,17 +24,24 @@
 
 @inject NavigationManager NavigationManager
 
-<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <AppRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <p>Bool bool</p>
-        @* @{  *@
-        @*     // redirect to home page if not found *@
-        @*     NavigationManager.NavigateTo("/");  *@
-        @* } *@
-    </NotFound>
-</Router>
-@* *@
-@* <AntContainer /> *@
+    
+        <Router AppAssembly="@typeof(Program).Assembly">
+            <Found Context="routeData">
+                <AppRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            </Found>
+            <NotFound>
+                <div class="bg">
+
+                    <img class="bg-image" src="/assets/images/BGimage404.png" />
+                </div>
+
+                    @* @{  *@
+                    @*     // redirect to home page if not found *@
+                    @*     NavigationManager.NavigateTo("/");  *@
+                    @* } *@
+            </NotFound>
+        </Router>
+
+    
+    @* *@
+    @* <AntContainer /> *@

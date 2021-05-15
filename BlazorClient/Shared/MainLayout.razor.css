@@ -1,3 +1,4 @@
+
 .page {
     position: relative;
     display: flex;
@@ -21,30 +22,34 @@
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-    }
+.top-row ::deep a, .top-row .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
 
-    .top-row a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    body .navbar-expand {
-        background-color: #F5F6F7;
-        padding: 0;
-    }
+body .navbar-expand {
+    background-color: #F5F6F7;
+    padding: 0;
+}
 
-    .navbar-nav {
-        padding-left: 45px;
-    }
+.navbar-nav {
+    padding-left: 45px;
+}
+
 
     .home {
-        font-size: 30px;
+        font-size: 250%;
         font-family: 'Exo 2';
         color: black;
+        margin-left:20px;
+        margin-bottom: 5px;
     }
+
 
     .nav-menu[b-lor2elsqal] {
         display: flex;
@@ -52,14 +57,36 @@
         align-items:center;
     }
 
-    .user-image {
-        max-width:45px;
+.home {
+    font-size: 30px;
+    font-family: 'Exo 2';
+    color: black;
+}
+
+.nav-menu[b-lor2elsqal] {
+    display: flex;
+    padding-left: 40px;
+    align-items: center;
+}
+
+.user-image {
+    max-width: 45px;
+}
+
+.user-profile {
+    display: flex;
+    padding-left: 300px;
+    align-items: center;
+}
+
+    .shadow {
+          box-shadow: 0 .5rem 1rem rgba(0,0,0,.05)!important;
+          border:0.25px solid #D7D8D9;
     }
 
-    .user-profile{
+    .sider{
         display:flex;
-        padding-left:300px;
-        align-items:center;
+          background-color: #eeeeee;
     }
 
 @media (max-width: 640.98px) {
@@ -73,6 +100,18 @@
 
     .top-row a, .top-row .btn-link {
         margin-left: 0;
+    }
+    .home {
+        position: relative;
+        left: 60px;
+    }
+    .nav-menu {
+        position: relative;
+        left: 60px
+    }
+    .user-profile {
+        position: relative;
+        right: 270px;
     }
 }
 
@@ -99,4 +138,5 @@
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+
 }

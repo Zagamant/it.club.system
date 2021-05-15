@@ -22,7 +22,7 @@ namespace System.BLL.Models.UserManagement
         public virtual IEnumerable<Image> Photos { get; set; } = new List<Image>();
         public virtual IList<string> Roles { get; set; } = new List<string>();
         public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
-        public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+        public virtual ICollection<Group> Groups { get; set; } = new List<Group>();  
         public virtual ICollection<Course> CoursesPassed { get; set; } = new List<Course>();
 
         public string Country { get; set; }

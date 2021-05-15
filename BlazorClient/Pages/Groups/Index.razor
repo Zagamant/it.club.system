@@ -1,0 +1,65 @@
+﻿@page "/groups"
+@using Microsoft.AspNetCore.Authorization
+@using BlazorClient.Services.GroupManagement
+@using System.BLL.Models.GroupManagement
+@attribute [Authorize]
+@inject IGroupService GroupService
+
+    <div class="table">
+            <NavLink href="groups/add" class="btn btn-sm btn-success mb-2">Add Group</NavLink>
+            <DataGrid TItem="GroupModel"
+                      Data="@groups"
+                      TotalItems="@totalCount"
+                      Filterable="true"
+                      FilterMethod="DataGridFilterMethod.Contains">
+                <DataGridColumns>
+                    <DataGridCommandColumn TItem="GroupModel">
+                        <DeleteCommandTemplate>
+                            <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
+                        </DeleteCommandTemplate>
+                    </DataGridCommandColumn>
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Название" />
+
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.LessonsPerWeek)" Caption="Уроков в неделю" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.OnlineConversationLink)" Caption="Ссылка на конференцию" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.StartDate)" Caption="Начало занятий" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.EndDate)" Caption="Окончание занятий" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Capacity)" Caption="Количество учащихся" />
+                    <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Status)" Caption="Статус" />
+
+                    <DataGridColumn TItem="GroupModel" Field="@nameof( GroupModel.Id)" Sortable="false" Filterable="false">
+                        <DisplayTemplate>
+                            <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
+                                Delete
+                            </Button>
+                        </DisplayTemplate>
+                    </DataGridColumn>
+                </DataGridColumns>
+            </DataGrid>
+    </div>
+
+    @code {
+        private bool loading;
+        private IList<GroupModel> groups;
+        private bool IsDeleting;
+        private int totalCount;
+
+        protected override async Task OnInitializedAsync()
+        {
+            loading = true;
+            groups = (await GroupService.GetAllAsync()).ToList();
+            totalCount = groups.Count;
+            loading = false;
+        }
+
+        private async void DeleteUser(int id)
+        {
+            var user = groups.First(x => x.Id == id);
+            IsDeleting = true;
+            await GroupService.DeleteAsync(id);
+            groups.Remove(user);
+            StateHasChanged();
+            IsDeleting = false;
+        }
+
+    }

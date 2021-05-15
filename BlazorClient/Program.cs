@@ -12,6 +12,7 @@ using Blazorise.AntDesign;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using BlazorClient.Services.GroupManagement;
 
 namespace BlazorClient
 {
@@ -27,6 +28,7 @@ namespace BlazorClient
                 .AddScoped<IAuthenticationService, AuthenticationService>()
                 .AddScoped<IAccountService, AccountService>()
                 .AddScoped<IGroupService, GroupService>()
+
                 .AddScoped<IAlertService, AlertService>();
 
             builder.Services.AddTransient(x =>
