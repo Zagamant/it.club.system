@@ -2,13 +2,13 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.UserManagement
-
 @attribute [Authorize]
 @inject IAccountService AccountService
+@inject IGroupService groupService
+
 
 <div class="table">
     <NavLink href="users/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
-
     <DataGrid TItem="UserModel"
               Data="@users"
               TotalItems="@totalCount"

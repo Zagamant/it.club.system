@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace System.DAL.Configurations
 {
-	public class PhotoConfiguration : IEntityTypeConfiguration<Photo>
+	public class PhotoConfiguration : IEntityTypeConfiguration<Image>
 	{
-		public void Configure(EntityTypeBuilder<Photo> builder)
+		public void Configure(EntityTypeBuilder<Image> builder)
 		{
 			builder
 				.HasOne<User>()
