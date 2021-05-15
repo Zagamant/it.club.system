@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace System.BLL.Models.PhotoManagement
+namespace System.BLL.Models.ImageManagement
 {
     public class UploadImageModel
     {

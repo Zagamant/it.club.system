@@ -1,4 +1,4 @@
-﻿using System.BLL.Models.PhotoManagement;
+﻿using System.BLL.Models.ImageManagement;
 using System.Net.Http;
 using BlazorClient.Services.Helpers;
 

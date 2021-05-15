@@ -100,8 +100,8 @@ namespace System.API.Controllers
         }
 
         
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<UserModel>> GetById(int id)
         {
             var user = await _userService.GetAsync(id);
             return Ok(user);
@@ -109,7 +109,7 @@ namespace System.API.Controllers
 
         
         [Authorize(Roles = "main_admin,admin")]
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));
 

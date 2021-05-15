@@ -2,10 +2,12 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.UserManagement
+@using BlazorClient.Services.GroupManagement
 @attribute [Authorize]
 @inject IAccountService AccountService
+@inject IGroupService groupService
 
-<h1>Users</h1>
+<h1>Users @countShit</h1>
 <NavLink href="users/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
 <table class="table table-striped">
     <DataGrid TItem="UserModel"
@@ -41,12 +43,14 @@
     private bool IsDeleting;
     private int totalCount;
 
+    private int countShit;
     protected override async Task OnInitializedAsync()
     {
         loading = true;
         users = (await AccountService.GetAll()).ToList();
         totalCount = users.Count;
         loading = false;
+        countShit = (await groupService.GetAllAsync()).Count();
     }
 
     private async void DeleteUser(int id)

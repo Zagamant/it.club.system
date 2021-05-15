@@ -6,8 +6,9 @@ using System.BLL.CourseManagement;
 using System.BLL.EmailManagement;
 using System.BLL.EventManagement;
 using System.BLL.GroupManagement;
+using System.BLL.ImageManagement;
+using System.BLL.Models.Helpers;
 using System.BLL.PaymentManagement;
-using System.BLL.PhotoManagement;
 using System.BLL.RoleManagement;
 using System.BLL.RoomManagement;
 using System.BLL.UserManagement;
@@ -56,6 +57,8 @@ namespace System.API
 				.AddEntityFrameworkStores<DataContext>()
 				.AddDefaultTokenProviders();
 
+			services.Configure<ImgurSettings>(Configuration.GetSection("ImgurSettings"));
+			
 			services.AddDbContext<DataContext>(options =>
 				options
 					.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))

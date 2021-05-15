@@ -1,6 +1,5 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.PaymentManagement;
-using System.BLL.PhotoManagement;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;

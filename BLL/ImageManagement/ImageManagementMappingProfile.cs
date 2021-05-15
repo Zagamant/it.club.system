@@ -1,8 +1,8 @@
-﻿using System.BLL.Models.PhotoManagement;
+﻿using System.BLL.Models.ImageManagement;
 using System.DAL.Entities;
 using AutoMapper;
 
-namespace System.BLL.PhotoManagement
+namespace System.BLL.ImageManagement
 {
     public class ImageManagementMappingProfile : Profile
     {

@@ -1,29 +1,37 @@
-﻿using System.BLL.Models.ImageManagement;
+using System.BLL.Models.Helpers;
+using System.BLL.Models.ImageManagement;
+using System.BLL.Models.ImageManagement.Imgur;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using RestSharp;
 
 namespace System.BLL.ImageManagement
 {
-    public class ImageService : IImageService
+    public class ImgurImageService : IImageService
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        private ILogger _logger;
+        private readonly ILogger _logger;
+        private readonly ImgurSettings _imgurSettings;
 
-        public ImageService(IMapper mapper, DataContext context, ILogger<ImageService> logger)
+        private const string ImgurBaseUrl = @"https://api.imgur.com/3/";
+
+        public ImgurImageService(IMapper mapper, DataContext context, ILogger<ImageService> logger,
+            IOptions<ImgurSettings> imgurSettings)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _imgurSettings = imgurSettings.Value;
         }
-
 
         public async Task<IEnumerable<ImageModel>> GetAsync()
         {
@@ -43,29 +51,31 @@ namespace System.BLL.ImageManagement
 
         public async Task<ImageModel> UploadAsync(UploadImageModel image)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Id == image.UserId);
-
-            var username = user != null
-                ? user.UserName
-                : throw new ArgumentException($"There is no user with {image.UserId}");
-
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Images", $"{username}",
-                $"{Guid.NewGuid()}.{Path.GetExtension(image.Image.FileName)}");
-
-            var entity = new Image
+            var client = new RestClient($"{ImgurBaseUrl}upload")
             {
-                UserId = image.UserId,
-                Path = path
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.POST)
+            {
+                AlwaysMultipartFormData = true
             };
 
-            await using (var fileStream = new FileStream(path, FileMode.Create))
+            request.AddHeader("Authorization", $"Client-ID {_imgurSettings.ClientId}");
+            request.AddParameter("image", image.Image);
+
+            var response = await client.ExecuteAsync(request);
+
+            var responseObj = JsonConvert.DeserializeObject<ImageResponse>(response.Content);
+
+            var imageModel = new Image
             {
-                await image.Image.CopyToAsync(fileStream);
-            }
+                Path = responseObj.ResponseData.Link,
+                UserId = image.UserId
+            };
 
-            await _context.Images.AddAsync(entity);
+            await _context.Images.AddAsync(imageModel);
 
-            return _mapper.Map<ImageModel>(entity);
+            return _mapper.Map<ImageModel>(imageModel);
         }
 
         public async Task Delete(int id)
@@ -74,8 +84,6 @@ namespace System.BLL.ImageManagement
                                  throw new ArgumentException($"Cannot find image with id: {id}");
 
             _context.Images.Remove(entityToDelete);
-            File.Delete(entityToDelete.Path);
-            
         }
     }
 }
