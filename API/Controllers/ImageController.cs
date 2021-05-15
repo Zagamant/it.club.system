@@ -11,10 +11,10 @@ namespace System.API.Controllers
     [ApiController]
     public class ImageController : ControllerBase
     {
-        private readonly IHostingEnvironment _hostingEnv;
+        private readonly IWebHostEnvironment _hostingEnv;
         private readonly IImageService _service;
 
-        public ImageController(IImageService service, IHostingEnvironment hostingEnv)
+        public ImageController(IImageService service, IWebHostEnvironment hostingEnv)
         {
             _hostingEnv = hostingEnv ?? throw new ArgumentNullException(nameof(hostingEnv));
             _service = service ?? throw new ArgumentNullException(nameof(service));
