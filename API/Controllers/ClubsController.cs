@@ -1,6 +1,8 @@
 ﻿using System.API.Helpers;
 using System.BLL.ClubManagement;
 using System.BLL.Models.ClubManagement;
+using System.Collections;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -53,6 +55,13 @@ namespace System.API.Controllers
         public async Task<ActionResult<ClubModel>> RemoveRoom([FromBody] int clubId, int roomId)
         {
             return await _service.RemoveRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
+        }
+        
+        [Authorize(Roles = "main_admin")]
+        [HttpPost("{id}/clubs")]
+        public async Task<IEnumerable<ClubModel>> GetClubByUserId(int userId)
+        {
+            return await _service.GetByUser(userId);
         }
     }
 }

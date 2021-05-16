@@ -26,15 +26,14 @@ namespace BlazorClient.Services.UserManagement
         public async Task<UserModel> AuthenticateAsync(string username, string password)
         {
             var response = await _http.PostAsJsonAsync($"{_url}/authenticate", new {username, password});
-            
-            if (response.IsSuccessStatusCode)
-            {
-                var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
-                return responseObj;
-            }
 
-            return null;
+            if (!response.IsSuccessStatusCode) 
+                throw new ArgumentException("Something wrong with http request");
+
+            var responseText = await response.Content.ReadAsStringAsync();
+            var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
+            return responseObj;
+
         }
 
         public async Task LogoutAsync()
@@ -63,14 +62,13 @@ namespace BlazorClient.Services.UserManagement
         {
             var response = await _http.PostAsJsonAsync($"{_url}", user);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
-                return responseObj;
-            }
+            if (!response.IsSuccessStatusCode)
+                throw new ArgumentException("Something wrong with http request");
+            
+            var responseText = await response.Content.ReadAsStringAsync();
+            var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
+            return responseObj;
 
-            return null;
         }
 
         /// <inheritdoc/>
@@ -78,14 +76,13 @@ namespace BlazorClient.Services.UserManagement
         {
             var response = await _http.PutAsJsonAsync($"{_url}/{id}", model);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseText = await response.Content.ReadAsStringAsync();
-                var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
-                return responseObj;
-            }
+            if (!response.IsSuccessStatusCode)                
+                throw new ArgumentException("Something wrong with http request");
 
-            return null;
+            var responseText = await response.Content.ReadAsStringAsync();
+            var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
+            return responseObj;
+
         }
 
         /// <inheritdoc/>

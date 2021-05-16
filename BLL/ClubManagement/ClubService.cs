@@ -1,11 +1,14 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.ClubManagement;
+using System.BLL.Models.UserManagement;
+using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.DAL.Entities.Enums;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -92,6 +95,22 @@ namespace System.BLL.ClubManagement
             await _context.SaveChangesAsync();
 
             return _mapper.Map<ClubModel>(club);
+        }
+
+        public async Task<IEnumerable<ClubModel>> GetByUser(int userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            
+            var clubs = _context.Groups
+                .Where(c => c.Users.Contains(user))
+                .Select(g => _context.Rooms.Where(c => c.Groups.Contains(g)))
+                .Select(ar => ar.Select(el => el.Club))
+                .SelectMany(item => item)
+                .Distinct();
+            
+            
+            return clubs.Select(c => _mapper.Map<ClubModel>(c)).ToList();
+
         }
 
         public override async Task<ClubModel> UpdateAsync(int clubId, ClubModel updatedGroup)

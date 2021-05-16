@@ -1,10 +1,12 @@
 ﻿@page "/users/{id:int}"
 @using BlazorClient.Services.AccountManagement
+@using System.BLL.Models.UserManagement
+@using BlazorClient.Services.UserManagement
+@inject NavigationManager NavigationManager
 @inject IAccountService  AccountService
+@inject IUserService UserService
 
-
-
-
+<h2>@_user.ToString()</h2>
 <div class="main-info">
     <div class="photo-card">
         <Figure Size="FigureSize.Is256x256">
@@ -29,15 +31,15 @@
                 <TableBody>
                     <TableRow>
                         <TableRowHeader> <b>Клуб:</b></TableRowHeader>
-                        <TableRowCell>Серебронск</TableRowCell>
+                        <TableRowCell>BLANK</TableRowCell>
                     </TableRow>
                     <TableRow>
                         <TableRowHeader><b>ФИО:</b></TableRowHeader>
-                        <TableRowCell>Пупкин лупкин залпукин</TableRowCell>
+                        <TableRowCell>@($"{_user?.Name} {_user?.MiddleName} {_user?.Surname}")</TableRowCell>
                     </TableRow>
                     <TableRow>
                         <TableRowHeader><b>Номер телефона:</b></TableRowHeader>
-                        <TableRowCell>+375 33 658 62 62</TableRowCell>
+                        <TableRowCell>@_user?.PhoneNumber</TableRowCell>
                     </TableRow>
                 </TableBody>
             </Table>
@@ -46,15 +48,15 @@
                 <TableBody>
                     <TableRow>
                         <TableRowHeader><b>Список курсов:</b></TableRowHeader>
-                        <TableRowCell> Много курсов</TableRowCell>
+                        <TableRowCell>@(_user?.CoursesPassed.Select(c => c.Title).Aggregate((s1,s2) =>$"{s1}, {s2}"))</TableRowCell>
                     </TableRow>
                     <TableRow>
                         <TableRowHeader><b>Контакты:</b></TableRowHeader>
-                        <TableRowCell> Контакты</TableRowCell>
+                        <TableRowCell>@(_user?.Contacts.Select(c => $"{c.Name}: {c.ContactAsIs}").Aggregate((s1,s2) => $"{s1}, {s2}"))</TableRowCell>
                     </TableRow>
                     <TableRow>
                         <TableRowHeader><b>Другая информация :</b></TableRowHeader>
-                        <TableRowCell>Другая информация :</TableRowCell>
+                        <TableRowCell>@_user?.AdditionalInfo</TableRowCell>
                     </TableRow>
                 </TableBody>
             </Table>
@@ -63,19 +65,21 @@
     </div>
 </div>
 
-
-
-
-
-
 @code {
 
+    private UserModel _user;
+    
     [Parameter]
     public int Id { get; set; }
-
-    protected override void OnInitialized()
+    
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        _user = await UserService.GetAsync(Id);
+        if (_user is null)
+        {
+            NavigationManager.NavigateTo("/error");
+        }
+        await base.OnInitializedAsync();
     }
 
 }

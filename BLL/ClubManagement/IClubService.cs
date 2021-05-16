@@ -1,5 +1,6 @@
 ﻿using System.BLL.Helpers;
 using System.BLL.Models.ClubManagement;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace System.BLL.ClubManagement
@@ -8,5 +9,6 @@ namespace System.BLL.ClubManagement
 	{
 		Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId);
 		Task<ClubModel> RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false);
+		Task<IEnumerable<ClubModel>> GetByUser(int userId);
 	}
 }
