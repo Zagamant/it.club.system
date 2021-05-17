@@ -2,10 +2,12 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.UserManagement
-
+@using BlazorClient.Services.GroupManagement
 @attribute [Authorize]
 @inject NavigationManager NavigationManager 
 @inject IAccountService AccountService
+@inject IGroupService groupService
+
 
 <div class="table">
     <DataGrid TItem="UserModel"

@@ -100,7 +100,7 @@ namespace System.API.Controllers
         }
 
         
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<UserModel>> GetById(int id)
         {
             var user = await _userService.GetAsync(id);
@@ -109,7 +109,7 @@ namespace System.API.Controllers
 
         
         [Authorize(Roles = "main_admin,admin")]
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));
 
@@ -193,5 +193,12 @@ namespace System.API.Controllers
         {
             return await _userService.RemoveUsersRole(id, role.Name);
         }
+        
+        [Authorize(Roles = "main_admin,admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UploadPhoto(int id, [FromBody] UserModel model, string password = null) =>
+            Ok(await _userService.UpdateAsync(id, model, password));
+
+        
     }
 }

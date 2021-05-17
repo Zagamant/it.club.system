@@ -2,9 +2,10 @@
 
 namespace System.DAL.Entities
 {
-    public class Photo : BaseEntity
+    public class Image : BaseEntity
     {
-        [Required] public byte[] PhotoAsBytes { get; set; }
+        [Required]
+        public string Path { get; set; }
 
         public int UserId { get; set; }
 

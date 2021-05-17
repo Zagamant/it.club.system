@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using BlazorClient.Services.AccountManagement;
 using BlazorClient.Services.AlertManagement;
 using BlazorClient.Services.AuthenticationManagement;
+using BlazorClient.Services.GroupManagement;
 using BlazorClient.Services.LocalStorageManagement;
 using Blazorise;
 using Blazorise.AntDesign;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using BlazorClient.Services.GroupManagement;
 
 namespace BlazorClient
 {
@@ -26,7 +26,8 @@ namespace BlazorClient
                 .AddScoped<ILocalStorageService, LocalStorageService>()
                 .AddScoped<IAuthenticationService, AuthenticationService>()
                 .AddScoped<IAccountService, AccountService>()
-                .AddScoped<IGroupService,GroupService>()
+                .AddScoped<IGroupService, GroupService>()
+
                 .AddScoped<IAlertService, AlertService>();
 
             builder.Services.AddTransient(x =>
