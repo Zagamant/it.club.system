@@ -101,7 +101,7 @@ namespace System.API.Controllers
 
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<UserModel>> GetById(int id)
         {
             var user = await _userService.GetAsync(id);
             return Ok(user);

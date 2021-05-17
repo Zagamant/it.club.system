@@ -1,3 +1,10 @@
 ﻿.bg-image{
     width:100%
 }
+.text {
+    position: fixed;
+    top: 355px;
+    font-family: sans-serif;
+    font-size: 25px;
+    left: 1110px;
+}

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BlazorClient.Helpers
 {
@@ -9,7 +10,8 @@ namespace BlazorClient.Helpers
             {
                 IgnoreNullValues = true,
                 PropertyNameCaseInsensitive = true,
-                DefaultBufferSize = 100_000
+                DefaultBufferSize = 100_000,
+                Converters = { new JsonStringEnumConverter() }
             };
     }
 }
