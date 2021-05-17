@@ -1,0 +1,109 @@
+﻿@page "/groups/{id:int}/edit"
+@using Microsoft.AspNetCore.Authorization
+@using BlazorClient.Services.GroupManagement
+@using BlazorClient.Services.AlertManagement
+@using System.BLL.Models.GroupManagement
+
+@attribute [Authorize]
+@inject IAlertService AlertService
+@inject IGroupService GroupService
+@inject NavigationManager NavigationManager
+
+@if (model != null)
+{
+    <div class="form1">
+        <h1>Edit Group </h1>
+
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Название</label>
+                    <InputText @bind-Value="model.Title" class="form-control" />
+                    <ValidationMessage For="@(() => model.Title)" />
+                </div>
+                <div class="form-group col">
+                    <label>Уроков в неделю</label>
+                    <InputNumber @bind-Value="model.LessonsPerWeek" class="form-control" />
+                    <ValidationMessage For="@(() => model.LessonsPerWeek)" />
+                </div>
+                <div class="form-group col">
+                    <label>Начало занятий</label>
+                    <InputDate @bind-Value="model.StartDate" class="form-control" />
+                    <ValidationMessage For="@(() => model.StartDate)" />
+                </div>
+                <div class="form-group col">
+                    <label>Окончание занятий</label>
+                    <InputDate @bind-Value="model.EndDate" class="form-control" />
+                    <ValidationMessage For="@(() => model.EndDate)" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Ссылка на конференцию</label>
+                    <InputText @bind-Value="model.OnlineConversationLink" class="form-control" />
+                    <ValidationMessage For="@(() => model.OnlineConversationLink)" />
+                </div>
+                <div class="form-group col">
+                    <label>Количество учащихся</label>
+                    <InputNumber @bind-Value="model.Capacity" class="form-control" />
+                    <ValidationMessage For="@(() => model.Capacity)" />
+                </div>
+                <div class="form-group col">
+                    <label>Статус</label>
+                    <div class="chek">
+                        <Check TValue="bool">Открыта</Check>
+                    </div>
+                    <Check TValue="bool">Закрыта</Check>
+                </div>
+            </div>
+
+</EditForm>
+        <div class="form-group">
+            <button disabled="@loading" class="btn btn-primary">
+                @if (loading)
+                {
+                    <span class="spinner-border spinner-border-sm mr-1"></span>
+                }
+                Save
+            </button>
+            <NavLink href="users" class="btn btn-link">Cancel</NavLink>
+        </div>
+    </div>
+}
+
+
+
+    @code {
+private GroupModel model;
+    private bool loading;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await GroupService.GetAsync(Id);
+    }
+
+    private async void OnValidSubmit()
+    {
+        loading = true;
+        try
+        {
+            await GroupService.UpdateAsync(Id, model);
+            AlertService.Success("Update successful", keepAfterRouteChange: true);
+            NavigationManager.NavigateTo("groups");
+        }
+        catch (Exception ex)
+        {
+            AlertService.Error(ex.Message);
+            loading = false;
+            StateHasChanged();
+        }
+    }
+    }
+

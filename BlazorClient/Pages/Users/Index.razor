@@ -4,40 +4,52 @@
 @using System.BLL.Models.UserManagement
 
 @attribute [Authorize]
+@inject NavigationManager NavigationManager 
 @inject IAccountService AccountService
 
 <div class="table">
-    <NavLink href="users/add" class="btn btn-sm btn-success mb-2">Add User</NavLink>
-
     <DataGrid TItem="UserModel"
               Data="@users"
               TotalItems="@totalCount"
               Filterable="true"
               FilterMethod="DataGridFilterMethod.Contains">
+
         <DataGridColumns>
             <DataGridCommandColumn TItem="UserModel">
+
                 <DeleteCommandTemplate>
                     <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
                 </DeleteCommandTemplate>
+
             </DataGridCommandColumn>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Имя пользователя" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.MiddleName)" Caption="Отчество" />
-
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения" />
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил" />
-
             <DataGridColumn TItem="UserModel" Field="@nameof( UserModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
+
                     <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
                         Delete
                     </Button>
+                    <Button Color="Color.Primary" Clicked="@(() => EditUser(context.Id))">
+                        <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid" />
+                    </Button>
+
                 </DisplayTemplate>
+
             </DataGridColumn>
+
         </DataGridColumns>
+
     </DataGrid>
 </div>
+
+<a href="users/add" class="add-user"></a>
+
+
 
 
 @code {
@@ -62,6 +74,11 @@
         users.Remove(user);
         StateHasChanged();
         IsDeleting = false;
+    }
+
+    private async void EditUser(int id)
+    {
+        NavigationManager.NavigateTo($"/users/{id}/edit");
     }
 
 }

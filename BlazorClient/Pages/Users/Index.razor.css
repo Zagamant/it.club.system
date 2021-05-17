@@ -8,4 +8,43 @@
     background-color: white;
     width: 1645px;
 }
+.add-user {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 50px;
+    height: 50px;
+    border-block-color: transparent;
+    border-radius: 50%;
+    background-color: #5ec246;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+    .add-user:hover,
+    .add-user:focus {
+        filter:brightness(1.1);
+        outline: none;
+    }
 
+    .add-user::before,
+    .add-user::after {
+        content: " ";
+        position: absolute;
+        display: block;
+        background-color: #fff;
+    }
+    .add-user::before {
+        width: 4px;
+        margin-left: -3px;
+        left: 52%;
+        top: 15px;
+        bottom: 15px;
+        z-index: 9;
+    }
+    .add-user::after {
+        height: 4px;
+        margin-top: -3px;
+        top: 52%;
+        left: 15px;
+        right: 15px;
+        z-index: 9;
+    }

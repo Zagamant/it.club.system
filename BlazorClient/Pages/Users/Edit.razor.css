@@ -1,0 +1,24 @@
+﻿body {
+}
+.form1, .form2, .secondary-form {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: white;
+}
+.table{
+    display:flex;
+}
+.column1 {
+    margin-right:10px;
+}
+.column2 {
+    margin-right: 10px;
+}
+.form{
+    display:flex;
+}
+.secondary-form{
+    margin-left:0;
+}
