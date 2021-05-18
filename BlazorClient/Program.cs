@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BlazorClient.Services.AccountManagement;
 using BlazorClient.Services.AlertManagement;
 using BlazorClient.Services.AuthenticationManagement;
+using BlazorClient.Services.ClubManagement;
 using BlazorClient.Services.GroupManagement;
 using BlazorClient.Services.LocalStorageManagement;
 using Blazorise;
@@ -27,6 +28,7 @@ namespace BlazorClient
                 .AddScoped<IAuthenticationService, AuthenticationService>()
                 .AddScoped<IAccountService, AccountService>()
                 .AddScoped<IGroupService, GroupService>()
+                .AddScoped<IClubService, ClubService>()
 
                 .AddScoped<IAlertService, AlertService>();
 

@@ -1,55 +1,66 @@
 ﻿@page "/users/{id:int}"
+@using System.BLL.Models.UserManagement
 @using BlazorClient.Services.AccountManagement
-@inject IAccountService  AccountService
-
-
-
+@using BlazorClient.Services.ClubManagement
+@using BlazorClient.Services.UserManagement
+@using System.BLL.Models.ClubManagement
+@using System.Linq
+@inject NavigationManager _navigationManager
+@inject IAccountService _accountService
+@inject IUserService _userService
+@inject IClubService _clubService
 
 <div class="main-info">
     <div class="photo-card">
         <Figure Size="FigureSize.Is256x256">
-            <FigureImage Source="/assets/images/User-photo.jpg" AlternateText="256x256" />
+            <FigureImage Source="/assets/images/User-photo.jpg" Style="border-radius: 2px" AlternateText="256x256"/>
             <FigureCaption>
-                
-                    <Heading Size="HeadingSize.Is4">
-                        <Button Style="height:40px; width: 300px; margin-top:20px;" Color="Color.Primary">Редактировать</Button>
-                    </Heading>
-                
+                <Button Color="Color.Primary" Block="true" Class="edit-button" Outline="false" Clicked="@OnButtonClicked">Редактировать</Button>
             </FigureCaption>
         </Figure>
     </div>
     <div class="info">
-        <div class="Name">
-            <DisplayHeading Size="DisplayHeadingSize.Is2">
-                @($"{AccountService.User.Name} {AccountService.User.Surname}")
-            </DisplayHeading>
-        </div>
+        <DisplayHeading Size="DisplayHeadingSize.Is2">
+            @($"{_accountService.User.Name} {_accountService.User.Surname}")
+        </DisplayHeading>
         <div class="tables">
-            <Table Borderless="true" Style="font-size:150%;">
+            <Table Borderless="true" Class="my-table">
                 <TableBody>
                     <TableRow>
-                        <TableRowHeader> <b>Клуб:</b></TableRowHeader>
-                        <TableRowCell>Серебронск</TableRowCell>
+                        <TableRowHeader>
+                            <b>Клуб:</b>
+                        </TableRowHeader>
+                        <TableRowCell>@(!_clubs.Any() ? "N/A" : string.Join(", ", _clubs))</TableRowCell>
                     </TableRow>
                     <TableRow>
-                        <TableRowHeader><b>ФИО:</b></TableRowHeader>
-                        <TableRowCell>Пупкин лупкин залпукин</TableRowCell>
+                        <TableRowHeader>
+                            <b>ФИО:</b>
+                        </TableRowHeader>
+                        <TableRowCell>@($"{_user?.Name} {_user?.MiddleName} {_user?.Surname}")</TableRowCell>
                     </TableRow>
                     <TableRow>
-                        <TableRowHeader><b>Номер телефона:</b></TableRowHeader>
-                        <TableRowCell>+375 33 658 62 62</TableRowCell>
+                        <TableRowHeader>
+                            <b>Номер телефона:</b>
+                        </TableRowHeader>
+                        <TableRowCell>@_user?.PhoneNumber</TableRowCell>
                     </TableRow>
                     <TableRow>
-                        <TableRowHeader><b>Список курсов:</b></TableRowHeader>
-                        <TableRowCell> Много курсов</TableRowCell>
+                        <TableRowHeader>
+                            <b>Список курсов:</b>
+                        </TableRowHeader>
+                        <TableRowCell>@(_user?.CoursesPassed?.Select(c => c.Title).Aggregate(string.Empty, (s1, s2) => $"{s1}, {s2}"))</TableRowCell>
                     </TableRow>
                     <TableRow>
-                        <TableRowHeader><b>Контакты:</b></TableRowHeader>
-                        <TableRowCell> Контакты</TableRowCell>
+                        <TableRowHeader>
+                            <b>Контакты:</b>
+                        </TableRowHeader>
+                        <TableRowCell>@(_user?.Contacts?.Select(c => $"{c.Name}: {c.ContactAsIs}").Aggregate(string.Empty, (s1, s2) => $"{s1}, {s2}"))</TableRowCell>
                     </TableRow>
                     <TableRow>
-                        <TableRowHeader><b>Другая информация :</b></TableRowHeader>
-                        <TableRowCell>Другая информация информация информация </TableRowCell>
+                        <TableRowHeader>
+                            <b>Другая информация :</b>
+                        </TableRowHeader>
+                        <TableRowCell>@_user?.AdditionalInfo</TableRowCell>
                     </TableRow>
                 </TableBody>
             </Table>
@@ -58,19 +69,28 @@
     </div>
 </div>
 
-
-
-
-
-
 @code {
+
+    private UserModel _user;
+    private IEnumerable<ClubModel> _clubs = new List<ClubModel>();
 
     [Parameter]
     public int Id { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        _clubs = await _clubService.GetClubsByUser(Id);
+        _user = await _userService.GetAsync(Id);
+        if (_user is null)
+        {
+            _navigationManager.NavigateTo("/error");
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private void OnButtonClicked()
+    {
+        _navigationManager.NavigateTo(@$"/users/{_user.Id}/edit");
     }
 
 }
