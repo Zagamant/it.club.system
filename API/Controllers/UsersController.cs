@@ -197,8 +197,6 @@ namespace System.API.Controllers
         [Authorize(Roles = "main_admin,admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UploadPhoto(int id, [FromBody] UserModel model, string password = null) =>
-            Ok(await _userService.UpdateAsync(id, model, password));
-
-        
+            Ok(await _userService.UpdateAsync(id, model, password));        
     }
 }

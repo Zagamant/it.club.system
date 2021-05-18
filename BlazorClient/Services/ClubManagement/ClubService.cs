@@ -1,7 +1,9 @@
 ﻿using System.BLL.Models.ClubManagement;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using BlazorClient.Helpers;
 using BlazorClient.Services.Helpers;
 using Newtonsoft.Json;
 
@@ -47,6 +49,13 @@ namespace BlazorClient.Services.ClubManagement
             }
 
             throw new HttpRequestException("Smth goes wrong in repo");
+        }
+
+        public async Task<IEnumerable<ClubModel>> GetClubsByUser(int userId)
+        {
+            var items = await _http.GetFromJsonAsync<IEnumerable<ClubModel>>(_url + $"/{userId}/clubs", MyOptions.JsonSerializerWebOptions);
+
+            return items;
         }
     }
 }

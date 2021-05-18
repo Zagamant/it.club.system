@@ -11,7 +11,7 @@ namespace BlazorClient.Helpers
                 IgnoreNullValues = true,
                 PropertyNameCaseInsensitive = true,
                 DefaultBufferSize = 100_000,
-                Converters = {new JsonStringEnumConverter()}
+                Converters = { new JsonStringEnumConverter() }
             };
     }
 }

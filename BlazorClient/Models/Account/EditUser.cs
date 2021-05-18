@@ -7,6 +7,12 @@ namespace BlazorClient.Models.Account
     public class EditUser
     {
         [Required]
+        public string MiddleName { get; set; }
+        [Required]
+        public DateTime BirthDay { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
         public string Name { get; set; }
 
         [Required]
@@ -17,6 +23,7 @@ namespace BlazorClient.Models.Account
 
         [MinLength(6, ErrorMessage = "The Password field must be a minimum of 6 characters")]
         public string Password { get; set; }
+        
 
         public EditUser() { }
 

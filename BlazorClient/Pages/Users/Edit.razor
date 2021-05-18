@@ -1,4 +1,4 @@
-﻿@page "/users/edit/{Id}"
+﻿@page "/users/{id:int}/edit"
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Models.Account
 @using BlazorClient.Services.AccountManagement
@@ -9,56 +9,152 @@
 @inject IAccountService AccountService
 @inject NavigationManager NavigationManager
 
-<h1>Edit User</h1>
+
 @if (model != null)
 {
-    <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-        <DataAnnotationsValidator />
-        <div class="form-row">
-            <div class="form-group col">
-                <label>First Name</label>
-                <InputText @bind-Value="model.Name" class="form-control" />
-                <ValidationMessage For="@(() => model.Name)" />
-            </div>
-            <div class="form-group col">
-                <label>Last Name</label>
-                <InputText @bind-Value="model.Surname" class="form-control" />
-                <ValidationMessage For="@(() => model.Surname)" />
-            </div>
+
+<div class="form">
+    <div class="main-form">
+        <div class="form1">
+            <h1>Edit Users </h1>
+
+            <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+                <DataAnnotationsValidator />
+
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Имя пользователя</label>
+                        <InputText @bind-Value="model.UserName" class="form-control" />
+                        <ValidationMessage For="@(() => model.UserName)" />
+                    </div>
+                    <div class="form-group col">
+                        <label>Фамилия</label>
+                        <InputText @bind-Value="model.Surname" class="form-control" />
+                        <ValidationMessage For="@(() => model.Surname)" />
+                    </div>
+                    <div class="form-group col">
+                        <label>Имя</label>
+                        <InputText @bind-Value="model.Name" class="form-control" />
+                        <ValidationMessage For="@(() => model.Name)" />
+                    </div>
+                    <div class="form-group col">
+                        <label>Отчество</label>
+                        <InputText @bind-Value="model.MiddleName" class="form-control" />
+                        <ValidationMessage For="@(() => model.MiddleName)" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Дата рождения</label>
+                        <InputDate @bind-Value="model.BirthDay" class="form-control" />
+                        <ValidationMessage For="@(() => model.BirthDay)" />
+                    </div>
+                    <div class="form-group col">
+                        <label>
+                            Password
+                            @*<em>(Leave blank to keep the same password)</em>*@
+                        </label>
+                        <InputText @bind-Value="password" type="password" class="form-control" />
+                        <ValidationMessage For="@(() => password)" />
+                    </div>
+                </div>
+
+            </EditForm>
+
         </div>
-        <div class="form-row">
-            <div class="form-group col">
-                <label>Username</label>
-                <InputText @bind-Value="model.UserName" class="form-control" />
-                <ValidationMessage For="@(() => model.UserName)" />
-            </div>
-            <div class="form-group col">
-                <label>
-                    Password
-                    <em>(Leave blank to keep the same password)</em>
-                </label>
-                <InputText @bind-Value="password" type="password" class="form-control" />
-                <ValidationMessage For="@(() => password)" />
-            </div>
+
+        <div class="form2">
+
+            <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+                <DataAnnotationsValidator />
+
+                <div class="form-row">
+
+                    <div class="form-group col">
+                        <Dropdown Style="display:flex;">
+                            <Button Style="border: none; padding:0">Контакты</Button>
+                            <DropdownToggle Split="true" Style="border: none;" />
+                            <DropdownMenu>
+                                <DropdownItem>Action</DropdownItem>
+                                <DropdownDivider />
+                                <DropdownItem>Another Action</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+
+                    <div class="form-group col">
+                        <Dropdown Style="display:flex;">
+                            <Button Style="border: none; padding:0">Группы</Button>
+                            <DropdownToggle Split="true" Style="border: none;" />
+                            <DropdownMenu>
+                                <DropdownItem>Action</DropdownItem>
+                                <DropdownDivider />
+                                <DropdownItem>Another Action</DropdownItem>
+                                <DropdownItem>Action</DropdownItem>
+                                <DropdownDivider />
+                                <DropdownItem>Another Action</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button disabled="@loading" class="btn btn-primary">
+                        @if (loading)
+                        {
+                            <span class="spinner-border spinner-border-sm mr-1"></span>
+                        }
+                        Save
+                    </button>
+                    <NavLink href="users" class="btn btn-link">Cancel</NavLink>
+                </div>
+            </EditForm>
         </div>
-        <div class="form-group">
-            <button disabled="@loading" class="btn btn-primary">
-                @if (loading) 
-                {
-                    <span class="spinner-border spinner-border-sm mr-1"></span>
-                }
-                Save
-            </button>
-            <NavLink href="users" class="btn btn-link">Cancel</NavLink>
-        </div>
-    </EditForm>
+    </div>
+
+    <div class="secondary-form">
+
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+
+
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Страна</label>
+                    <InputText @bind-Value="model.Country" class="form-control" />
+                    <ValidationMessage For="@(() => model.Country)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Город</label>
+                    <InputText @bind-Value="model.City" class="form-control" />
+                    <ValidationMessage For="@(() => model.City)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Адрес</label>
+                    <InputText @bind-Value="model.AddressLine" class="form-control" />
+                    <ValidationMessage For="@(() => model.AddressLine)" />
+                </div>
+            </div>
+
+        </EditForm>
+            
+    </div>
+</div>
+
 }
+
 else
 {
     <div class="text-center p-3">
         <span class="spinner-border spinner-border-lg align-center"></span>
     </div>
 }
+
 
 @code {
     private UserModel model;
