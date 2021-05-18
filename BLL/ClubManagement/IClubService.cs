@@ -9,6 +9,6 @@ namespace System.BLL.ClubManagement
 	{
 		Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId);
 		Task<ClubModel> RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false);
-		Task<IEnumerable<ClubModel>> GetByUser(int userId);
+		Task<IEnumerable<ClubModel>> GetByUserId(int userId);
 	}
 }

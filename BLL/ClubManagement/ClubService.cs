@@ -97,17 +97,23 @@ namespace System.BLL.ClubManagement
             return _mapper.Map<ClubModel>(club);
         }
 
-        public async Task<IEnumerable<ClubModel>> GetByUser(int userId)
+        public async Task<IEnumerable<ClubModel>> GetByUserId(int userId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             
+            //TODO: HERNYA
+            // var clubs = _context.Groups
+            //     .Where(c => c.Users.Contains(user))
+            //     .Select(g => _context.Rooms.Where(c => c.Groups.Contains(g)))
+            //     .Select(ar => ar.Select(el => el.Club))
+            //     .SelectMany(item => item)
+            //     .Distinct();
+
             var clubs = _context.Groups
-                .Where(c => c.Users.Contains(user))
-                .Select(g => _context.Rooms.Where(c => c.Groups.Contains(g)))
-                .Select(ar => ar.Select(el => el.Club))
-                .SelectMany(item => item)
+                .Where(gr => gr.Users.Contains(user))
+                .Select(gr => gr.Room)
+                .Select(r => r.Club)
                 .Distinct();
-            
             
             return clubs.Select(c => _mapper.Map<ClubModel>(c)).ToList();
 

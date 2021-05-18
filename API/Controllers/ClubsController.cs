@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace System.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ClubsController : BaseController<IClubService, ClubModel, ClubModel, ClubModel>
@@ -57,11 +57,11 @@ namespace System.API.Controllers
             return await _service.RemoveRoomAsync(clubId, roomId, User.FindFirstValue(ClaimTypes.Name));
         }
         
-        [Authorize(Roles = "main_admin")]
-        [HttpPost("{id}/clubs")]
-        public async Task<IEnumerable<ClubModel>> GetClubByUserId(int userId)
+        //[Authorize(Roles = "main_admin")]
+        [HttpGet("{userId:int}/clubs")]
+        public async Task<IEnumerable<ClubModel>> GetByUserId(int userId)
         {
-            return await _service.GetByUser(userId);
+            return await _service.GetByUserId(userId);
         }
     }
 }
