@@ -12,10 +12,15 @@ namespace System.API
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .CreateBootstrapLogger();
-            
+                // .WriteTo.File(@"Logs/logs.txt",
+                //     fileSizeLimitBytes: 1_000_000_000,
+                //     rollOnFileSizeLimit: true,
+                //     shared: true,
+                //     flushToDiskInterval: TimeSpan.FromSeconds(1))
+                .CreateLogger();
+
             Log.Information("Starting up!");
-            
+
             try
             {
                 CreateHostBuilder(args).Build().Run();
@@ -44,7 +49,6 @@ namespace System.API
                         logging.AddConsole();
                         logging.AddDebug();
                         logging.SetMinimumLevel(LogLevel.Trace);
-                        
                     });
                 });
     }

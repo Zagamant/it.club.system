@@ -11,6 +11,7 @@ using AutoMapper;
 using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace System.BLL.UserManagement
 {
@@ -24,6 +25,7 @@ namespace System.BLL.UserManagement
         private readonly RoleManager<Role> _roleManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
+        private readonly ILogger<UserService> _logger;
 
         /// <summary>
         /// Initialize a new instance of the <see cref="UserService"/> class with specified <see cref="DataContext"/>.
@@ -31,6 +33,8 @@ namespace System.BLL.UserManagement
         /// <param name="context">A <see cref="DataContext"/>.</param>
         /// <param name="userManager">A <see cref="UserManager{User}"/>.</param>
         /// <param name="signInManager">A <see cref="SignInManager{User}"/>.</param>
+        /// <param name="mapper"></param>
+        /// <param name="roleManager"></param>
         public UserService(DataContext context, UserManager<User> userManager, SignInManager<User> signInManager,
             IMapper mapper, RoleManager<Role> roleManager)
         {

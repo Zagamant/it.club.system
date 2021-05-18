@@ -34,7 +34,7 @@ namespace System.BLL.Helpers
         public virtual async Task<IEnumerable<TModel>> GetAllAsync(string sort = "",string page = "",string pageSize = "", string filter = "")
         {
             
-            _logger.LogInformation($"{DateTime.Now}: Getting all models");
+            _logger.LogInformation("Getting all models");
             
             var entityQuery = _table.AsQueryable();
 
@@ -95,13 +95,13 @@ namespace System.BLL.Helpers
 
         public virtual async Task<TModel> GetAsync(TId id)
         {
-            _logger.LogInformation($"{DateTime.Now}: Getting specific model with id: {id}");
+            _logger.LogInformation($"Getting specific model with id: {id}");
             
             var entity = await _table.FindAsync(id);
 
             if (entity == null)
             {
-                _logger.LogError($"{DateTime.Now}: {typeof(T)} not found");
+                _logger.LogError($"{typeof(T)} not found");
                 throw new ArgumentException($"{typeof(T)} not found");
             }
 
@@ -110,11 +110,11 @@ namespace System.BLL.Helpers
 
         public virtual async Task<TModel> AddAsync(TAddModel entity)
         {
-            _logger.LogInformation($"{DateTime.Now}: adding new entity to database");
+            _logger.LogInformation($"adding new entity to database");
             
             if (entity == null)
             {
-                _logger.LogError($"{DateTime.Now}: {nameof(entity)} was null");
+                _logger.LogError($"{nameof(entity)} was null");
                 throw new ArgumentNullException(nameof(entity));
             }
 
@@ -123,7 +123,7 @@ namespace System.BLL.Helpers
 
             if (result != null)
             {
-                _logger.LogError($"{DateTime.Now}: {nameof(entity)} already exist");
+                _logger.LogError($"{nameof(entity)} already exist");
 
                 throw new AppException($"Event already exist.");
             }
@@ -140,13 +140,13 @@ namespace System.BLL.Helpers
 
         public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel updatedGroup)
         {
-            _logger.LogInformation($"{DateTime.Now}: updating entity from database");
+            _logger.LogInformation($"updating entity from database");
 
             var realItem = _mapper.Map<T>(updatedGroup);
             var entityId = (TId)typeof(T).GetProperty("Id").GetValue(realItem);
              if (!id.Equals( entityId))
              {
-                 _logger.LogError($"{DateTime.Now}: {nameof(TUpdateModel)} was null");
+                 _logger.LogError($"{nameof(TUpdateModel)} was null");
                  throw new ArgumentException();
              }
 
@@ -158,7 +158,7 @@ namespace System.BLL.Helpers
              }
              catch (DbUpdateConcurrencyException)
              {
-                 _logger.LogError($"{DateTime.Now}: DbUpdateConcurrencyException");
+                 _logger.LogError($"DbUpdateConcurrencyException");
                  if (!EntityExists(id))
                  {
                      throw;
@@ -172,12 +172,12 @@ namespace System.BLL.Helpers
 
         public virtual async Task DeleteAsync(TId id, bool isDelete = false)
         {
-            _logger.LogInformation($"{DateTime.Now}: deleting entity from database");
+            _logger.LogInformation($"deleting entity from database");
 
             var entity = await _table.FindAsync(id);
             if (entity == null)
             {
-                _logger.LogError($"{DateTime.Now}: {typeof(T)} was not found in database");
+                _logger.LogError($"{typeof(T)} was not found in database");
                 throw new ArgumentException($"{typeof(T)} not found");
             }
 
