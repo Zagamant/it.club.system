@@ -7,63 +7,84 @@
 @inject IAccountService AccountService
 @inject NavigationManager NavigationManager
 
-<h1>Add User</h1>
-<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
-    <div class="form-row">
-        <div class="form-group col">
-            <label>First Name</label>
-            <InputText @bind-Value="model.Name" class="form-control" />
-            <ValidationMessage For="@(() => model.Name)" />
-        </div>
-        <div class="form-group col">
-            <label>Last Name</label>
-            <InputText @bind-Value="model.Surname" class="form-control" />
-            <ValidationMessage For="@(() => model.Surname)" />
-        </div>
+    <div class="form">
+        <h1>Add User</h1>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Username</label>
+                    <InputText @bind-Value="model.UserName" class="form-control" />
+                    <ValidationMessage For="@(() => model.UserName)" />
+                </div>
+                <div class="form-group col">
+                    <label>First Name</label>
+                    <InputText @bind-Value="model.Name" class="form-control" />
+                    <ValidationMessage For="@(() => model.Name)" />
+                </div>
+                <div class="form-group col">
+                    <label>Last Name</label>
+                    <InputText @bind-Value="model.Surname" class="form-control" />
+                    <ValidationMessage For="@(() => model.Surname)" />
+                </div>
+                <div class="form-group col">
+                    <label>Email</label>
+                    <InputText @bind-Value="model.MiddleName" class="form-control" />
+                    <ValidationMessage For="@(() => model.MiddleName)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Email</label>
+                    <InputText @bind-Value="model.Email" class="form-control" />
+                    <ValidationMessage For="@(() => model.Email)" />
+                </div>
+                <div class="form-group col">
+                    <label>Password</label>
+                    <InputText @bind-Value="model.Password" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => model.Password)" />
+                </div>
+                <div class="form-group col">
+                    <label>День рождения</label>
+                    <InputDate @bind-Value="model.BirthDay" class="form-control" />
+                    <ValidationMessage For="@(() => model.BirthDay)" />
+                </div>
+                <div class="form-group col">
+                    
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button disabled="@loading" class="btn btn-primary">
+                    @if (loading)
+                    {
+                        <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
+                    Save
+                </button>
+                <NavLink href="users" class="btn btn-link">Cancel</NavLink>
+            </div>
+        </EditForm>
     </div>
-    <div class="form-row">
-        <div class="form-group col">
-            <label>Username</label>
-            <InputText @bind-Value="model.UserName" class="form-control" />
-            <ValidationMessage For="@(() => model.UserName)" />
-        </div>
-        <div class="form-group col">
-            <label>Password</label>
-            <InputText @bind-Value="model.Password" type="password" class="form-control" />
-            <ValidationMessage For="@(() => model.Password)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <button disabled="@loading" class="btn btn-primary">
-            @if (loading) 
+
+    @code {
+        private AddUser model = new AddUser();
+        private bool loading;
+
+        private async void OnValidSubmit()
+        {
+            loading = true;
+            try
             {
-                <span class="spinner-border spinner-border-sm mr-1"></span>
+                await AccountService.Register(model);
+                AlertService.Success("User added successfully", keepAfterRouteChange: true);
+                NavigationManager.NavigateTo("users");
             }
-            Save
-        </button>
-        <NavLink href="users" class="btn btn-link">Cancel</NavLink>
-    </div>
-</EditForm>
-
-@code {
-    private AddUser model = new AddUser();
-    private bool loading;
-
-    private async void OnValidSubmit()
-    {
-        loading = true;
-        try
-        {
-            await AccountService.Register(model);
-            AlertService.Success("User added successfully", keepAfterRouteChange: true);
-            NavigationManager.NavigateTo("users");
-        }
-        catch (Exception ex)
-        {
-            AlertService.Error(ex.Message);
-            loading = false;
-            StateHasChanged();
+            catch (Exception ex)
+            {
+                AlertService.Error(ex.Message);
+                loading = false;
+                StateHasChanged();
+            }
         }
     }
-}

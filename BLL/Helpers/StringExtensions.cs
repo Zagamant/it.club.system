@@ -9,7 +9,7 @@ namespace System.BLL.Helpers
             {
                 null => throw new ArgumentNullException(nameof(input)),
                 "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
-                _ => input.First().ToString().ToUpper() + input.Substring(1)
+                _ => char.ToUpper(input.First()) + input[1..]
             };
     }
 }
