@@ -79,8 +79,8 @@ namespace System.BLL.UserManagement
 
         Task ResetPasswordAsync(ResetPasswordModel userModel);
 
-        Task<IEnumerable<string>> GetRoles(int userId);
-        Task<bool> AddRoleToUser(int userId, string role);
-        Task<bool> RemoveUsersRole(int userId, string role);
+        Task<IEnumerable<string>> GetRolesAsync(int userId);
+        Task<bool> AddRoleToUserAsync(int userId, string role);
+        Task<bool> RemoveUsersRoleAsync(int userId, string role);
     }
 }

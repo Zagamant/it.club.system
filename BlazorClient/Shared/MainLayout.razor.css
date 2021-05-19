@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'F1';
+    src: url('./assets/fonts/Formula1-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+::deep .header-bar {
+    
+}
 
 .page {
     position: relative;
@@ -42,26 +52,13 @@ body .navbar-expand {
 }
 
 
-    .home {
-        font-size: 250%;
-        font-family: 'Exo 2';
-        color: black;
-        margin-left:20px;
-        margin-bottom: 5px;
-    }
-
-
-    .nav-menu[b-lor2elsqal] {
-        display: flex;
-        padding-left: 40px;
-        align-items:center;
-    }
-
 .home {
-    font-size: 30px;
-    font-family: 'Exo 2';
-    color: black;
+    font-size: 200%;
+    font-family: 'F1', 'Exo 2', serif;
+    font-weight: bold;
+    margin: auto;
 }
+
 
 .nav-menu[b-lor2elsqal] {
     display: flex;
@@ -79,15 +76,22 @@ body .navbar-expand {
     align-items: center;
 }
 
-    .shadow {
-          box-shadow: 0 .5rem 1rem rgba(0,0,0,.05)!important;
-          border:0.25px solid #D7D8D9;
-    }
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05) !important;
+    border: 0.25px solid #D7D8D9;
+}
 
-    .sider{
-        display:flex;
-          background-color: #eeeeee;
-    }
+.sider {
+    display: flex;
+    background-color: #eeeeee;
+    height: 95vh;
+    width: 100%
+}
+
+::deep .sidebar {
+    min-height: 95vh;
+    height: 95vh;
+}
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
@@ -101,14 +105,17 @@ body .navbar-expand {
     .top-row a, .top-row .btn-link {
         margin-left: 0;
     }
+
     .home {
         position: relative;
         left: 60px;
     }
+
     .nav-menu {
         position: relative;
         left: 60px
     }
+
     .user-profile {
         position: relative;
         right: 270px;

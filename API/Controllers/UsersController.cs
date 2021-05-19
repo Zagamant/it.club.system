@@ -115,7 +115,7 @@ namespace System.API.Controllers
 
         
         //[Authorize(Roles = "main_admin,admin")]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _userService.DeleteAsync(id);
@@ -179,23 +179,31 @@ namespace System.API.Controllers
 
             return Ok();
         }
+        
+        [HttpGet("{id:int}/roles")]
+        public async Task<ActionResult<UserModel>> GetRolesByUserId(int id)
+        {
+            var user = await _userService.GetRolesAsync(id);
+            return Ok(user);
+        }
+
 
         [Authorize(Roles = "main_admin")]
-        [HttpPost("{id}/AddRole")]
+        [HttpPost("{id:int}/AddRole")]
         public async Task<bool> AddRoleToUser(int id, RoleModel role)
         {
-            return await _userService.AddRoleToUser(id, role.Name);
+            return await _userService.AddRoleToUserAsync(id, role.Name);
         }
 
         [Authorize(Roles = "main_admin")]
-        [HttpPost("{id}/RemoveRole")]
+        [HttpPost("{id:int}/RemoveRole")]
         public async Task<bool> RemoveRoleFromUser(int id, RoleModel role)
         {
-            return await _userService.RemoveUsersRole(id, role.Name);
+            return await _userService.RemoveUsersRoleAsync(id, role.Name);
         }
         
         [Authorize(Roles = "main_admin,admin")]
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> UploadPhoto(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));        
     }

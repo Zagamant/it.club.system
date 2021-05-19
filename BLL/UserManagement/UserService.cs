@@ -193,12 +193,12 @@ namespace System.BLL.UserManagement
 
             foreach (var roleToRemove in rolesToRemove)
             {
-                await RemoveUsersRole(user.Id, roleToRemove);
+                await RemoveUsersRoleAsync(user.Id, roleToRemove);
             }
 
             foreach (var newRole in rolesToAdd)
             {
-                await AddRoleToUser(user.Id, newRole);
+                await AddRoleToUserAsync(user.Id, newRole);
             }
 
             await _userManager.UpdateAsync(user: user);
@@ -280,15 +280,14 @@ namespace System.BLL.UserManagement
             }
         }
 
-        public async Task<IEnumerable<string>> GetRoles(int userId)
+        public async Task<IEnumerable<string>> GetRolesAsync(int userId)
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
-            if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
 
             return await _userManager.GetRolesAsync(realUser);
         }
 
-        public async Task<bool> AddRoleToUser(int userId, string role)
+        public async Task<bool> AddRoleToUserAsync(int userId, string role)
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");
@@ -298,7 +297,7 @@ namespace System.BLL.UserManagement
             return result.Succeeded;
         }
 
-        public async Task<bool> RemoveUsersRole(int userId, string role)
+        public async Task<bool> RemoveUsersRoleAsync(int userId, string role)
         {
             var realUser = await _userManager.FindByIdAsync(userId.ToString());
             if (realUser == null) throw new ArgumentNullException($"User with Id: {userId} not found");

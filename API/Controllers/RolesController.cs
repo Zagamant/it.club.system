@@ -21,28 +21,21 @@ namespace System.API.Controllers
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
-      
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RoleModel>>> Get()
         {
-           var result = await _service.GetAllAsync();
+            var result = await _service.GetAllAsync();
             Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
             Response.Headers.Add("Content-Range", $"{result.Count()}");
 
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<RoleModel>> GetAsync(int id)
+        [HttpGet("{userId:int}")]
+        public async Task<ActionResult<RoleModel>> GetAsync(int userId)
         {
-            try
-            {
-                return Ok(await _service.GetAsync(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _service.GetAsync(userId));
         }
 
         [HttpPost]
@@ -58,13 +51,12 @@ namespace System.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<RoleModel>> Put(int id, [FromBody] RoleModel value)
         {
             try
             {
                 return Ok(await _service.UpdateAsync(id, value));
-
             }
             catch (Exception ex)
             {
@@ -84,6 +76,12 @@ namespace System.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        
+        [HttpGet("/user/{userId:int}")]
+        public async Task<ActionResult<RoleModel>> GetRolesByUserIdAsync(int userId)
+        {
+            return Ok(await _service.GetAsync(userId));
         }
     }
 }

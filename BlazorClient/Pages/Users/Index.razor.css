@@ -1,50 +1,55 @@
 ﻿body {
 }
+
 .table {
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px;
     border-radius: 3px;
     background-color: white;
     width: 1645px;
 }
-.add-user {
+
+::deep .add-user {
     position: fixed;
-    right: 15px;
-    bottom: 15px;
+    right: 25px;
+    bottom: 25px;
     width: 50px;
     height: 50px;
     border-block-color: transparent;
     border-radius: 50%;
-    background-color: #5ec246;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    background-color: #28a745;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-    .add-user:hover,
-    .add-user:focus {
-        filter:brightness(1.1);
-        outline: none;
-    }
 
-    .add-user::before,
-    .add-user::after {
-        content: " ";
-        position: absolute;
-        display: block;
-        background-color: #fff;
-    }
-    .add-user::before {
-        width: 4px;
-        margin-left: -3px;
-        left: 52%;
-        top: 15px;
-        bottom: 15px;
-        z-index: 9;
-    }
-    .add-user::after {
-        height: 4px;
-        margin-top: -3px;
-        top: 52%;
-        left: 15px;
-        right: 15px;
-        z-index: 9;
-    }
+::deep .add-user:hover,
+::deep .add-user:focus {
+    filter: brightness(0.9);
+    outline: none;
+}
+
+::deep .add-user::before,
+::deep .add-user::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    background-color: #fff;
+}
+
+::deep .add-user::before {
+    width: 4px;
+    margin-left: -3px;
+    left: 52%;
+    top: 15px;
+    bottom: 15px;
+    z-index: 9;
+}
+
+::deep .add-user::after {
+    height: 4px;
+    margin-top: -3px;
+    top: 52%;
+    left: 15px;
+    right: 15px;
+    z-index: 9;
+}

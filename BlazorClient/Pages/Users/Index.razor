@@ -4,7 +4,7 @@
 @using System.BLL.Models.UserManagement
 @using BlazorClient.Services.GroupManagement
 @attribute [Authorize]
-@inject NavigationManager NavigationManager 
+@inject NavigationManager NavigationManager
 @inject IAccountService AccountService
 @inject IGroupService groupService
 
@@ -24,20 +24,20 @@
                 </DeleteCommandTemplate>
 
             </DataGridCommandColumn>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Имя пользователя" />
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя" />
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия" />
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.MiddleName)" Caption="Отчество" />
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения" />
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил" />
-            <DataGridColumn TItem="UserModel" Field="@nameof( UserModel.Id)" Sortable="false" Filterable="false">
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Имя пользователя"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.MiddleName)" Caption="Отчество"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил"/>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
 
                     <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
                         Delete
                     </Button>
                     <Button Color="Color.Primary" Clicked="@(() => EditUser(context.Id))">
-                        <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid" />
+                        <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid"/>
                     </Button>
 
                 </DisplayTemplate>
@@ -48,10 +48,9 @@
 
     </DataGrid>
 </div>
-
-<a href="users/add" class="add-user"></a>
-
-
+<div>
+    <Link To="users/add" Class="add-user" Color="Color.Success"/>
+</div>
 
 
 @code {

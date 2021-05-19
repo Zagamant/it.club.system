@@ -49,6 +49,13 @@ namespace BlazorClient.Services.UserManagement
             return items;
         }
 
+        public async Task<IEnumerable<string>> GetRolesAsync(int userId)
+        {
+            var items = await _http.GetFromJsonAsync<IEnumerable<string>>($"{_url}/{userId}/roles");
+
+            return items;
+        }
+
         /// <inheritdoc/>
         public async Task<UserModel> GetAsync(int id)
         {
