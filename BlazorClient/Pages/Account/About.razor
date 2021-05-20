@@ -1,16 +1,16 @@
 @page "/account"
 @using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
-@inject IAccountService AccountService
-@inject NavigationManager NavigationManager
+@inject IAccountService _accountService
+@inject NavigationManager _navigationManager
 
 
 @code {
     protected override void OnInitialized()
     {
-        if (AccountService.User != null)
+        if (_accountService.User != null)
         {
-            NavigationManager.NavigateTo($"/users/{AccountService.User.Id}");
+            _navigationManager.NavigateTo($"/users/{_accountService.User.Id}");
         }
     }
 }

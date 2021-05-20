@@ -3,10 +3,11 @@
 @using BlazorClient.Services.GroupManagement
 @using BlazorClient.Services.AlertManagement
 @using System.BLL.Models.GroupManagement;
+
 @attribute [Authorize]
-@inject IAlertService AlertService
-@inject IGroupService GroupService
-@inject NavigationManager NavigationManager
+@inject IAlertService _alertService
+@inject IGroupService _groupService
+@inject NavigationManager _navigationManager
 
     <div class="form">
             <h1>Add Group</h1>
@@ -106,13 +107,13 @@
             loading = true;
             try
             {
-                await GroupService.AddAsync(model);
-                AlertService.Success("Group added successfully", keepAfterRouteChange: true);
-                NavigationManager.NavigateTo("users");
+                await _groupService.AddAsync(model);
+                _alertService.Success("Group added successfully", keepAfterRouteChange: true);
+                _navigationManager.NavigateTo("users");
             }
             catch (Exception ex)
             {
-                AlertService.Error(ex.Message);
+                _alertService.Error(ex.Message);
                 loading = false;
                 StateHasChanged();
             }

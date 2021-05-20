@@ -2,10 +2,9 @@
 @using BlazorClient.Services.AccountManagement
 @using BlazorClient.Services.AlertManagement
 @using System.BLL.Models.UserManagement
-@inject IAccountService AccountService
-@inject IAlertService AlertService
-@inject NavigationManager NavigationManager
-
+@inject IAccountService _accountService
+@inject IAlertService _alertService
+@inject NavigationManager _navigationManager
 
 <Row Class="vh-100">
     <Column ColumnSize="ColumnSize.Is7.OnDesktop.Is7.OnTablet.Is4">
@@ -15,49 +14,27 @@
         <div class="paper">
             <Form class="w-100">
                 <Heading Size="HeadingSize.Is1">Sign In</Heading>
-                @* <DataAnnotationsValidator/> *@
                 <Validation Validator="@ValidateUsername">
                     <Field>
                         <FieldLabel Class="h2">Username</FieldLabel>
                         <FieldBody >
                             <TextEdit Placeholder="Enter username" @bind-Text="model.UserName" ChangeTextOnKeyPress="true"/>
                         </FieldBody>
-
-                        @* <ValidationMessage For="@(() => model.UserName)"/> *@
-
                     </Field>
                 </Validation>
-                @* <div class="form-group"> *@
-                @*     <label>Username</label> *@
-                @*     <InputText @bind-Value="model.UserName" class="form-control" /> *@
-                @*     <ValidationMessage For="@(() => model.UserName)" /> *@
-                @* </div> *@
                 <Validation Validator="@ValidatePassword">
                     <Field>
                         <FieldLabel Class="h2">Password</FieldLabel>
                         <FieldBody >
                             <TextEdit Placeholder="Enter password" @bind-Text="model.Password" type="password"/>
                         </FieldBody>
-                        @* <ValidationMessage For="@(() => model.UserName)"/> *@
 
                     </Field>
                 </Validation>
-                @* <div class="form-group"> *@
-                @*     <label>Password</label> *@
-                @*     <InputText @bind-Value="model.Password" type="password" class="form-control"/> *@
-                @*     <ValidationMessage For="@(() => model.Password)"/> *@
-                @* </div> *@
-                <Button Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
+                <Button Color="Color.Primary" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
                     Login
                 </Button>
-                @* <button disabled="@loading" class="btn btn-primary"> *@
-                @*     @if (loading) *@
-                @*     { *@
-                @*         <span class="spinner-border spinner-border-sm mr-1"></span> *@
-                @*     } *@
-                @*     Login *@
-                @* </button> *@
-                <Button Class="register-button mt-0" Color="Color.Light" Type="ButtonType.Link" To="account/register">
+                <Button Class="register-button mt-0" Color="Color.Light" To="account/register">
                     Register
                 </Button>
             </Form>
@@ -73,19 +50,19 @@
 
     private async void OnValidSubmit()
     {
-        // reset alerts on submit
-        AlertService.Clear();
+    // reset alerts on submit
+        _alertService.Clear();
 
         loading = true;
         try
         {
-            _user = await AccountService.Login(model);
-            var returnUrl = NavigationManager.QueryString("returnUrl") ?? "/";
-            NavigationManager.NavigateTo(returnUrl, true);
+            _user = await _accountService.Login(model);
+            var returnUrl = _navigationManager.QueryString("returnUrl") ?? "/";
+            _navigationManager.NavigateTo(returnUrl, true);
         }
         catch (Exception ex)
         {
-            AlertService.Error(ex.Message);
+            _alertService.Error(ex.Message);
             loading = false;
             StateHasChanged();
             Console.WriteLine(ex.Message);

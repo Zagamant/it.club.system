@@ -3,8 +3,8 @@
 @using BlazorClient.Services.GroupManagement
 @using System.BLL.Models.GroupManagement
 @attribute [Authorize]
-@inject NavigationManager NavigationManager
-@inject IGroupService GroupService
+@inject NavigationManager _navigationManager
+@inject IGroupService _groupService
 
 <div class="table">
     <DataGrid TItem="GroupModel"
@@ -57,7 +57,7 @@
     protected override async Task OnInitializedAsync()
     {
         loading = true;
-        groups = (await GroupService.GetAllAsync()).ToList();
+        groups = (await _groupService.GetAllAsync()).ToList();
         totalCount = groups.Count;
         loading = false;
     }
@@ -66,14 +66,14 @@
     {
         var user = groups.First(x => x.Id == id);
         IsDeleting = true;
-        await GroupService.DeleteAsync(id);
+        await _groupService.DeleteAsync(id);
         groups.Remove(user);
         StateHasChanged();
         IsDeleting = false;
     }
     private async void EditGroup(int id)
     {
-        NavigationManager.NavigateTo($"/groups/{id}/edit");
+        _navigationManager.NavigateTo($"/groups/{id}/edit");
     }
 
 }

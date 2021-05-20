@@ -1,8 +1,8 @@
 ﻿@using BlazorClient.Services.AccountManagement
 @inherits LayoutComponentBase
 @layout MainLayout
-@inject IAccountService AccountService
-@inject NavigationManager NavigationManager
+@inject IAccountService _accountService
+@inject NavigationManager _navigationManager
 
 <div class="app">
     @Body
@@ -11,10 +11,10 @@
 @code {
     protected override void OnInitialized()
     {
-    // redirect to home if already logged in
-        if (AccountService.User != null)
+        // redirect to home if already logged in
+        if (_accountService.User != null)
         {
-            NavigationManager.NavigateTo("");
+            _navigationManager.NavigateTo("");
         }
     }
 }
