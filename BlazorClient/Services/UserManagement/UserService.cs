@@ -26,14 +26,11 @@ namespace BlazorClient.Services.UserManagement
         public async Task<UserModel> AuthenticateAsync(string username, string password)
         {
             var response = await _http.PostAsJsonAsync($"{_url}/authenticate", new {username, password});
-
             if (!response.IsSuccessStatusCode) 
                 throw new ArgumentException("Something wrong with http request");
-
             var responseText = await response.Content.ReadAsStringAsync();
             var responseObj = JsonSerializer.Deserialize<UserModel>(responseText);
             return responseObj;
-
         }
 
         public async Task LogoutAsync()
@@ -45,7 +42,6 @@ namespace BlazorClient.Services.UserManagement
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             var items = await _http.GetFromJsonAsync<IEnumerable<UserModel>>($"{_url}");
-
             return items;
         }
 

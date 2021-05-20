@@ -29,7 +29,6 @@ namespace BlazorClient
                 .AddScoped<IAccountService, AccountService>()
                 .AddScoped<IGroupService, GroupService>()
                 .AddScoped<IClubService, ClubService>()
-
                 .AddScoped<IAlertService, AlertService>();
 
             builder.Services.AddTransient(x =>

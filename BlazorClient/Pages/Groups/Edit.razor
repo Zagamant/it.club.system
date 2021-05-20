@@ -5,9 +5,9 @@
 @using System.BLL.Models.GroupManagement
 
 @attribute [Authorize]
-@inject IAlertService AlertService
-@inject IGroupService GroupService
-@inject NavigationManager NavigationManager
+@inject IAlertService _alertService
+@inject IGroupService _groupService
+@inject NavigationManager _navigationManager
 
 @if (model != null)
 {
@@ -86,7 +86,7 @@ private GroupModel model;
 
     protected override async Task OnInitializedAsync()
     {
-        model = await GroupService.GetAsync(Id);
+        model = await _groupService.GetAsync(Id);
     }
 
     private async void OnValidSubmit()
@@ -94,13 +94,13 @@ private GroupModel model;
         loading = true;
         try
         {
-            await GroupService.UpdateAsync(Id, model);
-            AlertService.Success("Update successful", keepAfterRouteChange: true);
-            NavigationManager.NavigateTo("groups");
+            await _groupService.UpdateAsync(Id, model);
+            _alertService.Success("Update successful", keepAfterRouteChange: true);
+            _navigationManager.NavigateTo("groups");
         }
         catch (Exception ex)
         {
-            AlertService.Error(ex.Message);
+            _alertService.Error(ex.Message);
             loading = false;
             StateHasChanged();
         }

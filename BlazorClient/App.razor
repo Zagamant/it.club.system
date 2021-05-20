@@ -1,4 +1,4 @@
-@inject NavigationManager NavigationManager
+@inject NavigationManager _navigationManager
 
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
@@ -9,8 +9,8 @@
             <img class="bg-image" src="/assets/images/BGimage404.png"/>
         </div>
         <div class="text">
-            Unable to access the site. Check if there<br> are any typos in the
-            hostname. If you <br>entered everything correctly but lt <br> doesn't
+            Unable to access the site. Check if there are any typos in the
+            hostname. If you entered everything correctly but lt doesn't
             work for you, call <Link To="https://t.me/seltenes">Daniel</Link>
         </div>
     </NotFound>

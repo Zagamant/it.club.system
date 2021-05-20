@@ -62,14 +62,6 @@ a, .btn-link {
     top: 0.5rem;
 }
 
-.login-bg-image {
-    background-image: url(../assets/images/bg.jpg);
-    background-repeat: no-repeat;
-    background-position: top left;
-    height: 100%;
-    width: 100%;
-}
-
 .paper {
     display: flex;
     margin: 0 20%;
