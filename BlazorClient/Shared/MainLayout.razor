@@ -45,7 +45,7 @@
                     <BarItem Style="float:right">
 
                         <BarLink To="/users/{id:int}">
-                            <img class="user-image" src="/assets/images/User (1).svg"/>
+                            <img class="user-image" src="/assets/images/User (1).svg" alt="user-image"/>
                             @($"{_accountService.User.Name} {_accountService.User.Surname} ")
                         </BarLink>
 
@@ -63,7 +63,7 @@
                     {
                         <SidebarItem>
                             <SidebarLink To="" Title="@club.Title">
-                                <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight"/>Дворец
+                                <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight"/>@club.Title
                             </SidebarLink>
                         </SidebarItem>
                     }
@@ -91,7 +91,10 @@
     {
         _clubs = await _clubService.GetAllAsync();
         _userClubs = await _clubService.GetClubsByUser(_accountService.User.Id);
-        var clubsRoles = (await _clubService.GetAllAsync()).Select(cl => cl.Title).Intersect(await _userService.GetRolesAsync(_accountService.User.Id));
+        var clubsRoles = 
+            (await _clubService.GetAllAsync())
+            .Select(cl => cl.Title)
+            .Intersect(await _userService.GetRolesAsync(_accountService.User.Id));
     }
 
     void ToggleSidebar()
