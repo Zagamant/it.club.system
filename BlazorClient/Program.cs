@@ -36,11 +36,13 @@ namespace BlazorClient
                 var apiUrl = new Uri(builder.Configuration["apiUrl"]);
 
                 return new HttpClient {BaseAddress = apiUrl};
-                //  sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress + "api/v1/")});
             });
 
 
-            builder.Services.AddBlazorise(opt => { opt.ChangeTextOnKeyPress = true; })
+            builder.Services.AddBlazorise(opt =>
+                {
+                    opt.ChangeTextOnKeyPress = true;
+                })
                 .AddAntDesignProviders()
                 .AddFontAwesomeIcons();
 

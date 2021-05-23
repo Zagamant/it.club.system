@@ -44,7 +44,7 @@
 
                     <BarItem Style="float:right">
 
-                        <BarLink To="/users/{id:int}">
+                        <BarLink To=@($"/users/{_accountService.User.Id}")>
                             <img class="user-image" src="/assets/images/User (1).svg"/>
                             @($"{_accountService.User.Name} {_accountService.User.Surname} ")
                         </BarLink>
