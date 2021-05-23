@@ -10,7 +10,7 @@ namespace System.DAL.Configurations
 		{
 			builder
 				.HasOne<User>()
-				.WithMany(user => user.Photos)
+				.WithMany(user => user.Images)
 				.HasForeignKey(photo => photo.UserId)
 				;
 		}

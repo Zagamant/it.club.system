@@ -19,7 +19,7 @@ namespace System.BLL.Models.UserManagement
         public string Surname { get; set; }
         public DateTime BirthDay { get; set; }
         public string AdditionalInfo { get; set; }
-        public virtual IEnumerable<Image> Photos { get; set; } = new List<Image>();
+        public virtual IEnumerable<Image> Images { get; set; } = new List<Image>();
         public virtual IList<string> Roles { get; set; } = new List<string>();
         public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
         public virtual ICollection<Group> Groups { get; set; } = new List<Group>();  
