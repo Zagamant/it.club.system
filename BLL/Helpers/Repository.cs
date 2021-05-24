@@ -138,16 +138,16 @@ namespace System.BLL.Helpers
             return _mapper.Map<TModel>(entity);
         }
 
-        public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel updatedGroup)
+        public virtual async Task<TModel> UpdateAsync(TId id, TUpdateModel updated)
         {
             _logger.LogInformation($"updating entity from database");
 
-            var realItem = _mapper.Map<T>(updatedGroup);
+            var realItem = _mapper.Map<T>(updated);
             var entityId = (TId)typeof(T).GetProperty("Id").GetValue(realItem);
              if (!id.Equals( entityId))
              {
                  _logger.LogError($"{nameof(TUpdateModel)} was null");
-                 throw new ArgumentException();
+                 throw new ArgumentException(nameof(entityId));
              }
 
              _context.Entry(realItem).State = EntityState.Modified;
@@ -158,7 +158,7 @@ namespace System.BLL.Helpers
              }
              catch (DbUpdateConcurrencyException)
              {
-                 _logger.LogError($"DbUpdateConcurrencyException");
+                 _logger.LogError("DbUpdateConcurrencyException");
                  if (!EntityExists(id))
                  {
                      throw;

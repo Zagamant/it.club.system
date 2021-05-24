@@ -39,16 +39,16 @@ namespace System.BLL.CostManagement
             return entity;
         }
 
-        public override async Task<CostsModel> UpdateAsync(int id, CostsModel updatedGroup)
+        public override async Task<CostsModel> UpdateAsync(int id, CostsModel updated)
         {
             if (!_context.Events.Any(evnt => evnt.Id == id))
             {
                 throw new AppException("Not found");
             }
 
-            updatedGroup.Id = id;
+            updated.Id = id;
 
-            var map = _mapper.Map<Costs>(updatedGroup);
+            var map = _mapper.Map<Costs>(updated);
 
             map.Club = await _context.Clubs.SingleOrDefaultAsync(e => e.Id == map.ClubId);
 
@@ -57,7 +57,7 @@ namespace System.BLL.CostManagement
 
             await _context.SaveChangesAsync();
 
-            return updatedGroup;
+            return updated;
         }
     }
 }

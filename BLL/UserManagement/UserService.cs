@@ -76,24 +76,16 @@ namespace System.BLL.UserManagement
         /// <inheritdoc/>
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
-            //TODO: FIX ISSUE
-            // var users = _userManager.Users.AsEnumerable().Select(async user =>
-            // {
-            //     var roles = await _userManager.GetRolesAsync(user);
-            //     var userModel = _mapper.Map<UserModel>(user);
-            //     userModel.Roles = roles;
-            //     return userModel;
-            // }).ToList();
-
             var users = await _userManager.Users.ToListAsync();
-            var userModels = new List<UserModel>(users.Count);
-            
-            foreach (var user in users)
-            {
-                var newUser = _mapper.Map<UserModel>(user);
-                newUser.Roles = await _userManager.GetRolesAsync(user);
-                userModels.Add(newUser);
-            }
+
+            var userModels = users
+                .Select(async user =>
+                {
+                    var userModel = _mapper.Map<UserModel>(user);
+                    userModel.Roles = await _userManager.GetRolesAsync(user);
+                    return userModel;
+                })
+                .Select(t => t.Result);
 
             return userModels;
         }

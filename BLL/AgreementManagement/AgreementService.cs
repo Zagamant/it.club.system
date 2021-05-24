@@ -34,21 +34,21 @@ namespace System.BLL.AgreementManagement
             return agreement;
         }
 
-        public override async Task<AgreementModel> UpdateAsync(int agreementId, AgreementModel updatedGroup)
+        public override async Task<AgreementModel> UpdateAsync(int agreementId, AgreementModel updated)
         {
             var newAgr = await _context.Agreements.SingleOrDefaultAsync(a => a.Id == agreementId);
 
-            newAgr.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updatedGroup.CourseId) ??
+            newAgr.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updated.CourseId) ??
                             throw new ArgumentException("CourseId wasn't correct");
-            newAgr.User = await _context.Users.SingleOrDefaultAsync(c => c.Id == updatedGroup.UserId) ??
+            newAgr.User = await _context.Users.SingleOrDefaultAsync(c => c.Id == updated.UserId) ??
                           throw new ArgumentException("UserId wasn't correct");
 
-            newAgr.Payment = updatedGroup.Payment;
+            newAgr.Payment = updated.Payment;
 
             _context.Agreements.Update(newAgr);
             await _context.SaveChangesAsync();
 
-            return updatedGroup;
+            return updated;
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorClient.Helpers
 {
-    public static class ExtensionMethods
+    public static class NavigationExtensionMethods
     {
         public static NameValueCollection QueryString(this NavigationManager navigationManager)
         {

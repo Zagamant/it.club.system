@@ -38,16 +38,16 @@ namespace System.BLL.EventManagement
             return entity;
         }
 
-        public override async Task<EventModel> UpdateAsync(int id, EventModel updatedGroup)
+        public override async Task<EventModel> UpdateAsync(int id, EventModel updated)
         {
             if (!_context.Events.Any(evnt => evnt.Id == id))
             {
                 throw new AppException("Not found");
             }
 
-            updatedGroup.Id = id;
+            updated.Id = id;
 
-            var map = _mapper.Map<Event>(updatedGroup);
+            var map = _mapper.Map<Event>(updated);
 
             map.Club = await _context.Clubs.SingleOrDefaultAsync(e => e.Id == map.ClubId);
 
@@ -56,7 +56,7 @@ namespace System.BLL.EventManagement
 
             await _context.SaveChangesAsync();
 
-            return updatedGroup;
+            return updated;
         }
     }
 }

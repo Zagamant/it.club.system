@@ -1,4 +1,5 @@
 ﻿@page "/groups"
+@page "/groups/{ClubName}/"
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.GroupManagement
 @using System.BLL.Models.GroupManagement
@@ -8,8 +9,8 @@
 
 <div class="table">
     <DataGrid TItem="GroupModel"
-              Data="@groups"
-              TotalItems="@totalCount"
+              Data="@_groups"
+              TotalItems="@_totalCount"
               Filterable="true"
               FilterMethod="DataGridFilterMethod.Contains">
         <DataGridColumns>
@@ -46,30 +47,34 @@
     </DataGrid>
 </div>
 
-<a href="groups/add" class="add-group"></a>
+<a href="groups/add" class="separate-add-button"></a>
 
 @code {
-    private bool loading;
-    private IList<GroupModel> groups;
-    private bool IsDeleting;
-    private int totalCount;
+    
+    [Parameter]
+    public string ClubName { get; set; }
+    
+    private bool _loading;
+    private IList<GroupModel> _groups;
+    private bool _isDeleting;
+    private int _totalCount;
 
     protected override async Task OnInitializedAsync()
     {
-        loading = true;
-        groups = (await _groupService.GetAllAsync()).ToList();
-        totalCount = groups.Count;
-        loading = false;
+        _loading = true;
+        _groups = (await _groupService.GetAllAsync()).ToList();
+        _totalCount = _groups.Count;
+        _loading = false;
     }
 
     private async void DeleteUser(int id)
     {
-        var user = groups.First(x => x.Id == id);
-        IsDeleting = true;
+        var user = _groups.First(x => x.Id == id);
+        _isDeleting = true;
         await _groupService.DeleteAsync(id);
-        groups.Remove(user);
+        _groups.Remove(user);
         StateHasChanged();
-        IsDeleting = false;
+        _isDeleting = false;
     }
     private async void EditGroup(int id)
     {

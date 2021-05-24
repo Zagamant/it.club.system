@@ -2,6 +2,7 @@
 @using System.BLL.Models.ClubManagement
 @using BlazorClient.Services.ClubManagement
 @using BlazorClient.Services.UserManagement
+@using Microsoft.AspNetCore.WebUtilities
 @inherits LayoutComponentBase
 @inject IAccountService _accountService
 @inject IUserService _userService
@@ -16,7 +17,7 @@
              ThemeContrast="ThemeContrast.Light"
              Class="header-bar">
 
-            <BarBrand Style="border:none;">
+            <BarBrand Style="">
                 <BarLink To=".">
                     <div class="home">
                         It_Club
@@ -45,10 +46,16 @@
                     <BarItem Style="float:right">
 
                         <BarLink To=@($"/users/{_accountService.User.Id}")>
-                            <img class="user-image" src="/assets/images/User (1).svg"/>
-                            @($"{_accountService.User.Name} {_accountService.User.Surname} ")
+                            @if (_accountService.User?.Images != null && _accountService.User.Images.Any())
+                            {
+                                <img class="user-image" src=@_accountService.User.Images.First()/>
+                            }
+                            else
+                            {
+                                <img class="user-image" src="/assets/images/User (1).svg"/>
+                            }
+                            @($"{_accountService.User.Name} {_accountService.User.Surname}")
                         </BarLink>
-
                     </BarItem>
                 </BarStart>
             </BarMenu>
@@ -56,13 +63,15 @@
     </div>
     <div class="sider">
         <!--Sidebar-->
-        <Sidebar @ref="_sidebar">
+        <Sidebar @ref="_sidebar"
+                 Scrollable="false"
+                 >
             <SidebarContent>
                 <SidebarNavigation>
                     @foreach (var club in _clubs)
                     {
                         <SidebarItem>
-                            <SidebarLink To="" Title="@club.Title">
+                            <SidebarLink Title="@club.Title" Click=@(() => SetQueryClubTo(club.Title))>
                                 <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight"/>@club.Title
                             </SidebarLink>
                         </SidebarItem>
@@ -100,9 +109,14 @@ else
         }
     }
 
-    void ToggleSidebar()
+    private void ToggleSidebar()
     {
         _sidebar.Toggle();
+    }
+
+    private void SetQueryClubTo(string clubName)
+    {
+        _navigationManager.NavigateTo(QueryHelpers.AddQueryString(_navigationManager.Uri, new Dictionary<string, string> {{"club", clubName}}));
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿@page "/users"
+@page "/users/{ClubName}/"
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.UserManagement
@@ -11,19 +12,19 @@
 
 <div class="table">
     <DataGrid TItem="UserModel"
-              Data="@users"
-              TotalItems="@totalCount"
+              Data="@_users"
+              TotalItems="@_totalCount"
               Filterable="true"
               FilterMethod="DataGridFilterMethod.Contains">
 
         <DataGridColumns>
-            <DataGridCommandColumn TItem="UserModel">
-
-                <DeleteCommandTemplate>
-                    <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
-                </DeleteCommandTemplate>
-
-            </DataGridCommandColumn>
+            @* <DataGridCommandColumn TItem="UserModel"> *@
+            @* *@
+            @*     <DeleteCommandTemplate> *@
+            @*         <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button> *@
+            @*     </DeleteCommandTemplate> *@
+            @* *@
+            @* </DataGridCommandColumn> *@
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Имя пользователя"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия"/>
@@ -32,16 +33,17 @@
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
-
-                    <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
-                        Delete
-                    </Button>
                     <Button Color="Color.Primary" Clicked="@(() => EditUser(context.Id))">
                         <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid"/>
                     </Button>
-
                 </DisplayTemplate>
-
+            </DataGridColumn>
+            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Id)" Sortable="false" Filterable="false">
+                <DisplayTemplate>
+                    <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
+                        Delete
+                    </Button>
+                </DisplayTemplate>
             </DataGridColumn>
 
         </DataGridColumns>
@@ -49,35 +51,39 @@
     </DataGrid>
 </div>
 <div>
-    <Link To="users/add" Class="add-user" Color="Color.Success"/>
+    <Link To="users/add" Class="separate-add-button" Color="Color.Success"/>
 </div>
 
 
 @code {
-    private bool loading;
-    private IList<UserModel> users;
-    private bool IsDeleting;
-    private int totalCount;
+
+    [Parameter]
+    public string ClubName { get; set; }
+
+    private bool _loading;
+    private IList<UserModel> _users;
+    private bool _isDeleting;
+    private int _totalCount;
 
     protected override async Task OnInitializedAsync()
     {
-        loading = true;
-        users = (await AccountService.GetAll()).ToList();
-        totalCount = users.Count;
-        loading = false;
+        _loading = true;
+        _users = (await AccountService.GetAll()).ToList();
+        _totalCount = _users.Count;
+        _loading = false;
     }
 
     private async void DeleteUser(int id)
     {
-        var user = users.First(x => x.Id == id);
-        IsDeleting = true;
+        var user = _users.First(x => x.Id == id);
+        _isDeleting = true;
         await AccountService.Delete(id);
-        users.Remove(user);
+        _users.Remove(user);
         StateHasChanged();
-        IsDeleting = false;
+        _isDeleting = false;
     }
 
-    private async void EditUser(int id)
+    private void EditUser(int id)
     {
         NavigationManager.NavigateTo($"/users/{id}/edit");
     }

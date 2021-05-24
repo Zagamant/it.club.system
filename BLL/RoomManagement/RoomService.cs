@@ -26,28 +26,28 @@ namespace System.BLL.RoomManagement
             return _mapper.Map<RoomModel>(result);
         }
 
-        public override async Task<RoomModel> UpdateAsync(int roomId, RoomModel updatedGroup)
+        public override async Task<RoomModel> UpdateAsync(int roomId, RoomModel updated)
         {
             var room = await _context.Rooms.FirstOrDefaultAsync(roomIter => roomIter.Id == roomId);
             if (room == null) throw new AppException("Room wasn't find");
 
-            if (room.Club.Id != updatedGroup.ClubId)
+            if (room.Club.Id != updated.ClubId)
             {
-                var club = await _context.Clubs.FirstOrDefaultAsync(clubIter => clubIter.Id == updatedGroup.ClubId);
+                var club = await _context.Clubs.FirstOrDefaultAsync(clubIter => clubIter.Id == updated.ClubId);
                 if (club == null) throw new ArgumentException("club wasn't find");
 
                 room.Club = club;
             }
             
-            room.Capacity = updatedGroup.Capacity;
-            room.Number = updatedGroup.Number;
-            room.About = updatedGroup.About;
-            room.Status = updatedGroup.Status;
+            room.Capacity = updated.Capacity;
+            room.Number = updated.Number;
+            room.About = updated.About;
+            room.Status = updated.Status;
             
             
-            var idsToAdd = updatedGroup.GroupIds.Except(room.Groups.Select(u => u.Id));
+            var idsToAdd = updated.GroupIds.Except(room.Groups.Select(u => u.Id));
             
-            var IdsToRemove = room.Groups.Select(u => u.Id).Except(updatedGroup.GroupIds);
+            var IdsToRemove = room.Groups.Select(u => u.Id).Except(updated.GroupIds);
             
             foreach (var oldGroupUser in room.Groups.Where(user => IdsToRemove.Contains(user.Id)))
             {
@@ -63,7 +63,7 @@ namespace System.BLL.RoomManagement
 
             await _context.SaveChangesAsync();
 
-            return updatedGroup;
+            return updated;
         }
     }
 }

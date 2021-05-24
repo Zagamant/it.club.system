@@ -36,7 +36,7 @@ namespace System.BLL.GroupManagement
         }
 
 
-        public override async Task<GroupModel> UpdateAsync(int groupId, GroupModel updatedGroup)
+        public override async Task<GroupModel> UpdateAsync(int groupId, GroupModel updated)
         {
             var oldGroup = await _context.Groups
                 .FirstOrDefaultAsync(gr => gr.Id == groupId);
@@ -44,15 +44,15 @@ namespace System.BLL.GroupManagement
             if (oldGroup == null)
                 throw new AppException($"Group with id: {groupId} not exist in database");
 
-            if (oldGroup.RoomId != updatedGroup.RoomId)
-                oldGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == updatedGroup.RoomId);
+            if (oldGroup.RoomId != updated.RoomId)
+                oldGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == updated.RoomId);
             
-            if (oldGroup.CourseId != updatedGroup.CourseId)
-                oldGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updatedGroup.CourseId);
+            if (oldGroup.CourseId != updated.CourseId)
+                oldGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updated.CourseId);
             
-            var idsToAdd = updatedGroup.UsersIds.Except(oldGroup.Users.Select(u => u.Id));
+            var idsToAdd = updated.UsersIds.Except(oldGroup.Users.Select(u => u.Id));
             
-            var IdsToRemove = oldGroup.Users.Select(u => u.Id).Except(updatedGroup.UsersIds);
+            var IdsToRemove = oldGroup.Users.Select(u => u.Id).Except(updated.UsersIds);
             
             foreach (var oldGroupUser in oldGroup.Users.Where(user => IdsToRemove.Contains(user.Id)))
             {

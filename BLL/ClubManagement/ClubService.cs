@@ -119,39 +119,39 @@ namespace System.BLL.ClubManagement
 
         }
 
-        public override async Task<ClubModel> UpdateAsync(int clubId, ClubModel updatedGroup)
+        public override async Task<ClubModel> UpdateAsync(int clubId, ClubModel updated)
         {
             var club = await GetByIdFullClubAsync(clubId);
-            updatedGroup.Id = club.Id;
+            updated.Id = club.Id;
 
-            if (updatedGroup.Title != club.Title)
+            if (updated.Title != club.Title)
             {
                 var clubRole = await _context.Roles.FirstAsync(role => role.Name == club.Title);
-                clubRole.Name = updatedGroup.Title;
-                club.Title = updatedGroup.Title;
+                clubRole.Name = updated.Title;
+                club.Title = updated.Title;
                 _context.Roles.Update(clubRole);
             }
 
             club.Address ??= new Address
             {
-                AddressLine = updatedGroup.AddressLine,
-                City = updatedGroup.City,
-                Country = updatedGroup.Country
+                AddressLine = updated.AddressLine,
+                City = updated.City,
+                Country = updated.Country
             };
 
-            if (!string.IsNullOrEmpty(updatedGroup.Country) && club.Address.Country != updatedGroup.Country)
+            if (!string.IsNullOrEmpty(updated.Country) && club.Address.Country != updated.Country)
             {
-                club.Address.Country = updatedGroup.Country;
+                club.Address.Country = updated.Country;
             }
 
-            if (!string.IsNullOrEmpty(updatedGroup.City) && club.Address.City != updatedGroup.City)
+            if (!string.IsNullOrEmpty(updated.City) && club.Address.City != updated.City)
             {
-                club.Address.City = updatedGroup.City;
+                club.Address.City = updated.City;
             }
 
-            if (!string.IsNullOrEmpty(updatedGroup.AddressLine) && club.Address.AddressLine != updatedGroup.AddressLine)
+            if (!string.IsNullOrEmpty(updated.AddressLine) && club.Address.AddressLine != updated.AddressLine)
             {
-                club.Address.AddressLine = updatedGroup.AddressLine;
+                club.Address.AddressLine = updated.AddressLine;
             }
             
             _context.Clubs.Update(club);
