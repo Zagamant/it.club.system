@@ -41,6 +41,7 @@
         </div>
     </Column>
 </Row>
+<AlertCustom/>
 
 
 @code {
@@ -52,12 +53,14 @@
     {
     // reset alerts on submit
         _alertService.Clear();
-
         loading = true;
         try
         {
             _user = await _accountService.Login(model);
             var returnUrl = _navigationManager.QueryString("returnUrl") ?? "/";
+            _alertService.Success("Добро пожаловать", true, false);
+            Console.WriteLine("Найс логин");
+            await Task.Delay(100000);
             _navigationManager.NavigateTo(returnUrl, true);
         }
         catch (Exception ex)
@@ -69,6 +72,7 @@
         }
         finally
         {
+            
             loading = false;
         }
     }

@@ -1,10 +1,10 @@
 ﻿@using AlertType = BlazorClient.Models.AlertType
 @using BlazorClient.Services.AlertManagement
 @implements IDisposable
-@inject IAlertService AlertService
-@inject NavigationManager NavigationManager
+@inject IAlertService _alertService
+@inject NavigationManager _navigationManager
 
-@foreach (var alert in alerts)
+@foreach (var alert in _alerts)
 {
     <div class="@CssClass(alert)">
         <a class="close" @onclick="@(() => RemoveAlert(alert))">&times;</a>
@@ -13,51 +13,52 @@
 }
 
 @code {
+
     [Parameter]
     public int Id { get; set; }
 
     [Parameter]
     public bool Fade { get; set; } = true;
 
-    private List<Models.Alert> alerts = new();
+    private List<Models.Alert> _alerts = new();
 
     protected override void OnInitialized()
     {
-        // subscribe to new alerts and location change events
-        AlertService.OnAlert += OnAlert;
-        NavigationManager.LocationChanged += OnLocationChange;
+    // subscribe to new alerts and location change events
+        _alertService.OnAlert += OnAlert;
+        _navigationManager.LocationChanged += OnLocationChange;
     }
 
     public void Dispose()
     {
-        // unsubscribe from alerts and location change events
-        AlertService.OnAlert -= OnAlert;
-        NavigationManager.LocationChanged -= OnLocationChange;
+    // unsubscribe from alerts and location change events
+        _alertService.OnAlert -= OnAlert;
+        _navigationManager.LocationChanged -= OnLocationChange;
     }
 
     private async void OnAlert(Models.Alert alert)
     {
-        // ignore alerts sent to other alert components
-        if (alert.Id != Id) 
+    // ignore alerts sent to other alert components
+        if (alert.Id != Id)
             return;
 
-        // clear alerts when an empty alert is received
-        if (alert.Message == null) 
+    // clear alerts when an empty alert is received
+        if (alert.Message == null)
         {
-            // remove alerts without the 'KeepAfterRouteChange' flag set to true
-            alerts.RemoveAll(x => !x.KeepAfterRouteChange);
+    // remove alerts without the 'KeepAfterRouteChange' flag set to true
+            _alerts.RemoveAll(x => !x.KeepAfterRouteChange);
 
-            // set the 'KeepAfterRouteChange' flag to false for the 
-            // remaining alerts so they are removed on the next clear
-            alerts.ForEach(x => x.KeepAfterRouteChange = false);
+    // set the 'KeepAfterRouteChange' flag to false for the 
+    // remaining alerts so they are removed on the next clear
+            _alerts.ForEach(x => x.KeepAfterRouteChange = false);
         }
         else
         {
-            // add alert to array
-            alerts.Add(alert);
+    // add alert to array
+            _alerts.Add(alert);
             StateHasChanged();
 
-            // auto close alert if required
+    // auto close alert if required
             if (alert.AutoClose)
             {
                 await Task.Delay(3000);
@@ -70,43 +71,45 @@
 
     private void OnLocationChange(object sender, LocationChangedEventArgs e)
     {
-        AlertService.Clear(Id);
+        _alertService.Clear(Id);
     }
 
     private async void RemoveAlert(Models.Alert alert)
     {
-        // check if already removed to prevent error on auto close
-        if (!alerts.Contains(alert)) return;
+    // check if already removed to prevent error on auto close
+        if (!_alerts.Contains(alert)) return;
 
-        if (Fade) 
+        if (Fade)
         {
-            // fade out alert
+    // fade out alert
             alert.Fade = true;
 
-            // remove alert after faded out
+    // remove alert after faded out
             await Task.Delay(250);
-            alerts.Remove(alert);
-        } 
-        else 
+            _alerts.Remove(alert);
+        }
+        else
         {
-            // remove alert
-            alerts.Remove(alert);
+    // remove alert
+            _alerts.Remove(alert);
         }
 
         StateHasChanged();
     }
 
-    private string CssClass(Models.Alert alert) 
+    private string CssClass(Models.Alert alert)
     {
         if (alert == null) return null;
 
-        var classes = new List<string> { "alert", "alert-dismissable", "mt-4", "container", "fixed-top" };
+        var classes = new List<string> {"alert", "alert-dismissable", "mt-4", "mr-auto", "ml-auto", "container", "fixed-top"};
 
-        var alertTypeClass = new Dictionary<AlertType, string>();
-        alertTypeClass[AlertType.Success] = "alert-success";
-        alertTypeClass[AlertType.Error] = "alert-danger";
-        alertTypeClass[AlertType.Info] = "alert-info";
-        alertTypeClass[AlertType.Warning] = "alert-warning";
+        var alertTypeClass = new Dictionary<AlertType, string>
+        {
+            [AlertType.Success] = "alert-success",
+            [AlertType.Error] = "alert-danger",
+            [AlertType.Info] = "alert-info",
+            [AlertType.Warning] = "alert-warning"
+        };
 
         classes.Add(alertTypeClass[alert.Type]);
 
@@ -114,5 +117,6 @@
             classes.Add("fade");
 
         return string.Join(' ', classes);
-    }   
+    }
+
 }

@@ -3,13 +3,14 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.GroupManagement
 @using System.BLL.Models.GroupManagement
+@using System.Web
 @attribute [Authorize]
 @inject NavigationManager _navigationManager
 @inject IGroupService _groupService
 
 <div class="table">
     <DataGrid TItem="GroupModel"
-              Data="@_groups"
+              Data="@_groupsView"
               TotalItems="@_totalCount"
               Filterable="true"
               FilterMethod="DataGridFilterMethod.Contains">
@@ -55,16 +56,34 @@
     public string ClubName { get; set; }
     
     private bool _loading;
-    private IList<GroupModel> _groups;
+    private IList<GroupModel> _groups = new List<GroupModel>();
+    private IList<GroupModel> _groupsView = new List<GroupModel>();
     private bool _isDeleting;
     private int _totalCount;
-
+    
     protected override async Task OnInitializedAsync()
     {
         _loading = true;
         _groups = (await _groupService.GetAllAsync()).ToList();
+        
         _totalCount = _groups.Count;
+       
         _loading = false;
+        
+        var localUri = new Uri(_navigationManager.Uri);
+        var queryString = HttpUtility.ParseQueryString(localUri.Query);
+        var clubQuery = queryString["club"];
+        Console.WriteLine(clubQuery);
+        if (clubQuery is null or "")
+        {
+            _groupsView = _groups;
+        }
+        else
+        {
+            _groupsView = _groups.Where(gr => gr.Room.Club.Title == clubQuery).ToList();
+        }
+        _totalCount = _groupsView.Count;
+        StateHasChanged();
     }
 
     private async void DeleteUser(int id)
@@ -73,12 +92,12 @@
         _isDeleting = true;
         await _groupService.DeleteAsync(id);
         _groups.Remove(user);
-        StateHasChanged();
         _isDeleting = false;
+        StateHasChanged();
     }
+    
     private async void EditGroup(int id)
     {
         _navigationManager.NavigateTo($"/groups/{id}/edit");
     }
-
 }

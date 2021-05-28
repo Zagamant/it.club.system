@@ -1,5 +1,6 @@
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.ClubManagement
+@using System.Web
 @using BlazorClient.Services.ClubManagement
 @using BlazorClient.Services.UserManagement
 @using Microsoft.AspNetCore.WebUtilities
@@ -12,75 +13,79 @@
 @if (LoggedIn)
 {
     <div>
-        <Bar Breakpoint="Breakpoint.Desktop"
-             Background="Background.White"
-             ThemeContrast="ThemeContrast.Light"
-             Class="header-bar">
+        <Layout Sider="true">
+            <LayoutSider>
+                <LayoutSiderContent>
+                    <Sidebar @ref="_sidebar"
+                             Scrollable="false"
+                             Class="sider">
+                        <SidebarContent>
+                            <SidebarBrand Class="logo-text-wrapper">
+                                @* <BarLink To="" >It_Club</BarLink> *@
+                                <SidebarLink To="">It_Club</SidebarLink>
+                                @* <Blazorise.Link To="">It_Club</Blazorise.Link> *@
+                            </SidebarBrand>
 
-            <BarBrand Style="">
-                <BarLink To=".">
-                    <div class="home">
-                        It_Club
-                    </div>
-                </BarLink>
-            </BarBrand>
-            <BarMenu >
-                <BarStart Style="font-size:170%">
+                            <SidebarNavigation>
+                                @foreach (var club in _clubs)
+                                {
+                                    <SidebarItem>
+                                        <SidebarLink Title="@club.Title" Click=@(() => SetQueryClubTo(club.Title))>
+                                            <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight"/>@club.Title
+                                        </SidebarLink>
+                                    </SidebarItem>
+                                }
+                            </SidebarNavigation>
+                        </SidebarContent>
+                    </Sidebar>
+                </LayoutSiderContent>
+            </LayoutSider>
 
-                    <BarItem Style="margin-left:82px">
-                        <BarLink To="users">Список пользователей</BarLink>
-                    </BarItem>
+            <Layout>
+                <LayoutHeader Fixed="true">
+                    <Bar Breakpoint="Breakpoint.Desktop"
+                         Background="Background.White"
+                         ThemeContrast="ThemeContrast.Light"
+                         Class="header-bar">
+                        <BarMenu >
+                            <BarStart>
+                                <BarItem>
+                                    <Blazorise.Link To="users">Список пользователей</Blazorise.Link>
+                                </BarItem>
+                                <BarItem>
+                                    <BarLink To="groups">Cписок групп</BarLink>
+                                </BarItem>
+                                <BarItem>
+                                    <BarLink To="payments">Оплата</BarLink>
+                                </BarItem>
+                                <BarItem>
+                                    <BarLink To="account/logout">Выход</BarLink>
+                                </BarItem>
+                                <BarItem Style="float:right">
+                                    <BarLink To=@($"/users/{_accountService.User.Id}")>
+                                        @if (_accountService.User?.Images != null && _accountService.User.Images.Any())
+                                        {
+                                            <img class="user-image" src=@_accountService.User.Images.First()/>
+                                        }
+                                        else
+                                        {
+                                            <img class="user-image" src="/assets/images/User (1).svg"/>
+                                        }
+                                        @($"{_accountService.User.Name} {_accountService.User.Surname}")
+                                    </BarLink>
+                                </BarItem>
+                            </BarStart>
+                        </BarMenu>
+                    </Bar>
+                </LayoutHeader>
 
-                    <BarItem>
-                        <BarLink To="groups">Cписок групп</BarLink>
-                    </BarItem>
+                <LayoutContent>
+                    <AlertCustom/>
+                    @Body
+                </LayoutContent>
 
-                    <BarItem>
-                        <BarLink To="payments">Оплата</BarLink>
-                    </BarItem>
-
-                    <BarItem>
-                        <BarLink To="account/logout">Выход</BarLink>
-                    </BarItem>
-
-                    <BarItem Style="float:right">
-
-                        <BarLink To=@($"/users/{_accountService.User.Id}")>
-                            @if (_accountService.User?.Images != null && _accountService.User.Images.Any())
-                            {
-                                <img class="user-image" src=@_accountService.User.Images.First()/>
-                            }
-                            else
-                            {
-                                <img class="user-image" src="/assets/images/User (1).svg"/>
-                            }
-                            @($"{_accountService.User.Name} {_accountService.User.Surname}")
-                        </BarLink>
-                    </BarItem>
-                </BarStart>
-            </BarMenu>
-        </Bar>
-    </div>
-    <div class="sider">
-        <!--Sidebar-->
-        <Sidebar @ref="_sidebar"
-                 Scrollable="false"
-                 >
-            <SidebarContent>
-                <SidebarNavigation>
-                    @foreach (var club in _clubs)
-                    {
-                        <SidebarItem>
-                            <SidebarLink Title="@club.Title" Click=@(() => SetQueryClubTo(club.Title))>
-                                <Icon Name="IconName.Home" Margin="Margin.Is3.FromRight"/>@club.Title
-                            </SidebarLink>
-                        </SidebarItem>
-                    }
-                </SidebarNavigation>
-            </SidebarContent>
-        </Sidebar>
-        <AlertCustom/>
-        @Body
+            </Layout>
+        </Layout>
     </div>
 }
 else
@@ -116,7 +121,11 @@ else
 
     private void SetQueryClubTo(string clubName)
     {
-        _navigationManager.NavigateTo(QueryHelpers.AddQueryString(_navigationManager.Uri, new Dictionary<string, string> {{"club", clubName}}));
+        var localUri = new Uri(_navigationManager.Uri);
+        var queryString = HttpUtility.ParseQueryString(localUri.Query);
+        queryString["club"] = clubName;
+        _navigationManager.NavigateTo($"{localUri.LocalPath}?{queryString}", true);
+        StateHasChanged();
     }
 
 }

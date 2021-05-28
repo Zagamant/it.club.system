@@ -10,6 +10,7 @@ namespace System.BLL.Models.GroupManagement
 		public string Title { get; set; }
 		public int CourseId { get; set; }
 		public int RoomId { get; set; }
+		public Room Room { get; set; }
 		public int LessonsPerWeek { get; set; }
 		public string OnlineConversationLink { get; set; }
 		public string Messenger { get; set; }
