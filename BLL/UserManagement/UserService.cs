@@ -95,7 +95,10 @@ namespace System.BLL.UserManagement
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 
-            return user == null ? null : _mapper.Map<UserModel>(user);
+            if (user == null)
+                throw new AppException("User not found");
+            else
+                return _mapper.Map<UserModel>(user);
         }
 
         public async Task<UserModel> GetAsync(string username)

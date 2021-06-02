@@ -13,10 +13,10 @@
     <Column ColumnSize="ColumnSize.Is5.OnDesktop.Is5.OnTablet.Is8.OnMobile.Is12" Class="shadow">
         <div class="paper">
             <Form class="w-100">
-                <Heading Size="HeadingSize.Is1">Sign In</Heading>
+                <Heading Size="HeadingSize.Is1">Вход</Heading>
                 <Validation Validator="@ValidateUsername">
                     <Field>
-                        <FieldLabel Class="h2">Username</FieldLabel>
+                        <FieldLabel Class="h2">Имя пользователя</FieldLabel>
                         <FieldBody >
                             <TextEdit Placeholder="Enter username" @bind-Text="model.UserName" ChangeTextOnKeyPress="true"/>
                         </FieldBody>
@@ -24,7 +24,7 @@
                 </Validation>
                 <Validation Validator="@ValidatePassword">
                     <Field>
-                        <FieldLabel Class="h2">Password</FieldLabel>
+                        <FieldLabel Class="h2">Пароль</FieldLabel>
                         <FieldBody >
                             <TextEdit Placeholder="Enter password" @bind-Text="model.Password" type="password"/>
                         </FieldBody>
@@ -32,11 +32,11 @@
                     </Field>
                 </Validation>
                 <Button Color="Color.Primary" PreventDefaultOnSubmit="true" Clicked="@OnValidSubmit" Loading="@loading">
-                    Login
+                    Войти
                 </Button>
-                <Button Class="register-button mt-0" Color="Color.Light" To="account/register">
-                    Register
-                </Button>
+                @* <Button Class="register-button mt-0" Color="Color.Light" To="account/register"> *@
+                @*     Register *@
+                @* </Button> *@
             </Form>
         </div>
     </Column>

@@ -35,7 +35,6 @@ namespace System.API.Controllers
         }
 
         [AllowAnonymous]
-        //[Authorize(Roles = "main_admin,admin")]
         [HttpPost]
         public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
             Ok(await _userService.AddAsync(model, model.Password));
@@ -68,7 +67,7 @@ namespace System.API.Controllers
             // return basic user info and authentication token
             return Ok(new
             {
-                user.Id,
+                Id = user.Id,
                 UserName = user.UserName,
                 Name = user.Name,
                 Surname = user.Surname,
@@ -82,9 +81,7 @@ namespace System.API.Controllers
             await _userService.LogoutAsync();
             return Ok();
         }
-
-
-        //[Authorize(Roles = "main_admin,admin")]
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAll()
         {
@@ -202,7 +199,7 @@ namespace System.API.Controllers
             return await _userService.RemoveUsersRoleAsync(id, role.Name);
         }
         
-        [Authorize(Roles = "main_admin,admin")]
+        [Authorize(Roles = "main_admin,admin,teacher")]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UploadPhoto(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));        

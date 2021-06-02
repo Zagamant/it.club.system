@@ -1,9 +1,4 @@
-﻿body {
-}
-.form {
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    margin: 20px;
-    border-radius: 3px;
-    background-color: white;
+﻿.form {
+    min-width: 30%;
+    max-width: 650px;
 }

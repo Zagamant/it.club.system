@@ -3,7 +3,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.AgreementManagement
 {
-	public interface IAgreementService : IRepository<int, AgreementModel,AgreementModel,AgreementModel>
+	public interface IAgreementService : IServiceBase<int, AgreementModel,AgreementModel,AgreementModel>
 	{
 		
 	}

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace BlazorClient.Services.PaymentManagement
 {
-    public class PaymentService : Repository<int, PaymentModel, PaymentModel, PaymentModel>,
+    public class PaymentService : ServiceBase<int, PaymentModel, PaymentModel, PaymentModel>,
         IPaymentService
     {
         public PaymentService(HttpClient http) : base(http)

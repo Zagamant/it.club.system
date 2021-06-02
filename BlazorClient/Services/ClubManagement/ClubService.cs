@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace BlazorClient.Services.ClubManagement
 {
-    public class ClubService : Repository<int, ClubModel, ClubModel, ClubModel>, IClubService
+    public class ClubService : ServiceBase<int, ClubModel, ClubModel, ClubModel>, IClubService
     {
         public ClubService(HttpClient http) : base(http)
         {

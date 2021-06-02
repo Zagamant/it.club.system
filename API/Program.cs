@@ -12,11 +12,6 @@ namespace System.API
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                // .WriteTo.File(@"Logs/logs.txt",
-                //     fileSizeLimitBytes: 1_000_000_000,
-                //     rollOnFileSizeLimit: true,
-                //     shared: true,
-                //     flushToDiskInterval: TimeSpan.FromSeconds(1))
                 .CreateLogger();
 
             Log.Information("Starting up!");

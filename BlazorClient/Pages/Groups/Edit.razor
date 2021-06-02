@@ -2,91 +2,118 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.GroupManagement
 @using BlazorClient.Services.AlertManagement
-@using System.BLL.Models.GroupManagement
+@using GroupStatus = BlazorClient.Models.Enums.GroupStatus
+@using GroupModel = BlazorClient.Models.Group.GroupModel
 
 @attribute [Authorize]
 @inject IAlertService _alertService
 @inject IGroupService _groupService
 @inject NavigationManager _navigationManager
 
-@if (model != null)
+
+@if (_model != null)
 {
-    <div class="form1">
-        <h1>Edit Group </h1>
+    <div class="white-bg-plate form">
+        <h1>Редактировать</h1>
 
-        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-            <DataAnnotationsValidator />
+ <EditForm Model="@_model" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator/>
+
+        <Divider DividerType="DividerType.TextContent" Text="О группе"/>
+
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Название</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <TextEdit Placeholder="Си шарп ПН-СР" @bind-Text="@_model.Title"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Количество учащихся</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <NumericEdit Placeholder="10" @bind-Value="@_model.Capacity"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Соцсеть группы</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <TextEdit Placeholder="VK" @bind-Text="@_model.Messenger"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Уроков в неделю</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <NumericEdit Placeholder="Уроков в неделю" @bind-Value="@_model.LessonsPerWeek"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Начало занятий</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <DateEdit Placeholder="Начало занятий" @bind-Date="@_model.StartDate"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Окончание занятий</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <DateEdit Placeholder="Окончание занятий" @bind-Date="@_model.EndDate"/>
+            </FieldBody>
+        </Field>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Ссылка на конференцию</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <TextEdit Role="TextRole.Url" Placeholder="Ссылка на конференцию" @bind-Text="@_model.OnlineConversationLink"/>
+            </FieldBody>
+        </Field>
 
 
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Название</label>
-                    <InputText @bind-Value="model.Title" class="form-control" />
-                    <ValidationMessage For="@(() => model.Title)" />
-                </div>
-                <div class="form-group col">
-                    <label>Уроков в неделю</label>
-                    <InputNumber @bind-Value="model.LessonsPerWeek" class="form-control" />
-                    <ValidationMessage For="@(() => model.LessonsPerWeek)" />
-                </div>
-                <div class="form-group col">
-                    <label>Начало занятий</label>
-                    <InputDate @bind-Value="model.StartDate" class="form-control" />
-                    <ValidationMessage For="@(() => model.StartDate)" />
-                </div>
-                <div class="form-group col">
-                    <label>Окончание занятий</label>
-                    <InputDate @bind-Value="model.EndDate" class="form-control" />
-                    <ValidationMessage For="@(() => model.EndDate)" />
-                </div>
-            </div>
+        <Field Horizontal="true">
+            <FieldLabel ColumnSize="ColumnSize.Is5">Статус</FieldLabel>
+            <FieldBody ColumnSize="ColumnSize.Is5">
+                <Select TValue="string"
+                        SelectedValueChanged="@(ctx => OnEnumValueChange(ctx))">
+                    @foreach (Enum item in Enum.GetValues(typeof(GroupStatus)))
+                    {
+                        <SelectItem Value="@item.ToString()">@item.ToString()</SelectItem>
+                    }
+                    @* <SelectItem Value="@("Recruitment")">Открыт</SelectItem> *@
+                    @* <SelectItem Value="@("PendingStart")"></SelectItem> *@
+                    @* <SelectItem Value="@("InProgress")"></SelectItem> *@
+                    @* <SelectItem Value="@("Closed")"></SelectItem> *@
+                </Select>
+            </FieldBody>
+        </Field>
 
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Ссылка на конференцию</label>
-                    <InputText @bind-Value="model.OnlineConversationLink" class="form-control" />
-                    <ValidationMessage For="@(() => model.OnlineConversationLink)" />
-                </div>
-                <div class="form-group col">
-                    <label>Количество учащихся</label>
-                    <InputNumber @bind-Value="model.Capacity" class="form-control" />
-                    <ValidationMessage For="@(() => model.Capacity)" />
-                </div>
-                <div class="form-group col">
-                    <label>Статус</label>
-                    <div class="chek">
-                        <Check TValue="bool">Открыта</Check>
-                    </div>
-                    <Check TValue="bool">Закрыта</Check>
-                </div>
-            </div>
+        <Row Class="justify-content-space ">
+            <Column ColumnSize="ColumnSize.Is12" Margin="new FluentMargin().Is2">
+                <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
+                    @if (loading)
+                    {
+                        <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
+                    Сохранить
+                </Button>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is12" Margin="new FluentMargin().Is0.FromTop.Is2">
+                <Button To="users" Color="Color.Secondary" Block="true">Отменить</Button>
+            </Column>
+        </Row>
+    </EditForm>
 
-</EditForm>
-        <div class="form-group">
-            <button disabled="@loading" class="btn btn-primary">
-                @if (loading)
-                {
-                    <span class="spinner-border spinner-border-sm mr-1"></span>
-                }
-                Save
-            </button>
-            <NavLink href="users" class="btn btn-link">Cancel</NavLink>
-        </div>
+
     </div>
 }
 
-
-
-    @code {
-private GroupModel model;
+@code {
+    
+    private GroupModel _model;
     private bool loading;
+    private string status;
 
     [Parameter]
     public int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        model = await _groupService.GetAsync(Id);
+        _model = await _groupService.GetAsync(Id);
     }
 
     private async void OnValidSubmit()
@@ -94,7 +121,7 @@ private GroupModel model;
         loading = true;
         try
         {
-            await _groupService.UpdateAsync(Id, model);
+            await _groupService.UpdateAsync(Id, _model);
             _alertService.Success("Update successful", keepAfterRouteChange: true);
             _navigationManager.NavigateTo("groups");
         }
@@ -105,5 +132,11 @@ private GroupModel model;
             StateHasChanged();
         }
     }
+
+    private void OnEnumValueChange(string enumString)
+    {
+        Enum.TryParse(enumString, out GroupStatus status);
+        _model.Status = status;
     }
 
+}

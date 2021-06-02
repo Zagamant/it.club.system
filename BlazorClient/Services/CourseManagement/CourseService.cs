@@ -6,7 +6,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.CourseManagement
 {
-    public class CourseService : Repository<int, CourseRegisterModel, CourseModel, CourseModel>,
+    public class CourseService : ServiceBase<int, CourseRegisterModel, CourseModel, CourseModel>,
         ICourseService
     {
         public CourseService(HttpClient http) : base(http)

@@ -3,7 +3,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.EventManagement
 {
-	public interface IEventService : IRepository<int, EventModel,EventModel,EventModel>
+	public interface IEventService : IServiceBase<int, EventModel,EventModel,EventModel>
 	{
 	}
 }

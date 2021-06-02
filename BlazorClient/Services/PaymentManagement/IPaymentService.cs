@@ -6,7 +6,7 @@ using BlazorClient.Services.Helpers;
 namespace BlazorClient.Services.PaymentManagement
 {
     public interface
-        IPaymentService : IRepository<int, PaymentModel, PaymentModel, PaymentModel>
+        IPaymentService : IServiceBase<int, PaymentModel, PaymentModel, PaymentModel>
     {
         Task<PaymentModel> UpdatePaymentToUserAsync(int userId, DateTime month, decimal sum);
     }

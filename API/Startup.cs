@@ -18,7 +18,9 @@ using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -161,6 +163,15 @@ namespace System.API
 			app.UseAuthentication();
 			app.UseAuthorization();
 
+			app.UseExceptionHandler(c => c.Run(async context =>
+			{
+				var exception = context.Features
+					.Get<IExceptionHandlerPathFeature>()
+					.Error;
+				var response = new { error = exception.Message };
+				await context.Response.WriteAsJsonAsync(response);
+			}));
+			
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 		}
 	}

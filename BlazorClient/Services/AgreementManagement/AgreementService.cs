@@ -4,7 +4,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.AgreementManagement
 {
-    public class AgreementService : Repository<int, AgreementModel, AgreementModel, AgreementModel>,
+    public class AgreementService : ServiceBase<int, AgreementModel, AgreementModel, AgreementModel>,
         IAgreementService
     {
         public AgreementService(HttpClient http) : base(http)

@@ -11,8 +11,6 @@
 }
 
 ::deep .logo-text-wrapper {
-    
-    /*font-size: 200%;*/
     font-family: 'F1', 'Exo 2', serif;
     font-weight: bold;
     margin: auto;
@@ -25,6 +23,14 @@
 .shadow {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .05) !important;
     border: 0.25px solid #D7D8D9;
+}
+
+::deep .white-bg-plate {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 3px;
+    background-color: white;
 }
 
 ::deep .separate-add-button {

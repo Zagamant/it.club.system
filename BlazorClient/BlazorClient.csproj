@@ -24,4 +24,10 @@
       <Folder Include="wwwroot\Images" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\..\..\..\.nuget\packages\blazorise.datagrid\0.9.3.6\contentFiles\any\net5.0\Resources\Localization\DataGrid\ru.json">
+        <Link>Resources\Localization\DataGrid\ru.json</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>

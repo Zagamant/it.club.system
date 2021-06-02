@@ -3,7 +3,7 @@ using System.BLL.Models.ContactManagement;
 
 namespace BlazorClient.Services.ContactManagement
 {
-    public interface IContactService : Helpers.IRepository<int, ContactModel, ContactModel, ContactModel>
+    public interface IContactService : Helpers.IServiceBase<int, ContactModel, ContactModel, ContactModel>
     {
     }
 }

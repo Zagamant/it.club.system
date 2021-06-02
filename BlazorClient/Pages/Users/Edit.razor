@@ -1,151 +1,111 @@
 ﻿@page "/users/{id:int}/edit"
 @using Microsoft.AspNetCore.Authorization
-@using BlazorClient.Models.Account
 @using BlazorClient.Services.AccountManagement
 @using BlazorClient.Services.AlertManagement
 @using System.BLL.Models.UserManagement
 @attribute [Authorize]
-@inject IAlertService AlertService
-@inject IAccountService AccountService
-@inject NavigationManager NavigationManager
+@inject IAlertService _alertService
+@inject IAccountService _accountService
+@inject NavigationManager _navigationManager
 
 
 @if (model != null)
 {
+    <div class="white-bg-plate form">
+        <h1>Редактировать</h1>
 
-<div class="form">
-    <div class="main-form">
-        <div class="form1">
-            <h1>Edit Users </h1>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator/>
+            
+            <Divider DividerType="DividerType.TextContent" Text="О пользователе"
+                     Margin="Margin.Is4.FromTop.Is4.FromBottom"/>
+            
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Имя пользователя</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit Placeholder="Имя пользователя" @bind-Text="@model.UserName"/>
+                </FieldBody>
+            </Field>
 
-            <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-                <DataAnnotationsValidator />
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Фамилия</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit Placeholder="Фамилия" @bind-Text="@model.Surname"/>
+                </FieldBody>
+            </Field>
+
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Имя</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit Placeholder="Имя" @bind-Text="@model.Name"/>
+                </FieldBody>
+            </Field>
+
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Отчество</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit Placeholder="Отчество" @bind-Text="@model.MiddleName"/>
+                </FieldBody>
+            </Field>
+
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Дата рождения</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <DateEdit TValue="DateTime" @bind-Date="@model.BirthDay"/>
+                </FieldBody>
+            </Field>
+
+            
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Пароль</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit Role="TextRole.Password" @bind-Text="@password"/>
+                </FieldBody>
+            </Field>
+
+            <Divider DividerType="DividerType.TextContent" Text="Местоположение"
+                     Margin="Margin.Is4.FromTop.Is4.FromBottom"/>
+            
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Страна</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit TValue="DateTime" @bind-Text="@model.Country"/>
+                </FieldBody>
+            </Field>
+
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Город</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit TValue="DateTime" @bind-Text="@model.City"/>
+                </FieldBody>
+            </Field>
+
+            <Field Horizontal="true">
+                <FieldLabel ColumnSize="ColumnSize.Is5">Улица</FieldLabel>
+                <FieldBody ColumnSize="ColumnSize.Is5">
+                    <TextEdit TValue="DateTime" @bind-Text="@model.AddressLine"/>
+                </FieldBody>
+            </Field>
 
 
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label>Имя пользователя</label>
-                        <InputText @bind-Value="model.UserName" class="form-control" />
-                        <ValidationMessage For="@(() => model.UserName)" />
-                    </div>
-                    <div class="form-group col">
-                        <label>Фамилия</label>
-                        <InputText @bind-Value="model.Surname" class="form-control" />
-                        <ValidationMessage For="@(() => model.Surname)" />
-                    </div>
-                    <div class="form-group col">
-                        <label>Имя</label>
-                        <InputText @bind-Value="model.Name" class="form-control" />
-                        <ValidationMessage For="@(() => model.Name)" />
-                    </div>
-                    <div class="form-group col">
-                        <label>Отчество</label>
-                        <InputText @bind-Value="model.MiddleName" class="form-control" />
-                        <ValidationMessage For="@(() => model.MiddleName)" />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label>Дата рождения</label>
-                        <InputDate @bind-Value="model.BirthDay" class="form-control" />
-                        <ValidationMessage For="@(() => model.BirthDay)" />
-                    </div>
-                    <div class="form-group col">
-                        <label>
-                            Password
-                            @*<em>(Leave blank to keep the same password)</em>*@
-                        </label>
-                        <InputText @bind-Value="password" type="password" class="form-control" />
-                        <ValidationMessage For="@(() => password)" />
-                    </div>
-                </div>
-
-            </EditForm>
-
-        </div>
-
-        <div class="form2">
-
-            <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-                <DataAnnotationsValidator />
-
-                <div class="form-row">
-
-                    <div class="form-group col">
-                        <Dropdown Style="display:flex;">
-                            <Button Style="border: none; padding:0">Контакты</Button>
-                            <DropdownToggle Split="true" Style="border: none;" />
-                            <DropdownMenu>
-                                <DropdownItem>Action</DropdownItem>
-                                <DropdownDivider />
-                                <DropdownItem>Another Action</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
-
-                    <div class="form-group col">
-                        <Dropdown Style="display:flex;">
-                            <Button Style="border: none; padding:0">Группы</Button>
-                            <DropdownToggle Split="true" Style="border: none;" />
-                            <DropdownMenu>
-                                <DropdownItem>Action</DropdownItem>
-                                <DropdownDivider />
-                                <DropdownItem>Another Action</DropdownItem>
-                                <DropdownItem>Action</DropdownItem>
-                                <DropdownDivider />
-                                <DropdownItem>Another Action</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button disabled="@loading" class="btn btn-primary">
+            <Row Class="justify-content-space ">
+                <Column ColumnSize="ColumnSize.Is12" Margin="Margin.Is2">
+                    <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
                         @if (loading)
                         {
                             <span class="spinner-border spinner-border-sm mr-1"></span>
                         }
-                        Save
-                    </button>
-                    <NavLink href="users" class="btn btn-link">Cancel</NavLink>
-                </div>
-            </EditForm>
-        </div>
-    </div>
+                        Сохранить
+                    </Button>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is12" Margin="Margin.Is0.FromTop.Is2">
+                    <Button To="users" Color="Color.Secondary" Block="true">Отменить</Button>
+                </Column>
 
-    <div class="secondary-form">
-
-        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
-            <DataAnnotationsValidator />
-
-
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Страна</label>
-                    <InputText @bind-Value="model.Country" class="form-control" />
-                    <ValidationMessage For="@(() => model.Country)" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Город</label>
-                    <InputText @bind-Value="model.City" class="form-control" />
-                    <ValidationMessage For="@(() => model.City)" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Адрес</label>
-                    <InputText @bind-Value="model.AddressLine" class="form-control" />
-                    <ValidationMessage For="@(() => model.AddressLine)" />
-                </div>
-            </div>
-
+            </Row>
         </EditForm>
-            
-    </div>
-</div>
 
+    </div>
 }
 
 else
@@ -154,6 +114,7 @@ else
         <span class="spinner-border spinner-border-lg align-center"></span>
     </div>
 }
+<AlertCustom/>
 
 
 @code {
@@ -166,7 +127,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        model = await AccountService.GetById(Id);
+        model = await _accountService.GetById(Id);
     }
 
     private async void OnValidSubmit()
@@ -174,15 +135,16 @@ else
         loading = true;
         try
         {
-            await AccountService.Update(Id, model, password);
-            AlertService.Success("Update successful", keepAfterRouteChange: true);
-            NavigationManager.NavigateTo("users");
+            await _accountService.Update(Id, model, password);
+            _alertService.Success("Update successful", keepAfterRouteChange: true);
+            _navigationManager.NavigateTo("users");
         }
         catch (Exception ex)
         {
-            AlertService.Error(ex.Message);
+            _alertService.Error(ex.Message);
             loading = false;
             StateHasChanged();
         }
     }
+
 }

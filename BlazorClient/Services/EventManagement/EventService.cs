@@ -4,7 +4,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.EventManagement
 {
-    public class EventService : Repository<int, EventModel, EventModel, EventModel>,
+    public class EventService : ServiceBase<int, EventModel, EventModel, EventModel>,
         IEventService
     {
         public EventService(HttpClient http) : base(http)

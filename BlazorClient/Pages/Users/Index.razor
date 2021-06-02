@@ -12,6 +12,7 @@
 
 <div class="table">
     <DataGrid TItem="UserModel"
+              RowSelectable=@(context => { _navigationManager.NavigateTo($"users/{context.Id}/edit"); return true;})
               Data="@_users"
               TotalItems="@_totalCount"
               Filterable="true"

@@ -4,10 +4,11 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BlazorClient.Services.Helpers;
 using Newtonsoft.Json;
+using GroupModel = BlazorClient.Models.Group.GroupModel;
 
 namespace BlazorClient.Services.GroupManagement
 {
-    public class GroupService : Repository<int, GroupModel, GroupModel, GroupModel>,
+    public class GroupService : ServiceBase<int, GroupModel, GroupModel, GroupModel>,
         IGroupService
     {
         public GroupService(HttpClient http) : base(http)

@@ -3,7 +3,7 @@ using BlazorClient.Services.Helpers;
 
 namespace BlazorClient.Services.CourseManagement
 {
-    public interface ICourseService : IRepository<int, CourseRegisterModel, CourseModel, CourseModel>
+    public interface ICourseService : IServiceBase<int, CourseRegisterModel, CourseModel, CourseModel>
     {
     }
 }

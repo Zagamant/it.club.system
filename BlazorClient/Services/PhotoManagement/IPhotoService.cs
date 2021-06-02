@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 
 namespace BlazorClient.Services.PhotoManagement
 {
-    public interface IPhotoService : IRepository<int, ImageModel, ImageModel, ImageModel>
+    public interface IPhotoService : IServiceBase<int, ImageModel, ImageModel, ImageModel>
     {
         
 

@@ -4,7 +4,7 @@ using BlazorClient.Services.Helpers;
 namespace BlazorClient.Services.RoomManagement
 {
     public interface
-        IRoomService : IRepository<int, RoomCreateModel, RoomModel, RoomModel>
+        IRoomService : IServiceBase<int, RoomCreateModel, RoomModel, RoomModel>
     {
     }
 }
