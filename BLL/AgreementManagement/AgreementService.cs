@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.AgreementManagement
 {
-    public class AgreementService : Repository<int, Agreement, AgreementModel, AgreementModel, AgreementModel>,
+    public class AgreementService : BaseService<int, Agreement, AgreementModel, AgreementModel, AgreementModel>,
         IAgreementService
     {
         public AgreementService(DataContext context, IMapper mapper, ILogger<AgreementService> logger) : base(context, mapper, logger)

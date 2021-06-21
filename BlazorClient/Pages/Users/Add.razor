@@ -57,14 +57,11 @@
                 <TextEdit Role="TextRole.Password" @bind-Text="@model.Password"/>
             </FieldBody>
         </Field>
-
-        <Divider DividerType="DividerType.TextContent" Text="Местоположение"
-                 Margin="Margin.Is4.FromTop.Is4.FromBottom"/>
-
+        
 
         <Row Class="justify-content-space ">
             <Column ColumnSize="ColumnSize.Is12" Margin="Margin.Is2">
-                <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@_loading">
+                <Button Type="ButtonType.Submit" Size="Size.Large" Color="Color.Primary" Block="true" disabled="@_loading">
                     @if (_loading)
                     {
                         <span class="spinner-border spinner-border-sm mr-1"></span>
@@ -84,7 +81,6 @@
 @code {
     private AddUser model = new AddUser();
     private bool _loading;
-
     private async void OnValidSubmit()
     {
         _loading = true;

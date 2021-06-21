@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.RoomManagement
 {
-    public class RoomService : Repository<int, Room, RoomCreateModel, RoomModel, RoomModel>, IRoomService
+    public class RoomService : BaseService<int, Room, RoomCreateModel, RoomModel, RoomModel>, IRoomService
     {
         public RoomService(DataContext context, IMapper mapper, ILogger<RoomService> logger) : base(context, mapper, logger)
         {

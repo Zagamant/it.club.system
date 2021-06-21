@@ -9,7 +9,7 @@ namespace BlazorClient.Models.Account
         public string MiddleName { get; set; }
         [Required]
         public DateTime BirthDay { get; set; }
-        [Required]
+ 
         public string Email { get; set; }
         [Required]
         public string Name { get; set; }

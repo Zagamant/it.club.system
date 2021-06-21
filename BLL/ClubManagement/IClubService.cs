@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.BLL.ClubManagement
 {
-	public interface IClubService : IRepository<int, ClubModel,ClubModel,ClubModel>
+	public interface IClubService : IBaseService<int, ClubModel,ClubModel,ClubModel>
 	{
 		Task<ClubModel> AddRoomAsync(int clubId, int roomId, string userId);
 		Task<ClubModel> RemoveRoomAsync(int clubId, int roomId, string userId, bool isDeleteRoom = false);

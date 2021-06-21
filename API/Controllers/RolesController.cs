@@ -23,19 +23,20 @@ namespace System.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RoleModel>>> Get()
+        public async Task<ActionResult<IEnumerable<RoleModel>>> Get(string page = "",
+            string pageSize = "", string sort = "", string filter = "")
         {
-            var result = await _service.GetAllAsync();
+            var result = await _service.GetAllAsync(page, pageSize, sort, filter);
             Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
-            Response.Headers.Add("Content-Range", $"{result.Count()}");
-
+            Response.Headers.Add("Content-Range", $"{await _service.Count()}");
+            
             return Ok(result);
         }
 
-        [HttpGet("{userId:int}")]
-        public async Task<ActionResult<RoleModel>> GetAsync(int userId)
+        [HttpGet("{Id:int}")]
+        public async Task<ActionResult<RoleModel>> GetAsync(int Id)
         {
-            return Ok(await _service.GetAsync(userId));
+            return Ok(await _service.GetAsync(Id));
         }
 
         [HttpPost]

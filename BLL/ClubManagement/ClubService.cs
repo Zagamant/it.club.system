@@ -8,14 +8,13 @@ using System.DAL.Entities.Enums;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace System.BLL.ClubManagement
 {
-    public class ClubService : Repository<int, Club, ClubModel,ClubModel,ClubModel>, IClubService
+    public class ClubService : BaseService<int, Club, ClubModel,ClubModel,ClubModel>, IClubService
     {
         private readonly RoleManager<Role> _roleManager;
 
@@ -167,7 +166,7 @@ namespace System.BLL.ClubManagement
             if (entity == null)
                 throw new ArgumentException($"Club with id: {id} not found");
 
-            var clubRole = await _context.Roles.SingleAsync(r => r.Name == entity.Title);
+            var clubRole = await _context.Roles.FirstAsync(r => r.Name == entity.Title);
             
             _context.Roles.Remove(clubRole);
             _table.Remove(entity);

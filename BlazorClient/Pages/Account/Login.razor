@@ -60,7 +60,6 @@
             var returnUrl = _navigationManager.QueryString("returnUrl") ?? "/";
             _alertService.Success("Добро пожаловать", true, false);
             Console.WriteLine("Найс логин");
-            await Task.Delay(100000);
             _navigationManager.NavigateTo(returnUrl, true);
         }
         catch (Exception ex)

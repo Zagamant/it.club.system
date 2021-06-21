@@ -12,9 +12,10 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.GroupManagement
 {
-    public class GroupService : Repository<int, Group, GroupModel, GroupModel, GroupModel>, IGroupService
+    public class GroupService : BaseService<int, Group, GroupModel, GroupModel, GroupModel>, IGroupService
     {
-        public GroupService(DataContext context, IMapper mapper, ILogger<GroupService> logger) : base(context, mapper, logger)
+        public GroupService(DataContext context, IMapper mapper, ILogger<GroupService> logger) : base(context, mapper,
+            logger)
         {
             _table = _context.Groups;
         }
@@ -26,8 +27,8 @@ namespace System.BLL.GroupManagement
 
             var realGroup = _mapper.Map<Group>(group);
 
-            realGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == group.RoomId);
-            realGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == group.CourseId);
+            //realGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == group.RoomId);
+            //realGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == group.CourseId);
 
             await _context.Groups.AddAsync(realGroup);
             await _context.SaveChangesAsync();
@@ -46,15 +47,15 @@ namespace System.BLL.GroupManagement
 
             if (oldGroup.RoomId != updated.RoomId)
                 oldGroup.Room = await _context.Rooms.SingleOrDefaultAsync(r => r.Id == updated.RoomId);
-            
+
             if (oldGroup.CourseId != updated.CourseId)
                 oldGroup.Course = await _context.Courses.SingleOrDefaultAsync(c => c.Id == updated.CourseId);
-            
+
             var idsToAdd = updated.UsersIds.Except(oldGroup.Users.Select(u => u.Id));
-            
-            var IdsToRemove = oldGroup.Users.Select(u => u.Id).Except(updated.UsersIds);
-            
-            foreach (var oldGroupUser in oldGroup.Users.Where(user => IdsToRemove.Contains(user.Id)))
+
+            var idsToRemove = oldGroup.Users.Select(u => u.Id).Except(updated.UsersIds);
+
+            foreach (var oldGroupUser in oldGroup.Users.Where(user => idsToRemove.Contains(user.Id)))
             {
                 oldGroup.Users.Remove(oldGroupUser);
             }
@@ -63,6 +64,17 @@ namespace System.BLL.GroupManagement
             {
                 oldGroup.Users.Add(oldGroupUser);
             }
+
+            oldGroup.Capacity = updated.Capacity;
+            oldGroup.Messenger = updated.Messenger;
+            oldGroup.Status = updated.Status;
+            oldGroup.Capacity = updated.Capacity;
+            oldGroup.Title = updated.Title;
+            oldGroup.EndDate = updated.EndDate;
+            oldGroup.StartDate = updated.StartDate;
+            oldGroup.LessonsPerWeek = updated.LessonsPerWeek;
+            oldGroup.OnlineConversationLink = updated.OnlineConversationLink;
+
 
             _context.Groups.Update(oldGroup);
 
@@ -124,8 +136,9 @@ namespace System.BLL.GroupManagement
             {
                 group.Status = GroupStatus.Canceled;
                 _context.Groups.Update(group);
-                await _context.SaveChangesAsync();
             }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

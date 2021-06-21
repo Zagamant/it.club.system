@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.ContactManagement
 {
-    public class ContactService : Repository<int, Contact, ContactModel, ContactModel, ContactModel>, IContactService
+    public class ContactService : BaseService<int, Contact, ContactModel, ContactModel, ContactModel>, IContactService
     {
         public ContactService(DataContext context, IMapper mapper, ILogger<ContactService> logger) : base(context, mapper, logger)
         {

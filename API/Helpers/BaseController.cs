@@ -12,7 +12,7 @@ namespace System.API.Helpers
         where TAddModel : class, new()
         where TUpdateModel : class, new()
         where TModel : class, new()
-        where TService : IRepository<int, TAddModel, TUpdateModel, TModel>
+        where TService : IBaseService<int, TAddModel, TUpdateModel, TModel>
     {
         protected readonly TService _service;
 
@@ -21,82 +21,41 @@ namespace System.API.Helpers
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TModel>>> Get(string sort = "", string page = "1",
-            string pageSize = "10", string filter = "")
+        public async Task<ActionResult<IEnumerable<TModel>>> Get(string page = "",
+            string pageSize = "", string sort = "", string filter = "")
         {
-            try
-            {
-                int pageNumber = Int32.Parse(page);
-                int pageSizeNumber = Int32.Parse(pageSize);
+            var result = await _service.GetAllAsync(page, pageSize, sort, filter);
+            Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
+            Response.Headers.Add("Content-Range", $"{await _service.Count()}");
 
-                var from = (pageNumber - 1) * pageSizeNumber;
-                var to = (pageNumber) * pageSizeNumber;
-
-
-                var result = await _service.GetAllAsync(sort, page, pageSize, filter);
-                Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
-                Response.Headers.Add("Content-Range", $"{typeof(TModel).Name.ToLower()} {from}-{to}/{result.Count()}");
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TModel>> GetAsync(int id)
         {
-            try
-            {
-                return Ok(await _service.GetAsync(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _service.GetAsync(id));
         }
 
         [HttpPost]
         public async Task<ActionResult<TModel>> Post([FromBody] TAddModel value)
         {
-            try
-            {
-                return StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return StatusCode(StatusCodes.Status201Created, await _service.AddAsync(value));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<TModel>> Put(int id, [FromBody] TUpdateModel value)
         {
-            try
-            {
-                return Ok(await _service.UpdateAsync(id, value));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _service.UpdateAsync(id, value));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id, [FromQuery] bool isDelete = false)
         {
-            try
-            {
-                await _service.DeleteAsync(id);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _service.DeleteAsync(id, isDelete);
+            return NoContent();
         }
     }
 }

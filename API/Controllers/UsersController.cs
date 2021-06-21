@@ -5,6 +5,7 @@ using System.BLL.Models.UserManagement;
 using System.BLL.UserManagement;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,8 @@ namespace System.API.Controllers
         [HttpPost]
         public async Task<ActionResult<UserModel>> Register([FromBody] UserRegister model) =>
             Ok(await _userService.AddAsync(model, model.Password));
-        
-        
+
+
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticate model)
@@ -81,22 +82,19 @@ namespace System.API.Controllers
             await _userService.LogoutAsync();
             return Ok();
         }
-        
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserModel>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserModel>>> GetAll(string sort = "", string page = "",
+            string pageSize = "", string filter = "")
         {
-            try
-            {
-                var users = await _userService.GetAllAsync();
-                return Ok(users);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _userService.GetAllAsync(page, pageSize, sort, filter);
+            Response.Headers.Add("Access-Control-Expose-Headers", "Content-Range");
+            Response.Headers.Add("Content-Range", $"{await _userService.Count()}");
+            
+            return Ok(result);
         }
 
-        
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<UserModel>> GetById(int id)
         {
@@ -104,13 +102,13 @@ namespace System.API.Controllers
             return Ok(user);
         }
 
-        
-        [Authorize(Roles = "main_admin,admin")]
+
+        //[Authorize(Roles = "main_admin,admin")]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserModel model, string password = null) =>
             Ok(await _userService.UpdateAsync(id, model, password));
 
-        
+
         //[Authorize(Roles = "main_admin,admin")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
@@ -134,7 +132,7 @@ namespace System.API.Controllers
                 $"To reset password follow link: <a href='{callbackUrl}'>link</a>");
         }
 
-        
+
         [HttpPost("SendEmailConfirmation")]
         public async Task SendEmailConfirmation()
         {
@@ -158,7 +156,7 @@ namespace System.API.Controllers
                 $"To confirm email follow link: <a href='{callbackUrl}'>link</a>");
         }
 
-        
+
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailModel model)
@@ -176,7 +174,7 @@ namespace System.API.Controllers
 
             return Ok();
         }
-        
+
         [HttpGet("{id:int}/roles")]
         public async Task<ActionResult<UserModel>> GetRolesByUserId(int id)
         {
@@ -185,23 +183,23 @@ namespace System.API.Controllers
         }
 
 
-        [Authorize(Roles = "main_admin")]
+        //[Authorize(Roles = "main_admin")]
         [HttpPost("{id:int}/AddRole")]
         public async Task<bool> AddRoleToUser(int id, RoleModel role)
         {
             return await _userService.AddRoleToUserAsync(id, role.Name);
         }
 
-        [Authorize(Roles = "main_admin")]
+        //[Authorize(Roles = "main_admin")]
         [HttpPost("{id:int}/RemoveRole")]
         public async Task<bool> RemoveRoleFromUser(int id, RoleModel role)
         {
             return await _userService.RemoveUsersRoleAsync(id, role.Name);
         }
-        
-        [Authorize(Roles = "main_admin,admin,teacher")]
-        [HttpPut("{id:int}")]
+
+        //[Authorize(Roles = "main_admin,admin,teacher")]
+        [HttpPut("{id:int}/photo")]
         public async Task<IActionResult> UploadPhoto(int id, [FromBody] UserModel model, string password = null) =>
-            Ok(await _userService.UpdateAsync(id, model, password));        
+            Ok(await _userService.UpdateAsync(id, model, password));
     }
 }

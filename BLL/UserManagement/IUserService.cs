@@ -30,6 +30,13 @@ namespace System.BLL.UserManagement
         Task<IEnumerable<UserModel>> GetAllAsync();
 
         /// <summary>
+        /// GetIdAsync all users from database.
+        /// </summary>
+        /// <returns>List of <see cref="User"/>s.</returns>
+        Task<IEnumerable<UserModel>> GetAllAsync(string page,
+            string pageSize, string sort = "", string filter = "");
+
+        /// <summary>
         /// GetIdAsync 1 user from database by id.
         /// </summary>
         /// <param name="id">A user identifier.</param>
@@ -82,5 +89,6 @@ namespace System.BLL.UserManagement
         Task<IEnumerable<string>> GetRolesAsync(int userId);
         Task<bool> AddRoleToUserAsync(int userId, string role);
         Task<bool> RemoveUsersRoleAsync(int userId, string role);
+        Task<int> Count();
     }
 }

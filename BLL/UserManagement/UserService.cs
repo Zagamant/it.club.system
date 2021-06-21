@@ -1,10 +1,10 @@
 ﻿using System.BLL.Helpers;
-using System.BLL.Models.RoleManagement;
 using System.BLL.Models.UserManagement;
 using System.Collections.Generic;
 using System.DAL;
 using System.DAL.Entities;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,6 +12,8 @@ using Castle.Core.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace System.BLL.UserManagement
 {
@@ -72,8 +74,6 @@ namespace System.BLL.UserManagement
             return Convert.ToInt32(id);
         }
 
-
-        /// <inheritdoc/>
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -82,7 +82,81 @@ namespace System.BLL.UserManagement
                 .Select(async user =>
                 {
                     var userModel = _mapper.Map<UserModel>(user);
-                    userModel.Roles = await _userManager.GetRolesAsync(user);
+                    userModel.RoleIds = await _userManager.GetRolesAsync(user);
+                    return userModel;
+                })
+                .Select(t => t.Result);
+
+            return userModels;
+        }
+
+        /// <inheritdoc/>
+        public async Task<IEnumerable<UserModel>> GetAllAsync(string page,
+            string pageSize, string sort = "", string filter = "")
+        {
+            if (string.IsNullOrEmpty(page) || string.IsNullOrEmpty(pageSize))
+            {
+                return await _context.Users.Select(ent => _mapper.Map<UserModel>(ent))
+                    .ToListAsync();
+            }
+
+            var entityQuery = _context.Users.AsQueryable();
+
+            // if (!string.IsNullOrEmpty(filter))
+            // {
+            //     var filterVal = (JObject) JsonConvert.DeserializeObject(filter);
+            //     var t = new User();
+            //     foreach (var (key, value) in filterVal)
+            //     {
+            //         if (key == "q")
+            //         {
+            //             //TODO: Logic for non correct filters
+            //             continue;
+            //         }
+            //         entityQuery = entityQuery
+            //             .Where(t.GetType().GetProperty(key.FirstCharToUpper())?.PropertyType == typeof(string)
+            //                 ? $"{key}.Contains(@0)"
+            //                 : $"{key} == @0", value.ToString());
+            //     }
+            // }
+
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                var sortVal = sort.Split('+');
+                var condition = sortVal.First();
+                var order = sortVal.Last() == "ASC" ? "" : "descending";
+                entityQuery = entityQuery.OrderBy($"{condition} {order}");
+            }
+
+            if (!string.IsNullOrEmpty(page) && !string.IsNullOrEmpty(pageSize))
+            {
+                var pageNumber = int.Parse(page);
+                var pageSizeNumber = int.Parse(pageSize);
+
+                var from = (pageNumber - 1) * pageSizeNumber;
+
+                entityQuery = entityQuery.Skip(from).Take(pageSizeNumber);
+            }
+
+            return entityQuery.AsEnumerable<User>()
+                .Select(async user =>
+                {
+                    var userModel = _mapper.Map<UserModel>(user);
+                    userModel.RoleIds = await _userManager.GetRolesAsync(user);
+                    return userModel;
+                })
+                .Select(t => t.Result)
+                .ToList();
+
+
+            var users = await _userManager.Users.ToListAsync();
+
+            var userModels = users
+                .Select(async user =>
+                {
+                    var userModel = _mapper.Map<UserModel>(user);
+                    userModel.RoleIds = await _userManager.GetRolesAsync(user);
                     return userModel;
                 })
                 .Select(t => t.Result);
@@ -182,9 +256,13 @@ namespace System.BLL.UserManagement
 
             //Roles management
             var oldRoles = await _userManager.GetRolesAsync(user);
-            var rolesToAdd = newUser.Roles.Except(oldRoles);
 
-            var rolesToRemove = oldRoles.Except(newUser.Roles);
+            var newRoles = newUser.RoleIds
+                .Select(roleId => _context.Roles.Single(r => r.Id == Convert.ToInt32(roleId)).Name)
+                .ToList();
+            var rolesToAdd = newRoles.Except(oldRoles);
+
+            var rolesToRemove = oldRoles.Except(newUser.RoleIds);
 
             foreach (var roleToRemove in rolesToRemove)
             {
@@ -302,6 +380,11 @@ namespace System.BLL.UserManagement
             return result.Succeeded;
         }
 
+        public async Task<int> Count()
+        {
+            return await _userManager.Users.CountAsync();
+        }
+
         #region private helper methods
 
         /// <summary>
@@ -312,9 +395,9 @@ namespace System.BLL.UserManagement
         /// <param name="passwordSalt">Password's salt.</param>
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            if (password == null) throw new ArgumentNullException("password");
+            if (password == null) throw new ArgumentNullException(nameof(password));
             if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+                throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
 
             using var hmac = new System.Security.Cryptography.HMACSHA512();
             passwordSalt = hmac.Key;

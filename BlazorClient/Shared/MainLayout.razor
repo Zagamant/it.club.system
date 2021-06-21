@@ -50,7 +50,7 @@
                         <BarMenu >
                             <BarStart>
                                 <BarItem>
-                                    <Blazorise.Link To="users">Список пользователей</Blazorise.Link>
+                                    <Blazorise.Link Clicked=@(() => _navigationManager.NavigateTo("users", true)) >Список пользователей</Blazorise.Link>
                                 </BarItem>
                                 <BarItem>
                                     <BarLink To="groups">Cписок групп</BarLink>

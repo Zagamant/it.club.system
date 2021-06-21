@@ -3,28 +3,48 @@
 @using Microsoft.AspNetCore.Authorization
 @using BlazorClient.Services.AccountManagement
 @using System.BLL.Models.UserManagement
+@using System.Web
 @using BlazorClient.Services.GroupManagement
+@using BlazorClient.Services.UserManagement
 @attribute [Authorize]
 @inject NavigationManager _navigationManager
 @inject IAccountService _accountService
 @inject IGroupService _groupService
+@inject IUserService _userService
 
 
 <div class="table">
     <DataGrid TItem="UserModel"
               RowSelectable=@(context => { _navigationManager.NavigateTo($"users/{context.Id}/edit"); return true;})
-              Data="@_users"
+              Data="@_usersView"
               TotalItems="@_totalCount"
               Filterable="true"
-              FilterMethod="DataGridFilterMethod.Contains">
+              FilterMethod="DataGridFilterMethod.Contains"
+              ShowPager="true"
+              PageSize="5">
 
+        <FirstPageButtonTemplate>
+            Превая страница
+        </FirstPageButtonTemplate>
+        <PreviousPageButtonTemplate>
+            Назад
+        </PreviousPageButtonTemplate>
+        <PageButtonTemplate>
+            @context.PageNumer
+        </PageButtonTemplate>
+        <NextPageButtonTemplate>
+            Вперед
+        </NextPageButtonTemplate>
+        <LastPageButtonTemplate>
+            Последняя страница
+        </LastPageButtonTemplate>
         <DataGridColumns>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.UserName)" Caption="Имя пользователя"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Name)" Caption="Имя"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Surname)" Caption="Фамилия"/>
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.MiddleName)" Caption="Отчество"/>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения"/>
-            <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил"/>
+            <DataGridDateColumn DisplayFormat="{0: dd MMM yyyy}" TItem="UserModel" Field="@nameof(UserModel.BirthDay)" Caption="Дата рождения"/>
+            @* <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Email)" Caption="Емеил"/> *@
             <DataGridColumn TItem="UserModel" Field="@nameof(UserModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
                     <Button Color="Color.Primary" Clicked="@(() => EditUser(context.Id))">
@@ -56,6 +76,7 @@
 
     private bool _loading;
     private IList<UserModel> _users;
+    private IList<UserModel> _usersView = new List<UserModel>();
     private bool _isDeleting;
     private int _totalCount;
 
@@ -63,7 +84,31 @@
     {
         _loading = true;
         _users = (await _accountService.GetAll()).ToList();
-        _totalCount = _users.Count;
+
+        var localUri = new Uri(_navigationManager.Uri);
+        var queryString = HttpUtility.ParseQueryString(localUri.Query);
+        var clubQuery = queryString["club"];
+        Console.WriteLine(clubQuery);
+        if (clubQuery is null or "")
+        {
+            _usersView = _users;
+        }
+        else
+        {
+            var res = _users.WhereAsync(async user =>
+            {
+                var roles = await _userService.GetRolesAsync(user.Id);
+                return roles.Contains(clubQuery);
+            });
+
+            await foreach (var x in res)
+            {
+                _usersView.Add(x);
+            }
+        }
+        _totalCount = _usersView.Count;
+        Console.WriteLine(_totalCount);
+
         _loading = false;
     }
 

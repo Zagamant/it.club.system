@@ -78,7 +78,7 @@
 
         <Row Class="justify-content-space ">
             <Column ColumnSize="ColumnSize.Is12" Margin="new FluentMargin().Is2">
-                <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
+                <Button Type="ButtonType.Submit"  Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
                     @if (loading)
                     {
                         <span class="spinner-border spinner-border-sm mr-1"></span>
@@ -91,12 +91,10 @@
             </Column>
         </Row>
     </EditForm>
-
 </div>
 
 
 @code {
-
     private GroupModel _model = new();
     private bool loading;
 

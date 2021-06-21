@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.PaymentManagement
 {
-    public class PaymentService : Repository<int, Payment, PaymentModel, PaymentModel, PaymentModel>, IPaymentService
+    public class PaymentService : BaseService<int, Payment, PaymentModel, PaymentModel, PaymentModel>, IPaymentService
     {
         public PaymentService(DataContext context, IMapper mapper, ILogger<PaymentService> logger) : base(context, mapper, logger)
         {

@@ -4,6 +4,7 @@
 @using BlazorClient.Services.AccountManagement
 @attribute [Authorize]
 @inject IAccountService AccountService
+@inject NavigationManager _navigationManager
 
 <div class="p-4">
     <div class="container">
@@ -12,3 +13,12 @@
         <p><NavLink href="users">Manage Users</NavLink></p>
     </div>
 </div>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        _navigationManager.NavigateTo("users");
+    }
+
+}

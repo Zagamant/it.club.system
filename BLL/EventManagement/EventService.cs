@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.EventManagement
 {
-    public class EventService : Repository<int, Event, EventModel,EventModel,EventModel>, IEventService
+    public class EventService : BaseService<int, Event, EventModel,EventModel,EventModel>, IEventService
     {
         public EventService(DataContext context, IMapper mapper, ILogger<EventService> logger) : base(context, mapper, logger)
         {

@@ -84,7 +84,7 @@
 
         <Row Class="justify-content-space ">
             <Column ColumnSize="ColumnSize.Is12" Margin="new FluentMargin().Is2">
-                <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
+                <Button Type="ButtonType.Submit" Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
                     @if (loading)
                     {
                         <span class="spinner-border spinner-border-sm mr-1"></span>
@@ -93,17 +93,15 @@
                 </Button>
             </Column>
             <Column ColumnSize="ColumnSize.Is12" Margin="new FluentMargin().Is0.FromTop.Is2">
-                <Button To="users" Color="Color.Secondary" Block="true">Отменить</Button>
+                <Button To="groups" Color="Color.Secondary" Block="true">Отменить</Button>
             </Column>
         </Row>
     </EditForm>
-
 
     </div>
 }
 
 @code {
-    
     private GroupModel _model;
     private bool loading;
     private string status;

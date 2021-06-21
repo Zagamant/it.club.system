@@ -1,0 +1,160 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class BaseEntity
+class Address
+class Agreement
+class Club
+class Contact
+class Costs
+class Course
+class Events
+class Group
+class Room
+class User
+class Role
+
+BaseEntity <|-- Address
+BaseEntity <|-- User
+BaseEntity <|-- Role
+BaseEntity <|-- Agreement
+BaseEntity <|-- Club
+BaseEntity <|- Contact
+BaseEntity <|-- Costs
+BaseEntity <|--- Course
+BaseEntity <|-- Events
+BaseEntity <|--- Group
+BaseEntity <|-- Room
+
+Agreement -* Course
+Club -* Address
+Club *-- ClubStatus 
+Club *-o Room
+Costs -* Club
+Course -o Group
+Events -* Club
+Group *- Course
+Group o-* Room
+Group o-- GroupStatus
+Room *-o Club
+Room o- Group
+Room o-- RoomStatus
+User *--* Group
+User *- Role
+Club -* Role
+
+abstract class BaseEntity {
+int Id
+}
+
+class Role{
+string Name
+}
+
+class Address {
+string Country
+string City
+string AddressLine
+}
+
+class Agreement {
+int CourseId
+Course Course
+int UserId 
+User User
+decimal Payment
+}
+
+class Club {
+Title
+Address Address
+ClubStatus Status
+ICollection<Role> Permissions
+ICollection<Room> Rooms 
+}
+
+class Contact {
+string Name 
+string ContactType 
+string ContactAsIs 
+}
+
+class Costs {
+int ClubId 
+Club Club 
+decimal Cost 
+DateTime Date 
+string About 
+}
+
+class Course {
+string Title 
+string About 
+string ManualLink 
+}
+
+class Events {
+int ClubId 
+Club Club 
+DateTime DateTime 
+string About 
+}
+
+class Group {
+string Title 
+int CourseId 
+Course Course 
+int RoomId 
+Room Room 
+int LessonsPerWeek 
+string OnlineConversationLink 
+string Messenger 
+DateTime StartDate 
+DateTime EndDate 
+int Capacity 
+GroupStatus Status 
+ICollection<User> Users
+}
+
+
+class Room {
+int ClubId 
+Club Club 
+int Capacity 
+string Number 
+string About 
+}
+
+enum ClubStatus {
+PendingStart
+Open
+Closed
+}
+
+enum GroupStatus {
+Recruitment
+PendingStart
+InProgress
+Canceled
+}
+
+enum RoomStatus {
+PendingStart,
+Open,
+Closed
+}
+
+class User {
+string Name 
+string MiddleName 
+string Surname 
+DateTime BirthDay 
+Address Address 
+string AdditionalInfo 
+IEnumerable<Image> Images
+ICollection<Contact> Contacts
+ICollection<Group> Groups
+ICollection<Course> CoursesPassed
+}
+
+@enduml

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.CostManagement
 {
-    public class CostsService :  Repository<int, Costs, CostsModel,CostsModel,CostsModel>, ICostsService
+    public class CostsService :  BaseService<int, Costs, CostsModel,CostsModel,CostsModel>, ICostsService
     {
         public CostsService(DataContext context, IMapper mapper, ILogger<CostsService> logger) : base(context, mapper, logger)
         {

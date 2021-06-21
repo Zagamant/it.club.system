@@ -71,7 +71,7 @@ namespace BlazorClient.Services.Helpers
 
         public virtual async Task DeleteAsync(TId id, bool isDelete = false)
         {
-            var httpResponseMessage = await _http.DeleteAsync($"{_url}/{id}");
+            var httpResponseMessage = await _http.DeleteAsync($"{_url}/{id}?isDelete={isDelete}");
         }
     }
 }

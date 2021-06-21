@@ -60,5 +60,6 @@ namespace BlazorClient.Services.UserManagement
         Task<IEnumerable<string>> GetRolesAsync(int userId);
         Task<bool> AddRole(int userId, int roleId);
         Task<bool> RemoveRole(int userId, int roleId);
+        
     }
 }

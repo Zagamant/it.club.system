@@ -3,9 +3,11 @@
 @using BlazorClient.Services.AccountManagement
 @using BlazorClient.Services.AlertManagement
 @using System.BLL.Models.UserManagement
+@using BlazorClient.Services.UserManagement
 @attribute [Authorize]
 @inject IAlertService _alertService
 @inject IAccountService _accountService
+@inject IUserService _userService
 @inject NavigationManager _navigationManager
 
 
@@ -16,10 +18,10 @@
 
         <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
             <DataAnnotationsValidator/>
-            
+
             <Divider DividerType="DividerType.TextContent" Text="О пользователе"
                      Margin="Margin.Is4.FromTop.Is4.FromBottom"/>
-            
+
             <Field Horizontal="true">
                 <FieldLabel ColumnSize="ColumnSize.Is5">Имя пользователя</FieldLabel>
                 <FieldBody ColumnSize="ColumnSize.Is5">
@@ -55,7 +57,7 @@
                 </FieldBody>
             </Field>
 
-            
+
             <Field Horizontal="true">
                 <FieldLabel ColumnSize="ColumnSize.Is5">Пароль</FieldLabel>
                 <FieldBody ColumnSize="ColumnSize.Is5">
@@ -65,7 +67,7 @@
 
             <Divider DividerType="DividerType.TextContent" Text="Местоположение"
                      Margin="Margin.Is4.FromTop.Is4.FromBottom"/>
-            
+
             <Field Horizontal="true">
                 <FieldLabel ColumnSize="ColumnSize.Is5">Страна</FieldLabel>
                 <FieldBody ColumnSize="ColumnSize.Is5">
@@ -90,7 +92,7 @@
 
             <Row Class="justify-content-space ">
                 <Column ColumnSize="ColumnSize.Is12" Margin="Margin.Is2">
-                    <Button Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
+                    <Button Type="ButtonType.Submit" Size="Size.Large" Color="Color.Primary" Block="true" disabled="@loading">
                         @if (loading)
                         {
                             <span class="spinner-border spinner-border-sm mr-1"></span>
@@ -104,7 +106,6 @@
 
             </Row>
         </EditForm>
-
     </div>
 }
 
@@ -121,7 +122,6 @@ else
     private UserModel model;
     private string password;
     private bool loading;
-
     [Parameter]
     public int Id { get; set; }
 
@@ -129,13 +129,13 @@ else
     {
         model = await _accountService.GetById(Id);
     }
-
+    
     private async void OnValidSubmit()
     {
         loading = true;
         try
         {
-            await _accountService.Update(Id, model, password);
+            await _userService.UpdateAsync(Id, model, password);
             _alertService.Success("Update successful", keepAfterRouteChange: true);
             _navigationManager.NavigateTo("users");
         }

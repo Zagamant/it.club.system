@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace System.BLL.CourseManagement
 {
-    public class CourseService : Repository<int, Course, CourseRegisterModel, CourseModel, CourseModel>, ICourseService
+    public class CourseService : BaseService<int, Course, CourseRegisterModel, CourseModel, CourseModel>, ICourseService
     {
         public CourseService(DataContext context, IMapper mapper, ILogger<CourseService> logger) : base(context, mapper, logger)
         {

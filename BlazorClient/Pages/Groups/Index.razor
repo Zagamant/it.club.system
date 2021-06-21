@@ -4,6 +4,7 @@
 @using BlazorClient.Services.GroupManagement
 @using System.BLL.Models.GroupManagement
 @using System.Web
+@using BlazorClient.Models.Enums
 @using GroupModel = BlazorClient.Models.Group.GroupModel
 @attribute [Authorize]
 @inject NavigationManager _navigationManager
@@ -15,62 +16,67 @@
               TotalItems="@_totalCount"
               Filterable="true"
               FilterMethod="DataGridFilterMethod.Contains">
+  
         <DataGridColumns>
             <DataGridCommandColumn TItem="GroupModel">
                 <DeleteCommandTemplate>
                     <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
                 </DeleteCommandTemplate>
             </DataGridCommandColumn>
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Название" />
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Title)" Caption="Название"/>
 
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.LessonsPerWeek)" Caption="Уроков в неделю" />
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.OnlineConversationLink)" Caption="Ссылка на конференцию" />
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.StartDate)" Caption="Начало занятий" />
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.EndDate)" Caption="Окончание занятий" />
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Capacity)" Caption="Количество учащихся" />
-            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Status)" Caption="Статус" />
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.LessonsPerWeek)" Caption="Уроков в неделю"/>
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.OnlineConversationLink)" Caption="Ссылка на конференцию"/>
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.StartDate)" Caption="Начало занятий"/>
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.EndDate)" Caption="Окончание занятий"/>
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Capacity)" Caption="Количество учащихся"/>
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Status)" Caption="Статус"/>
 
 
-
-            <DataGridColumn TItem="GroupModel" Field="@nameof( GroupModel.Id)" Sortable="false" Filterable="false">
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Id)" Sortable="false" Filterable="false">
                 <DisplayTemplate>
 
-                    <Button Color="Color.Danger" Clicked="@(() => DeleteUser(context.Id))">
+                    <Button Color="Color.Primary" Clicked="@(() => EditGroup(context.Id))">
+                        <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid"/>
+                    </Button>
+                </DisplayTemplate>
+            </DataGridColumn>
+
+            <DataGridColumn TItem="GroupModel" Field="@nameof(GroupModel.Id)" Sortable="false" Filterable="false">
+                <DisplayTemplate>
+                    <Button Color="Color.Danger" Clicked="@(() => DeleteGroup(context.Id))">
                         Delete
                     </Button>
-
-                    <Button Color="Color.Primary" Clicked="@(() => EditGroup(context.Id))">
-                        <Icon Name="IconName.Edit" IconStyle="IconStyle.Solid" />
-                    </Button>
-
                 </DisplayTemplate>
             </DataGridColumn>
         </DataGridColumns>
+
+
     </DataGrid>
 </div>
 
 <a href="groups/add" class="separate-add-button"></a>
 
 @code {
-    
+
     [Parameter]
     public string ClubName { get; set; }
-    
+
     private bool _loading;
     private IList<GroupModel> _groups = new List<GroupModel>();
     private IList<GroupModel> _groupsView = new List<GroupModel>();
     private bool _isDeleting;
     private int _totalCount;
-    
+
     protected override async Task OnInitializedAsync()
     {
         _loading = true;
         _groups = (await _groupService.GetAllAsync()).ToList();
-        
+
         _totalCount = _groups.Count;
-       
+
         _loading = false;
-        
+
         var localUri = new Uri(_navigationManager.Uri);
         var queryString = HttpUtility.ParseQueryString(localUri.Query);
         var clubQuery = queryString["club"];
@@ -87,18 +93,19 @@
         StateHasChanged();
     }
 
-    private async void DeleteUser(int id)
+    private async void DeleteGroup(int id)
     {
         var user = _groups.First(x => x.Id == id);
         _isDeleting = true;
-        await _groupService.DeleteAsync(id);
+        await _groupService.DeleteAsync(id, user.Status == GroupStatus.Canceled);
         _groups.Remove(user);
         _isDeleting = false;
         StateHasChanged();
     }
-    
-    private async void EditGroup(int id)
+
+    private void EditGroup(int id)
     {
         _navigationManager.NavigateTo($"/groups/{id}/edit");
     }
+
 }

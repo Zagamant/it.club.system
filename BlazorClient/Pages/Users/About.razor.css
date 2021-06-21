@@ -4,32 +4,33 @@
 .main-info {
     display: flex;
     margin: 20px;
-    position: relative;
-    width: 100%;
+    gap: 20px;
 }
 
 .info {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 50px;
-    border-radius: 3px;
+    border-radius: 2px;
+    padding: 40px 100px 40px 40px;
     background-color: white;
-    width: 100%;
+}
+
+::deep .Avatar {
+    display: block;
+    height: 300px;
+    border-radius: 2px 2px 0 0;
 }
 
 .photo-card {
-    margin-right: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     background-color: white;
-    display: table;
+    height: 340px;
 }
 
-.edit-button {
-    background-color: black;
+::deep .edit-button {
+    border-radius: 0 0 2px 2px;
     height: 40px;
-    width: 250px;
-    margin-top: 20px;
-    margin-left: 20px;
+    width: 100%;
 }
 
 .tables {
